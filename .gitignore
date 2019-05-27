@@ -3,3 +3,4 @@
 .recommenders/*
 .metadata/*
 setenv.sh
+/.metadata/
