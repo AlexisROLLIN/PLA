@@ -1,4 +1,5 @@
 package LurkInTheShadow;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -10,8 +11,10 @@ public class Component {
 	int id_x;
 	boolean show;
 	BufferedImage[] m_sprites;
+	BufferedImage m_sprite;
 	float m_scale;
 	int m_nrows, m_ncols;
+	long m_lastMove;
 	
 	public Component(Model m, int x, int y, int w, int h, int id_x,int rows,int col,float scale,BufferedImage sprite,boolean show) {
 		this.m_x =x;
@@ -31,7 +34,9 @@ public class Component {
 	
 	public void hit() {}
 	
-	public void paint() {}
+	public void paint(Graphics g) {}
+	
+	public void step(long now) {}
 	
 
 }
