@@ -1,5 +1,9 @@
+.gitignore
 *.class
 .recommenders/*
 .metadata/*
 setenv.sh
 /.metadata/
+.project
+*/.classpath
+
