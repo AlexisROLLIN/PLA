@@ -29,7 +29,7 @@ public class Model extends GameModel {
 	    this.components.add(m_feu);
 	}
 
-	public Mage cowboys() {
+	public Mage mage() {
 		return m_Mage;
 	}
 
@@ -55,7 +55,7 @@ public class Model extends GameModel {
 			ex.printStackTrace();
 			System.exit(-1);
 		}
-		 imageFile = new File("src/Sprites/logo.png");
+		imageFile = new File("src/Sprites/logo.png");
 
 		try {
 			m_background = ImageIO.read(imageFile);

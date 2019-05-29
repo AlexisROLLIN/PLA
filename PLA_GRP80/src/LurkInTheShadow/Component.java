@@ -15,13 +15,14 @@ public class Component {
 	float m_scale;
 	int m_nrows, m_ncols;
 	long m_lastMove;
-	
-	public Component(Model m, int x, int y, int w, int h, int id_x,int rows,int col,float scale,BufferedImage sprite,boolean show) {
-		this.m_x =x;
+
+	public Component(Model m, int x, int y, int w, int h, int id_x, int rows, int col, float scale,
+			BufferedImage sprite, boolean show) {
+		this.m_x = x;
 		this.m_y = y;
 		this.m_w = w;
 		this.m_h = h;
-		this.model=m;
+		this.model = m;
 		this.id_x = id_x;
 		this.show = show;
 		this.m_sprite = sprite;
@@ -29,18 +30,22 @@ public class Component {
 		this.m_ncols = col;
 		this.m_scale = scale;
 	}
-	
-	public void pop() {}
-	
-	public void wizz() {}
-	
-	public void egg() {}
-	
-	public void hit() {}
-	
-	public void paint(Graphics g) {}
-	
-	public void step(long now) {}
-	
 
+	public void pop() {
+	}
+
+	public void wizz() {
+	}
+
+	public void egg() {
+	}
+
+	public void hit() {
+	}
+
+	public void paint(Graphics g) {
+	}
+
+	public void step(long now) {
+	}
 }

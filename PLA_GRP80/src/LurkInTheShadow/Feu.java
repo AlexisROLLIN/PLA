@@ -4,15 +4,15 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-
-public class Feu extends Weapon{
+public class Feu extends Weapon {
 	int dir;
 	long m_lastChange;
-	public Feu(Model model, BufferedImage sprite, int rows, int columns, int id_x,float scale,boolean show,int dir) {
-		super(model, model.m_Mage.m_x, model.m_Mage.m_y, model.m_Mage.m_w, model.m_Mage.m_h, id_x, rows, columns, scale, sprite, show);
+
+	public Feu(Model model, BufferedImage sprite, int rows, int columns, int id_x, float scale, boolean show, int dir) {
+		super(model, model.m_Mage.m_x, model.m_Mage.m_y, model.m_Mage.m_w, model.m_Mage.m_h, id_x, rows, columns, scale,
+				sprite, show);
 		this.dir = dir;
 		m_sprites = new BufferedImage[rows * columns];
-		
 
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
@@ -32,15 +32,19 @@ public class Feu extends Weapon{
 
 	public void step(long now) {
 		long elapsed = now - m_lastChange;
+		
 		if (elapsed > 10L) {
 			m_lastChange = now;
-			
 
 			if (dir == 1) {
 				m_x -= 2;
-			}  if (dir == 2) {
+			}
+			
+			if (dir == 2) {
 				m_x += 2;
-			} if (dir == 3) {
+			}
+			
+			if (dir == 3) {
 				m_y -= 2;
 			}
 		}
@@ -51,6 +55,7 @@ public class Feu extends Weapon{
 	 * 
 	 * @param g
 	 */
+	
 	@Override
 	public void paint(Graphics g) {
 		Image img;
@@ -59,5 +64,4 @@ public class Feu extends Weapon{
 		int h = (int) (m_scale * m_h);
 		g.drawImage(img, m_x, m_y, w, h, null);
 	}
-
 }
