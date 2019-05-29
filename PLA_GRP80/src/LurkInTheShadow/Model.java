@@ -11,11 +11,13 @@ import javax.imageio.ImageIO;
 
 import edu.ricm3.game.GameModel;
 import LurkInTheShadow.Mage;
+import LurkInTheShadow.Mur;
 import java.awt.Color;
 
 public class Model extends GameModel {
 	BufferedImage m_testSprite;
 	BufferedImage m_background;
+	Mur m_Mur;
 	Mage m_Mage;
 	Feu m_feu;
 	LinkedList<Component> components;
@@ -23,10 +25,12 @@ public class Model extends GameModel {
 	public Model() {
 	    loadSprites();
 	    this.components = new LinkedList();
-	    m_Mage = new Mage(this, 300, 300, 32, 32, 39,true,100,1,7,7,3F,m_testSprite,0);
-	    m_feu = new Feu(this,m_testSprite,7,7,18,1F,true,1);
+	    m_Mage = new Mage(this, 300, 300, 32, 32, 39,true,100,1,9,10,3F,m_testSprite,0);
+	    m_feu = new Feu(this,m_testSprite,9,10,18,1F,true,1);
+	    m_Mur = new Mur(this, 400, 400, 32, 32, 5, 9, 10, 3F, m_testSprite,true);
 	    this.components.add(m_Mage);
 	    this.components.add(m_feu);
+	    this.components.add(m_Mur);
 	}
 
 	public Mage cowboys() {
@@ -35,6 +39,10 @@ public class Model extends GameModel {
 
 	public Feu feu() {
 		return m_feu;
+	}
+	
+	public Mur Mur() {
+		return m_Mur;
 	}
 
 	@Override

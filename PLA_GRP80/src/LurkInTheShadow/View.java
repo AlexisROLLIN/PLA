@@ -41,7 +41,8 @@ public class View extends GameView{
 			    computeFPS();
 
 			    Image image = m_model.m_background;
-			    g.drawImage(image,0,0,1024,768,null);			    Iterator<Component> iter = m_model.components.iterator();
+			    g.drawImage(image,0,0,1024,768,null);
+			    Iterator<Component> iter = m_model.components.iterator();
 				while(iter.hasNext()) {
 					iter.next().paint(g);
 				}
