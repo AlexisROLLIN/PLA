@@ -15,6 +15,7 @@ import java.awt.Color;
 
 public class Model extends GameModel {
 	BufferedImage m_testSprite;
+	BufferedImage m_background;
 	Mage m_Mage;
 	Feu m_feu;
 	LinkedList<Component> components;
@@ -50,6 +51,14 @@ public class Model extends GameModel {
 
 		try {
 			m_testSprite = ImageIO.read(imageFile);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			System.exit(-1);
+		}
+		 imageFile = new File("src/Sprites/logo.png");
+
+		try {
+			m_background = ImageIO.read(imageFile);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			System.exit(-1);

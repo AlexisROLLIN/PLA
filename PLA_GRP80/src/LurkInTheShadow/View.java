@@ -40,9 +40,8 @@ public class View extends GameView{
 			  protected void _paint(Graphics g) {
 			    computeFPS();
 
-			    Color image =m_background;
-			    g.setColor(image);
-			    Iterator<Component> iter = m_model.components.iterator();
+			    Image image = m_model.m_background;
+			    g.drawImage(image,0,0,1024,768,null);			    Iterator<Component> iter = m_model.components.iterator();
 				while(iter.hasNext()) {
 					iter.next().paint(g);
 				}

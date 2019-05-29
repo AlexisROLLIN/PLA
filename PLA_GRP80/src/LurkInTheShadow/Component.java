@@ -24,6 +24,10 @@ public class Component {
 		this.model=m;
 		this.id_x = id_x;
 		this.show = show;
+		this.m_sprite = sprite;
+		this.m_nrows = rows;
+		this.m_ncols = col;
+		this.m_scale = scale;
 	}
 	
 	public void pop() {}

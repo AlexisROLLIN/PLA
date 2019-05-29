@@ -41,18 +41,20 @@ public class Mage extends Allié{
 			
 
 			if (m_avancer) {
-				id_x = 17;
+				id_x = 34;
 				m_x += 50;
 			}
 			if (m_reculer) {
-				id_x = 3;
+				id_x = 26;
 				m_x -= 50;
 			}
 			if(m_monter) {
+				id_x = 46;
 				m_y -= 50;
 			}
 			if(m_descendre) {
 				m_y += 50;
+				id_x = 36;
 			}
 		}
 
@@ -91,16 +93,19 @@ public class Mage extends Allié{
 	}
 
 	public void tir(int dir) {
-		 Feu f = new Feu(model,model.m_testSprite,7,7,18,1F,true,1);
+		 Feu f = new Feu(model,model.m_testSprite,7,7,18,8F,true,dir);
 		 f.setPosition(m_x, m_y, 1);
 		 model.components.add(f);
-		 f.id_x=9;
+		 f.id_x=39;
 		 if(dir==1) {
-			 id_x=17;
+			 f.id_x=19;
 			 
 		 }
-		 else {
-			 id_x=18;
+		 if(dir==2) {
+			 f.id_x=17;
+		 }
+		 if(dir==3) {
+			 f.id_x=18;
 		 }
 	}
 	

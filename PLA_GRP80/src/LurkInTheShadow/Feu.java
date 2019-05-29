@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 public class Feu extends Weapon{
 	int dir;
 	long m_lastChange;
-	Feu(Model model, BufferedImage sprite, int rows, int columns, int id_x,float scale,boolean show,int dir) {
+	public Feu(Model model, BufferedImage sprite, int rows, int columns, int id_x,float scale,boolean show,int dir) {
 		super(model, model.m_Mage.m_x, model.m_Mage.m_y, model.m_Mage.m_w, model.m_Mage.m_h, id_x, rows, columns, scale, sprite, show);
 		this.dir = dir;
 		m_sprites = new BufferedImage[rows * columns];

@@ -42,7 +42,7 @@ public class Controller extends GameController implements ActionListener{
 		if (e.getKeyChar() == 'z') {
 
 			this.m_model.m_Mage.monterOn();
-			this.m_model.m_Mage.tir(2);
+			this.m_model.m_Mage.tir(3);
 		}
 		if (e.getKeyChar() == 'q') {
 
