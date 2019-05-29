@@ -1,9 +1,12 @@
 .gitignore
 *.class
+*.jar
 .recommenders/*
 .metadata/*
 setenv.sh
 /.metadata/
-.project
 */.classpath
+*/.gitignore
+PLA_Grp80/*
+PLA_Grp80
 
