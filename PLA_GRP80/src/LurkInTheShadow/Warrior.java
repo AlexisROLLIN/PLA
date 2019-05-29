@@ -4,13 +4,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-public class Mage extends Ally {
+public class Warrior extends Ally {
 	boolean m_goUp;
 	boolean m_goLeft;
 	boolean m_goDown;
 	boolean m_goRight;
 
-	public Mage(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
+	public Warrior(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
 			boolean show, int HP, int intensity, int faction) {
 		super(m, x, y, w, h, scale, sprite, rows, col, id_x, show, HP, intensity);
 		splitSprite();
@@ -34,32 +34,31 @@ public class Mage extends Ally {
 
 	@Override
 	public void step(long now) {
-
 		long elapsed = now - m_lastMove;
 
 		if (elapsed > 60L) {
 			m_lastMove = now;
-			
+
 			if (m_goUp) {
-				id_x = 46; // +47
+				id_x = 49; // +50
 				m_y -= 8;
 
 				if (0 > m_y + (int) (m_scale * m_h)) {
 					m_y += 768;
 				}
 			}
-
+			
 			if (m_goLeft) {
-				id_x = 31; // +32
+				id_x = 60; // +61 (56)
 				m_x -= 8;
 
 				if (0 > m_x + (int) (m_scale * m_w)) {
 					m_x += 1024;
 				}
 			}
-
+			
 			if (m_goDown) {
-				id_x = 43; // +44
+				id_x = 51; // +52 (48)
 				m_y += 8;
 
 				if (768 < m_y) {
@@ -68,7 +67,7 @@ public class Mage extends Ally {
 			}
 			
 			if (m_goRight) {
-				id_x = 37; // +38
+				id_x = 66; // +67
 				m_x += 8;
 
 				if (1024 < m_x) {
@@ -111,20 +110,20 @@ public class Mage extends Ally {
 	}
 
 	public void hit(int dir) {
-		Fireball f = new Fireball(model, 8F, model.m_testSprite, 10, 9, 17, true, dir);
-		f.setPosition(m_x, m_y, 1);
-		model.components.add(f);
-		// f.id_x = 39;
+		Bullet b = new Bullet(model, 8F, model.m_testSprite, 10, 9, 18, true, dir); // 18 ? num bullet
+		b.setPosition(m_x, m_y, 1);
+		model.components.add(b);
+		// b.id_x = 48;
 
 		if (dir == 1) {
-			f.id_x = 19;
+			b.id_x = 23;
 		}
 
 		if (dir == 2) {
-			f.id_x = 17;
+			b.id_x = 21;
 		}
 	}
-
+	
 	@Override
 	public void paint(Graphics g) {
 		Image img = m_sprites[id_x];

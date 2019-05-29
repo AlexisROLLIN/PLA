@@ -26,13 +26,13 @@ public class View extends GameView {
 
 	private void computeFPS() {
 		long now = System.currentTimeMillis();
-		
+
 		if (now - m_last > 1000L) {
 			m_fps = m_npaints;
 			m_last = now;
 			m_npaints = 0;
 		}
-		
+
 		m_game.setFPS(m_fps, null);
 		m_npaints++;
 	}
@@ -43,6 +43,7 @@ public class View extends GameView {
 
 		Image image = m_model.m_background;
 		g.drawImage(image, 0, 0, 1024, 768, null);
+		
 		Iterator<Component> iter = m_model.components.iterator();
 		while (iter.hasNext()) {
 			iter.next().paint(g);

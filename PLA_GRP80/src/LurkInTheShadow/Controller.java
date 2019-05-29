@@ -35,33 +35,39 @@ public class Controller extends GameController implements ActionListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
-		
+
 		// move
-		
+
 		if (e.getKeyChar() == 'z') {
-			m_model.m_Mage.monterOn();
+			m_model.m_mage.upOn();
+			m_model.m_warrior.upOn();
 		}
-		
+
 		if (e.getKeyChar() == 'q') {
-			m_model.m_Mage.reculeOn();
+			m_model.m_mage.leftOn();
+			m_model.m_warrior.leftOn();
 		}
-		
+
 		if (e.getKeyChar() == 's') {
-			m_model.m_Mage.descendreOn();
+			m_model.m_mage.downOn();
+			m_model.m_warrior.downOn();
 		}
-		
+
 		if (e.getKeyChar() == 'd') {
-			m_model.m_Mage.avanceOn();
+			m_model.m_mage.rightOn();
+			m_model.m_warrior.rightOn();
 		}
-		
+
 		// shoot
-		
+
 		if (e.getKeyChar() == 'a') {
-			m_model.m_Mage.tir(1);
+			m_model.m_mage.hit(1);
+			m_model.m_warrior.hit(1);
 		}
-		
+
 		if (e.getKeyChar() == 'e') {
-			m_model.m_Mage.tir(2);
+			m_model.m_mage.hit(2);
+			m_model.m_warrior.hit(2);
 		}
 	}
 
@@ -70,19 +76,23 @@ public class Controller extends GameController implements ActionListener {
 		System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());
 
 		if (e.getKeyChar() == 'z') {
-			m_model.m_Mage.monterOff();
+			m_model.m_mage.upOff();
+			m_model.m_warrior.upOff();
 		}
-		
+
 		if (e.getKeyChar() == 'q') {
-			m_model.m_Mage.reculeOff();
+			m_model.m_mage.leftOff();
+			m_model.m_warrior.leftOff();
 		}
-		
+
 		if (e.getKeyChar() == 's') {
-			m_model.m_Mage.descendreOff();
+			m_model.m_mage.downOff();
+			m_model.m_warrior.downOff();
 		}
-		
+
 		if (e.getKeyChar() == 'd') {
-			m_model.m_Mage.avanceOff();
+			m_model.m_mage.rightOff();
+			m_model.m_warrior.rightOff();
 		}
 	}
 
