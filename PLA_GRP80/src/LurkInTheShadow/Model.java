@@ -18,6 +18,7 @@ public class Model extends GameModel {
 	BufferedImage m_testSprite;
 	BufferedImage m_background;
 	Mage m_mage;
+	Shooter m_shooter;
 	Warrior m_warrior;
 	Fireball m_fireball;
 	Bullet m_bullet;
@@ -29,6 +30,8 @@ public class Model extends GameModel {
 		this.components = new LinkedList();
 		m_mage = new Mage(this, 300, 300, 32, 32, 3F, m_testSprite, 10, 9, 39, true, 100, 1, 0);
 		this.components.add(m_mage);
+		m_shooter = new Shooter(this, 300, 400, 32, 32, 3F, m_testSprite, 10, 9, 81, true, 200, 1, 0);
+		this.components.add(m_shooter);
 		m_warrior = new Warrior(this, 300, 200, 32, 32, 3F, m_testSprite, 10, 9, 48, true, 200, 1, 0);
 		this.components.add(m_warrior);
 		m_fireball = new Fireball(this, 1F, m_testSprite, 10, 9, 17, true, 1);
@@ -42,13 +45,17 @@ public class Model extends GameModel {
 	public Mage mage() {
 		return m_mage;
 	}
-
-	public Fireball Fireball() {
-		return m_fireball;
+	
+	public Shooter shooter() {
+		return m_shooter;
 	}
 
 	public Warrior Warrior() {
 		return m_warrior;
+	}
+	
+	public Fireball fireball() {
+		return m_fireball;
 	}
 
 	public Bullet bullet() {

@@ -4,13 +4,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-public class Warrior extends Ally {
+public class Shooter extends Ally {
 	boolean m_goUp;
 	boolean m_goLeft;
 	boolean m_goDown;
 	boolean m_goRight;
 
-	public Warrior(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
+	public Shooter(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
 			boolean show, int HP, int intensity, int faction) {
 		super(m, x, y, w, h, scale, sprite, rows, col, id_x, show, HP, intensity);
 		splitSprite();
@@ -40,7 +40,7 @@ public class Warrior extends Ally {
 			m_lastMove = now;
 
 			if (m_goUp) {
-				id_x = 49; // +50 <!> Il manque une image
+				id_x = 78; // +79 +80
 				m_y -= 8;
 
 				if (0 > m_y + (int) (m_scale * m_h)) {
@@ -49,7 +49,7 @@ public class Warrior extends Ally {
 			}
 			
 			if (m_goLeft) {
-				id_x = 56; // +60 +61
+				id_x = 73; // +76 +77
 				m_x -= 8;
 
 				if (0 > m_x + (int) (m_scale * m_w)) {
@@ -58,7 +58,7 @@ public class Warrior extends Ally {
 			}
 			
 			if (m_goDown) {
-				id_x = 48; // +51 +52
+				id_x = 81; // +82 +83
 				m_y += 8;
 
 				if (768 < m_y) {
@@ -67,7 +67,7 @@ public class Warrior extends Ally {
 			}
 			
 			if (m_goRight) {
-				id_x = 62; // +66 +67
+				id_x = 68; // +72 +71
 				m_x += 8;
 
 				if (1024 < m_x) {
@@ -110,18 +110,18 @@ public class Warrior extends Ally {
 	}
 
 	public void hit(int dir) {
-//		Bullet b = new Bullet(model, 8F, model.m_testSprite, 10, 9, 18, true, dir); // 18 ? num bullet
-//		b.setPosition(m_x, m_y, 1);
-//		model.components.add(b);
-//		// b.id_x = 48;
-//
-//		if (dir == 1) {
-//			b.id_x = 23;
-//		}
-//
-//		if (dir == 2) {
-//			b.id_x = 21;
-//		}
+		Bullet b = new Bullet(model, 8F, model.m_testSprite, 10, 9, 18, true, dir); // 18 ? num bullet
+		b.setPosition(m_x, m_y, 1);
+		model.components.add(b);
+		// b.id_x = 48;
+
+		if (dir == 1) {
+			b.id_x = 23;
+		}
+
+		if (dir == 2) {
+			b.id_x = 21;
+		}
 	}
 	
 	@Override

@@ -41,21 +41,25 @@ public class Controller extends GameController implements ActionListener {
 		if (e.getKeyChar() == 'z') {
 			m_model.m_mage.upOn();
 			m_model.m_warrior.upOn();
+			m_model.m_shooter.upOn();
 		}
 
 		if (e.getKeyChar() == 'q') {
 			m_model.m_mage.leftOn();
 			m_model.m_warrior.leftOn();
-		}
+			m_model.m_shooter.leftOn();		}
 
 		if (e.getKeyChar() == 's') {
 			m_model.m_mage.downOn();
 			m_model.m_warrior.downOn();
+			m_model.m_shooter.downOn();
+
 		}
 
 		if (e.getKeyChar() == 'd') {
 			m_model.m_mage.rightOn();
 			m_model.m_warrior.rightOn();
+			m_model.m_shooter.rightOn();
 		}
 
 		// shoot
@@ -63,11 +67,13 @@ public class Controller extends GameController implements ActionListener {
 		if (e.getKeyChar() == 'a') {
 			m_model.m_mage.hit(1);
 			m_model.m_warrior.hit(1);
+			m_model.m_shooter.hit(1);
 		}
 
 		if (e.getKeyChar() == 'e') {
 			m_model.m_mage.hit(2);
 			m_model.m_warrior.hit(2);
+			m_model.m_shooter.hit(2);
 		}
 	}
 
@@ -78,21 +84,25 @@ public class Controller extends GameController implements ActionListener {
 		if (e.getKeyChar() == 'z') {
 			m_model.m_mage.upOff();
 			m_model.m_warrior.upOff();
+			m_model.m_shooter.upOff();
 		}
 
 		if (e.getKeyChar() == 'q') {
 			m_model.m_mage.leftOff();
 			m_model.m_warrior.leftOff();
+			m_model.m_shooter.leftOff();
 		}
 
 		if (e.getKeyChar() == 's') {
 			m_model.m_mage.downOff();
 			m_model.m_warrior.downOff();
+			m_model.m_shooter.downOff();
 		}
 
 		if (e.getKeyChar() == 'd') {
 			m_model.m_mage.rightOff();
 			m_model.m_warrior.rightOff();
+			m_model.m_shooter.rightOff();
 		}
 	}
 

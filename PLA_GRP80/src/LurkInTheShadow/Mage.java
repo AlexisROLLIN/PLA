@@ -41,7 +41,7 @@ public class Mage extends Ally {
 			m_lastMove = now;
 			
 			if (m_goUp) {
-				id_x = 46; // +47
+				id_x = 45; // +46 +47
 				m_y -= 8;
 
 				if (0 > m_y + (int) (m_scale * m_h)) {
@@ -50,7 +50,7 @@ public class Mage extends Ally {
 			}
 
 			if (m_goLeft) {
-				id_x = 31; // +32
+				id_x = 25; // +26 +31 +32
 				m_x -= 8;
 
 				if (0 > m_x + (int) (m_scale * m_w)) {
@@ -59,7 +59,7 @@ public class Mage extends Ally {
 			}
 
 			if (m_goDown) {
-				id_x = 43; // +44
+				id_x = 39; // +43 +44
 				m_y += 8;
 
 				if (768 < m_y) {
@@ -68,7 +68,7 @@ public class Mage extends Ally {
 			}
 			
 			if (m_goRight) {
-				id_x = 37; // +38
+				id_x = 37; // +38 <!> Il manque une image
 				m_x += 8;
 
 				if (1024 < m_x) {
