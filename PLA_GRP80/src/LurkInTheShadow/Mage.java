@@ -5,10 +5,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class Mage extends Ally {
-	boolean m_goUp;
-	boolean m_goLeft;
-	boolean m_goDown;
-	boolean m_goRight;
 
 	public Mage(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
 			boolean show, int HP, int intensity, int faction) {
@@ -34,15 +30,17 @@ public class Mage extends Ally {
 
 	@Override
 	public void step(long now) {
-
 		long elapsed = now - m_lastMove;
 
 		if (elapsed > 60L) {
 			m_lastMove = now;
-			
+
 			if (m_goUp) {
-				id_x = 45; // +46 +47
-				m_y -= 8;
+				
+				if (!collision(0, -8)) {
+					id_x = 45; // +46 +47
+					m_y -= 8;
+				}
 
 				if (0 > m_y + (int) (m_scale * m_h)) {
 					m_y += 768;
@@ -50,8 +48,11 @@ public class Mage extends Ally {
 			}
 
 			if (m_goLeft) {
-				id_x = 25; // +26 +31 +32
-				m_x -= 8;
+				
+				if (!collision(-8, 0)) {
+					id_x = 25; // +26 +31 +32
+					m_x -= 8;
+				}				
 
 				if (0 > m_x + (int) (m_scale * m_w)) {
 					m_x += 1024;
@@ -59,55 +60,29 @@ public class Mage extends Ally {
 			}
 
 			if (m_goDown) {
-				id_x = 39; // +43 +44
-				m_y += 8;
+				
+				if (!collision(0, 8)) {
+					id_x = 39; // +43 +44
+					m_y += 8;
+				}
 
 				if (768 < m_y) {
 					m_y -= (768 + (int) (m_scale * m_h));
 				}
 			}
-			
+
 			if (m_goRight) {
-				id_x = 37; // +38 <!> Il manque une image
-				m_x += 8;
+				
+				if (!collision(8, 0)) {
+					id_x = 37; // +38 <!> Il manque une image
+					m_x += 8;
+				}
 
 				if (1024 < m_x) {
 					m_x -= (1024 + (int) (m_scale * m_w));
 				}
 			}
 		}
-	}
-
-	public void rightOn() {
-		m_goRight = true;
-	}
-
-	public void leftOn() {
-		m_goLeft = true;
-	}
-
-	public void upOn() {
-		m_goUp = true;
-	}
-
-	public void downOn() {
-		m_goDown = true;
-	}
-
-	public void rightOff() {
-		m_goRight = false;
-	}
-
-	public void leftOff() {
-		m_goLeft = false;
-	}
-
-	public void upOff() {
-		m_goUp = false;
-	}
-
-	public void downOff() {
-		m_goDown = false;
 	}
 
 	public void hit(int dir) {
@@ -124,6 +99,10 @@ public class Mage extends Ally {
 			f.id_x = 17;
 		}
 	}
+
+//	private boolean collision(int stepX, int stepY) {
+//		return model.m_wall.getBounds(0, 0).intersects(getBounds(stepX, stepY));
+//	}
 
 	@Override
 	public void paint(Graphics g) {

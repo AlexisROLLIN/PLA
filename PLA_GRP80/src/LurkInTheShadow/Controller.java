@@ -38,42 +38,44 @@ public class Controller extends GameController implements ActionListener {
 
 		// move
 
-		if (e.getKeyChar() == 'z') {
-			m_model.m_mage.upOn();
-			m_model.m_warrior.upOn();
-			m_model.m_shooter.upOn();
+		if (e.getKeyCode() == 90) {
+			m_model.m_main.upOn();
 		}
 
-		if (e.getKeyChar() == 'q') {
-			m_model.m_mage.leftOn();
-			m_model.m_warrior.leftOn();
-			m_model.m_shooter.leftOn();		}
-
-		if (e.getKeyChar() == 's') {
-			m_model.m_mage.downOn();
-			m_model.m_warrior.downOn();
-			m_model.m_shooter.downOn();
-
+		if (e.getKeyCode() == 81) {
+			m_model.m_main.leftOn();
 		}
 
-		if (e.getKeyChar() == 'd') {
-			m_model.m_mage.rightOn();
-			m_model.m_warrior.rightOn();
-			m_model.m_shooter.rightOn();
+		if (e.getKeyCode() == 83) {
+			m_model.m_main.downOn();
 		}
 
-		// shoot
-
-		if (e.getKeyChar() == 'a') {
-			m_model.m_mage.hit(1);
-			m_model.m_warrior.hit(1);
-			m_model.m_shooter.hit(1);
+		if (e.getKeyCode() == 68) {
+			m_model.m_main.rightOn();
 		}
 
-		if (e.getKeyChar() == 'e') {
-			m_model.m_mage.hit(2);
-			m_model.m_warrior.hit(2);
-			m_model.m_shooter.hit(2);
+		// shoot (to work)
+
+		if (e.getKeyCode() == 65) {
+			m_model.m_main.hit(1);
+		}
+
+		if (e.getKeyCode() == 69) {
+			m_model.m_main.hit(2);
+		}
+		
+		// change main character
+		
+		if (e.getKeyCode() == 49) {
+			m_model.m_main = m_model.m_warrior;
+		}
+		
+		if (e.getKeyCode() == 50) {
+			m_model.m_main = m_model.m_shooter;
+		}
+		
+		if (e.getKeyCode() == 51) {
+			m_model.m_main = m_model.m_mage;
 		}
 	}
 
@@ -81,28 +83,36 @@ public class Controller extends GameController implements ActionListener {
 	public void keyReleased(KeyEvent e) {
 		System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());
 
-		if (e.getKeyChar() == 'z') {
-			m_model.m_mage.upOff();
-			m_model.m_warrior.upOff();
-			m_model.m_shooter.upOff();
+		if (e.getKeyCode() == 90) {
+			m_model.m_main.upOff();
+			
+//			m_model.m_mage.upOff();
+//			m_model.m_warrior.upOff();
+//			m_model.m_shooter.upOff();
 		}
 
-		if (e.getKeyChar() == 'q') {
-			m_model.m_mage.leftOff();
-			m_model.m_warrior.leftOff();
-			m_model.m_shooter.leftOff();
+		if (e.getKeyCode() == 81) {
+			m_model.m_main.leftOff();
+			
+//			m_model.m_mage.leftOff();
+//			m_model.m_warrior.leftOff();
+//			m_model.m_shooter.leftOff();
 		}
 
-		if (e.getKeyChar() == 's') {
-			m_model.m_mage.downOff();
-			m_model.m_warrior.downOff();
-			m_model.m_shooter.downOff();
+		if (e.getKeyCode() == 83) {
+			m_model.m_main.downOff();
+			
+//			m_model.m_mage.downOff();
+//			m_model.m_warrior.downOff();
+//			m_model.m_shooter.downOff();
 		}
 
-		if (e.getKeyChar() == 'd') {
-			m_model.m_mage.rightOff();
-			m_model.m_warrior.rightOff();
-			m_model.m_shooter.rightOff();
+		if (e.getKeyCode() == 68) {
+			m_model.m_main.rightOff();
+			
+//			m_model.m_mage.rightOff();
+//			m_model.m_warrior.rightOff();
+//			m_model.m_shooter.rightOff();
 		}
 	}
 

@@ -17,9 +17,10 @@ import java.awt.Color;
 public class Model extends GameModel {
 	BufferedImage m_testSprite;
 	BufferedImage m_background;
-	Mage m_mage;
-	Shooter m_shooter;
+	Character m_main;
 	Warrior m_warrior;
+	Shooter m_shooter;
+	Mage m_mage;
 	Fireball m_fireball;
 	Bullet m_bullet;
 	Wall m_wall;
@@ -28,38 +29,43 @@ public class Model extends GameModel {
 	public Model() {
 		loadSprites();
 		this.components = new LinkedList();
-		m_mage = new Mage(this, 300, 300, 32, 32, 3F, m_testSprite, 10, 9, 39, true, 100, 1, 0);
-		this.components.add(m_mage);
-		m_shooter = new Shooter(this, 300, 400, 32, 32, 3F, m_testSprite, 10, 9, 81, true, 200, 1, 0);
-		this.components.add(m_shooter);
 		m_warrior = new Warrior(this, 300, 200, 32, 32, 3F, m_testSprite, 10, 9, 48, true, 200, 1, 0);
 		this.components.add(m_warrior);
-		m_fireball = new Fireball(this, 1F, m_testSprite, 10, 9, 17, true, 1);
-		this.components.add(m_fireball);
+		m_shooter = new Shooter(this, 200, 400, 32, 32, 3F, m_testSprite, 10, 9, 81, true, 200, 1, 0);
+		this.components.add(m_shooter);
+		m_mage = new Mage(this, 300, 400, 32, 32, 3F, m_testSprite, 10, 9, 39, true, 100, 1, 0);
+		this.components.add(m_mage);
 		m_bullet = new Bullet(this, 1F, m_testSprite, 10, 9, 21, true, 1);
 		this.components.add(m_bullet);
+		m_fireball = new Fireball(this, 1F, m_testSprite, 10, 9, 17, true, 1);
+		this.components.add(m_fireball);
 		m_wall = new Wall(this, 400, 400, 32, 32, 3F, m_testSprite, 10, 9, 4, true);
 		this.components.add(m_wall);
+		m_main = m_shooter;
 	}
-
-	public Mage mage() {
-		return m_mage;
+	
+	public Character main() {
+		return m_main;
+	}
+	
+	public Warrior Warrior() {
+		return m_warrior;
 	}
 	
 	public Shooter shooter() {
 		return m_shooter;
 	}
-
-	public Warrior Warrior() {
-		return m_warrior;
+	
+	public Mage mage() {
+		return m_mage;
+	}
+	
+	public Bullet bullet() {
+		return m_bullet;
 	}
 	
 	public Fireball fireball() {
 		return m_fireball;
-	}
-
-	public Bullet bullet() {
-		return m_bullet;
 	}
 
 	public Wall Wall() {
