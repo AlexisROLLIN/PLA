@@ -5,14 +5,14 @@ import java.awt.image.BufferedImage;
 public class Character extends Component {
 	int HP;
 	int intensity;
+//	int[] m_spritesGoUp;
+//	int[] m_spritesGoLeft;
+//	int[] m_spritesGoDown;
+//	int[] m_spritesGoRight;
 	boolean m_goUp;
 	boolean m_goLeft;
 	boolean m_goDown;
 	boolean m_goRight;
-	BufferedImage[] m_spritesGoUp;
-	BufferedImage[] m_spritesGoLeft;
-	BufferedImage[] m_spritesGoDown;
-	BufferedImage[] m_spritesGoRight;
 
 	public Character(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col,
 			int id_x, boolean show, int HP, int intensity) {
@@ -20,7 +20,7 @@ public class Character extends Component {
 		this.HP = HP;
 		this.intensity = intensity;
 	}
-	
+
 	public void rightOn() {
 		m_goRight = true;
 	}
@@ -52,11 +52,7 @@ public class Character extends Component {
 	public void downOff() {
 		m_goDown = false;
 	}
-	
+
 	public void hit(int dir) {
-	}
-	
-	public boolean collision(int stepX, int stepY) {
-		return model.m_wall.getBounds(0, 0).intersects(getBounds(stepX, stepY));
 	}
 }

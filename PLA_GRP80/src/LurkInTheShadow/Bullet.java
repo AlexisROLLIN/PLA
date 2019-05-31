@@ -12,6 +12,7 @@ public class Bullet extends Weapon {
 		super(m, m.m_mage.m_x, m.m_mage.m_y, m.m_mage.m_w, m.m_mage.m_h, scale, sprite, rows, col, id_x, show);
 		this.dir = dir;
 		m_sprites = new BufferedImage[rows * col];
+		m_step = 2;
 
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < col; j++) {
@@ -36,15 +37,21 @@ public class Bullet extends Weapon {
 			m_lastChange = now;
 
 			if (dir == 1) {
-				m_x -= 2;
+				if (collision(-m_step, 0)) {
+					model.components.remove(this);
+				} else {
+					id_x = 23;
+					m_x -= m_step;
+				}
 			}
 
 			if (dir == 2) {
-				m_x += 2;
-			}
-
-			if (dir == 3) {
-				m_y -= 2;
+				if (collision(m_step, 0)) {
+					model.components.remove(this);
+				} else {
+					id_x = 21;
+					m_x += m_step;
+				}
 			}
 		}
 	}

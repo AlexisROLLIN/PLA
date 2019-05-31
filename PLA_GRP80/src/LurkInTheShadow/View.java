@@ -44,9 +44,13 @@ public class View extends GameView {
 		Image image = m_model.m_background;
 		g.drawImage(image, 0, 0, 1024, 768, null);
 		
+		Component currComp;
 		Iterator<Component> iter = m_model.components.iterator();
 		while (iter.hasNext()) {
-			iter.next().paint(g);
+			currComp = iter.next();
+			if (currComp.show) {
+				currComp.paint(g);
+			}
 		}
 	}
 }

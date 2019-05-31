@@ -14,6 +14,7 @@ public class Component {
 	BufferedImage m_sprite;
 	int m_nrows, m_ncols;
 	int id_x;
+	int m_step;
 	boolean show;
 	long m_lastMove;
 
@@ -45,6 +46,10 @@ public class Component {
 	}
 
 	public void hit() {
+	}
+	
+	public boolean collision(int stepX, int stepY) {
+		return model.m_wall.getBounds(0, 0).intersects(getBounds(stepX, stepY));
 	}
 	
 	public Rectangle getBounds(int stepX,int stepY) {

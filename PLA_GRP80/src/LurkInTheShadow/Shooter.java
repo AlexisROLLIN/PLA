@@ -5,10 +5,19 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class Shooter extends Ally {
+	int[] m_spritesGoUp = { 79, 78, 80 };
+	int[] m_spritesGoDown = { 82, 81, 83 };
+	int[] m_spritesGoLeft = { 76, 73, 77 };
+	int[] m_spritesGoRight = { 72, 68, 71 };
+	int id_xUp = 0;
+	int id_xDown = 0;
+	int id_xLeft = 0;
+	int id_xRight = 0;
 
 	public Shooter(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
 			boolean show, int HP, int intensity, int faction) {
 		super(m, x, y, w, h, scale, sprite, rows, col, id_x, show, HP, intensity);
+		m_step = 8;
 		splitSprite();
 	}
 
@@ -36,10 +45,11 @@ public class Shooter extends Ally {
 			m_lastMove = now;
 
 			if (m_goUp) {
-				
-				if (!collision(0, -8)) {
-					id_x = 78; // +79 +80
-					m_y -= 8;
+
+				if (!collision(0, -m_step)) {
+					id_x = m_spritesGoUp[id_xUp];
+					id_xUp = (id_xUp + 1) % m_spritesGoUp.length;
+					m_y -= m_step;
 				}
 
 				if (0 > m_y + (int) (m_scale * m_h)) {
@@ -47,23 +57,12 @@ public class Shooter extends Ally {
 				}
 			}
 
-			if (m_goLeft) {
-				
-				if (!collision(-8, 0)) {
-					id_x = 73; // +76 +77
-					m_x -= 8;
-				}
-
-				if (0 > m_x + (int) (m_scale * m_w)) {
-					m_x += 1024;
-				}
-			}
-
 			if (m_goDown) {
-				
-				if (!collision(0, 8)) {
-					id_x = 81; // +82 +83
-					m_y += 8;
+
+				if (!collision(0, m_step)) {
+					id_x = m_spritesGoDown[id_xDown];
+					id_xDown = (id_xDown + 1) % m_spritesGoDown.length;
+					m_y += m_step;
 				}
 
 				if (768 < m_y) {
@@ -71,11 +70,25 @@ public class Shooter extends Ally {
 				}
 			}
 
+			if (m_goLeft) {
+
+				if (!collision(-m_step, 0)) {
+					id_x = m_spritesGoLeft[id_xLeft];
+					id_xLeft = (id_xLeft + 1) % m_spritesGoLeft.length;
+					m_x -= m_step;
+				}
+
+				if (0 > m_x + (int) (m_scale * m_w)) {
+					m_x += 1024;
+				}
+			}
+
 			if (m_goRight) {
-				
-				if (!collision(8, 0)) {
-					id_x = 68; // +72 +71
-					m_x += 8;
+
+				if (!collision(m_step, 0)) {
+					id_x = m_spritesGoRight[id_xRight];
+					id_xRight = (id_xRight + 1) % m_spritesGoRight.length;
+					m_x += m_step;
 				}
 
 				if (1024 < m_x) {
@@ -90,14 +103,6 @@ public class Shooter extends Ally {
 		b.setPosition(m_x, m_y, 1);
 		model.components.add(b);
 		// b.id_x = 48;
-
-		if (dir == 1) {
-			b.id_x = 23;
-		}
-
-		if (dir == 2) {
-			b.id_x = 21;
-		}
 	}
 
 	@Override
