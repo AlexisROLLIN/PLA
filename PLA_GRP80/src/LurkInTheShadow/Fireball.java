@@ -1,7 +1,5 @@
 package LurkInTheShadow;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class Fireball extends Weapon {
@@ -54,20 +52,5 @@ public class Fireball extends Weapon {
 				}
 			}
 		}
-	}
-
-	/**
-	 * paints this square on the screen.
-	 * 
-	 * @param g
-	 */
-
-	@Override
-	public void paint(Graphics g) {
-		Image img;
-		img = m_sprites[id_x];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img, m_x, m_y, w, h, null);
 	}
 }

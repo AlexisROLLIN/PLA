@@ -1,7 +1,5 @@
 package LurkInTheShadow;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class Bullet extends Weapon {
@@ -9,7 +7,7 @@ public class Bullet extends Weapon {
 	long m_lastChange;
 
 	public Bullet(Model m, float scale, BufferedImage sprite, int rows, int col, int id_x, boolean show, int dir) {
-		super(m, m.m_mage.m_x, m.m_mage.m_y, m.m_mage.m_w, m.m_mage.m_h, scale, sprite, rows, col, id_x, show);
+		super(m, m.m_shooter.m_x, m.m_shooter.m_y, m.m_shooter.m_w, m.m_shooter.m_h, scale, sprite, rows, col, id_x, show);
 		this.dir = dir;
 		m_sprites = new BufferedImage[rows * col];
 		m_step = 2;
@@ -54,20 +52,5 @@ public class Bullet extends Weapon {
 				}
 			}
 		}
-	}
-
-	/**
-	 * paints this square on the screen.
-	 * 
-	 * @param g
-	 */
-
-	@Override
-	public void paint(Graphics g) {
-		Image img;
-		img = m_sprites[id_x];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img, m_x, m_y, w, h, null);
 	}
 }
