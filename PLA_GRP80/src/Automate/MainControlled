@@ -1,0 +1,12 @@
+Player(Init){
+  * (Init):
+  | Key(z) ? Move(N) :(Init)
+  | Key(s) ? Move(S) :(Init)
+  | Key(q) ? Move(O) :(Init)
+  | Key(d) ? Move(E) :(Init)
+  | Key(SPACE) ? Hit  :(Init)
+  | Key(e)  ? Pop     :(Init)
+  | Key(a)  ? Wizz    :(Init)
+  | Key(r)  ? Get     :(Init)
+  | Key(t)  ? Throw   :(Init)
+}
