@@ -13,77 +13,113 @@ import java.io.File;
 import edu.ricm3.game.GameController;
 import LurkInTheShadow.Model;
 import LurkInTheShadow.View;
-public class Controller extends GameController implements ActionListener{
+
+public class Controller extends GameController implements ActionListener {
 	Model m_model;
 	View m_view;
-	
-	
+
 	public Controller(Model model, View view) {
-		m_model = model;
-		m_view = view;
-	} 
-	
+		this.m_model = model;
+		this.m_view = view;
+	}
+
 	@Override
 	public void step(long now) {
 		m_model.step(now);
 		m_view.step(now);
-
 	}
-	
-	public void keyTyped(KeyEvent e) {}
-	
+
+	public void keyTyped(KeyEvent e) {
+	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
-			System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
-		if (e.getKeyChar() == 'd') {
+		System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
 
-			this.m_model.m_Mage.avanceOn();
-		}
-		if (e.getKeyChar() == 'z') {
+		// move
 
-			this.m_model.m_Mage.monterOn();
-			this.m_model.m_Mage.tir(3);
+		if (e.getKeyCode() == 90) {
+			m_model.m_main.upOn();
 		}
-		if (e.getKeyChar() == 'q') {
 
-			this.m_model.m_Mage.reculeOn();
+		if (e.getKeyCode() == 81) {
+			m_model.m_main.leftOn();
 		}
-		if (e.getKeyChar() == 's') {
 
-			this.m_model.m_Mage.descendreOn();
+		if (e.getKeyCode() == 83) {
+			m_model.m_main.downOn();
 		}
-		if (e.getKeyChar() == 'a') {
-			this.m_model.m_Mage.tir(1);
+
+		if (e.getKeyCode() == 68) {
+			m_model.m_main.rightOn();
 		}
-		if (e.getKeyChar() == 'e') {
-			this.m_model.m_Mage.tir(2);
+
+		// shoot (to work)
+
+		if (e.getKeyCode() == 65) {
+			m_model.m_main.hit(1);
+		}
+
+		if (e.getKeyCode() == 69) {
+			m_model.m_main.hit(2);
+		}
+		
+		// change main character
+		
+		if (e.getKeyCode() == 49) {
+			m_model.m_main = m_model.m_warrior;
+		}
+		
+		if (e.getKeyCode() == 50) {
+			m_model.m_main = m_model.m_shooter;
+		}
+		
+		if (e.getKeyCode() == 51) {
+			m_model.m_main = m_model.m_mage;
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-			System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());
+		System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());
 
-		if (e.getKeyChar() == 'd') {
-			this.m_model.m_Mage.avanceOff();
+		if (e.getKeyCode() == 90) {
+			m_model.m_main.upOff();
+			
+//			m_model.m_mage.upOff();
+//			m_model.m_warrior.upOff();
+//			m_model.m_shooter.upOff();
 		}
-		if (e.getKeyChar() == 'q') {
 
-			this.m_model.m_Mage.reculeOff();
+		if (e.getKeyCode() == 81) {
+			m_model.m_main.leftOff();
+			
+//			m_model.m_mage.leftOff();
+//			m_model.m_warrior.leftOff();
+//			m_model.m_shooter.leftOff();
 		}
-		if (e.getKeyChar() == 'z') {
 
-			this.m_model.m_Mage.monterOff();
+		if (e.getKeyCode() == 83) {
+			m_model.m_main.downOff();
+			
+//			m_model.m_mage.downOff();
+//			m_model.m_warrior.downOff();
+//			m_model.m_shooter.downOff();
 		}
-		if (e.getKeyChar() == 's') {
 
-			this.m_model.m_Mage.descendreOff();
+		if (e.getKeyCode() == 68) {
+			m_model.m_main.rightOff();
+			
+//			m_model.m_mage.rightOff();
+//			m_model.m_warrior.rightOff();
+//			m_model.m_shooter.rightOff();
 		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	}
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}
@@ -91,6 +127,7 @@ public class Controller extends GameController implements ActionListener{
 	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
+
 	@Override
 	public void mouseEntered(MouseEvent e) {
 	}
@@ -113,6 +150,4 @@ public class Controller extends GameController implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	}
-
 }
-

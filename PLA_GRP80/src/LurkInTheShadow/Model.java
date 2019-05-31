@@ -6,43 +6,94 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
-
 import edu.ricm3.game.GameModel;
 import LurkInTheShadow.Mage;
-import LurkInTheShadow.Mur;
+import LurkInTheShadow.Wall;
 import java.awt.Color;
 
 public class Model extends GameModel {
 	BufferedImage m_testSprite;
 	BufferedImage m_background;
-	Mur m_Mur;
-	Mage m_Mage;
-	Feu m_feu;
+	Character m_main;
+	Warrior m_warrior;
+	Shooter m_shooter;
+	Mage m_mage;
+	Fireball m_fireball;
+	Bullet m_bullet;
+	Wall m_wall;
 	LinkedList<Component> components;
 
 	public Model() {
-	    loadSprites();
-	    this.components = new LinkedList();
-	    m_Mage = new Mage(this, 300, 300, 32, 32, 39,true,100,1,9,10,3F,m_testSprite,0);
-	    m_feu = new Feu(this,m_testSprite,9,10,18,1F,true,1);
-	    m_Mur = new Mur(this, 400, 400, 32, 32, 5, 9, 10, 3F, m_testSprite,true);
-	    this.components.add(m_Mage);
-	    this.components.add(m_feu);
-	    this.components.add(m_Mur);
+		loadSprites();
+		this.components = new LinkedList();
+
+		// Warrior
+
+		int[] spritesGoUpWarrior = { 49, 50 };
+		int[] spritesGoDownWarrior = { 51, 48, 52 };
+		int[] spritesGoLeftWarrior = { 60, 56, 61 };
+		int[] spritesGoRightWarrior = { 66, 62, 67 };
+
+		m_warrior = new Warrior(this, 300, 200, 32, 32, 3F, m_testSprite, 10, 9, 48, spritesGoUpWarrior,
+				spritesGoDownWarrior, spritesGoLeftWarrior, spritesGoRightWarrior, true, 200, 1, 0);
+		this.components.add(m_warrior);
+
+		// Shooter
+
+		int[] spritesGoUpShooter = { 79, 78, 80 };
+		int[] spritesGoDownShooter = { 82, 81, 83 };
+		int[] spritesGoLeftShooter = { 76, 73, 77 };
+		int[] spritesGoRightShooter = { 72, 68, 71 };
+
+		m_shooter = new Shooter(this, 200, 400, 32, 32, 3F, m_testSprite, 10, 9, 81, spritesGoUpShooter,
+				spritesGoDownShooter, spritesGoLeftShooter, spritesGoRightShooter, true, 200, 1, 0);
+		this.components.add(m_shooter);
+
+		// Mage
+
+		int[] spritesGoUpMage = { 46, 45, 47 };
+		int[] spritesGoDownMage = { 43, 39, 44 };
+		int[] spritesGoLeftMage = { 31, 25, 32 };
+		int[] spritesGoRightMage = { 37, 38 };
+
+		m_mage = new Mage(this, 300, 400, 32, 32, 3F, m_testSprite, 10, 9, 39, spritesGoUpMage, spritesGoDownMage,
+				spritesGoLeftMage, spritesGoRightMage, true, 100, 1, 0);
+		this.components.add(m_mage);
+
+		// Decor
+
+		m_wall = new Wall(this, 400, 400, 32, 32, 3F, m_testSprite, 10, 9, 4, true);
+		this.components.add(m_wall);
+		m_main = m_shooter;
 	}
 
-	public Mage cowboys() {
-		return m_Mage;
+	public Character main() {
+		return m_main;
 	}
 
-	public Feu feu() {
-		return m_feu;
+	public Warrior Warrior() {
+		return m_warrior;
 	}
-	
-	public Mur Mur() {
-		return m_Mur;
+
+	public Shooter shooter() {
+		return m_shooter;
+	}
+
+	public Mage mage() {
+		return m_mage;
+	}
+
+	public Bullet bullet() {
+		return m_bullet;
+	}
+
+	public Fireball fireball() {
+		return m_fireball;
+	}
+
+	public Wall Wall() {
+		return m_wall;
 	}
 
 	@Override
@@ -63,7 +114,7 @@ public class Model extends GameModel {
 			ex.printStackTrace();
 			System.exit(-1);
 		}
-		 imageFile = new File("src/Sprites/logo.png");
+		imageFile = new File("src/Sprites/logo.png");
 
 		try {
 			m_background = ImageIO.read(imageFile);
@@ -75,6 +126,5 @@ public class Model extends GameModel {
 
 	@Override
 	public void shutdown() {
-
 	}
 }
