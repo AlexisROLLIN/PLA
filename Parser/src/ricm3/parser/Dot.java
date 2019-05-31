@@ -1,5 +1,7 @@
 package ricm3.parser;
 
+/* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, may 2018 */
+
 public final class Dot {
 
 		public static String graph(String name, String content) {
