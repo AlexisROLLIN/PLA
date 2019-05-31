@@ -366,11 +366,11 @@ public class Ast {
 			switch(name.toString()) {
 				case "True": return new ITrue();
 				case "GotPower": return new IGotPower();
-				/*case "GotStuff": return new IGotStuff();
+				case "GotStuff": return new IGotStuff();
 				case "Key": return new IKey(parameters.get(0).make());//Key(Touche)
 				case "MyDir": return new IMyDir(parameters.get(0).make());//MyDir(Direction)*/
 				case "Cell": return new ICell(parameters.get(0).make(),parameters.get(1).make());
-				/*case "Closest": return new IClosest(parameters.get(0).make(),parameters.get(1).make());*/
+				case "Closest": return new IClosest(parameters.get(0).make(),parameters.get(1).make());
 				default: throw new Interpreter_Exception("Fonction inconnue"+name.toString()+"\n");
 			}
 		}
@@ -380,20 +380,75 @@ public class Ast {
 			
 			//Selon le nom de fonction, differentes reactions
 			switch(name.toString()) {
-				/*case "Wait": return new IWait();
-				case "Pop": return new IPop(parameters.get(0).make());
-				case "Wizz": return new IWizz(parameters.get(0).make());*/
-				case "Move": return new IMove(parameters.get(0).make());
-				/*case "Jump": return new IJump(parameters.get(0).make());
-				case "Turn": return new ITurn(parameters.get(0).make());*/
-				case "Hit": return new IHit(parameters.get(0).make());
-				/*case "Pick": return new IPick(parameters.get(0).make());
-				case "Throw": return new IThrow(parameters.get(0).make());
+				case "Wait": return new IWait();
+				case "Pop": 
+					if (parameters.size()<1) {
+						return new IPop();
+					} 
+					else {
+						return new IPop(parameters.get(0).make());
+					}
+				case "Wizz":
+					if (parameters.size()<1) {
+						return new IWizz();
+					} 
+					else {
+						return new IWizz(parameters.get(0).make());
+					}
+				case "Move":
+					if (parameters.size()<1) {
+						return new IMove();
+					} 
+					else {
+						return new IMove(parameters.get(0).make());
+					}
+				case "Jump":
+					if (parameters.size()<1) {
+						return new IJump();
+					} 
+					else {
+						return new IJump(parameters.get(0).make());
+					}
+				case "Turn":
+					if (parameters.size()<1) {
+						return new ITurn();
+					} 
+					else {
+						return new ITurn(parameters.get(0).make());
+					}
+				case "Hit":
+					if (parameters.size()<1) {
+						return new IHit();
+					} 
+					else {
+						return new IHit(parameters.get(0).make());
+					}
+				case "Protect":
+					if (parameters.size()<1) {
+						return new IProtect();
+					} 
+					else {
+						return new IProtect(parameters.get(0).make());
+					}
+				case "Pick":
+					if (parameters.size()<1) {
+						return new IPick();
+					} 
+					else {
+						return new IPick(parameters.get(0).make());
+					}
+				case "Throw":
+					if (parameters.size()<1) {
+						return new IThrow();
+					} 
+					else {
+						return new IThrow(parameters.get(0).make());
+					}
 				case "Store": return new IStore();
 				case "Get": return new IGet();
 				case "Power": return new IPower();
 				case "Kamikaze": return new IKamikaze();
-				case "Egg": return new IEgg();*/
+				case "Egg": return new IEgg();
 				default: throw new Interpreter_Exception("Fonction inconnue"+name.toString()+"\n");
 			}
 		}
