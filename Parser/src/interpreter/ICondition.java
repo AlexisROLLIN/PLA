@@ -2,6 +2,7 @@ package interpreter;
 
 import tests.Component;
 import tests.Direction;
+import tests.Type;
 
 public abstract class ICondition {
 
@@ -10,16 +11,11 @@ public abstract class ICondition {
 
 	public boolean eval(Component c) {
 		return true;
-	} // à redéfinir dans chaque sous-classe
-
-	public static class ITrue extends ICondition {
-		public ITrue() {}
-
-		public boolean eval(Component c) {
-			return true;
-		}
 	}
 
+	
+	//Operateurs booleens basiques
+	
 	public static class IOr extends ICondition { // Operateur OU
 
 		ICondition m_left;
@@ -62,14 +58,26 @@ public abstract class ICondition {
 			return !(m_cond.eval(c));
 		}
 	}
+	
+	
+	//Conditions booleennes de base
+	
+	public static class ITrue extends ICondition {
+		public ITrue() {}
 
-	public static class ICell extends ICondition {
+		public boolean eval(Component c) {
+			return true;
+		}
+	}
+
+	public static class ICell extends ICondition { //TODO
 		Direction direction;
-		Component c;
+		Type type;
 
-		public ICell(String direction, String component){
+		public ICell(String direction, String type){
 			this.direction = Direction.strToDir(direction);
-			//def du component A FAIRE
+			this.type=Type.strToType(type);
+			
 		}
 
 		public boolean eval(Component e) {
@@ -85,10 +93,41 @@ public abstract class ICondition {
 			return (c.power() > 0);
 		}
 	}
+	
+	public static class IGotStuff extends ICondition { //TODO
+		public IGotStuff() {}
 
-	// TODO
-	/*
-	 * public class True GotPower, GotStuff Key MyDir Cell Closest
-	 */
+		public boolean eval(Component c) {
+			return true;
+		}
+	}
+	
+	public static class IKey extends ICondition { //TODO
+		public IKey(String s) {}
+
+		public boolean eval(Component c) {
+			return true;
+		}
+	}
+	
+	public static class IMyDir extends ICondition {
+		Direction direction;
+		
+		public IMyDir(String dir) {
+			this.direction=Direction.strToDir(dir);
+		}
+
+		public boolean eval(Component c) {
+			return (c.dir()==direction);
+		}
+	}
+
+	public static class IClosest extends ICondition { //TODO
+		public IClosest(String s, String t) {}
+
+		public boolean eval(Component c) {
+			return true;
+		}
+	}
 
 }
