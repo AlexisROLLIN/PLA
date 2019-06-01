@@ -26,7 +26,7 @@ public class Model extends GameModel {
 
 	public Model() {
 		loadSprites();
-		this.components = new LinkedList();
+		this.components = new LinkedList<Component>();
 
 		// Warrior
 
@@ -36,7 +36,7 @@ public class Model extends GameModel {
 		int[] spritesGoRightWarrior = { 66, 62, 67 };
 
 		m_warrior = new Warrior(this, 300, 200, 32, 32, 3F, m_testSprite, 10, 9, 48, spritesGoUpWarrior,
-				spritesGoDownWarrior, spritesGoLeftWarrior, spritesGoRightWarrior, true, 200, 1, 0);
+				spritesGoDownWarrior, spritesGoLeftWarrior, spritesGoRightWarrior, true, 200, 10, 1, 0);
 		this.components.add(m_warrior);
 
 		// Shooter
@@ -47,7 +47,7 @@ public class Model extends GameModel {
 		int[] spritesGoRightShooter = { 72, 68, 71 };
 
 		m_shooter = new Shooter(this, 200, 400, 32, 32, 3F, m_testSprite, 10, 9, 81, spritesGoUpShooter,
-				spritesGoDownShooter, spritesGoLeftShooter, spritesGoRightShooter, true, 200, 1, 0);
+				spritesGoDownShooter, spritesGoLeftShooter, spritesGoRightShooter, true, 150, 15, 1, 0);
 		this.components.add(m_shooter);
 
 		// Mage
@@ -58,7 +58,7 @@ public class Model extends GameModel {
 		int[] spritesGoRightMage = { 37, 38 };
 
 		m_mage = new Mage(this, 300, 400, 32, 32, 3F, m_testSprite, 10, 9, 39, spritesGoUpMage, spritesGoDownMage,
-				spritesGoLeftMage, spritesGoRightMage, true, 100, 1, 0);
+				spritesGoLeftMage, spritesGoRightMage, true, 100, 20, 1, 0);
 		this.components.add(m_mage);
 
 		// Decor

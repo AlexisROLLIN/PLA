@@ -4,11 +4,13 @@ import java.awt.image.BufferedImage;
 
 public class Bullet extends Weapon {
 	int dir;
+	int damage;
 	long m_lastChange;
 
-	public Bullet(Model m, float scale, BufferedImage sprite, int rows, int col, int id_x, boolean show, int dir) {
-		super(m, m.m_shooter.m_x, m.m_shooter.m_y, m.m_shooter.m_w, m.m_shooter.m_h, scale, sprite, rows, col, id_x, show);
+	public Bullet(Model m, float scale, BufferedImage sprite, int rows, int col, int id_x, boolean show, int dir, int damage) {
+		super(m, m.m_shooter.m_origin.x, m.m_shooter.m_origin.y, m.m_shooter.m_w, m.m_shooter.m_h, scale, sprite, rows, col, id_x, show);
 		this.dir = dir;
+		this.damage = damage;
 		m_sprites = new BufferedImage[rows * col];
 		m_step = 2;
 
@@ -22,8 +24,8 @@ public class Bullet extends Weapon {
 	}
 
 	public void setPosition(int x, int y, float scale) {
-		m_x = (int) (x - scale * m_w / 2f);
-		m_y = (int) (y - scale * m_h / 2f);
+		m_origin.x = (int) (x - scale * m_w / 2f);
+		m_origin.y = (int) (y - scale * m_h / 2f);
 		m_scale = scale;
 		id_x = 0;
 	}
@@ -35,20 +37,26 @@ public class Bullet extends Weapon {
 			m_lastChange = now;
 
 			if (dir == 1) {
-				if (collision(-m_step, 0)) {
+				Enemy enemy = doesDamageTo(-m_step, 0);
+				if (!canMove(-m_step, 0)) {
 					model.components.remove(this);
+				} else if (enemy != null) {
+					enemy.HP -= damage;
 				} else {
 					id_x = 23;
-					m_x -= m_step;
+					m_origin.x -= m_step;
 				}
 			}
 
 			if (dir == 2) {
-				if (collision(m_step, 0)) {
+				Enemy enemy = doesDamageTo(m_step, 0);
+				if (!canMove(m_step, 0)) {
 					model.components.remove(this);
+				} else if (enemy != null) {
+					enemy.HP -= damage;
 				} else {
 					id_x = 21;
-					m_x += m_step;
+					m_origin.x += m_step;
 				}
 			}
 		}

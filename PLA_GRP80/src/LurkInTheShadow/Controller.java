@@ -85,34 +85,18 @@ public class Controller extends GameController implements ActionListener {
 
 		if (e.getKeyCode() == 90) {
 			m_model.m_main.upOff();
-			
-//			m_model.m_mage.upOff();
-//			m_model.m_warrior.upOff();
-//			m_model.m_shooter.upOff();
 		}
 
 		if (e.getKeyCode() == 81) {
 			m_model.m_main.leftOff();
-			
-//			m_model.m_mage.leftOff();
-//			m_model.m_warrior.leftOff();
-//			m_model.m_shooter.leftOff();
 		}
 
 		if (e.getKeyCode() == 83) {
 			m_model.m_main.downOff();
-			
-//			m_model.m_mage.downOff();
-//			m_model.m_warrior.downOff();
-//			m_model.m_shooter.downOff();
 		}
 
 		if (e.getKeyCode() == 68) {
 			m_model.m_main.rightOff();
-			
-//			m_model.m_mage.rightOff();
-//			m_model.m_warrior.rightOff();
-//			m_model.m_shooter.rightOff();
 		}
 	}
 
