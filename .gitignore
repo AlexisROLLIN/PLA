@@ -9,4 +9,7 @@ setenv.sh
 */.gitignore
 PLA_Grp80/*
 PLA_Grp80
+./bin
+./.project
+./.settings
 
