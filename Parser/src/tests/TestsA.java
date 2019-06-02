@@ -41,13 +41,13 @@ public class TestsA {
 	*/  
 	Model m=new Model();  
 	  
-	Component c = new Component(10,10,10,m);
+	Component c = new Component(10,10,10,10,10,m);
 	  
 	IState etat1=new IState("E1");
 	IState etat2=new IState("E2");
 	
-	ICondition cond1a2=new ICondition.ICell("N","D");
-	ICondition cond2a1=new ICondition.ICell("N","D");
+	ICondition cond1a2=new ICondition.ICell("R","V"); //Si case droite vide
+	ICondition cond2a1=new ICondition.ICell("R","V");
 	
 	IAction act1a2=new IAction.IMove("R"); //va toujours à sa droite
 	IAction act2a1=new IAction.IHit("N");
@@ -97,7 +97,7 @@ public class TestsA {
 	*/  
 	Model m=new Model();  
 	  
-	Component c = new Component(10,10,10,m);
+	Component c = new Component(10,10,10,10,10,m);
 	  
 	IState etat1=new IState("E1");
 	IState etat2=new IState("E2");
@@ -140,6 +140,106 @@ public class TestsA {
 	c.step();
 	assertTrue((auto.current()).name().equals("E2"));
   }
-
-
+  
+  @Test
+  public void test02() throws Interpreter_Exception{
+	  //Test Interaction entre 2 automates
+	  
+	/*Def manuelle d'un premier automate à 3 transitions.
+	 (1) -Cell(E,V)/Move(E)-> (1)
+	 (1) -True/Hit(E)->(2)
+	 (2) -True/Wait->(2)
+	 Je marche vers l'Est tant qu'il n'y a aucune entité sur la case Est 
+	 et si je tombe face à une entité je frappe en sa direction
+	*/
+	Model m=new Model();  
+	  
+	Component c_A = new Component(0,0,10,10,10,m); //en (0,0)
+	  
+	IState etat1_A=new IState("E1_A");
+	IState etat2_A=new IState("E2_A");
+	
+	ICondition cond1a2_A=new ICondition.ITrue();
+	ICondition cond1a1_A=new ICondition.ICell("E","V");
+	ICondition cond2a2_A=new ICondition.ITrue();
+	
+	IAction act1a1_A=new IAction.IMove("E");
+	IAction act1a2_A=new IAction.IHit("E");
+	IAction act2a2_A=new IAction.IWait();
+	
+	ITransition trans1a1_A=new ITransition(cond1a1_A,act1a1_A,etat1_A);
+	ITransition trans1a2_A=new ITransition(cond1a2_A,act1a2_A,etat2_A);
+	ITransition trans2a2_A=new ITransition(cond2a2_A,act2a2_A,etat2_A);
+	
+	List<ITransition> transList1_A=new LinkedList<ITransition>();
+	transList1_A.add(trans1a1_A);//Ordre d'ajout des transitions important
+	transList1_A.add(trans1a2_A);
+	
+	List<ITransition> transList2_A=new LinkedList<ITransition>();
+	transList2_A.add(trans2a2_A);
+	
+	IBehaviour source1_A=new IBehaviour(etat1_A,transList1_A);
+	IBehaviour source2_A=new IBehaviour(etat2_A,transList2_A);
+	
+	List<IBehaviour> behaviourList_A=new LinkedList<IBehaviour>();
+	behaviourList_A.add(source1_A);
+	behaviourList_A.add(source2_A);
+	
+	IAutomaton auto_A=new IAutomaton(etat1_A,behaviourList_A);
+	
+	/*  
+	 Def manuelle d'un second automate à 3 transitions.
+	 (1) -Cell(W,V)/Move(E)-> (1)
+	 (1) -True/Hit(W)->(2)
+	 (2) -True/Wait->(2)
+	Je marche vers l'Ouest tant qu'il n'y a aucune entité sur la case Ouest 
+	 et si je tombe face à une entité je frappe en sa direction
+	*/  
+	
+	Component c_B = new Component(96,0,10,10,10,m); //en (96,0), soit 3 cases à l'est de c_A
+	
+	IState etat1_B=new IState("E1_B");
+	IState etat2_B=new IState("E2_B");
+	
+	ICondition cond1a2_B=new ICondition.ITrue();
+	ICondition cond1a1_B=new ICondition.ICell("W","V");
+	ICondition cond2a2_B=new ICondition.ITrue();
+	
+	IAction act1a1_B=new IAction.IMove("W");
+	IAction act1a2_B=new IAction.IHit("W");
+	IAction act2a2_B=new IAction.IWait();
+	
+	ITransition trans1a1_B=new ITransition(cond1a1_B,act1a1_B,etat1_B);
+	ITransition trans1a2_B=new ITransition(cond1a2_B,act1a2_B,etat2_B);
+	ITransition trans2a2_B=new ITransition(cond2a2_B,act2a2_B,etat2_B);
+	
+	List<ITransition> transList1_B=new LinkedList<ITransition>();
+	transList1_B.add(trans1a1_B);//Ordre d'ajout des transitions important
+	transList1_B.add(trans1a2_B);
+	
+	List<ITransition> transList2_B=new LinkedList<ITransition>();
+	transList2_B.add(trans2a2_B);
+	
+	IBehaviour source1_B=new IBehaviour(etat1_B,transList1_B);
+	IBehaviour source2_B=new IBehaviour(etat2_B,transList2_B);
+	
+	List<IBehaviour> behaviourList_B=new LinkedList<IBehaviour>();
+	behaviourList_B.add(source1_B);
+	behaviourList_B.add(source2_B);
+	
+	IAutomaton auto_B=new IAutomaton(etat1_B,behaviourList_B);
+	  
+	c_A.setAutomate(auto_A);
+	c_B.setAutomate(auto_B);
+	
+	c_A.step();
+	assertTrue((auto_A.current()).name().equals("E1_A")); //Supposé avancer vers l'est
+	c_B.step();
+	assertTrue((auto_B.current()).name().equals("E1_B"));
+	c_A.step();
+	assertTrue((auto_A.current()).name().equals("E2_A")); //Les deux components sont censés se rencontrer
+	c_B.step();
+	assertTrue((auto_B.current()).name().equals("E2_B"));
+  }
+  
 }

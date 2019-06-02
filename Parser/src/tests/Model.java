@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Model {
 
-	List<Component> comp;
+	public List<Component> comp;
 	
 	public Model() {
 		comp=new LinkedList<Component>();
