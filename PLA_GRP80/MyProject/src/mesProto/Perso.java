@@ -20,7 +20,9 @@ public class Perso extends Component{
 	  }
 	  
 	  boolean Vision(Component c) {
-		  Ellipse2D.Double player = new Ellipse2D.Double(this.m_x,this.m_y,100,100);
+		  int x = 50;
+		  int y = 50;
+		  Ellipse2D.Double player = new Ellipse2D.Double(this.m_x - x,this.m_y - y,4*x,4*y);
 		  Rectangle objet = c.getBounds();
 		  
 		  if (player.intersects(objet)) {
