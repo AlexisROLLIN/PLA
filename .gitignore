@@ -1,8 +1,9 @@
 .gitignore
 *.class
 .recommenders/*
-.metadata/*
+PLA_GRP80/src/LurkInTheShadow/.metadata/*
 setenv.sh
 /.metadata/
 */.classpath
-
+PLA_GRP80/MyProject/.settings/*
+Parser/bin/*
