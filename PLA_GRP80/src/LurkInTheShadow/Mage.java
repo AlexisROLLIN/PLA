@@ -14,9 +14,9 @@ public class Mage extends Ally {
 	}
 
 	public void hit(int dir) {
-		Fireball f = new Fireball(model, 8F, model.m_testSprite, 10, 9, 17, true, dir, damage);
+		Fireball f = new Fireball(m_model, 8F, m_model.m_testSprite, 10, 9, 17, true, dir, damage);
 		f.setPosition(m_origin.x, m_origin.y, 1);
-		model.components.add(f);
+		m_model.components.add(f);
 		// f.id_x = 39;
 	}
 }

@@ -47,7 +47,7 @@ public class Ally extends Character {
 		}
 
 		if (0 >= HP) {
-			model.components.remove(this);
+			m_model.components.remove(this);
 		}
 	}
 

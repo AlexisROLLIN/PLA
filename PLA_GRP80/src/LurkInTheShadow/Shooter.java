@@ -14,9 +14,9 @@ public class Shooter extends Ally {
 	}
 
 	public void hit(int dir) {
-		Bullet b = new Bullet(model, 8F, model.m_testSprite, 10, 9, 18, true, dir, damage); // 18 ? num bullet
+		Bullet b = new Bullet(m_model, 8F, m_model.m_testSprite, 10, 9, 18, true, dir, damage); // 18 ? num bullet
 		b.setPosition(m_origin.x, m_origin.y, 1);
-		model.components.add(b);
+		m_model.components.add(b);
 		// b.id_x = 48;
 	}
 }

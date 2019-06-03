@@ -11,6 +11,7 @@ import edu.ricm3.game.GameModel;
 import LurkInTheShadow.Mage;
 import LurkInTheShadow.Wall;
 import java.awt.Color;
+import java.awt.Font;
 
 public class Model extends GameModel {
 	BufferedImage m_testSprite;
@@ -22,6 +23,8 @@ public class Model extends GameModel {
 	Fireball m_fireball;
 	Bullet m_bullet;
 	Wall m_wall;
+	Square m_data;
+	Square m_test;
 	LinkedList<Component> components;
 
 	public Model() {
@@ -66,6 +69,10 @@ public class Model extends GameModel {
 		m_wall = new Wall(this, 400, 400, 32, 32, 3F, m_testSprite, 10, 9, 4, true);
 		this.components.add(m_wall);
 		m_main = m_shooter;
+		
+		// Data
+		
+		m_data = new Square(this, Options.PW_WIDTH, 0, Options.DW_WIDTH, Options.W_HEIGHT, Color.gray, m_test);
 	}
 
 	public Character main() {

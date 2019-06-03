@@ -39,7 +39,7 @@ public class Bullet extends Weapon {
 			if (dir == 1) {
 				Enemy enemy = doesDamageTo(-m_step, 0);
 				if (!canMove(-m_step, 0)) {
-					model.components.remove(this);
+					m_model.components.remove(this);
 				} else if (enemy != null) {
 					enemy.HP -= damage;
 				} else {
@@ -51,7 +51,7 @@ public class Bullet extends Weapon {
 			if (dir == 2) {
 				Enemy enemy = doesDamageTo(m_step, 0);
 				if (!canMove(m_step, 0)) {
-					model.components.remove(this);
+					m_model.components.remove(this);
 				} else if (enemy != null) {
 					enemy.HP -= damage;
 				} else {

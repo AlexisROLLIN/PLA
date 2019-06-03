@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Component {
-	Model model;
+	Model m_model;
 	Point m_origin;
 	int m_w, m_h;
 	float m_scale;
@@ -28,7 +28,7 @@ public class Component {
 
 	public Component(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col,
 			int id_x, boolean show) {
-		this.model = m;
+		this.m_model = m;
 		this.m_origin = new Point(x, y);
 		this.m_w = w;
 		this.m_h = h;
@@ -112,9 +112,11 @@ public class Component {
 	public LinkedList<Component> inCollisionWith(int stepX, int stepY) {
 		Component comp;
 		LinkedList<Component> listComp = new LinkedList<Component>();
-		Iterator<Component> iter = model.components.iterator();
+		Iterator<Component> iter = m_model.components.iterator();
+		
 		while (iter.hasNext()) {
 			comp = iter.next();
+			
 			if (this != comp) {
 				if (comp.getBounds(0, 0).intersects(getBounds(stepX, stepY))) {
 					System.out.println("this: " + this.toString() + " comp: " + comp.toString());
@@ -129,8 +131,10 @@ public class Component {
 	public boolean canMove(int stepX, int stepY) {
 		Component comp;
 		Iterator<Component> iter = inCollisionWith(stepX, stepY).iterator();
+		
 		while (iter.hasNext()) {
 			comp = iter.next();
+			
 			if (comp instanceof Wall) {
 				return false;
 			}
@@ -141,21 +145,30 @@ public class Component {
 	
 	public void tore() {
 		
-		if (0 > m_origin.y + (int) (m_scale * m_h)) {
-			m_origin.y += 768;
+		if (this instanceof Ally ) {
+			
+			if (0 > m_origin.y + (int) (m_scale * m_h)) {
+				m_origin.y += Options.W_HEIGHT;
+			}
+			
+			if (768 < m_origin.y) {
+				m_origin.y -= (Options.W_HEIGHT + (int) (m_scale * m_h));
+			}
+			
+			if (0 > m_origin.x + (int) (m_scale * m_w)) {
+				m_origin.x += Options.PW_WIDTH;
+			}
+			
+			if (1024 < m_origin.x) {
+				m_origin.x -= (Options.PW_WIDTH + (int) (m_scale * m_w));
+			}
 		}
 		
-		if (768 < m_origin.y) {
-			m_origin.y -= (768 + (int) (m_scale * m_h));
+		else {
+			show = false;
 		}
 		
-		if (0 > m_origin.x + (int) (m_scale * m_w)) {
-			m_origin.x += 1024;
-		}
 		
-		if (1024 < m_origin.x) {
-			m_origin.x -= (1024 + (int) (m_scale * m_w));
-		}
 	}
 	
 	public void translate() {

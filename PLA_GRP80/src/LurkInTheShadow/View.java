@@ -52,5 +52,7 @@ public class View extends GameView {
 				currComp.paint(g);
 			}
 		}
+		
+		m_model.m_data.paint(g);
 	}
 }
