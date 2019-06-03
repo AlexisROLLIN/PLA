@@ -6,4 +6,6 @@ setenv.sh
 /.metadata/
 .project
 */.classpath
+PLA_GRP80/map/.settings/*
+
 
