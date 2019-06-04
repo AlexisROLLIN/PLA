@@ -3,6 +3,7 @@ package interpreter;
 import tests.Component;
 import tests.Direction;
 import tests.Type;
+import java.util.ListIterator;
 
 public abstract class ICondition {
 
@@ -70,7 +71,7 @@ public abstract class ICondition {
 		}
 	}
 
-	public static class ICell extends ICondition { //TODO
+	public static class ICell extends ICondition {
 		Direction direction;
 		Type type;
 
@@ -81,8 +82,78 @@ public abstract class ICondition {
 		}
 
 		public boolean eval(Component e) {
-			//A changer, defini comme ça juste pour les tests
-			return true; //On dit que la case est toujours libre
+			
+			if (direction == Direction.NORTH || (e.dir() == Direction.NORTH && direction == Direction.FRONT)
+					|| (e.dir() == Direction.SOUTH && direction == Direction.BACK)
+					|| (e.dir() == Direction.WEST && direction == Direction.RIGHT)
+					|| (e.dir() == Direction.EAST && direction == Direction.LEFT)) {
+				//On teste tous les components du plateau pour voir s'ils sont dans la case à côté de la nôtre
+				ListIterator<Component> iter= e.model.comp.listIterator();
+				while (iter.hasNext()) {
+					Component comp=iter.next();
+					if (comp.is_in_case(e.x(), e.y()-32)) { //S'il y a un component dans la case d'à coté
+						if (type==Type.VOID) {//Si on s'attend à une case vide
+							return false;
+						}
+						else if(comp.type()==type || type==Type.ANYTHING){//Si on s'attend à un composant reel
+							return true;}
+						}
+				}
+				//Case d'à coté vide
+				return type==Type.VOID;
+			}
+
+			else if (direction == Direction.SOUTH || (e.dir() == Direction.SOUTH && direction == Direction.FRONT)
+					|| (e.dir() == Direction.NORTH && direction == Direction.BACK)
+					|| (e.dir() == Direction.EAST && direction == Direction.RIGHT)
+					|| (e.dir() == Direction.WEST && direction == Direction.LEFT)) {
+				ListIterator<Component> iter= e.model.comp.listIterator();
+				while (iter.hasNext()) {
+					Component comp=iter.next();
+					if (comp.is_in_case(e.x(), e.y()+32)) {
+						if (type==Type.VOID) {
+							return false;
+						}
+						else if(comp.type()==type || type==Type.ANYTHING){
+							return true;}
+						}
+				}
+				return type==Type.VOID;
+			}
+
+			else if (direction == Direction.WEST || (e.dir() == Direction.WEST && direction == Direction.FRONT)
+					|| (e.dir() == Direction.EAST && direction == Direction.BACK)
+					|| (e.dir() == Direction.SOUTH && direction == Direction.RIGHT)
+					|| (e.dir() == Direction.NORTH && direction == Direction.LEFT)) {
+				ListIterator<Component> iter= e.model.comp.listIterator();
+				while (iter.hasNext()) {
+					Component comp=iter.next();
+					if (comp.is_in_case(e.x()-32, e.y())) {
+						if (type==Type.VOID) {
+							return false;
+						}
+						else if(comp.type()==type || type==Type.ANYTHING){
+							return true;}
+						}
+				}
+				return type==Type.VOID;
+			}
+
+			else {
+				ListIterator<Component> iter= e.model.comp.listIterator();
+				while (iter.hasNext()) {
+					Component comp=iter.next();
+					if (comp.is_in_case(e.x()+32, e.y())) {
+						if (type==Type.VOID) {
+							return false;
+						}
+						else if(comp.type()==type || type==Type.ANYTHING){
+							return true;}
+						}
+				}
+				return type==Type.VOID;
+			}
+			
 		}
 	}
 
