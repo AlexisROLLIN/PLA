@@ -70,7 +70,7 @@ public class Controller extends GameController implements ActionListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		int i = 0;
-		;
+		
 		int j = 0;
 		if (Options.SHOW_M1) {
 			i = 0;
