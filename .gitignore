@@ -5,5 +5,11 @@ PLA_GRP80/src/LurkInTheShadow/.metadata/*
 setenv.sh
 /.metadata/
 */.classpath
+<<<<<<< HEAD
 PLA_GRP80/MyProject/.settings/*
 Parser/bin/*
+=======
+PLA_GRP80/map/.settings/*
+
+
+>>>>>>> origin/tmpAli

@@ -3,9 +3,6 @@ package LurkInTheShadow;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Point;
-
-import javax.swing.border.Border;
-
 import java.awt.Graphics;
 
 public class Score {
@@ -25,7 +22,7 @@ public class Score {
 	}
 
 	/**
-	 * paints this square on the screen.
+	 * paint the score on the IHM.
 	 * 
 	 * @param g
 	 **/
