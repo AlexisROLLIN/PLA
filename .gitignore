@@ -2,10 +2,11 @@
 *.class
 *.jar
 .recommenders/*
-.metadata/*
+PLA_GRP80/src/LurkInTheShadow/.metadata/*
 setenv.sh
 /.metadata/
 */.classpath
+<<<<<<< HEAD
 */.gitignore
 PLA_Grp80/*
 PLA_Grp80
@@ -16,3 +17,7 @@ PLA_Grp80
 ~$rnet de Bord.docx
 ~$What lurks in the shadow.pptx
 ~$WLITS.mvdx
+=======
+PLA_GRP80/MyProject/.settings/*
+Parser/bin/*
+>>>>>>> origin/tmpWill
