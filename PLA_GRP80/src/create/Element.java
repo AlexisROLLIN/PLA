@@ -18,6 +18,7 @@ public class Element {
 	long m_lastMove, m_lastReverse;
 	BufferedImage[] m_sprites;
 	Model m_model;
+	int screen;
 
 	public Element(Model model, int no, BufferedImage sprite, int rows, int columns, int x, int y, float scale,
 			int screen) {
@@ -28,14 +29,25 @@ public class Element {
 		m_x = x;
 		m_y = y;
 		m_scale = scale;
-		if (screen == 1)
+		if (screen == 1) {
 			model.ElementsM1.add(this);
-		if (screen == 2)
+			this.screen = 1;
+		}
+		if (screen == 2) {
 			model.ElementsM2.add(this);
-		if (screen == 3)
+			this.screen=2;
+		}
+			
+		if (screen == 3) {
 			model.ElementsM3.add(this);
-		if (screen == 4)
+			this.screen =3;
+		}
+	
+		if (screen == 4) {
 			model.ElementsM4.add(this);
+			this.screen =4;
+		}
+			
 		model.nbElements++;
 		splitSprite();
 	}

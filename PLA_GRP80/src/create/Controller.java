@@ -69,69 +69,123 @@ public class Controller extends GameController implements ActionListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-
+		int i = 0;
+		;
+		int j = 0;
+		if (Options.SHOW_M1) {
+			i = 0;
+			j = 0;
+		}
+		if (Options.SHOW_M2) {
+			i = 0;
+			j = this.m_model.m.width / 2;
+		}
+		if (Options.SHOW_M3) {
+			i = this.m_model.m.length / 2;
+			j = 0;
+		}
+		if (Options.SHOW_M4) {
+			i = this.m_model.m.length / 2;
+			j = this.m_model.m.width / 2;
+		}
 		if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') {
-			if (this.m_model.perso1.m_x < (this.m_model.m.width / 2) * 31 ) {// && !(this.m_model.perso1.CollisionTotale()) ) {
+			if (this.m_model.perso1.m_x < (this.m_model.m.width / 2) * 31
+					&& this.m_model.m.tab[(this.m_model.perso1.m_y) / 32 + i][(this.m_model.perso1.m_x) / 32 + 1
+							+ j] != 1) {
 				this.m_model.perso1.m_x = this.m_model.perso1.m_x + 32;
 				this.m_model.perso1.m_idx = 37;
-			} else {
+			} else if (this.m_model.perso1.m_x == (this.m_model.m.width / 2) * 31) {
 				this.m_model.perso1.m_x = 0;
 				if (Options.SHOW_M1) {
 					Options.SHOW_M1 = false;
 					Options.SHOW_M2 = true;
+					this.m_model.perso1.screen = 2;
+					this.m_model.ElementsM2.add(this.m_model.perso1);
+					this.m_model.ElementsM1.remove(this.m_model.perso1);
+
 				}
 				if (Options.SHOW_M3) {
 					Options.SHOW_M3 = false;
 					Options.SHOW_M4 = true;
+					this.m_model.perso1.screen = 4;
+					this.m_model.ElementsM4.add(this.m_model.perso1);
+					this.m_model.ElementsM3.remove(this.m_model.perso1);
 				}
 			}
 		}
 
-			if (e.getKeyChar() == 'z' || e.getKeyChar() == 'Z') {
-				if (this.m_model.perso1.m_y > 0) {  //&& !(this.m_model.perso1.CollisionTotale())) {
+		if (e.getKeyChar() == 'z' || e.getKeyChar() == 'Z') {
+			if (this.m_model.perso1.m_y > 0) {
+				if (this.m_model.m.tab[(this.m_model.perso1.m_y / 32) - 1 + i][(this.m_model.perso1.m_x) / 32
+						+ j] != 1) {
 					this.m_model.perso1.m_y = this.m_model.perso1.m_y - 32;
-				} else {
-					this.m_model.perso1.m_y = ((this.m_model.m.length / 2)-1) * 32;
-					if (Options.SHOW_M3) {
-						Options.SHOW_M3 = false;
-						Options.SHOW_M1 = true;
-					}
-					if (Options.SHOW_M4) {
-						Options.SHOW_M4 = false;
-						Options.SHOW_M2 = true;
-					}
 				}
 
+			} else {
+				this.m_model.perso1.m_y = ((this.m_model.m.length / 2) - 1) * 32;
+				if (Options.SHOW_M3) {
+					Options.SHOW_M3 = false;
+					Options.SHOW_M1 = true;
+					this.m_model.perso1.screen = 1;
+					this.m_model.ElementsM1.add(this.m_model.perso1);
+					this.m_model.ElementsM3.remove(this.m_model.perso1);
+				}
+				if (Options.SHOW_M4) {
+					Options.SHOW_M4 = false;
+					Options.SHOW_M2 = true;
+					this.m_model.perso1.screen = 2;
+					this.m_model.ElementsM2.add(this.m_model.perso1);
+					this.m_model.ElementsM4.remove(this.m_model.perso1);
+				}
 			}
-			if (e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
-				if (this.m_model.perso1.m_y < (this.m_model.m.length / 2) * 30 ) {// && !(this.m_model.perso1.CollisionTotale())) {
+
+		}
+		if (e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
+			if (this.m_model.perso1.m_y < (this.m_model.m.length / 2) * 30) {
+				if (this.m_model.m.tab[(this.m_model.perso1.m_y / 32) + 1 + i][(this.m_model.perso1.m_x) / 32
+						+ j] != 1) {
 					this.m_model.perso1.m_y = this.m_model.perso1.m_y + 32;
 				} else {
 					this.m_model.perso1.m_y = 0;
 					if (Options.SHOW_M1) {
 						Options.SHOW_M1 = false;
 						Options.SHOW_M3 = true;
+						this.m_model.perso1.screen = 3;
+						this.m_model.ElementsM3.add(this.m_model.perso1);
+						this.m_model.ElementsM1.remove(this.m_model.perso1);
 					}
 					if (Options.SHOW_M2) {
 						Options.SHOW_M2 = false;
 						Options.SHOW_M4 = true;
+						this.m_model.perso1.screen = 4;
+						this.m_model.ElementsM4.add(this.m_model.perso1);
+						this.m_model.ElementsM2.remove(this.m_model.perso1);
 					}
 				}
+			}
 
 			}
-			
+
 			if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
-				if (this.m_model.perso1.m_x > 0) {  //&& !(this.m_model.perso1.CollisionTotale())) {
+				if (this.m_model.perso1.m_x > 0
+						&& this.m_model.m.tab[(this.m_model.perso1.m_y) / 32 + i][(this.m_model.perso1.m_x) / 32 - 1
+								+ j] != 1) {
 					this.m_model.perso1.m_x = this.m_model.perso1.m_x - 32;
-				} else {
+				} else if (this.m_model.perso1.m_x == 0) {
 					this.m_model.perso1.m_x = (this.m_model.m.width / 2) * 31;
 					if (Options.SHOW_M4) {
 						Options.SHOW_M4 = false;
 						Options.SHOW_M3 = true;
+						this.m_model.perso1.screen = 3;
+						this.m_model.ElementsM3.add(this.m_model.perso1);
+						this.m_model.ElementsM4.remove(this.m_model.perso1);
 					}
 					if (Options.SHOW_M2) {
 						Options.SHOW_M2 = false;
 						Options.SHOW_M1 = true;
+						this.m_model.perso1.screen = 1;
+						this.m_model.ElementsM1.add(this.m_model.perso1);
+						this.m_model.ElementsM2.remove(this.m_model.perso1);
 					}
 				}
 
@@ -158,8 +212,9 @@ public class Controller extends GameController implements ActionListener {
 				Options.SHOW_M3 = false;
 				Options.SHOW_M4 = true;
 			}
-		
-	}
+		}
+
+	
 
 	@Override
 	public void keyPressed(KeyEvent e) {

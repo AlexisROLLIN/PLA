@@ -46,7 +46,18 @@ public class map {
 
 		m_x = 1;
 		m_y = 1;
+		for(i = 1 ; i < length -1 ;i++ ) {
+			for(int j = width/2 -2 ; j < width/2 +2 ;j++ ) {
+				tab[i][j] = 0;
+			}
+		}
+		for(i = 1 ; i < width -1 ;i++ ) {
+			for(int j = length/2 -2 ; j < length/2 +2 ;j++ ) {
+				tab[j][i] = 0;
+			}
+		}
 		
+		i=0;
 		while (i < nbCasesCreuse) {
 			int nbSteps = (int) (Math.random() * 1000) % 5;
 
