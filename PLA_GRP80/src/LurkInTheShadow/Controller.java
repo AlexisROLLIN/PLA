@@ -47,23 +47,23 @@ public class Controller extends GameController implements ActionListener {
 		}
 		if (Options.SHOW_M2) {
 			i = 0;
-			j = this.m_model.m.width / 2;
+			j = this.m_model.m.m_w / 2;
 		}
 		if (Options.SHOW_M3) {
-			i = this.m_model.m.length / 2;
+			i = this.m_model.m.m_h/ 2;
 			j = 0;
 		}
 		if (Options.SHOW_M4) {
-			i = this.m_model.m.length / 2;
-			j = this.m_model.m.width / 2;
+			i = this.m_model.m.m_h/ 2;
+			j = this.m_model.m.m_w / 2;
 		}
 		if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') {
-			if (this.m_model.perso1.m_x < (this.m_model.m.width / 2) * 31
+			if (this.m_model.perso1.m_x < (this.m_model.m.m_w / 2) * 31
 					&& this.m_model.m.tab[(this.m_model.perso1.m_y) / 32 + i][(this.m_model.perso1.m_x) / 32 + 1
 							+ j] != 1) {
 				this.m_model.perso1.m_x = this.m_model.perso1.m_x + 32;
 				this.m_model.perso1.m_idx = 37;
-			} else if (this.m_model.perso1.m_x == (this.m_model.m.width / 2) * 31) {
+			} else if (this.m_model.perso1.m_x == (this.m_model.m.m_w / 2) * 31) {
 				this.m_model.perso1.m_x = 0;
 				if (Options.SHOW_M1) {
 					Options.SHOW_M1 = false;
@@ -91,7 +91,7 @@ public class Controller extends GameController implements ActionListener {
 				}
 
 			} else {
-				this.m_model.perso1.m_y = ((this.m_model.m.length / 2) - 1) * 32;
+				this.m_model.perso1.m_y = ((this.m_model.m.m_h / 2) - 1) * 32;
 				if (Options.SHOW_M3) {
 					Options.SHOW_M3 = false;
 					Options.SHOW_M1 = true;
@@ -113,7 +113,7 @@ public class Controller extends GameController implements ActionListener {
 			{
 				if (this.m_model.m.tab[(this.m_model.perso1.m_y / 32) + 1 + i][(this.m_model.perso1.m_x) / 32
 						+ j] != 1) {
-					if (this.m_model.perso1.m_y < (this.m_model.m.length / 2) * 30)
+					if (this.m_model.perso1.m_y < (this.m_model.m.m_h / 2) * 30)
 						this.m_model.perso1.m_y = this.m_model.perso1.m_y + 32;
 					else {
 						this.m_model.perso1.m_y = 0;
@@ -143,7 +143,7 @@ public class Controller extends GameController implements ActionListener {
 							+ j] != 1) {
 				this.m_model.perso1.m_x = this.m_model.perso1.m_x - 32;
 			} else if (this.m_model.perso1.m_x == 0) {
-				this.m_model.perso1.m_x = (this.m_model.m.width / 2) * 31;
+				this.m_model.perso1.m_x = (this.m_model.m.m_w / 2) * 31;
 				if (Options.SHOW_M4) {
 					Options.SHOW_M4 = false;
 					Options.SHOW_M3 = true;

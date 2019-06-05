@@ -5,7 +5,7 @@ import create.Personnage;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
@@ -41,7 +41,7 @@ public class Model extends GameModel {
 		ElementsM4 = new LinkedList<Component>();
 		Options.SHOW_M1 = true;
 		m = new map(44, 64, this);
-		Iterator<Component> iter = this.ElementsM1.iterator();
+		ListIterator<Component> iter = this.ElementsM1.listIterator();
 		Component tmp = iter.next();
 		while(iter.hasNext() && tmp instanceof obstacle ){
 			tmp = iter.next();
@@ -66,18 +66,18 @@ public class Model extends GameModel {
 		perso1.Afficher();
 	}
 	
-	public Iterator<Component> components(){
+	public ListIterator<Component> components(){
 		  if(Options.SHOW_M1){
-			return ElementsM1.iterator();
+			return ElementsM1.listIterator();
 		  }
 		  if(Options.SHOW_M2){
-			return ElementsM2.iterator();
+			return ElementsM2.listIterator();
 		  }
 		  if(Options.SHOW_M3){
-			return ElementsM3.iterator();
+			return ElementsM3.listIterator();
 		  }
 		  else{
-			return ElementsM4.iterator();
+			return ElementsM4.listIterator();
 		  }
 		  
 	  }
