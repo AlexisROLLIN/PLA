@@ -273,7 +273,7 @@ public class Ast {
 		}
 
 		public ICondition make_condition() throws Interpreter_Exception {
-			if (operator.toString().equals("not")) {
+			if (operator.toString().equals("!")) {
 				return new INot(operand.make_condition());
 			} else {
 				// la negation est le seul operateur unaire valable
@@ -555,6 +555,16 @@ public class Ast {
 				string += automaton.as_dot_aut();
 			}
 			return Dot.graph("Automata", string);
+		}
+		
+		public IAI_Definitions make() throws Interpreter_Exception {
+			List<IAutomaton> iAutomaton = new LinkedList<IAutomaton>();
+			ListIterator<Automaton> iter = automata.listIterator();
+			while (iter.hasNext()) {
+				Automaton a = iter.next();
+				iAutomaton.add(a.make());
+			}
+			return new IAI_Definitions(iAutomaton);
 		}
 
 	}

@@ -6,13 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import interpreter.IAutomaton;
-import interpreter.IState;
-import interpreter.ICondition;
-import interpreter.IAction;
-import interpreter.ITransition;
-import interpreter.IBehaviour;
-import interpreter.Interpreter_Exception;
+import interpreter.*;
+import ricm3.parser.*;
+import ricm3.parser.Ast.*;
+
 import tests.Component;
 import java.util.List;
 import java.util.ListIterator;
@@ -38,7 +35,21 @@ public class TestsA {
 	/*Def manuelle d'un automate à 2 états.
 	  (1) - Cell() / Move(R) -> (2)
 	  (2) - Cell() / Hit -> (1)
-	*/  
+	  
+	*/
+	  
+	Direction dir=Direction.NORTH;
+	Direction dir2=Direction.NORTH; 
+	if(dir==dir2) {
+		System.out.println("kksksks");
+	}
+	
+	Type tir=Type.PLAYER;
+	Type tir2=Type.PLAYER; 
+	if(tir==tir2) {
+		System.out.println("kksksks");
+	} 
+	  
 	Model m=new Model();  
 	  
 	Component c = new Component(10,10,10,10,10,m);
@@ -90,8 +101,8 @@ public class TestsA {
 	  //Test boucle sur un état
 	/*Def manuelle d'un automate à 3 transitions.
 	  (1) - MyDir(S) / Wait -> (2)
-	  (1) - True / Move(L) -> (1)
-	  (2) - True / Wait -> (2)
+	  (1) - !MyDir(S)/ Move(L) -> (1)
+	  (2) - !MyDir(S) / Wait -> (2)
 	 
 	 Se dirige en marchant vers le sud et et reste dans cette direction
 	*/  
@@ -103,8 +114,8 @@ public class TestsA {
 	IState etat2=new IState("E2");
 	
 	ICondition cond1a2=new ICondition.IMyDir("S");
-	ICondition cond1a1=new ICondition.ITrue();
-	ICondition cond2a2=new ICondition.ITrue();
+	ICondition cond1a1=new ICondition.INot(cond1a2);
+	ICondition cond2a2=new ICondition.INot(cond1a2);
 	
 	IAction act1a1=new IAction.IMove("L");
 	IAction act1a2=new IAction.IWait();
@@ -115,7 +126,7 @@ public class TestsA {
 	ITransition trans2a2=new ITransition(cond2a2,act2a2,etat2);
 	
 	List<ITransition> transList1=new LinkedList<ITransition>();
-	transList1.add(trans1a2); // /!\ L'ordre d'ajout des transitions est important ici: le true doit bien etre ajoute en dernier 
+	transList1.add(trans1a2);
 	transList1.add(trans1a1);
 	
 	List<ITransition> transList2=new LinkedList<ITransition>();
@@ -147,7 +158,7 @@ public class TestsA {
 	  
 	/*Def manuelle d'un premier automate à 3 transitions.
 	 (1) -Cell(E,V)/Move(E)-> (1)
-	 (1) -True/Hit(E)->(2)
+	 (1) -!Cell(E,V)/Hit(E)->(2)
 	 (2) -True/Wait->(2)
 	 Je marche vers l'Est tant qu'il n'y a aucune entité sur la case Est 
 	 et si je tombe face à une entité je frappe en sa direction
@@ -159,8 +170,8 @@ public class TestsA {
 	IState etat1_A=new IState("E1_A");
 	IState etat2_A=new IState("E2_A");
 	
-	ICondition cond1a2_A=new ICondition.ITrue();
 	ICondition cond1a1_A=new ICondition.ICell("E","V");
+	ICondition cond1a2_A=new ICondition.INot(cond1a1_A);
 	ICondition cond2a2_A=new ICondition.ITrue();
 	
 	IAction act1a1_A=new IAction.IMove("E");
@@ -190,7 +201,7 @@ public class TestsA {
 	/*  
 	 Def manuelle d'un second automate à 3 transitions.
 	 (1) -Cell(W,V)/Move(E)-> (1)
-	 (1) -True/Hit(W)->(2)
+	 (1) -!Cell(W,V)/Hit(W)->(2)
 	 (2) -True/Wait->(2)
 	Je marche vers l'Ouest tant qu'il n'y a aucune entité sur la case Ouest 
 	 et si je tombe face à une entité je frappe en sa direction
@@ -201,8 +212,8 @@ public class TestsA {
 	IState etat1_B=new IState("E1_B");
 	IState etat2_B=new IState("E2_B");
 	
-	ICondition cond1a2_B=new ICondition.ITrue();
 	ICondition cond1a1_B=new ICondition.ICell("W","V");
+	ICondition cond1a2_B=new ICondition.INot(cond1a1_B);
 	ICondition cond2a2_B=new ICondition.ITrue();
 	
 	IAction act1a1_B=new IAction.IMove("W");
@@ -231,7 +242,6 @@ public class TestsA {
 	  
 	c_A.setAutomate(auto_A);
 	c_B.setAutomate(auto_B);
-	
 	c_A.step();
 	assertTrue((auto_A.current()).name().equals("E1_A")); //Supposé avancer vers l'est
 	c_B.step();
@@ -240,6 +250,16 @@ public class TestsA {
 	assertTrue((auto_A.current()).name().equals("E2_A")); //Les deux components sont censés se rencontrer
 	c_B.step();
 	assertTrue((auto_B.current()).name().equals("E2_B"));
+
+  }
+  
+  @Test
+  public void test03() throws Interpreter_Exception, Exception{
+	  
+		  AI_Definitions ai_def = ((AI_Definitions)AutomataParser.from_file("automate0.txt"));
+		  IAI_Definitions iai_def = ai_def.make();
+		  IAutomaton spawn=iai_def.automatas.get(0);
+		  assertTrue(spawn.current().name().equals("Init"));
   }
   
 }
