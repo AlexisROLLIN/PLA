@@ -1,11 +1,17 @@
 .gitignore
 *.class
+*.jar
 .recommenders/*
 .metadata/*
 setenv.sh
 /.metadata/
-.project
 */.classpath
 PLA_GRP80/map/.settings/*
+*/.gitignore
+PLA_Grp80/*
+PLA_Grp80
+./bin
+./.project
+./.settings
 
 
