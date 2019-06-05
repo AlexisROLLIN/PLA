@@ -4,14 +4,20 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-public class sol extends Element {
+import LurkInTheShadow.Component;
+import LurkInTheShadow.Model;
+
+public class sol extends Component {
+	
 
 	public sol(Model model, int no, BufferedImage sprite, int rows, int columns, int x, int y, float scale,int screen) {
 		super(model, no, sprite, rows, columns, x, y, scale,screen);
-
+		m_idx = 0;
+		m_show = true;
+		splitSprite();
 	}
 
-	void paint(Graphics g) {
+	public void paint(Graphics g) {
 
 		Image img = m_sprites[m_idx];
 		int w = (int) (m_scale * m_w);

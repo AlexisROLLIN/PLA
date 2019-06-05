@@ -1,4 +1,4 @@
-package mesProto;
+package LurkInTheShadow;
 
 import java.awt.Dimension;
 
@@ -12,7 +12,7 @@ public class GameMain {
 		View view = new View(model);
 		Controller controller = new Controller(model,view);
 
-		Dimension d = new Dimension(1920, 1024);
+		Dimension d = new Dimension(1024, 768);
 		new GameUI(model,view,controller,d);
     
     return;
