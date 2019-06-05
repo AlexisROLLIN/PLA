@@ -141,80 +141,80 @@ public class Controller extends GameController implements ActionListener {
 
 		}
 		if (e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
-			if (this.m_model.perso1.m_y < (this.m_model.m.length / 2) * 30) {
+			{
 				if (this.m_model.m.tab[(this.m_model.perso1.m_y / 32) + 1 + i][(this.m_model.perso1.m_x) / 32
 						+ j] != 1) {
-					this.m_model.perso1.m_y = this.m_model.perso1.m_y + 32;
-				} else {
-					this.m_model.perso1.m_y = 0;
-					if (Options.SHOW_M1) {
-						Options.SHOW_M1 = false;
-						Options.SHOW_M3 = true;
-						this.m_model.perso1.screen = 3;
-						this.m_model.ElementsM3.add(this.m_model.perso1);
-						this.m_model.ElementsM1.remove(this.m_model.perso1);
-					}
-					if (Options.SHOW_M2) {
-						Options.SHOW_M2 = false;
-						Options.SHOW_M4 = true;
-						this.m_model.perso1.screen = 4;
-						this.m_model.ElementsM4.add(this.m_model.perso1);
-						this.m_model.ElementsM2.remove(this.m_model.perso1);
-					}
-				}
-			}
-
-			}
-
-			if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
-				if (this.m_model.perso1.m_x > 0
-						&& this.m_model.m.tab[(this.m_model.perso1.m_y) / 32 + i][(this.m_model.perso1.m_x) / 32 - 1
-								+ j] != 1) {
-					this.m_model.perso1.m_x = this.m_model.perso1.m_x - 32;
-				} else if (this.m_model.perso1.m_x == 0) {
-					this.m_model.perso1.m_x = (this.m_model.m.width / 2) * 31;
-					if (Options.SHOW_M4) {
-						Options.SHOW_M4 = false;
-						Options.SHOW_M3 = true;
-						this.m_model.perso1.screen = 3;
-						this.m_model.ElementsM3.add(this.m_model.perso1);
-						this.m_model.ElementsM4.remove(this.m_model.perso1);
-					}
-					if (Options.SHOW_M2) {
-						Options.SHOW_M2 = false;
-						Options.SHOW_M1 = true;
-						this.m_model.perso1.screen = 1;
-						this.m_model.ElementsM1.add(this.m_model.perso1);
-						this.m_model.ElementsM2.remove(this.m_model.perso1);
+					if (this.m_model.perso1.m_y < (this.m_model.m.length / 2) * 30)
+						this.m_model.perso1.m_y = this.m_model.perso1.m_y + 32;
+					else {
+						this.m_model.perso1.m_y = 0;
+						if (Options.SHOW_M1) {
+							Options.SHOW_M1 = false;
+							Options.SHOW_M3 = true;
+							this.m_model.perso1.screen = 3;
+							this.m_model.ElementsM3.add(this.m_model.perso1);
+							this.m_model.ElementsM1.remove(this.m_model.perso1);
+						}
+						if (Options.SHOW_M2) {
+							Options.SHOW_M2 = false;
+							Options.SHOW_M4 = true;
+							this.m_model.perso1.screen = 4;
+							this.m_model.ElementsM4.add(this.m_model.perso1);
+							this.m_model.ElementsM2.remove(this.m_model.perso1);
+						}
 					}
 				}
-
 			}
 
-			if (e.getKeyChar() == '1') {
-				Options.SHOW_M1 = true;
-				Options.SHOW_M2 = false;
-				Options.SHOW_M3 = false;
-				Options.SHOW_M4 = false;
-			} else if (e.getKeyChar() == '2') {
-				Options.SHOW_M1 = false;
-				Options.SHOW_M2 = true;
-				Options.SHOW_M3 = false;
-				Options.SHOW_M4 = false;
-			} else if (e.getKeyChar() == '3') {
-				Options.SHOW_M1 = false;
-				Options.SHOW_M2 = false;
-				Options.SHOW_M3 = true;
-				Options.SHOW_M4 = false;
-			} else if (e.getKeyChar() == '4') {
-				Options.SHOW_M1 = false;
-				Options.SHOW_M2 = false;
-				Options.SHOW_M3 = false;
-				Options.SHOW_M4 = true;
-			}
 		}
 
-	
+		if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
+			if (this.m_model.perso1.m_x > 0
+					&& this.m_model.m.tab[(this.m_model.perso1.m_y) / 32 + i][(this.m_model.perso1.m_x) / 32 - 1
+							+ j] != 1) {
+				this.m_model.perso1.m_x = this.m_model.perso1.m_x - 32;
+			} else if (this.m_model.perso1.m_x == 0) {
+				this.m_model.perso1.m_x = (this.m_model.m.width / 2) * 31;
+				if (Options.SHOW_M4) {
+					Options.SHOW_M4 = false;
+					Options.SHOW_M3 = true;
+					this.m_model.perso1.screen = 3;
+					this.m_model.ElementsM3.add(this.m_model.perso1);
+					this.m_model.ElementsM4.remove(this.m_model.perso1);
+				}
+				if (Options.SHOW_M2) {
+					Options.SHOW_M2 = false;
+					Options.SHOW_M1 = true;
+					this.m_model.perso1.screen = 1;
+					this.m_model.ElementsM1.add(this.m_model.perso1);
+					this.m_model.ElementsM2.remove(this.m_model.perso1);
+				}
+			}
+
+		}
+
+		if (e.getKeyChar() == '1') {
+			Options.SHOW_M1 = true;
+			Options.SHOW_M2 = false;
+			Options.SHOW_M3 = false;
+			Options.SHOW_M4 = false;
+		} else if (e.getKeyChar() == '2') {
+			Options.SHOW_M1 = false;
+			Options.SHOW_M2 = true;
+			Options.SHOW_M3 = false;
+			Options.SHOW_M4 = false;
+		} else if (e.getKeyChar() == '3') {
+			Options.SHOW_M1 = false;
+			Options.SHOW_M2 = false;
+			Options.SHOW_M3 = true;
+			Options.SHOW_M4 = false;
+		} else if (e.getKeyChar() == '4') {
+			Options.SHOW_M1 = false;
+			Options.SHOW_M2 = false;
+			Options.SHOW_M3 = false;
+			Options.SHOW_M4 = true;
+		}
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
