@@ -2,7 +2,7 @@ package tests;
 
 public enum Type {
 
-	ADVERSAIRE,DANGER,GATE,JUMPABLE,MISSILE,OBSTACLE,PRENABLE,TEAM,VOID,PLAYER;
+	ADVERSAIRE,DANGER,GATE,JUMPABLE,MISSILE,OBSTACLE,PRENABLE,TEAM,VOID,PLAYER,ANYTHING;
 	
 	public static Type strToType(String str) {
 		
@@ -17,6 +17,7 @@ public enum Type {
 			case "T": return Type.TEAM;
 			case "@": return Type.PLAYER;
 			case "V": return Type.VOID;
+			case "An": return Type.ANYTHING;
 			default: System.out.println("Type inconnu, VOID par défaut \n");
 				return Type.VOID;
 		}

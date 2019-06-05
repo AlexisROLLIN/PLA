@@ -101,6 +101,21 @@ public class Component {
 		return true;
 	}
 	
+	public Type type() {
+		return this.m_type;
+	}
+	
+	public boolean is_in_case(int x, int y) {//x et y sont les coord de la case
+		if ((m_x >= x + 32) // trop à droite
+				|| (m_x + m_w <= x) // trop à gauche
+				|| (m_y >= y + 32) // trop en bas
+				|| (m_y + m_h <= y)) // trop en haut
+			return false;
+		else
+			return true;
+	}
+
+	
 	public void step(long now) throws Interpreter_Exception{
 		
 	}

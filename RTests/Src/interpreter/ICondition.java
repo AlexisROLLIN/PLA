@@ -5,6 +5,7 @@ import java.util.Iterator;
 import tests.Component;
 import tests.Direction;
 import tests.Type;
+import java.util.ListIterator;
 
 public abstract class ICondition {
 
@@ -82,10 +83,7 @@ public abstract class ICondition {
 		}
 
 		public boolean eval(Component e) {
-			if (e.m_dir == this.direction && e.m_type == this.type) {
-				return true;
-			}
-			return false;
+			return true;
 		}
 	}
 
@@ -108,7 +106,7 @@ public abstract class ICondition {
 	}
 
 	public static class IKey extends ICondition {
-		String touche;
+		public String touche;
 
 		public IKey(String touche) {
 			this.touche = touche;
@@ -117,7 +115,7 @@ public abstract class ICondition {
 		public boolean eval(Component c) {
 			Iterator<String> iter = c.model.touches.iterator();
 			while (iter.hasNext()) {
-				if (iter.next() == this.touche) {
+				if (iter.next().equals(this.touche)) {
 					return true;
 				}
 			}
@@ -138,6 +136,7 @@ public abstract class ICondition {
 	}
 
 	public static class IClosest extends ICondition { // TODO
+		
 		public IClosest(String s, String t) {
 		}
 

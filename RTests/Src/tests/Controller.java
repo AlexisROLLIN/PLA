@@ -36,14 +36,49 @@ public class Controller extends GameController implements ActionListener {
 	public void keyPressed(KeyEvent e) {
 		System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
 
-		
+		if (e.getKeyChar() == 'z') {
+			if (!m_model.touches.contains("N")) {
+				m_model.touches.add("N");
+			}
+		}
+
+		if (e.getKeyChar() == 'd') {
+			if (!m_model.touches.contains("E")) {
+				m_model.touches.add("E");
+			}
+		}
+
+		if (e.getKeyChar() == 'q') {
+			if (!m_model.touches.contains("W")) {
+				m_model.touches.add("W");
+			}
+		}
+
+		if (e.getKeyChar() == 's') {
+			if (!m_model.touches.contains("S")) {
+				m_model.touches.add("S");
+			}
+		}
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());
 
-		
+		if (e.getKeyChar() == 'z') {
+			m_model.touches.remove("N");
+		}
+		if (e.getKeyChar() == 'd') {
+			m_model.touches.remove("E");
+		}
+		if (e.getKeyChar() == 'q') {
+			m_model.touches.remove("W");
+		}
+		if (e.getKeyChar() == 's') {
+			m_model.touches.remove("S");
+		}
+
 	}
 
 	@Override
