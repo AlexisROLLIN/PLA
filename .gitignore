@@ -7,12 +7,17 @@ setenv.sh
 /.metadata/
 */.classpath
 <<<<<<< HEAD
+<<<<<<< HEAD
 */.gitignore
 PLA_Grp80/*
 PLA_Grp80
 ./bin
 ./.project
 ./.settings
+=======
+PLA_GRP80/map/.settings/*
+
+>>>>>>> origin/tmpAli
 
 ~$rnet de Bord.docx
 ~$What lurks in the shadow.pptx
