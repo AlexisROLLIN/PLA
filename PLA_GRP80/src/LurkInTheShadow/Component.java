@@ -18,9 +18,9 @@ public class Component {
 	int m_nrows, m_ncols;
 	int id_x;
 	int m_step;
-	boolean show;
+	boolean m_show;
 	long m_lastMove;
-	
+
 	boolean m_goUp;
 	boolean m_goLeft;
 	boolean m_goDown;
@@ -37,7 +37,7 @@ public class Component {
 		this.m_nrows = rows;
 		this.m_ncols = col;
 		this.id_x = id_x;
-		this.show = show;
+		this.m_show = show;
 	}
 
 	void splitSprite() {
@@ -70,7 +70,7 @@ public class Component {
 
 	public void hit() {
 	}
-	
+
 	public void rightOn() {
 		m_goRight = true;
 	}
@@ -102,7 +102,11 @@ public class Component {
 	public void downOff() {
 		m_goDown = false;
 	}
-	
+
+	public Rectangle getBounds() {
+		return new Rectangle(m_origin.x, m_origin.y, m_w, m_h);
+	}
+
 	public Rectangle getBounds(int stepX, int stepY) {
 		int w = (int) (m_scale * m_w);
 		int h = (int) (m_scale * m_h);
@@ -113,10 +117,10 @@ public class Component {
 		Component comp;
 		LinkedList<Component> listComp = new LinkedList<Component>();
 		Iterator<Component> iter = m_model.components.iterator();
-		
+
 		while (iter.hasNext()) {
 			comp = iter.next();
-			
+
 			if (this != comp) {
 				if (comp.getBounds(0, 0).intersects(getBounds(stepX, stepY))) {
 					System.out.println("this: " + this.toString() + " comp: " + comp.toString());
@@ -127,70 +131,69 @@ public class Component {
 
 		return listComp;
 	}
-	
+
 	public boolean canMove(int stepX, int stepY) {
 		Component comp;
 		Iterator<Component> iter = inCollisionWith(stepX, stepY).iterator();
-		
+
 		while (iter.hasNext()) {
 			comp = iter.next();
-			
+
 			if (comp instanceof Wall) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	public void tore() {
-		
-		if (this instanceof Ally ) {
-			
+
+		if (this instanceof Ally) {
+
 			if (0 > m_origin.y + (int) (m_scale * m_h)) {
 				m_origin.y += Options.W_HEIGHT;
 			}
-			
+
 			if (768 < m_origin.y) {
 				m_origin.y -= (Options.W_HEIGHT + (int) (m_scale * m_h));
 			}
-			
+
 			if (0 > m_origin.x + (int) (m_scale * m_w)) {
 				m_origin.x += Options.PW_WIDTH;
 			}
-			
+
 			if (1024 < m_origin.x) {
 				m_origin.x -= (Options.PW_WIDTH + (int) (m_scale * m_w));
 			}
 		}
-		
+
 		else {
-			show = false;
+			m_show = false;
 		}
-		
-		
+
 	}
-	
+
 	public void translate() {
 		int stepX = 0;
 		int stepY = 0;
-		
+
 		if (m_goUp) {
 			stepY -= m_step;
 		}
-		
+
 		if (m_goDown) {
 			stepY += m_step;
 		}
-		
+
 		if (m_goLeft) {
 			stepX -= m_step;
 		}
-		
+
 		if (m_goRight) {
 			stepX += m_step;
 		}
-		
+
 		if (canMove(stepX, stepY)) {
 			m_origin.translate(stepX, stepY);
 			tore();

@@ -23,7 +23,8 @@ public class Options {
   
   public static final int PW_WIDTH = 1024;
   
-  public static final int DW_WIDTH = W_WIDTH - PW_WIDTH;
+  public static final int IHM_WIDTH = W_WIDTH - PW_WIDTH;
+  public static final int NB_I = 3;
   
   
 

@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Random;
 import javax.imageio.ImageIO;
 import edu.ricm3.game.GameModel;
 import LurkInTheShadow.Mage;
@@ -23,8 +22,8 @@ public class Model extends GameModel {
 	Fireball m_fireball;
 	Bullet m_bullet;
 	Wall m_wall;
-	Square m_data;
-	Square m_test;
+	IHM m_IHM;
+	Score m_score;
 	LinkedList<Component> components;
 
 	public Model() {
@@ -70,9 +69,14 @@ public class Model extends GameModel {
 		this.components.add(m_wall);
 		m_main = m_shooter;
 		
-		// Data
+		// IHM
 		
-		m_data = new Square(this, Options.PW_WIDTH, 0, Options.DW_WIDTH, Options.W_HEIGHT, Color.gray, m_test);
+		m_IHM = new IHM(this, Options.PW_WIDTH, 0, Options.IHM_WIDTH, Options.W_HEIGHT, Color.gray);
+		
+		Font font = new Font("TimesRoman", Font.BOLD, 32);
+		m_score = new Score(this, Options.PW_WIDTH, Options.W_HEIGHT / Options.NB_I, font);
+		
+		
 	}
 
 	public Character main() {

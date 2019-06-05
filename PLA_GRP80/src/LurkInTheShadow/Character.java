@@ -1,6 +1,9 @@
 package LurkInTheShadow;
 
+import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.util.Iterator;
 
 public class Character extends Component {
 	int maxHP;
@@ -28,6 +31,32 @@ public class Character extends Component {
 		this.m_spritesGoDown = spritesGoDown;
 		this.m_spritesGoLeft = spritesGoLeft;
 		this.m_spritesGoRight = spritesGoRight;
+	}
+	
+	public void vision() {
+		Iterator<Component> iter = m_model.components.iterator();
+
+		while (iter.hasNext()) {
+			Component c = iter.next();
+			if (inFieldOfVision(c)) {
+				c.m_show = true;
+			} else {
+				c.m_show = false;
+			}
+		}
+	}
+
+	boolean inFieldOfVision(Component c) {
+		int x = 50;
+		int y = 50;
+		Ellipse2D.Double playerView = new Ellipse2D.Double(m_origin.x - x, m_origin.y - y, 4 * x, 4 * y);
+		Rectangle objet = c.getBounds();
+
+		if (playerView.intersects(objet)) {
+			return true;
+		}
+		
+		return false;
 	}
 
 	public void hit(int dir) {

@@ -44,15 +44,22 @@ public class View extends GameView {
 		Image image = m_model.m_background;
 		g.drawImage(image, 0, 0, 1024, 768, null);
 		
+		m_model.m_main.vision();
+		
 		Component currComp;
 		Iterator<Component> iter = m_model.components.iterator();
 		while (iter.hasNext()) {
 			currComp = iter.next();
-			if (currComp.show) {
+			if (currComp.m_show) {
 				currComp.paint(g);
 			}
 		}
 		
-		m_model.m_data.paint(g);
+		Graphics gIHM = g.create(m_model.m_IHM.m_origin.x, m_model.m_IHM.m_origin.y, m_model.m_IHM.m_w, m_model.m_IHM.m_h);
+		m_model.m_IHM.paint(gIHM);
+		
+		Graphics gScore = gIHM.create(0, 0, m_model.m_IHM.m_w, m_model.m_IHM.m_h / Options.NB_I);
+		m_model.m_score.paint(gScore);
+		
 	}
 }
