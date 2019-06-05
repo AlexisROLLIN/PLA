@@ -1,15 +1,18 @@
 package create;
 
-public class map {
-	int length;
-	int width;
-	int[][] tab;
+import LurkInTheShadow.Component;
+import LurkInTheShadow.Model;
+
+public class map extends Component {
+	public int length;
+	public int width;
+	public int[][] tab;
 	int[][] m1, m2, m3, m4;
 	int realLen = this.length / 2;
 	int realWid = this.width / 2;
 	Model model;
 
-	map(int length, int width, Model model) {
+	public map(int length, int width, Model model) {
 		this.model = model;
 		this.length = length;
 		this.width = width;
@@ -243,22 +246,22 @@ public class map {
 
 				}
 				if (m1[i][j] == 0) {
-					obstacle m = new obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
+					sol m = new sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
 					m.m_idx = 86;
 
 				}
 				if (m2[i][j] == 0) {
-					obstacle m = new obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
+					sol m = new sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
 					m.m_idx = 86;
 
 				}
 				if (m3[i][j] == 0) {
-					obstacle m = new obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
+					sol m = new sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
 					m.m_idx = 86;
 
 				}
 				if (m4[i][j] == 0) {
-					obstacle m = new obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
+					sol m = new sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
 					m.m_idx = 86;
 
 				}
