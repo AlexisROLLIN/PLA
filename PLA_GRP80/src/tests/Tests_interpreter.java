@@ -249,12 +249,12 @@ public class Tests_interpreter {
 	IState etat1_B=new IState("E1_B");
 	IState etat2_B=new IState("E2_B");
 	
-	ICondition cond1a1_B=new ICondition.ICell("W","V");
+	ICondition cond1a1_B=new ICondition.ICell("O","V");
 	ICondition cond1a2_B=new ICondition.INot(cond1a1_B);
 	ICondition cond2a2_B=new ICondition.ITrue();
 	
-	IAction act1a1_B=new IAction.IMove("W");
-	IAction act1a2_B=new IAction.IHit("W");
+	IAction act1a1_B=new IAction.IMove("O");
+	IAction act1a2_B=new IAction.IHit("O");
 	IAction act2a2_B=new IAction.IWait();
 	
 	ITransition trans1a1_B=new ITransition(cond1a1_B,act1a1_B,etat1_B);
