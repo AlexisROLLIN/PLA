@@ -315,12 +315,12 @@ public class Tests_interpreter {
 		c.m_w=32;
 	  
 		
-		  AI_Definitions ai_def = ((AI_Definitions)AutomataParser.from_file("Automates.txt"));
+		  AI_Definitions ai_def = ((AI_Definitions)AutomataParser.from_file("automate0.txt"));
 		  IAI_Definitions iai_def = ai_def.make();
 		  IAutomaton spawn=iai_def.automatas.get(0);
 		  assertTrue(spawn.current().name().equals("Init"));
 		  spawn.step(c);
-		  assertTrue(spawn.current().name().equals("Init"));
+		  assertTrue(spawn.current().name().equals("Turn0"));
   }
 
   
