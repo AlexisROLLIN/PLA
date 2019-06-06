@@ -1,4 +1,4 @@
-package create;
+package LurkInTheShadow;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -7,14 +7,12 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
-import LurkInTheShadow.Component;
-import LurkInTheShadow.Model;
-
 public class Personnage extends Component {
 
 	public Personnage(Model model, int no, BufferedImage sprite, int rows,
 			int columns, int x, int y, float scale, int screen) {
-		super(model, no, sprite, rows, columns, x, y, scale, screen);
+		
+		super(model, no, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale,screen);
 		m_idx = 0;
 		m_show = true;
 		splitSprite();

@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import create.obstacle;
 import edu.ricm3.game.Options;
 import interpreter.IAutomaton;
 import interpreter.Interpreter_Exception;
@@ -30,7 +29,7 @@ public class Component {
 	
 	IAutomaton automate;
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
-	IType m_type; // Definit le type (allié, ennemi, rocher, etc) de ce component.
+	public IType m_type; // Definit le type (allié, ennemi, rocher, etc) de ce component.
 
 	public Component(Model model, int no, BufferedImage sprite, int rows, int columns, int x, int y, int h, int w, float scale,
 			int screen) {
@@ -211,7 +210,7 @@ public class Component {
 			Iterator<Component> iter = this.m_model.ElementsM1.iterator();
 			Component tmp = iter.next();
 			while (iter.hasNext()) {
-				if (tmp instanceof obstacle) {
+				if (tmp instanceof Obstacle) {
 					if (this.Collision(tmp)) {
 						return true;
 					}
@@ -223,7 +222,7 @@ public class Component {
 			Iterator<Component> iter = m_model.ElementsM2.iterator();
 			Component tmp = iter.next();
 			while (iter.hasNext()) {
-				if (tmp instanceof obstacle) {
+				if (tmp instanceof Obstacle) {
 					if (this.Collision(tmp)) {
 						return true;
 					}
@@ -235,7 +234,7 @@ public class Component {
 			Iterator<Component> iter = m_model.ElementsM3.iterator();
 			Component tmp = iter.next();
 			while (iter.hasNext()) {
-				if (tmp instanceof obstacle) {
+				if (tmp instanceof Obstacle) {
 					if (this.Collision(tmp)) {
 						return true;
 					}
@@ -247,7 +246,7 @@ public class Component {
 			Iterator<Component> iter = m_model.ElementsM4.iterator();
 			Component tmp = iter.next();
 			while (iter.hasNext()) {
-				if (tmp instanceof obstacle) {
+				if (tmp instanceof Obstacle) {
 					if (this.Collision(tmp)) {
 						return true;
 					}

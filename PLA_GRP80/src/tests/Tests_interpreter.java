@@ -10,13 +10,19 @@ import interpreter.*;
 import ricm3.parser.*;
 import LurkInTheShadow.*;
 import ricm3.parser.Ast.AI_Definitions;
+import map_creator.*;
 
 import java.util.List;
 import java.util.ListIterator;
+
+import javax.imageio.ImageIO;
+
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
-public class TestsA {
+public class Tests_interpreter {
   
   @Before
   public void before() {
@@ -31,30 +37,30 @@ public class TestsA {
   
   
   @Test
-  public void test00() throws Interpreter_Exception{
+  public void test00() throws Interpreter_Exception, IOException {
 	  
 	/*Def manuelle d'un automate à 2 états.
 	  (1) - Cell() / Move(R) -> (2)
 	  (2) - Cell() / Hit -> (1)
 	  
 	*/
-	  
-	IDirection dir=LurkInTheShadow.IDirection.NORTH;
-	IDirection dir2=IDirection.NORTH; 
-	if(dir==dir2) {
-		System.out.println("kksksks");
-	}
 	
-	IType tir=IType.PLAYER;
-	IType tir2=IType.PLAYER; 
-	if(tir==tir2) {
-		System.out.println("kksksks");
-	} 
 	  
-	Model m=new Model(); 
-	BufferedImage sprite=null;
+	Model m=new Model();
+	
+	//Juste utile pour le constructeur
+	File imageFile = new File("src/map_creator/testSprites.png");
+	BufferedImage sprite=ImageIO.read(imageFile);
+	
+	//Vider la map
+	ListIterator<Component> iter = m.components();
+	while (iter.hasNext()) {
+		Component c = iter.next();
+		c.m_type=IType.VOID;
+	}
 	  
-	Component c = new Component (m, 0, sprite, 0, 0, 10, 10, 10, 10, (float) 1.0, 0);
+	Component c = new Component (m, 0, sprite, 1, 1, 10, 10, 10, 10, (float) 1.0, 1);
+	c.m_type=IType.ADVERSAIRE;
 	  
 	IState etat1=new IState("E1");
 	IState etat2=new IState("E2");
@@ -99,7 +105,7 @@ public class TestsA {
   }
   
   @Test
-  public void test01() throws Interpreter_Exception{
+  public void test01() throws Interpreter_Exception, IOException{
 	  //Test boucle sur un état
 	/*Def manuelle d'un automate à 3 transitions.
 	  (1) - MyDir(S) / Wait -> (2)
@@ -109,9 +115,17 @@ public class TestsA {
 	 Se dirige en marchant vers le sud et et reste dans cette direction
 	*/  
 	Model m=new Model();
-	BufferedImage sprite=null;
+	File imageFile = new File("src/map_creator/testSprites.png");
+	BufferedImage sprite=ImageIO.read(imageFile);
+	
+	//Vider la map
+	ListIterator<Component> iter = m.components();
+	while (iter.hasNext()) {
+		Component c = iter.next();
+		c.m_type=IType.VOID;
+	}
 	  
-	Component c = new Component (m, 0, sprite, 0, 0, 10, 10, 10, 10, (float) 1.0, 0);
+	Component c = new Component (m, 0, sprite, 1, 1, 10, 10, 10, 10, (float) 1.0, 1);
 	  
 	IState etat1=new IState("E1");
 	IState etat2=new IState("E2");
@@ -156,7 +170,7 @@ public class TestsA {
   }
   
   @Test
-  public void test02() throws Interpreter_Exception{
+  public void test02() throws Interpreter_Exception, IOException{
 	  //Test Interaction entre 2 automates
 	  
 	/*Def manuelle d'un premier automate à 3 transitions.
@@ -167,9 +181,18 @@ public class TestsA {
 	 et si je tombe face à une entité je frappe en sa direction
 	*/
 	Model m=new Model(); 
-	BufferedImage sprite=null;
+	File imageFile = new File("src/map_creator/testSprites.png");
+	BufferedImage sprite=ImageIO.read(imageFile);
+	
+	//Vider la map
+	ListIterator<Component> iter = m.components();
+	while (iter.hasNext()) {
+		Component c = iter.next();
+		c.m_type=IType.VOID;
+	}
 	  
-	Component c_A = new Component (m, 0, sprite, 0, 0, 0, 0, 10, 10, (float) 1.0, 0); //en (0,0)
+	Component c_A = new Component (m, 0, sprite, 1, 1, 0, 0, 10, 10, (float) 1.0, 1); //en (0,0)
+	c_A.m_type=IType.ADVERSAIRE;
 	
 	IState etat1_A=new IState("E1_A");
 	IState etat2_A=new IState("E2_A");
@@ -211,7 +234,8 @@ public class TestsA {
 	 et si je tombe face à une entité je frappe en sa direction
 	*/  
 
-	Component c_B = new Component (m, 0, sprite, 0, 0, 96, 0, 10, 10, (float) 1.0, 0); //en (96,0), soit 3 cases à l'est de c_A
+	Component c_B = new Component (m, 0, sprite, 1, 1, 96, 0, 10, 10, (float) 1.0, 1); //en (96,0), soit 3 cases à l'est de c_A
+	c_B.m_type=IType.ADVERSAIRE;
 	
 	IState etat1_B=new IState("E1_B");
 	IState etat2_B=new IState("E2_B");

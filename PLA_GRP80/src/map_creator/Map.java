@@ -1,37 +1,42 @@
-package create;
+package map_creator;
 
 import java.awt.image.BufferedImage;
 
 import LurkInTheShadow.Component;
 import LurkInTheShadow.Model;
+import LurkInTheShadow.Obstacle;
+import LurkInTheShadow.Sol;
 
-public class map extends Component {
+public class Map {
 
 	public int[][] tab;
 	int[][] m1, m2, m3, m4;
-	int realLen = this.m_h / 2;
-	int realWid = this.m_w / 2;
+	public int width;
+	public int length;
+	Model model;
+	int realLen = this.length / 2;
+	int realWid = this.width / 2;
 
-	public map(Model m_model, int no, BufferedImage sprite, int rows, int columns, int x, int y, int h, int w, float scale,
-			int screen){
-		super(m_model, no, sprite, rows, columns, x, y, h, w, scale, screen);
-		this.m_model = m_model;
-		tab = new int[m_h][m_w];
-		if (this.m_h % 2 == 1) {
+	public Map(int length, int width, Model model) {
+		this.model = model;
+		this.length = length;
+		this.width = width;
+		tab = new int[length][width];
+		if (this.length % 2 == 1) {
 			realLen++;
 		}
-		if (this.m_w % 2 == 1) {
+		if (this.width % 2 == 1) {
 			realWid++;
 		}
 		initialisation();
 		creuser();
 		division();
 		repartition();
-	}
+}
 
 	void initialisation() {
-		for (int i = 0; i < m_h; i++) {
-			for (int j = 0; j < m_w; j++) {
+		for (int i = 0; i < length; i++) {
+			for (int j = 0; j < width; j++) {
 				tab[i][j] = 1;
 			}
 		}
@@ -39,23 +44,23 @@ public class map extends Component {
 	}
 
 	void creuser() {
-		int nbCasesCreuse = (m_h - 2) * (m_w - 2);
+		int nbCasesCreuse = (length - 2) * (width - 2);
 		int i = 0;
 		int m_x, m_y;
 		int nbAl;
 
-		//m_x = (int) (Math.random() * 1000 % m_h);
-		//m_y = (int) (Math.random() * 1000 % m_w);
+		//m_x = (int) (Math.random() * 1000 % length);
+		//m_y = (int) (Math.random() * 1000 % width);
 
 		m_x = 1;
 		m_y = 1;
-		for(i = 1 ; i < m_h -1 ;i++ ) {
-			for(int j = m_w/2 -2 ; j < m_w/2 +2 ;j++ ) {
+		for(i = 1 ; i < length -1 ;i++ ) {
+			for(int j = width/2 -2 ; j < width/2 +2 ;j++ ) {
 				tab[i][j] = 0;
 			}
 		}
-		for(i = 1 ; i < m_w -1 ;i++ ) {
-			for(int j = m_h/2 -2 ; j < m_h/2 +2 ;j++ ) {
+		for(i = 1 ; i < width -1 ;i++ ) {
+			for(int j = length/2 -2 ; j < length/2 +2 ;j++ ) {
 				tab[j][i] = 0;
 			}
 		}
@@ -66,7 +71,7 @@ public class map extends Component {
 
 			nbAl = (int) (Math.random() * 1000) % 4;
 			if (nbAl == 0) {
-				if (m_x + nbSteps < m_h - 1) {
+				if (m_x + nbSteps < length - 1) {
 					for (int j = m_x; j < m_x + nbSteps + 1; j++) {
 						tab[j][m_y] = 0;
 					}
@@ -78,7 +83,7 @@ public class map extends Component {
 					nbAl = (int) (Math.random() % 4);
 				}
 			} else if (nbAl == 1)
-				if (m_y + nbSteps < m_w - 1) {
+				if (m_y + nbSteps < width - 1) {
 					for (int j = m_y + 1; j < m_y + nbSteps; j++) {
 						tab[m_x][j] = 0;
 					}
@@ -120,8 +125,8 @@ public class map extends Component {
 	void afficherTab() {
 		System.out.println("GRAND TABLEAU");
 		System.out.println();
-		for (int i = 0; i < m_h; i++) {
-			for (int j = 0; j < m_w; j++) {
+		for (int i = 0; i < length; i++) {
+			for (int j = 0; j < width; j++) {
 				System.out.print(" " + tab[i][j]);
 			}
 			System.out.println();
@@ -129,8 +134,8 @@ public class map extends Component {
 		System.out.println();
 		System.out.println("1ER TABLEAU");
 		System.out.println();
-		for (int i = 0; i < m_h / 2; i++) {
-			for (int j = 0; j < m_w / 2; j++) {
+		for (int i = 0; i < length / 2; i++) {
+			for (int j = 0; j < width / 2; j++) {
 				System.out.print(m1[i][j]);
 			}
 			System.out.println();
@@ -139,8 +144,8 @@ public class map extends Component {
 		System.out.println();
 		System.out.println("2EME TABLEAU");
 		System.out.println();
-		for (int i = 0; i < m_h / 2; i++) {
-			for (int j = 0; j < m_w / 2; j++) {
+		for (int i = 0; i < length / 2; i++) {
+			for (int j = 0; j < width / 2; j++) {
 				System.out.print(m2[i][j]);
 			}
 			System.out.println();
@@ -149,8 +154,8 @@ public class map extends Component {
 		System.out.println();
 		System.out.println("3EME TABLEAU");
 		System.out.println();
-		for (int i = 0; i < m_h / 2; i++) {
-			for (int j = 0; j < m_w / 2; j++) {
+		for (int i = 0; i < length / 2; i++) {
+			for (int j = 0; j < width / 2; j++) {
 				System.out.print(m3[i][j]);
 			}
 			System.out.println();
@@ -159,8 +164,8 @@ public class map extends Component {
 		System.out.println();
 		System.out.println("4EME TABLEAU");
 		System.out.println();
-		for (int i = 0; i < m_h / 2; i++) {
-			for (int j = 0; j < m_w / 2; j++) {
+		for (int i = 0; i < length / 2; i++) {
+			for (int j = 0; j < width / 2; j++) {
 				System.out.print(m4[i][j]);
 			}
 			System.out.println();
@@ -168,28 +173,28 @@ public class map extends Component {
 	}
 
 	void division() {
-		int realLen = this.m_h / 2;
-		int realWid = this.m_w / 2;
-		if (this.m_h % 2 == 1) {
+		int realLen = this.length / 2;
+		int realWid = this.width / 2;
+		if (this.length % 2 == 1) {
 			realLen++;
 		}
-		if (this.m_w % 2 == 1) {
+		if (this.width % 2 == 1) {
 			realWid++;
 		}
-		m1 = new int[this.m_h / 2][this.m_w / 2];
-		m2 = new int[this.m_h / 2][realWid];
-		m3 = new int[realLen][this.m_w / 2];
+		m1 = new int[this.length / 2][this.width / 2];
+		m2 = new int[this.length / 2][realWid];
+		m3 = new int[realLen][this.width / 2];
 		m4 = new int[realLen][realWid];
 
-		for (int i = 0; i < this.m_h / 2; i++) {
-			for (int j = 0; j < this.m_w / 2; j++) {
+		for (int i = 0; i < this.length / 2; i++) {
+			for (int j = 0; j < this.width / 2; j++) {
 				m1[i][j] = tab[i][j];
 			}
 		}
 		int k = 0;
 		int p = 0;
-		for (int i = realLen; i < this.m_h; i++) {
-			for (int j = realWid; j < this.m_w; j++) {
+		for (int i = realLen; i < this.length; i++) {
+			for (int j = realWid; j < this.width; j++) {
 				m4[k][p] = tab[i][j];
 				p++;
 			}
@@ -200,8 +205,8 @@ public class map extends Component {
 		k = 0;
 		p = 0;
 
-		for (int i = 0; i < this.m_h / 2; i++) {
-			for (int j = realWid; j < this.m_w; j++) {
+		for (int i = 0; i < this.length / 2; i++) {
+			for (int j = realWid; j < this.width; j++) {
 				m2[k][p] = tab[i][j];
 				p++;
 			}
@@ -211,8 +216,8 @@ public class map extends Component {
 		k = 0;
 		p = 0;
 
-		for (int i = realLen; i < this.m_h; i++) {
-			for (int j = 0; j < this.m_w / 2; j++) {
+		for (int i = realLen; i < this.length; i++) {
+			for (int j = 0; j < this.width / 2; j++) {
 				m3[k][p] = tab[i][j];
 				p++;
 			}
@@ -223,45 +228,45 @@ public class map extends Component {
 	}
 
 	void repartition() {
-		for (int i = 0; i < m_h / 2; i++) {
-			for (int j = 0; j < m_w / 2; j++) {
+		for (int i = 0; i < length / 2; i++) {
+			for (int j = 0; j < width / 2; j++) {
 				if (m1[i][j] == 1) {
-					obstacle m = new obstacle(this.m_model, 100, this.m_model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
+					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
 					m.m_idx = 4;
 
 				}
 				if (m2[i][j] == 1) {
-					obstacle m = new obstacle(this.m_model, 100, this.m_model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
+					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
 					m.m_idx = 4;
 
 				}
 				if (m3[i][j] == 1) {
-					obstacle m = new obstacle(this.m_model, 100, this.m_model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
+					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
 					m.m_idx = 4;
 
 				}
 				if (m4[i][j] == 1) {
-					obstacle m = new obstacle(this.m_model, 100, this.m_model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
+					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
 					m.m_idx = 4;
 
 				}
 				if (m1[i][j] == 0) {
-					sol m = new sol(this.m_model, 100, this.m_model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
 					m.m_idx = 86;
 
 				}
 				if (m2[i][j] == 0) {
-					sol m = new sol(this.m_model, 100, this.m_model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
 					m.m_idx = 86;
 
 				}
 				if (m3[i][j] == 0) {
-					sol m = new sol(this.m_model, 100, this.m_model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
 					m.m_idx = 86;
 
 				}
 				if (m4[i][j] == 0) {
-					sol m = new sol(this.m_model, 100, this.m_model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
 					m.m_idx = 86;
 
 				}

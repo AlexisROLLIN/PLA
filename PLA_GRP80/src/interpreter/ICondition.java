@@ -90,15 +90,11 @@ public abstract class ICondition {
 				while (iter.hasNext()) {
 					Component comp=iter.next();
 					if (comp.is_in_case(e.x(), e.y()-32)) { //S'il y a un component dans la case d'à coté
-						if (type==IType.VOID) {//Si on s'attend à une case vide
-							return false;
-						}
-						else if(comp.type()==type || type==IType.ANYTHING){//Si on s'attend à un composant reel
+						if(comp.type()==type || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
 						}
 				}
-				//Case d'à coté vide
-				return type==IType.VOID;
+				return false;
 			}
 
 			else if (direction == IDirection.SOUTH || (e.dir() == IDirection.SOUTH && direction == IDirection.FRONT)
@@ -109,14 +105,11 @@ public abstract class ICondition {
 				while (iter.hasNext()) {
 					Component comp=iter.next();
 					if (comp.is_in_case(e.x(), e.y()+32)) {
-						if (type==IType.VOID) {
-							return false;
-						}
-						else if(comp.type()==type || type==IType.ANYTHING){
+						if(comp.type()==type || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
 						}
 				}
-				return type==IType.VOID;
+				return false;
 			}
 
 			else if (direction == IDirection.WEST || (e.dir() == IDirection.WEST && direction == IDirection.FRONT)
@@ -127,25 +120,25 @@ public abstract class ICondition {
 				while (iter.hasNext()) {
 					Component comp=iter.next();
 					if (comp.is_in_case(e.x()-32, e.y())) {
-						if (type==IType.VOID) {
-							return false;
-						}
-						else if(comp.type()==type || type==IType.ANYTHING){
+						if(comp.type()==type || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
 						}
 				}
-				return type==IType.VOID;
+				return false;
 			}
 
 			else {
 				ListIterator<Component> iter= e.m_model.components();
 				while (iter.hasNext()) {
 					Component comp=iter.next();
+					
 					if (comp.is_in_case(e.x()+32, e.y())) {
-						if (type==IType.VOID) {
+						
+						if(comp.type()!=IType.VOID && type==IType.VOID) {
 							return false;
 						}
-						else if(comp.type()==type || type==IType.ANYTHING){
+						
+						else if((comp.type()==type && type!=IType.VOID) || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
 						}
 				}
