@@ -32,5 +32,20 @@ public class Options {
    */
   static final double FPS = 30.0;
   static final int REPAINT_DELAY = (int) (1000.0 / FPS);
-
+  
+  
+  /////////////////// A trier/////////////////////////
+  public static final int NSQUARES = 6;
+  public static boolean SHOW_M1 = false;
+  public static boolean SHOW_M2 = false;
+  public static boolean SHOW_M3 = false;
+  public static boolean SHOW_M4 = false;
+  
+  public static boolean END_GAME = false;
+  public static boolean LOST = false;
+  
+  public static final boolean ECHO_MOUSE = true;
+  public static final boolean ECHO_MOUSE_MOTION = true;
+  public static final boolean ECHO_KEYBOARD = true;
+  //////////////////////////////////////////////////
 }

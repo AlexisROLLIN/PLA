@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="PLA Lurks in the Shadow" company="" webLink="http://" view-date="2019-05-28" view-index="0" gantt-divider-location="471" resource-divider-location="300" version="2.0" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="PLA Lurks in the Shadow" company="" webLink="http://" view-date="2019-05-26" view-index="0" gantt-divider-location="461" resource-divider-location="300" version="2.0" locale="fr_FR">
     <description><![CDATA[Réalisation d'un jeu video au sein du module PLA]]></description>
     <view zooming-state="default:2" id="gantt-chart">
-        <field id="tpd3" name="Nom" width="50" order="0"/>
-        <field id="tpd4" name="Date de début" width="24" order="1"/>
-        <field id="tpd5" name="Date de fin" width="24" order="2"/>
+        <field id="tpd3" name="Nom" width="61" order="0"/>
+        <field id="tpd4" name="Date de début" width="18" order="1"/>
+        <field id="tpd5" name="Date de fin" width="19" order="2"/>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nom" width="56" order="0"/>
-        <field id="1" name="Rôle par défaut" width="43" order="1"/>
+        <field id="0" name="Nom" width="52" order="0"/>
+        <field id="1" name="Rôle par défaut" width="47" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -49,24 +49,53 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="2" name="Développement Jeu Vidéo" color="#3333ff" meeting="false" start="2019-05-27" duration="6" complete="0" expand="true">
-            <task id="0" name="Genération de map aléatoire" color="#00ff33" meeting="false" start="2019-05-27" duration="6" complete="0" expand="true">
-                <task id="7" name="Mise en place d'une grille" color="#00ff33" meeting="false" start="2019-05-27" duration="3" complete="0" expand="true"/>
-                <task id="8" name="Fonction tracé les chemins" color="#00ff33" meeting="false" start="2019-05-30" duration="3" complete="0" expand="true"/>
+        <task id="2" name="Développement Jeu Vidéo" color="#3333ff" meeting="false" start="2019-05-27" duration="16" complete="0" expand="true">
+            <task id="48" name="Prototypes" color="#ffff33" meeting="false" start="2019-05-27" duration="6" complete="0" expand="false">
+                <task id="0" name="Genération de map aléatoire" color="#00ff33" meeting="false" start="2019-05-27" duration="6" complete="0" expand="false">
+                    <task id="7" name="Mise en place d'une grille" color="#00ff33" meeting="false" start="2019-05-27" duration="3" complete="0" expand="true"/>
+                    <task id="8" name="Fonction tracé les chemins" color="#00ff33" meeting="false" start="2019-05-30" duration="3" complete="0" expand="true"/>
+                </task>
+                <task id="16" name="Mise en place de la visibilité" color="#ff9900" meeting="false" start="2019-05-27" duration="6" complete="0" expand="false">
+                    <task id="17" name="Gestion de l'affichage de la map" color="#ff9900" meeting="false" start="2019-05-27" duration="3" complete="0" expand="true"/>
+                    <task id="18" name="Gestion de l'affichage des éléments utils" color="#ff9900" meeting="false" start="2019-05-30" duration="3" complete="0" expand="true"/>
+                </task>
+                <task id="23" name="Automates de comportement" color="#ff3333" meeting="false" start="2019-05-28" duration="5" complete="0" expand="false">
+                    <task id="24" name="Recherche du fonctionnement" color="#ff3333" meeting="false" start="2019-05-28" duration="2" complete="0" expand="true"/>
+                    <task id="25" name="Elaboration des premiers automates" color="#ff3333" meeting="false" start="2019-05-30" duration="3" complete="0" expand="true"/>
+                </task>
+                <task id="29" name="Interprétation Automate" color="#cc00cc" meeting="false" start="2019-05-28" duration="5" complete="0" expand="false">
+                    <task id="44" name="Codage d'un interpreteur" color="#cc00cc" meeting="false" start="2019-05-28" duration="2" complete="0" expand="true"/>
+                    <task id="31" name="Phase de tests des automates" color="#cc00cc" meeting="false" start="2019-05-30" duration="3" complete="0" expand="true"/>
+                </task>
+                <task id="37" name="Gestion des coordonnées Locales et Globales" color="#ffff00" meeting="false" start="2019-05-28" duration="5" complete="0" expand="true"/>
             </task>
-            <task id="16" name="Mise en place de la visibilité" color="#ff9900" meeting="false" start="2019-05-27" duration="6" complete="0" expand="true">
-                <task id="17" name="Gestion de l'affichage de la map" color="#ff9900" meeting="false" start="2019-05-27" duration="3" complete="0" expand="true"/>
-                <task id="18" name="Gestion de l'affichage des éléments utils" color="#ff9900" meeting="false" start="2019-05-30" duration="3" complete="0" expand="true"/>
+            <task id="50" name="Soutenance Contrat" color="#33ffff" meeting="false" start="2019-06-04" duration="1" complete="0" expand="true"/>
+            <task id="45" name="Analyse du contrat officiel" color="#00ffcc" meeting="false" start="2019-06-05" duration="1" complete="0" expand="true"/>
+            <task id="81" name="Fonction generation Map" color="#ff6600" meeting="false" start="2019-06-06" duration="1" complete="0" expand="true"/>
+            <task id="47" name="Aspect Graphisme 1" color="#00ff00" meeting="false" start="2019-06-06" duration="1" complete="0" expand="false">
+                <task id="55" name="Décision Sprite utilisé" color="#00ff00" meeting="false" start="2019-06-06" duration="1" complete="0" expand="true"/>
+                <task id="59" name="Mise en place des Sprites de la Map" color="#00ff00" meeting="false" start="2019-06-06" duration="1" complete="0" expand="true"/>
             </task>
-            <task id="23" name="Automates de comportement" color="#ff3333" meeting="false" start="2019-05-28" duration="5" complete="0" expand="true">
-                <task id="24" name="Recherche du fonctionnement" color="#ff3333" meeting="false" start="2019-05-28" duration="2" complete="0" expand="true"/>
-                <task id="25" name="Elaboration des premiers automates" color="#ff3333" meeting="false" start="2019-05-30" duration="3" complete="0" expand="true"/>
+            <task id="72" name="Fonction affichage restreint" color="#ff6600" meeting="false" start="2019-06-06" duration="1" complete="0" expand="true"/>
+            <task id="78" name="Test 1.1 (Map)" color="#ff0000" meeting="false" start="2019-06-07" duration="1" complete="0" expand="true"/>
+            <task id="75" name="Integration Affichage et Map" color="#ff00ff" meeting="false" start="2019-06-07" duration="1" complete="0" expand="true"/>
+            <task id="63" name="Aspect Evenementiel" color="#0000ff" meeting="false" start="2019-06-06" duration="2" complete="0" expand="false">
+                <task id="65" name="Implementation des automates" color="#0000ff" meeting="false" start="2019-06-06" duration="1" complete="0" expand="true"/>
+                <task id="66" name="Mise en place de l'interpreteur Parser" color="#0000ff" meeting="false" start="2019-06-06" duration="2" complete="0" expand="true"/>
             </task>
-            <task id="29" name="Interprétation Automate" color="#cc00cc" meeting="false" start="2019-05-28" duration="5" complete="0" expand="true">
-                <task id="44" name="Codage d'un interpreteur" color="#cc00cc" meeting="false" start="2019-05-28" duration="2" complete="0" expand="true"/>
-                <task id="31" name="Phase de tests des automates" color="#cc00cc" meeting="false" start="2019-05-30" duration="3" complete="0" expand="true"/>
-            </task>
-            <task id="37" name="Gestion des coordonnées Locales et Globales" color="#ffff00" meeting="false" start="2019-05-28" duration="5" complete="0" expand="true"/>
+            <task id="70" name="Test 1.2 (Automate)" color="#ff0000" meeting="false" start="2019-06-07" duration="1" complete="0" expand="true"/>
+            <task id="83" name="Fonction Changement univers" color="#ff6600" meeting="false" start="2019-06-08" duration="2" complete="0" expand="true"/>
+            <task id="87" name="Fonction Switch Personnage" color="#ff6600" meeting="false" start="2019-06-08" duration="2" complete="0" expand="true"/>
+            <task id="90" name="Amelioration Automate" color="#0000ff" meeting="false" start="2019-06-08" duration="2" complete="0" expand="true"/>
+            <task id="94" name="Test 2 (Univers)" color="#ff0000" meeting="false" start="2019-06-11" duration="1" complete="0" expand="true"/>
+            <task id="92" name="Integration Univers / Personnage" color="#ff00ff" meeting="false" start="2019-06-11" duration="1" complete="0" expand="true"/>
+            <task id="97" name="Mise en place des monstres" color="#ff6600" meeting="false" start="2019-06-12" duration="1" complete="0" expand="true"/>
+            <task id="98" name="Fonction vie et tirer" color="#ff6600" meeting="false" start="2019-06-12" duration="1" complete="0" expand="true"/>
+            <task id="102" name="Amelioration graphique" color="#00ff00" meeting="false" start="2019-06-12" duration="1" complete="0" expand="true"/>
+            <task id="104" name="Test 3 (Monstres / Tirer)" color="#ff0000" meeting="false" start="2019-06-12" duration="1" complete="0" expand="true"/>
+            <task id="112" name="Integration nouvelles identitées" color="#ff00ff" meeting="false" start="2019-06-12" duration="1" complete="0" expand="true"/>
+            <task id="107" name="Temps Bonus" color="#ffff33" meeting="false" start="2019-06-13" duration="1" complete="0" expand="true"/>
+            <task id="108" name="Test Final" color="#ff0000" meeting="false" start="2019-06-13" duration="1" complete="0" expand="true"/>
         </task>
     </tasks>
     <resources>
@@ -80,24 +109,40 @@
     <allocations>
         <allocation task-id="7" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="8" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="45" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="50" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="47" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="55" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="17" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="18" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="45" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="50" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="24" resource-id="2" function="Default:1" responsible="true" load="25.0"/>
         <allocation task-id="25" resource-id="2" function="Default:1" responsible="true" load="25.0"/>
         <allocation task-id="31" resource-id="2" function="Default:1" responsible="true" load="25.0"/>
         <allocation task-id="37" resource-id="2" function="Default:1" responsible="false" load="25.0"/>
         <allocation task-id="44" resource-id="2" function="Default:1" responsible="false" load="25.0"/>
+        <allocation task-id="45" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
+        <allocation task-id="50" resource-id="2" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="24" resource-id="3" function="Default:0" responsible="false" load="50.0"/>
         <allocation task-id="25" resource-id="3" function="Default:0" responsible="false" load="25.0"/>
         <allocation task-id="31" resource-id="3" function="Default:0" responsible="false" load="50.0"/>
         <allocation task-id="44" resource-id="3" function="Default:0" responsible="false" load="25.0"/>
+        <allocation task-id="45" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="50" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="0" resource-id="4" function="Default:0" responsible="false" load="50.0"/>
         <allocation task-id="16" resource-id="4" function="Default:0" responsible="false" load="50.0"/>
+        <allocation task-id="45" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="50" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="47" resource-id="4" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="59" resource-id="4" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="24" resource-id="5" function="Default:0" responsible="false" load="25.0"/>
         <allocation task-id="25" resource-id="5" function="Default:0" responsible="false" load="25.0"/>
         <allocation task-id="31" resource-id="5" function="Default:0" responsible="false" load="25.0"/>
         <allocation task-id="37" resource-id="5" function="Default:0" responsible="true" load="25.0"/>
         <allocation task-id="44" resource-id="5" function="Default:0" responsible="false" load="25.0"/>
+        <allocation task-id="45" resource-id="5" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="50" resource-id="5" function="Default:0" responsible="false" load="100.0"/>
     </allocations>
     <vacations/>
     <taskdisplaycolumns>
@@ -110,9 +155,9 @@
         <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd0" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="238" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="115" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="114" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="283" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="85" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="89" visible="true"/>
     </taskdisplaycolumns>
     <previous/>
     <roles roleset-name="Default"/>

@@ -1,9 +1,22 @@
 .gitignore
 *.class
+*.jar
 .recommenders/*
-PLA_GRP80/src/LurkInTheShadow/.metadata/*
 setenv.sh
 /.metadata/
 */.classpath
-PLA_GRP80/MyProject/.settings/*
+*/.gitignore
+./bin
+*/.project
+*/.settings
+
+PLA_GRP80/map/.settings/*
+PLA_GRP80/bin/*
+
 Parser/bin/*
+
+#Lecture Fichier
+~$rnet de Bord.docx
+~$What lurks in the shadow.pptx
+~$WLITS.mvdx
+

@@ -1,6 +1,8 @@
 package ricm3.parser;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import ricm3.parser.Automate;
 
 /* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, june 2018
  *
@@ -47,7 +49,8 @@ public class Ast {
 	// AST as active automata (interpreter of transitions)
 	
 	public Object  make() {
-		  return null; // TODO à définir dans la plupart des classes internes ci-dessous.
+		  //à définir dans la plupart des classes internes ci-dessous.
+
 	}
 	
 	public static class Terminal extends Ast {
@@ -295,6 +298,10 @@ public class Ast {
 		public String toString() {
 			return expression.toString() ;
 		}
+		
+		public Object make(){
+			
+		}
 	}
 
 	public static class Action extends Ast {
@@ -370,6 +377,18 @@ public class Ast {
 			return Dot.graph("Automata", string);
 		}
 		
+		public Object make() {
+			LinkedList<Automate> list_aut_lisibles = new LinkedList<Automate>();
+			ListIterator<Automaton> iter=automata.listIterator();
+			while (iter.hasNext()) {
+				Automaton current_auto = iter.next();
+				Automate aut_lisible = (Automate)current_auto.make();
+				list_aut_lisibles.add(aut_lisible);
+			}
+			return list_aut_lisibles;
+			
+		}
+		
 	}
 
 	
@@ -408,6 +427,12 @@ public class Ast {
 				string += behaviour.as_transition_of(this);
 			}
 			return Dot.subgraph(this.id, string) ;
+		}
+		
+		public Object make() {
+			  Automate aut=new Automate(this);
+			  
+			  return aut;
 		}
 		
 	}
