@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import interpreter.*;
 import ricm3.parser.*;
+import ricm3.parser.AutomataParser;
 import LurkInTheShadow.*;
 import ricm3.parser.Ast.AI_Definitions;
 import map_creator.*;
