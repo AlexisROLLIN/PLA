@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.util.Iterator;
 import java.awt.Image;
 
-import create.Personnage;
 import edu.ricm3.game.GameView;
 import edu.ricm3.game.Options;
 
