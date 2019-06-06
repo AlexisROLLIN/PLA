@@ -90,11 +90,15 @@ public abstract class ICondition {
 				while (iter.hasNext()) {
 					Component comp=iter.next();
 					if (comp.is_in_case(e.x(), e.y()-32)) { //S'il y a un component dans la case d'à coté
-						if(comp.type()==type || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
+						if(comp.type()!=IType.VOID && type==IType.VOID) {
+							return false;
+						}
+						
+						else if((comp.type()==type && type!=IType.VOID) || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
 						}
 				}
-				return false;
+				return type==IType.VOID;
 			}
 
 			else if (direction == IDirection.SOUTH || (e.dir() == IDirection.SOUTH && direction == IDirection.FRONT)
@@ -105,11 +109,15 @@ public abstract class ICondition {
 				while (iter.hasNext()) {
 					Component comp=iter.next();
 					if (comp.is_in_case(e.x(), e.y()+32)) {
-						if(comp.type()==type || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
+						if(comp.type()!=IType.VOID && type==IType.VOID) {
+							return false;
+						}
+						
+						else if((comp.type()==type && type!=IType.VOID) || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
 						}
 				}
-				return false;
+				return type==IType.VOID;
 			}
 
 			else if (direction == IDirection.WEST || (e.dir() == IDirection.WEST && direction == IDirection.FRONT)
@@ -120,11 +128,15 @@ public abstract class ICondition {
 				while (iter.hasNext()) {
 					Component comp=iter.next();
 					if (comp.is_in_case(e.x()-32, e.y())) {
-						if(comp.type()==type || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
+						if(comp.type()!=IType.VOID && type==IType.VOID) {
+							return false;
+						}
+						
+						else if((comp.type()==type && type!=IType.VOID) || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
 						}
 				}
-				return false;
+				return type==IType.VOID;
 			}
 
 			else {
@@ -140,7 +152,7 @@ public abstract class ICondition {
 						
 						else if((comp.type()==type && type!=IType.VOID) || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
-						}
+					}
 				}
 				return type==IType.VOID;
 			}

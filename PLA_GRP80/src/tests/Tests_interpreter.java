@@ -61,6 +61,8 @@ public class Tests_interpreter {
 	  
 	Component c = new Component (m, 0, sprite, 1, 1, 10, 10, 10, 10, (float) 1.0, 1);
 	c.m_type=IType.ADVERSAIRE;
+	c.m_h=32;
+	c.m_w=32;
 	  
 	IState etat1=new IState("E1");
 	IState etat2=new IState("E2");
@@ -126,6 +128,9 @@ public class Tests_interpreter {
 	}
 	  
 	Component c = new Component (m, 0, sprite, 1, 1, 10, 10, 10, 10, (float) 1.0, 1);
+	c.m_type=IType.ADVERSAIRE;
+	c.m_h=32;
+	c.m_w=32;
 	  
 	IState etat1=new IState("E1");
 	IState etat2=new IState("E2");
@@ -193,6 +198,8 @@ public class Tests_interpreter {
 	  
 	Component c_A = new Component (m, 0, sprite, 1, 1, 0, 0, 10, 10, (float) 1.0, 1); //en (0,0)
 	c_A.m_type=IType.ADVERSAIRE;
+	c_A.m_h=32;
+	c_A.m_w=32;
 	
 	IState etat1_A=new IState("E1_A");
 	IState etat2_A=new IState("E2_A");
@@ -236,6 +243,8 @@ public class Tests_interpreter {
 
 	Component c_B = new Component (m, 0, sprite, 1, 1, 96, 0, 10, 10, (float) 1.0, 1); //en (96,0), soit 3 cases à l'est de c_A
 	c_B.m_type=IType.ADVERSAIRE;
+	c_B.m_h=32;
+	c_B.m_w=32;
 	
 	IState etat1_B=new IState("E1_B");
 	IState etat2_B=new IState("E2_B");

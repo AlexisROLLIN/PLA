@@ -97,10 +97,12 @@ public class Component {
 		if ((m_x >= x + 32) // trop à droite
 				|| (m_x + m_w <= x) // trop à gauche
 				|| (m_y >= y + 32) // trop en bas
-				|| (m_y + m_h <= y)) // trop en haut
+				|| (m_y + m_h <= y)) { // trop en haut
 			return false;
-		else
+		}
+		else {
 			return true;
+		}
 	}
 
 	// Avec param

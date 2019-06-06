@@ -40,15 +40,9 @@ public class TestsA {
 	  
 	Direction dir=Direction.NORTH;
 	Direction dir2=Direction.NORTH; 
-	if(dir==dir2) {
-		System.out.println("kksksks");
-	}
 	
 	Type tir=Type.PLAYER;
 	Type tir2=Type.PLAYER; 
-	if(tir==tir2) {
-		System.out.println("kksksks");
-	} 
 	  
 	Model m=new Model();  
 	  
