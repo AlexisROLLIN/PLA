@@ -1,8 +1,6 @@
-package create;
+package map_creator;
 
 import java.awt.Dimension;
-
-
 
 import LurkInTheShadow.Controller;
 import LurkInTheShadow.Model;
