@@ -1,9 +1,9 @@
 Reine1(Init){
   * (Init):
-  | Closest(@,N) && Cell(N,O) ? Move(N)  :(State1)
-  | Closest(@,S) && Cell(N,O) ? Move(S) :(State1)
-  | Closest(@,E) && Cell(N,O) ? Move(O) :(State1)
-  | Closest(@,O) && Cell(N,O) ? Move(E) :(State1)
+  | Closest(@,N) & Cell(N,O) ? Move(N)  :(State1)
+  | Closest(@,S) & Cell(N,O) ? Move(S) :(State1)
+  | Closest(@,E) & Cell(N,O) ? Move(O) :(State1)
+  | Closest(@,O) & Cell(N,O) ? Move(E) :(State1)
   | Cell(N,@) ? Hit(N)  :(Init)
   | Cell(S,@) ? Hit(S) :(Init)
   | Cell(O,@) ? Hit(O) :(Init)
@@ -28,10 +28,10 @@ Reine1(Init){
 
 Monstre1(Init){
   * (Init):
-  | Closest(@,N) && Cell(N,O) ? Move(N) :(Init)
-  | Closest(@,S) && Cell(S,O) ? Move(S) :(Init)
-  | Closest(@,E) && Cell(E,O) ? Move(O) :(Init)
-  | Closest(@,O) && Cell(O,O) ? Move(E) :(Init)
+  | Closest(@,N) & Cell(N,O) ? Move(N) :(Init)
+  | Closest(@,S) & Cell(S,O) ? Move(S) :(Init)
+  | Closest(@,E) & Cell(E,O) ? Move(O) :(Init)
+  | Closest(@,O) & Cell(O,O) ? Move(E) :(Init)
   }
   
 Wall1(Init){
@@ -45,20 +45,20 @@ Wall1(Init){
  }
  
  
-Allié1(Init){
+Allie1(Init){
   * (Init):
-  | Closest(@,N) && Cell(N,O) ? Move(N) :(Init)
-  | Closest(@,S) && Cell(S,O) ? Move(S) :(Init)
-  | Closest(@,E) && Cell(E,O) ? Move(O) :(Init)
-  | Closest(@,O) && Cell(O,O) ? Move(E) :(Init)
+  | Closest(@,N) & Cell(N,O) ? Move(N) :(Init)
+  | Closest(@,S) & Cell(S,O) ? Move(S) :(Init)
+  | Closest(@,E) & Cell(E,O) ? Move(O) :(Init)
+  | Closest(@,O) & Cell(O,O) ? Move(E) :(Init)
   }
   
-  Allié2(Init){
+  Allie2(Init){
   * (Init):
-  | Closest(T,N) && Cell(N,O) ? Move(N) :(Init)
-  | Closest(T,S) && Cell(S,O) ? Move(S) :(Init)
-  | Closest(T,E) && Cell(E,O) ? Move(O) :(Init)
-  | Closest(T,O) && Cell(O,O) ? Move(E) :(Init)
+  | Closest(T,N) & Cell(N,O) ? Move(N) :(Init)
+  | Closest(T,S) & Cell(S,O) ? Move(S) :(Init)
+  | Closest(T,E) & Cell(E,O) ? Move(O) :(Init)
+  | Closest(T,O) & Cell(O,O) ? Move(E) :(Init)
   }
   
   Item(Init){

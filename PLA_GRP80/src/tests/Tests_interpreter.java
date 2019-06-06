@@ -293,10 +293,35 @@ public class Tests_interpreter {
   @Test
   public void test03() throws Interpreter_Exception, Exception{
 	  
-		  AI_Definitions ai_def = ((AI_Definitions)AutomataParser.from_file("automate0.txt"));
+		  /*AI_Definitions ai_def = ((AI_Definitions)AutomataParser.from_file("automate0.txt"));
+		  IAI_Definitions iai_def = ai_def.make();
+		  IAutomaton spawn=iai_def.automatas.get(0);
+		  assertTrue(spawn.current().name().equals("Init"));*/
+	  
+		Model m=new Model(); 
+		File imageFile = new File("src/map_creator/testSprites.png");
+		BufferedImage sprite=ImageIO.read(imageFile);
+		
+		//Vider la map
+		ListIterator<Component> iter = m.components();
+		while (iter.hasNext()) {
+			Component co = iter.next();
+			co.m_type=IType.VOID;
+		}
+		  
+		Component c = new Component (m, 0, sprite, 1, 1, 0, 0, 10, 10, (float) 1.0, 1); //en (0,0)
+		c.m_type=IType.ADVERSAIRE;
+		c.m_h=32;
+		c.m_w=32;
+	  
+		
+		  AI_Definitions ai_def = ((AI_Definitions)AutomataParser.from_file("Automates.txt"));
 		  IAI_Definitions iai_def = ai_def.make();
 		  IAutomaton spawn=iai_def.automatas.get(0);
 		  assertTrue(spawn.current().name().equals("Init"));
+		  spawn.step(c);
+		  assertTrue(spawn.current().name().equals("Init"));
   }
+
   
 }
