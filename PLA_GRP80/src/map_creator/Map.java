@@ -1,18 +1,23 @@
-package create;
+package map_creator;
+
+import java.awt.image.BufferedImage;
 
 import LurkInTheShadow.Component;
 import LurkInTheShadow.Model;
+import LurkInTheShadow.Obstacle;
+import LurkInTheShadow.Sol;
 
-public class map extends Component {
-	public int length;
-	public int width;
+public class Map {
+
 	public int[][] tab;
 	int[][] m1, m2, m3, m4;
+	public int width;
+	public int length;
+	Model model;
 	int realLen = this.length / 2;
 	int realWid = this.width / 2;
-	Model model;
 
-	public map(int length, int width, Model model) {
+	public Map(int length, int width, Model model) {
 		this.model = model;
 		this.length = length;
 		this.width = width;
@@ -27,7 +32,7 @@ public class map extends Component {
 		creuser();
 		division();
 		repartition();
-	}
+}
 
 	void initialisation() {
 		for (int i = 0; i < length; i++) {
@@ -226,42 +231,42 @@ public class map extends Component {
 		for (int i = 0; i < length / 2; i++) {
 			for (int j = 0; j < width / 2; j++) {
 				if (m1[i][j] == 1) {
-					obstacle m = new obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
+					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
 					m.m_idx = 4;
 
 				}
 				if (m2[i][j] == 1) {
-					obstacle m = new obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
+					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
 					m.m_idx = 4;
 
 				}
 				if (m3[i][j] == 1) {
-					obstacle m = new obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
+					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
 					m.m_idx = 4;
 
 				}
 				if (m4[i][j] == 1) {
-					obstacle m = new obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
+					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
 					m.m_idx = 4;
 
 				}
 				if (m1[i][j] == 0) {
-					sol m = new sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
 					m.m_idx = 86;
 
 				}
 				if (m2[i][j] == 0) {
-					sol m = new sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
 					m.m_idx = 86;
 
 				}
 				if (m3[i][j] == 0) {
-					sol m = new sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
 					m.m_idx = 86;
 
 				}
 				if (m4[i][j] == 0) {
-					sol m = new sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
 					m.m_idx = 86;
 
 				}
