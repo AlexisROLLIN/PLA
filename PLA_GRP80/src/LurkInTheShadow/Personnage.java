@@ -15,7 +15,6 @@ public class Personnage extends Component {
 		super(model, no, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale,screen);
 		m_idx = 0;
 		m_show = true;
-		splitSprite();
 	}
 
 	boolean Vision(Component c) {

@@ -11,7 +11,7 @@ public abstract class IAction {
 	
 	public static class IHit extends IAction {
 		IDirection direction ;
-		Integer power; //Force du coup, on peut faire un constructeur le prenant en param si besoin
+		Integer power; //Force du coup on peut faire un constructeur le prenant en param si besoin
 		
 		public IHit(String direction){
 			this.direction = IDirection.strToDir(direction);

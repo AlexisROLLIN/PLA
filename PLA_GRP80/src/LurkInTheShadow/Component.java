@@ -45,6 +45,7 @@ public class Component {
 		m_show = false;
 		power=0;
 		m_dir = IDirection.NORTH; //dir par defaut
+		splitSprite();
 		
 		if (screen == 1) {
 			model.ElementsM1.add(this);
@@ -170,10 +171,7 @@ public class Component {
 	}
 
 	public boolean hit(IDirection d) {
-
-		// Pas le vrai hit, juste une version pour tester.
-		System.out.println("Frappe\n");
-		return true;// L'action s'est bien déroulée
+		return true; //Sera overridee
 	}
 
 	public Rectangle getBounds() {
@@ -258,6 +256,10 @@ public class Component {
 		}
 
 		return false;
+	}
+	
+	public void hit() {
+		
 	}
 	
 	public void paint(Graphics g) {
