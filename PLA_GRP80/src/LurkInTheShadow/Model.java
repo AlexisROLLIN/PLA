@@ -24,6 +24,8 @@ public class Model extends GameModel {
 	public LinkedList<Component> ElementsM3;
 	public LinkedList<Component> ElementsM4;
 	
+	public LinkedList<Ally> allies;//Allies du plateau
+	
 	//LinkedList<Component> m_component;
 
 	public Model() {

@@ -24,6 +24,7 @@ public class IAutomaton {
 		// true si une transition effectuée, false si aucune transition possible (=?= mort de l'automate ?)
 
 		// - selectionne le comportement en fonction de l'état courant
+
 		ListIterator<IBehaviour> iter = behaviours.listIterator();
 		IBehaviour currentBehaviour=null;
 		while (iter.hasNext()) {
