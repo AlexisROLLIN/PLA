@@ -42,14 +42,25 @@ public class Personnage extends Component {
 			}
 		}
 	}
+	
+	
+	//Fonction test temporaire
+	public void MoveR(){
+		this.m_x+=32;
+	}
+	public void MoveL(){
+		this.m_x-=32;
+	}
+	public void MoveN(){
+		this.m_y-=32;
+	}
+	public void MoveS(){
+		this.m_y+=32;
+	}
 
+	@Override
 	public void paint(Graphics g) {
-
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img, m_x, m_y, w, h, null);
-
+		super.paint(g);
 	}
 
 }

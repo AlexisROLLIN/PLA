@@ -1,6 +1,7 @@
 package map_creator;
 
 import java.awt.image.BufferedImage;
+import java.util.Iterator;
 
 import LurkInTheShadow.Component;
 import LurkInTheShadow.Model;
@@ -16,12 +17,18 @@ public class Map {
 	Model model;
 	int realLen = this.length / 2;
 	int realWid = this.width / 2;
+	int [][]tabDecor;
+	public int iViewport;
+	public int jViewport;
+
+	
 
 	public Map(int length, int width, Model model) {
 		this.model = model;
 		this.length = length;
 		this.width = width;
 		tab = new int[length][width];
+		tabDecor = new int [length/2][width/2];
 		if (this.length % 2 == 1) {
 			realLen++;
 		}
@@ -30,8 +37,9 @@ public class Map {
 		}
 		initialisation();
 		creuser();
-		division();
+		//division();
 		repartition();
+		firstCase();
 }
 
 	void initialisation() {
@@ -171,6 +179,84 @@ public class Map {
 			System.out.println();
 		}
 	}
+	
+	public void firstCase(){
+		int x = model.perso1.m_x;
+		int y = model.perso1.m_y;
+		
+		//Cherche la premiere case correct
+				boolean test=false;
+				int i=0;
+				int j=0;
+					for (i=0;i<length;i++){
+						for(j=0;j<width;j++){
+							if((j*32==x-512)&&(i*32==y-384)){
+								test=true;
+								break;
+							}
+						}
+						if(test==true){
+							break;
+						}
+					}
+				iViewport=i;
+				jViewport=j;
+	}
+	
+	public void majTabDecor(){
+		
+//		int l=0; //length
+//		int w=0; //width
+		
+//		for (int i=0; i < length; i++){
+//			w=0;
+//			for (int j=0; j < width;j++){
+//				if ((j*32>=x-512) && (j*32<x+512) && (i*32>=y-384)&&(i*32<y+384)){
+//					tabDecor[l][w]=tab[i][j];
+//					w++;
+//				}
+//			}
+//			l++;
+//		}
+		
+
+		int i1=iViewport+(length/2); //limite i
+		int j1=jViewport+(width/2);	 //limite j
+
+		
+		for(int i=iViewport;i<i1;i++){
+			int j=jViewport;
+			for(;j<j1;j++){
+				model.ElementsViewPort.add(model.ElementsMap[i][j]);
+			}
+		}
+		
+//		for (;i<i1;i++){
+//			w=0;
+//			j=j2;
+//			for(;j<j1;j++){
+//				tabDecor[l][w]=tab[i][j];
+//				w++;
+//			}
+//			l++;
+//		}
+		
+		
+	}
+	
+//	public void majTabDecor(int x, int y){
+//		xViewport=xViewport+x;
+//		yViewport=yViewport+y;
+//		
+//		int y2=yViewport;
+//		//for(int i=);
+//			
+//		
+//	}
+	
+	public void step(long now){
+		this.majTabDecor();
+	}
 
 	void division() {
 		int realLen = this.length / 2;
@@ -226,50 +312,65 @@ public class Map {
 		}
 
 	}
+	
 
-	void repartition() {
-		for (int i = 0; i < length / 2; i++) {
-			for (int j = 0; j < width / 2; j++) {
-				if (m1[i][j] == 1) {
+	public void repartition() {
+		for (int i = 0; i < length; i++) {
+			for (int j = 0; j < width; j++) {
+				if (tab[i][j] == 1) {
 					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
 					m.m_idx = 4;
+					model.ElementsMap[i][j]=m;
 
 				}
-				if (m2[i][j] == 1) {
-					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
-					m.m_idx = 4;
-
-				}
-				if (m3[i][j] == 1) {
-					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
-					m.m_idx = 4;
-
-				}
-				if (m4[i][j] == 1) {
-					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
-					m.m_idx = 4;
-
-				}
-				if (m1[i][j] == 0) {
-					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
-					m.m_idx = 86;
-
-				}
-				if (m2[i][j] == 0) {
+				if (tab[i][j] == 0) {
 					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
 					m.m_idx = 86;
+					model.ElementsMap[i][j]=m;
 
 				}
-				if (m3[i][j] == 0) {
-					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
-					m.m_idx = 86;
-
-				}
-				if (m4[i][j] == 0) {
-					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
-					m.m_idx = 86;
-
-				}
+				
+				
+//				if (m1[i][j] == 1) {
+//					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
+//					m.m_idx = 4;
+//
+//				}
+//				if (m2[i][j] == 1) {
+//					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
+//					m.m_idx = 4;
+//
+//				}
+//				if (m3[i][j] == 1) {
+//					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
+//					m.m_idx = 4;
+//
+//				}
+//				if (m4[i][j] == 1) {
+//					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
+//					m.m_idx = 4;
+//
+//				}
+//				if (m1[i][j] == 0) {
+//					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
+//					m.m_idx = 86;
+//
+//				}
+//				if (m2[i][j] == 0) {
+//					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
+//					m.m_idx = 86;
+//
+//				}
+//				if (m3[i][j] == 0) {
+//					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
+//					m.m_idx = 86;
+//
+//				}
+//				if (m4[i][j] == 0) {
+//					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
+//					m.m_idx = 86;
+//
+//				}
 
 			}
 		}

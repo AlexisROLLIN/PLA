@@ -1,6 +1,7 @@
 package LurkInTheShadow;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
@@ -26,49 +27,32 @@ public class Component {
 	public Model m_model;
 	public int screen;
 	public boolean m_show;
-	
+
 	IAutomaton automate;
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
-	public IType m_type; // Definit le type (allié, ennemi, rocher, etc) de ce component.
+	public IType m_type; // Definit le type (allié, ennemi, rocher, etc) de ce
+							// component.
 
-	public Component(Model model, int no, BufferedImage sprite, int rows, int columns, int x, int y, int h, int w, float scale,
-			int screen) {
+	public Component(Model model, int no, BufferedImage sprite, int rows,
+			int columns, int x, int y, int h, int w, float scale, int screen) {
 		m_model = model;
 		m_sprite = sprite;
 		m_ncols = columns;
 		m_nrows = rows;
 		m_x = x;
 		m_y = y;
-		m_h=h;
-		m_w=w;
+		m_h = h;
+		m_w = w;
 		m_scale = scale;
 		m_show = false;
-		power=0;
-		m_dir = IDirection.NORTH; //dir par defaut
-		
-		if (screen == 1) {
-			model.ElementsM1.add(this);
-			this.screen = 1;
-		}
-		if (screen == 2) {
-			model.ElementsM2.add(this);
-			this.screen=2;
-		}
-			
-		if (screen == 3) {
-			model.ElementsM3.add(this);
-			this.screen =3;
-		}
-	
-		if (screen == 4) {
-			model.ElementsM4.add(this);
-			this.screen =4;
-		}
-		
+		power = 0;
+		m_dir = IDirection.NORTH; // dir par defaut
+
+
 		model.nbElements++;
 		splitSprite();
 	}
-	
+
 	public void setAutomate(IAutomaton aut) {
 		automate = aut;
 	}
@@ -88,12 +72,12 @@ public class Component {
 	public IDirection dir() {
 		return m_dir;
 	}
-	
+
 	public IType type() {
 		return m_type;
 	}
 
-	public boolean is_in_case(int x, int y) {//x et y sont les coord de la case
+	public boolean is_in_case(int x, int y) {// x et y sont les coord de la case
 		if ((m_x >= x + 32) // trop à droite
 				|| (m_x + m_w <= x) // trop à gauche
 				|| (m_y >= y + 32) // trop en bas
@@ -106,35 +90,38 @@ public class Component {
 	// Avec param
 	public boolean move(IDirection d) {
 
-		if (d == IDirection.NORTH || (m_dir == IDirection.NORTH && d == IDirection.FRONT)
+		if (d == IDirection.NORTH
+				|| (m_dir == IDirection.NORTH && d == IDirection.FRONT)
 				|| (m_dir == IDirection.SOUTH && d == IDirection.BACK)
 				|| (m_dir == IDirection.WEST && d == IDirection.RIGHT)
 				|| (m_dir == IDirection.EAST && d == IDirection.LEFT)) {
-			m_y-=32;
+			m_y -= 32;
 			m_dir = IDirection.NORTH;
 			System.out.println("Avance au Nord\n");
 		}
 
-		else if (d == IDirection.SOUTH || (m_dir == IDirection.SOUTH && d == IDirection.FRONT)
+		else if (d == IDirection.SOUTH
+				|| (m_dir == IDirection.SOUTH && d == IDirection.FRONT)
 				|| (m_dir == IDirection.NORTH && d == IDirection.BACK)
 				|| (m_dir == IDirection.EAST && d == IDirection.RIGHT)
 				|| (m_dir == IDirection.WEST && d == IDirection.LEFT)) {
-			m_y+=32;
+			m_y += 32;
 			m_dir = IDirection.SOUTH;
 			System.out.println("Avance au Sud \n");
 		}
 
-		else if (d == IDirection.WEST || (m_dir == IDirection.WEST && d == IDirection.FRONT)
+		else if (d == IDirection.WEST
+				|| (m_dir == IDirection.WEST && d == IDirection.FRONT)
 				|| (m_dir == IDirection.EAST && d == IDirection.BACK)
 				|| (m_dir == IDirection.SOUTH && d == IDirection.RIGHT)
 				|| (m_dir == IDirection.NORTH && d == IDirection.LEFT)) {
-			m_x-=32;
+			m_x -= 32;
 			m_dir = IDirection.WEST;
 			System.out.println("Avance à l'Ouest \n");
 		}
 
 		else {
-			m_x+=32;
+			m_x += 32;
 			m_dir = IDirection.EAST;
 			System.out.println("Avance à l'Est \n");
 		}
@@ -147,16 +134,16 @@ public class Component {
 
 		switch (m_dir) {
 		case NORTH:
-			m_y-=32;
+			m_y -= 32;
 			break;
 		case SOUTH:
-			m_y+=32;
+			m_y += 32;
 			break;
 		case EAST:
-			m_x+=32;
+			m_x += 32;
 			break;
 		default:
-			m_x-=32;
+			m_x -= 32;
 			break;
 		}
 
@@ -189,7 +176,8 @@ public class Component {
 			for (int j = 0; j < m_ncols; j++) {
 				int x = j * m_w;
 				int y = i * m_h;
-				m_sprites[(i * m_ncols) + j] = m_sprite.getSubimage(x, y, m_w, m_h);
+				m_sprites[(i * m_ncols) + j] = m_sprite.getSubimage(x, y, m_w,
+						m_h);
 			}
 		}
 	}
@@ -206,61 +194,75 @@ public class Component {
 	}
 
 	boolean CollisionTotale() {
-		if (Options.SHOW_M1) {
-			Iterator<Component> iter = this.m_model.ElementsM1.iterator();
-			Component tmp = iter.next();
-			while (iter.hasNext()) {
-				if (tmp instanceof Obstacle) {
-					if (this.Collision(tmp)) {
-						return true;
-					}
-				}
-				tmp = iter.next();
-			}
-		}
-		if (Options.SHOW_M2) {
-			Iterator<Component> iter = m_model.ElementsM2.iterator();
-			Component tmp = iter.next();
-			while (iter.hasNext()) {
-				if (tmp instanceof Obstacle) {
-					if (this.Collision(tmp)) {
-						return true;
-					}
-				}
-				tmp = iter.next();
-			}
-		}
-		if (Options.SHOW_M3) {
-			Iterator<Component> iter = m_model.ElementsM3.iterator();
-			Component tmp = iter.next();
-			while (iter.hasNext()) {
-				if (tmp instanceof Obstacle) {
-					if (this.Collision(tmp)) {
-						return true;
-					}
-				}
-				tmp = iter.next();
-			}
-		}
-		if (Options.SHOW_M4) {
-			Iterator<Component> iter = m_model.ElementsM4.iterator();
-			Component tmp = iter.next();
-			while (iter.hasNext()) {
-				if (tmp instanceof Obstacle) {
-					if (this.Collision(tmp)) {
-						return true;
-					}
-				}
-				tmp = iter.next();
-			}
-		}
+
+		// Iterator<Component> iter = this.m_model.ElementsMap.iterator();
+		// Component tmp = iter.next();
+		// while (iter.hasNext()) {
+		// if (tmp instanceof Obstacle) {
+		// if (this.Collision(tmp)) {
+		// return true;
+		// }
+		// }
+		// tmp = iter.next();
+		// }
+
+		// if (Options.SHOW_M1) {
+		// Iterator<Component> iter = this.m_model.ElementsM1.iterator();
+		// Component tmp = iter.next();
+		// while (iter.hasNext()) {
+		// if (tmp instanceof Obstacle) {
+		// if (this.Collision(tmp)) {
+		// return true;
+		// }
+		// }
+		// tmp = iter.next();
+		// }
+		// }
+		// if (Options.SHOW_M2) {
+		// Iterator<Component> iter = m_model.ElementsM2.iterator();
+		// Component tmp = iter.next();
+		// while (iter.hasNext()) {
+		// if (tmp instanceof Obstacle) {
+		// if (this.Collision(tmp)) {
+		// return true;
+		// }
+		// }
+		// tmp = iter.next();
+		// }
+		// }
+		// if (Options.SHOW_M3) {
+		// Iterator<Component> iter = m_model.ElementsM3.iterator();
+		// Component tmp = iter.next();
+		// while (iter.hasNext()) {
+		// if (tmp instanceof Obstacle) {
+		// if (this.Collision(tmp)) {
+		// return true;
+		// }
+		// }
+		// tmp = iter.next();
+		// }
+		// }
+		// if (Options.SHOW_M4) {
+		// Iterator<Component> iter = m_model.ElementsM4.iterator();
+		// Component tmp = iter.next();
+		// while (iter.hasNext()) {
+		// if (tmp instanceof Obstacle) {
+		// if (this.Collision(tmp)) {
+		// return true;
+		// }
+		// }
+		// tmp = iter.next();
+		// }
+		// }
 
 		return false;
 	}
-	
-	public void paint(Graphics g) {
 
+	public void paint(Graphics g) {
+		Image img = m_sprites[m_idx];
+		int w = (int) (m_scale * m_w);
+		int h = (int) (m_scale * m_h);
+		g.drawImage(img, m_x-m_model.perso1.m_x+512, m_y-m_model.perso1.m_y+384, w, h, null);
 	}
 
 }
-
