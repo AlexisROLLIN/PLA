@@ -2,20 +2,20 @@ package tests;
 
 import java.awt.image.BufferedImage;
 import interpreter.*;
-import tests.Type;
+import tests.*;
 
 public class Shooter extends Component {
 	IAutomaton automate;
-	Direction m_dir; 
-	Type m_type;
+	IDirection m_dir; 
+	IType m_type;
 
 	public Shooter(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
 			int[] spritesGoUp, int[] spritesGoDown, int[] spritesGoLeft, int[] spritesGoRight, boolean show, int HP,
 			int intensity, int faction) {
 		super(m, x, y, w, h, scale, sprite, rows, col, id_x, show);
 		m_step = 8;
-		m_dir = Direction.EAST;
-		m_type = Type.PLAYER;
+		m_dir = IDirection.EAST;
+		m_type = IType.PLAYER;
 		splitSprite();
 	}
 
@@ -23,34 +23,34 @@ public class Shooter extends Component {
 		automate = aut;
 	}
 
-	public void setType(Type type) {
+	public void setType(IType type) {
 		m_type = type;
 	}
 
-	public boolean move(Direction d) {
+	public boolean move(IDirection d) {
 		
 
-		if (d == Direction.NORTH) {
-			m_y-=20;
-			m_dir = Direction.NORTH;
+		if (d == IDirection.NORTH) {
+			m_y-=32;
+			m_dir = IDirection.NORTH;
 			System.out.println("Avance au Nord\n");
 		}
 
-		else if (d == Direction.SOUTH) {
-			m_y+=20;
-			m_dir = Direction.SOUTH;
+		else if (d == IDirection.SOUTH) {
+			m_y+=32;
+			m_dir = IDirection.SOUTH;
 			System.out.println("Avance au Sud \n");
 		}
 
-		else if (d == Direction.WEST) {
-			m_x-=20;
-			m_dir = Direction.WEST;
+		else if (d == IDirection.WEST) {
+			m_x-=32;
+			m_dir = IDirection.WEST;
 			System.out.println("Avance à l'Ouest \n");
 		}
 
 		else {
-			m_x+=20;
-			m_dir = Direction.EAST;
+			m_x+=32;
+			m_dir = IDirection.EAST;
 			System.out.println("Avance à l'Est \n");
 		}
 
@@ -87,10 +87,10 @@ public class Shooter extends Component {
 		}
 	}
 
-	public boolean hit(Direction d) {
+	public boolean Hit(IDirection d) {
 
-		// Pas le vrai hit, juste une version pour tester.
-		System.out.println("Frappe\n");
+		//Bullet b = new Bullet()
+		
 		return true;// L'action s'est bien déroulée
 	}
 }

@@ -37,26 +37,26 @@ public class Controller extends GameController implements ActionListener {
 		System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
 
 		if (e.getKeyChar() == 'z') {
-			if (!m_model.touches.contains("N")) {
-				m_model.touches.add("N");
+			if (!m_model.touches.contains("z")) {
+				m_model.touches.add("z");
 			}
 		}
 
 		if (e.getKeyChar() == 'd') {
-			if (!m_model.touches.contains("E")) {
-				m_model.touches.add("E");
+			if (!m_model.touches.contains("d")) {
+				m_model.touches.add("d");
 			}
 		}
 
 		if (e.getKeyChar() == 'q') {
-			if (!m_model.touches.contains("W")) {
-				m_model.touches.add("W");
+			if (!m_model.touches.contains("q")) {
+				m_model.touches.add("q");
 			}
 		}
 
 		if (e.getKeyChar() == 's') {
-			if (!m_model.touches.contains("S")) {
-				m_model.touches.add("S");
+			if (!m_model.touches.contains("s")) {
+				m_model.touches.add("s");
 			}
 		}
 
@@ -67,16 +67,16 @@ public class Controller extends GameController implements ActionListener {
 		System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());
 
 		if (e.getKeyChar() == 'z') {
-			m_model.touches.remove("N");
+			m_model.touches.remove("z");
 		}
 		if (e.getKeyChar() == 'd') {
-			m_model.touches.remove("E");
+			m_model.touches.remove("d");
 		}
 		if (e.getKeyChar() == 'q') {
-			m_model.touches.remove("W");
+			m_model.touches.remove("q");
 		}
 		if (e.getKeyChar() == 's') {
-			m_model.touches.remove("S");
+			m_model.touches.remove("s");
 		}
 
 	}

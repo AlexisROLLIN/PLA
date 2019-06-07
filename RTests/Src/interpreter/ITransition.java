@@ -1,5 +1,5 @@
 package interpreter;
-import tests.Component;
+import tests.*;
 
 public class ITransition {
 

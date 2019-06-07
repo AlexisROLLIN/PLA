@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import tests.Model;
+import java.math.*;
 import interpreter.IAutomaton;
 import interpreter.Interpreter_Exception;
 
@@ -13,11 +14,11 @@ public class Component {
 	// Classe component de test très sommaire
 	// Entre autres, un champ direction devra etre ajouté
 
-	int power;
+	public int power;
 	public Model model;
-	int m_x, m_y;
-	int m_w, m_h;
-	float m_scale;
+	public int m_x, m_y;
+	public int m_w, m_h;
+	public float m_scale;
 	BufferedImage[] m_sprites;
 	BufferedImage m_sprite;
 	int m_nrows, m_ncols;
@@ -28,8 +29,8 @@ public class Component {
 
 	// A ajouter dans le vrai component
 	IAutomaton automate;
-	public Direction m_dir; //doit etre NORTH,SOUTH,EAST ou WEST
-	public Type m_type; //Definit le type (allié, ennemi, rocher, etc) de ce component.
+	public IDirection m_dir; //doit etre NORTH,SOUTH,EAST ou WEST
+	public IType m_type; //Definit le type (allié, ennemi, rocher, etc) de ce component.
 	//Ce type est utile lors de l'interprétation, notamment pour ICell
 
 	public Component(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col,
@@ -68,7 +69,7 @@ public class Component {
 		automate = aut;
 	}
 
-	public void setType(Type type) {
+	public void setType(IType type) {
 		m_type=type;
 	}
 	
@@ -84,12 +85,12 @@ public class Component {
 		return m_y;
 	}
 
-	public Direction dir() {
+	public IDirection dir() {
 		return m_dir;
 	}
 	
 	// Avec param
-	public boolean move(Direction d) {
+	public boolean move(IDirection d) {
 
 		return true;
 	
@@ -101,7 +102,7 @@ public class Component {
 		return true;
 	}
 	
-	public Type type() {
+	public IType type() {
 		return this.m_type;
 	}
 	
@@ -120,11 +121,18 @@ public class Component {
 		
 	}
 
-	public boolean hit(Direction d) {
+	public boolean hit(IDirection d) {
 
 		// Pas le vrai hit, juste une version pour tester.
 		System.out.println("Frappe\n");
 		return true;// L'action s'est bien déroulée
+	}
+	
+	public double distance(Component c1,Component c2) {
+		int a = (c2.m_x - c1.m_x) * (c2.m_x - c1.m_x) ;
+		int b = (c2.m_y - c1.m_y) * (c2.m_y - c1.m_y);
+		
+		return (Math.sqrt((double)a+b));
 	}
 	
 	public void paint(Graphics g) {

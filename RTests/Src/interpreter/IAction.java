@@ -10,16 +10,16 @@ public abstract class IAction {
 	
 	
 	public static class IHit extends IAction {
-		Direction direction ;
+		IDirection direction ;
 		Integer power; //Force du coup, on peut faire un constructeur le prenant en param si besoin
 		
 		public IHit(String direction){
-			this.direction = Direction.strToDir(direction);
+			this.direction = IDirection.strToDir(direction);
 			this.power = 1 ; // valeur par défaut
 		}
 		
 		public IHit(){
-			this.direction = Direction.FRONT; // Front par défaut
+			this.direction = IDirection.FRONT; // Front par défaut
 			this.power = 1 ; // puissance par défaut
 		}
 		
@@ -30,14 +30,14 @@ public abstract class IAction {
 	
 	
 	public static class IMove extends IAction {
-		Direction direction ;
+		IDirection direction ;
 		
 		public IMove(String direction){
-			this.direction = Direction.strToDir(direction);
+			this.direction = IDirection.strToDir(direction);
 		}
 		
 		public IMove(){
-			this.direction = Direction.FRONT;// Front par défaut
+			this.direction = IDirection.FRONT;// Front par défaut
 		}
 		
 		public boolean exec(Component e){

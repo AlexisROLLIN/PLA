@@ -1,7 +1,7 @@
 package interpreter;
 import java.util.List;
 import java.util.ListIterator;
-import tests.Component;
+import tests.*;
 
 public class IAutomaton {
 
@@ -28,7 +28,7 @@ public class IAutomaton {
 		IBehaviour currentBehaviour=null;
 		while (iter.hasNext()) {
 			IBehaviour b = iter.next();
-			if (b.source.toString().equals(current.toString())) {
+			if (b.source.name().equals(current.name())) {
 				currentBehaviour = b;
 				break; //inutile d'aller plus loin, on a trouvé l'état qui correspond à notre état courant dans la liste d'états
 			}
