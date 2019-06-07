@@ -1,0 +1,17 @@
+Player(Init){
+  * (Init):
+  | Key(z) ? Move(N) :(Init)
+  | Key(s) ? Move(S) :(Init)
+  | Key(q) ? Move(O) :(Init)
+  | Key(d) ? Move(E) :(Init)
+  }
+  
+ Allie1(Init){
+  * (Init):
+  | Closest(@,N) & Cell(N,O) ? Move(N) :(Init)
+  | Closest(@,S) & Cell(S,O) ? Move(S) :(Init)
+  | Closest(@,E) & Cell(E,O) ? Move(O) :(Init)
+  | Closest(@,O) & Cell(O,O) ? Move(E) :(Init)
+  }
+
+
