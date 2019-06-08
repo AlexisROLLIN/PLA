@@ -4,14 +4,25 @@ Player(Init){
   | Key(s) ? Move(S) :(Init)
   | Key(q) ? Move(O) :(Init)
   | Key(d) ? Move(E) :(Init)
+  | Key(p) ? Get()   :(Init)
+  | Key(m) ? Get()   :(Init)
+  | Key(o) ? Get()   :(Init)
+  
   }
   
- Allie1(Init){
-  * (Init):
-  | Closest(@,N) & Cell(N,O) ? Move(N) :(Init)
-  | Closest(@,S) & Cell(S,O) ? Move(S) :(Init)
-  | Closest(@,E) & Cell(E,O) ? Move(O) :(Init)
-  | Closest(@,O) & Cell(O,O) ? Move(E) :(Init)
+ Allie1(Init1){
+  * (Init1):
+  | Closest(@,N) & (Cell(N,V) / Cell(N,T)) ? Move(N) :(Init1)
+  | Closest(@,S) & (Cell(S,V) / Cell(S,T)) ? Move(S) :(Init1)
+  | Closest(@,E) & (Cell(E,V) / Cell(E,T)) ? Move(E) :(Init1)
+  | Closest(@,O) & (Cell(O,V) / Cell(O,T)) ? Move(O) :(Init1)
   }
 
+ Allie2(Init2){
+  * (Init2):
+  | Closest(T,N) & (Cell(N,V) / Cell(N,@))  ? Move(N) :(Init2)
+  | Closest(T,S) & (Cell(S,V) / Cell(S,@)) ? Move(S) :(Init2)
+  | Closest(T,E) & (Cell(E,V) / Cell(E,@)) ? Move(E) :(Init2)
+  | Closest(T,O) & (Cell(O,V) / Cell(O,@))  ? Move(O) :(Init2)
+  }
 

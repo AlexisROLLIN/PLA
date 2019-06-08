@@ -11,9 +11,10 @@ public class Bullet extends Component {
 	IType m_type;
 
 	public Bullet(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
-			boolean show) {
+			boolean show,IDirection dir) {
 		super(m, x, y, w, h, scale, sprite, rows, col, id_x, show);
 		m_type = IType.MISSILE;
+		m_dir = dir;
 	}
 
 	public boolean move(IDirection d) {
@@ -52,5 +53,9 @@ public class Bullet extends Component {
 			m_lastMove = now;
 			automate.step(this);
 		}
+	}
+	public boolean IWait() {
+		model.components.remove(this);
+		return true;
 	}
 }

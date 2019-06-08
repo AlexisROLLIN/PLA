@@ -11,9 +11,6 @@ import interpreter.Interpreter_Exception;
 
 public class Component {
 
-	// Classe component de test très sommaire
-	// Entre autres, un champ direction devra etre ajouté
-
 	public int power;
 	public Model model;
 	public int m_x, m_y;
@@ -27,14 +24,13 @@ public class Component {
 	boolean show;
 	long m_lastMove;
 
-	// A ajouter dans le vrai component
-	IAutomaton automate;
-	public IDirection m_dir; //doit etre NORTH,SOUTH,EAST ou WEST
-	public IType m_type; //Definit le type (allié, ennemi, rocher, etc) de ce component.
-	//Ce type est utile lors de l'interprétation, notamment pour ICell
+	
+	public IAutomaton automate;
+	public IDirection m_dir;
+	public IType m_type; 
 
 	public Component(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col,
-			int id_x, boolean show){
+			int id_x, boolean show) {
 		this.model = m;
 		this.m_x = x;
 		this.m_y = y;
@@ -48,7 +44,9 @@ public class Component {
 		this.show = show;
 		splitSprite();
 	}
-	
+
+
+
 	void splitSprite() {
 		int width = m_sprite.getWidth(null);
 		int height = m_sprite.getHeight(null);
@@ -70,9 +68,9 @@ public class Component {
 	}
 
 	public void setType(IType type) {
-		m_type=type;
+		m_type = type;
 	}
-	
+
 	public int power() {
 		return power;
 	}
@@ -88,12 +86,12 @@ public class Component {
 	public IDirection dir() {
 		return m_dir;
 	}
-	
+
 	// Avec param
 	public boolean move(IDirection d) {
 
 		return true;
-	
+
 	}
 
 	// Sans param, on suit la direction actuelle
@@ -101,12 +99,12 @@ public class Component {
 
 		return true;
 	}
-	
+
 	public IType type() {
 		return this.m_type;
 	}
-	
-	public boolean is_in_case(int x, int y) {//x et y sont les coord de la case
+
+	public boolean is_in_case(int x, int y) {// x et y sont les coord de la case
 		if ((m_x >= x + 32) // trop à droite
 				|| (m_x + m_w <= x) // trop à gauche
 				|| (m_y >= y + 32) // trop en bas
@@ -116,9 +114,8 @@ public class Component {
 			return true;
 	}
 
-	
-	public void step(long now) throws Interpreter_Exception{
-		
+	public void step(long now) throws Interpreter_Exception {
+
 	}
 
 	public boolean hit(IDirection d) {
@@ -127,14 +124,45 @@ public class Component {
 		System.out.println("Frappe\n");
 		return true;// L'action s'est bien déroulée
 	}
-	
-	public double distance(Component c1,Component c2) {
-		int a = (c2.m_x - c1.m_x) * (c2.m_x - c1.m_x) ;
+
+	public double distance(Component c1, Component c2) {
+		int a = (c2.m_x - c1.m_x) * (c2.m_x - c1.m_x);
 		int b = (c2.m_y - c1.m_y) * (c2.m_y - c1.m_y);
-		
-		return (Math.sqrt((double)a+b));
+
+		return (Math.sqrt((double) a + b));
 	}
-	
+
+	public void Get1() {
+		
+		this.setAutomate(model.m_shooter.automate);
+		model.m_shooter.setAutomate(model.TabAuto[0]);
+		this.m_type=IType.TEAM;
+		model.m_shooter.m_type=IType.PLAYER;
+
+	}
+
+	public void Get2() {
+
+
+		this.setAutomate(model.m_mage.automate);
+		model.m_mage.setAutomate(model.TabAuto[0]);
+		this.m_type=IType.TEAM;
+		model.m_mage.m_type=IType.PLAYER;
+
+	}
+
+	public void Get3() {
+
+
+
+		this.setAutomate(model.m_warrior.automate);
+		model.m_warrior.setAutomate(model.TabAuto[0]);
+		this.m_type=IType.TEAM;
+		model.m_warrior.m_type=IType.PLAYER;
+		
+
+	}
+
 	public void paint(Graphics g) {
 		Image img = m_sprites[id_x];
 		int w = (int) (m_scale * m_w);
