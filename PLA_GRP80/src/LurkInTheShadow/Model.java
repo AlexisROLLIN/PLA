@@ -24,6 +24,8 @@ public class Model extends GameModel {
 	public LinkedList<Component> ElementsM3;
 	public LinkedList<Component> ElementsM4;
 	
+	public LinkedList<Ally> allies;//Allies du plateau
+	
 	//LinkedList<Component> m_component;
 
 	public Model() {
@@ -34,11 +36,14 @@ public class Model extends GameModel {
 		ElementsM2 = new LinkedList<Component>();
 		ElementsM3 = new LinkedList<Component>();
 		ElementsM4 = new LinkedList<Component>();
+		
+		allies=new LinkedList<Ally>();
+		
 		Options.SHOW_M1 = true;
 		map = new Map(44, 64, this);
 		ListIterator<Component> iter = this.ElementsM1.listIterator();
 		Component tmp = iter.next();
-		while(iter.hasNext() && tmp instanceof Obstacle ){
+		while(iter.hasNext() && tmp.m_type==IType.OBSTACLE){
 			tmp = iter.next();
 		}
 		perso1 = new Personnage(this, 100, Sprite, 10, 9, tmp.m_x, tmp.m_y, 1F, 1);
