@@ -5,9 +5,7 @@ import interpreter.*;
 import tests.*;
 
 public class Shooter extends Component {
-	IAutomaton automate;
-	IDirection m_dir; 
-	IType m_type;
+	
 
 	public Shooter(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
 			int[] spritesGoUp, int[] spritesGoDown, int[] spritesGoLeft, int[] spritesGoRight, boolean show, int HP,
@@ -17,14 +15,6 @@ public class Shooter extends Component {
 		m_dir = IDirection.EAST;
 		m_type = IType.PLAYER;
 		splitSprite();
-	}
-
-	public void setAutomate(IAutomaton aut) {
-		automate = aut;
-	}
-
-	public void setType(IType type) {
-		m_type = type;
 	}
 
 	public boolean move(IDirection d) {
@@ -87,10 +77,26 @@ public class Shooter extends Component {
 		}
 	}
 
-	public boolean Hit(IDirection d) {
+	public boolean hit(IDirection d) {
+		int a =0;
+		if(d==IDirection.EAST) {
+			a=21;
+		}
+		if(d==IDirection.NORTH) {
+			a=22;
+		}
+		if(d==IDirection.WEST) {
+			a=23;
+		}
+		if(d==IDirection.SOUTH) {
+			a=24;
+		}
 
-		//Bullet b = new Bullet()
+		Bullet b = new Bullet(model, this.m_x, this.m_y, 32, 32, 1F, this.m_sprite, 10, 9,a ,
+				true, this.m_dir,3);
+		model.components.add(b);
+		b.setAutomate(model.TabAuto[3]);
 		
-		return true;// L'action s'est bien déroulée
+		return true;
 	}
 }

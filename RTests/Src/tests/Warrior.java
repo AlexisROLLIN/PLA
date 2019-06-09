@@ -2,57 +2,51 @@ package tests;
 
 import java.awt.image.BufferedImage;
 
-import interpreter.IAutomaton;
 import interpreter.Interpreter_Exception;
 
-public class Bullet extends Component {
-	IAutomaton automate;
-	IDirection m_dir;
-	IType m_type;
-	int vie;
-
-	public Bullet(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
-			boolean show,IDirection dir, int v) {
+public class Warrior extends Component{
+	public Warrior(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
+			int[] spritesGoUp, int[] spritesGoDown, int[] spritesGoLeft, int[] spritesGoRight, boolean show, int HP,
+			int intensity, int faction) {
 		super(m, x, y, w, h, scale, sprite, rows, col, id_x, show);
-		m_type = IType.MISSILE;
-		m_dir = dir;
-		vie =v;
+		m_step = 8;
+		m_dir = IDirection.EAST;
+		m_type = IType.TEAM;
+		splitSprite();
 	}
 
-	public boolean move(IDirection d) {
-		
-		if(vie ==0) {
-			this.show = false;
-		}
+	
 
-		else if (d == IDirection.NORTH) {
+	public boolean move(IDirection d) {
+
+		if (d == IDirection.NORTH) {
 			m_y -= 32;
 			m_dir = IDirection.NORTH;
-			vie--;
-	
+			System.out.println("Avance au Nord\n");
 		}
 
 		else if (d == IDirection.SOUTH) {
 			m_y += 32;
 			m_dir = IDirection.SOUTH;
-			vie--;
+			System.out.println("Avance au Sud \n");
 		}
 
 		else if (d == IDirection.WEST) {
 			m_x -= 32;
 			m_dir = IDirection.WEST;
-			vie--;
+			System.out.println("Avance à l'Ouest \n");
 		}
 
 		else {
 			m_x += 32;
 			m_dir = IDirection.EAST;
-			vie--;
+			System.out.println("Avance à l'Est \n");
 		}
 
 		return true; // L'action s'est bien déroulée
 	}
 
+	@Override
 	public void step(long now) throws Interpreter_Exception {
 		long elapsed = now - m_lastMove;
 
@@ -61,8 +55,5 @@ public class Bullet extends Component {
 			automate.step(this);
 		}
 	}
-	public boolean IWait() {
-		model.components.remove(this);
-		return true;
-	}
+
 }

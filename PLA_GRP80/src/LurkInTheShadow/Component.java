@@ -1,6 +1,7 @@
 package LurkInTheShadow;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
@@ -9,6 +10,8 @@ import java.util.LinkedList;
 import edu.ricm3.game.Options;
 import interpreter.IAutomaton;
 import interpreter.Interpreter_Exception;
+
+
 
 public class Component {
 	BufferedImage m_sprite;
@@ -33,8 +36,8 @@ public class Component {
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
 	public IType m_type; // Definit le type (allié, ennemi, rocher, etc) de ce component.
 
-	public Component(Model model, int no, BufferedImage sprite, int rows, int columns, int x, int y, int h, int w, float scale,
-			int screen) {
+	public Component(Model model, BufferedImage sprite, int rows, int columns, int x, int y, int h, int w, float scale,
+			int id_x, boolean show, int screen) {
 		m_model = model;
 		m_sprite = sprite;
 		m_ncols = columns;
@@ -44,30 +47,30 @@ public class Component {
 		m_h=h;
 		m_w=w;
 		m_scale = scale;
-		m_show = false;
+		m_show = show;
 		m_dir = IDirection.NORTH; //dir par defaut
 		splitSprite();
 		
 		if (screen == 1) {
-			model.ElementsM1.add(this);
+			m_model.ElementsM1.add(this);
 			this.screen = 1;
 		}
 		if (screen == 2) {
-			model.ElementsM2.add(this);
+			m_model.ElementsM2.add(this);
 			this.screen=2;
 		}
 			
 		if (screen == 3) {
-			model.ElementsM3.add(this);
+			m_model.ElementsM3.add(this);
 			this.screen =3;
 		}
 	
 		if (screen == 4) {
-			model.ElementsM4.add(this);
+			m_model.ElementsM4.add(this);
 			this.screen =4;
 		}
 		
-		model.nbElements++;
+		m_model.nbElements++;
 		splitSprite();
 	}
 	
@@ -107,8 +110,13 @@ public class Component {
 		}
 	}
 
-	public void step() throws Interpreter_Exception {
-		automate.step(this);
+	public void step(long now) throws Interpreter_Exception {
+		long elapsed = now - m_lastMove;
+
+		if (elapsed > 60L) {
+			m_lastMove = now;
+			automate.step(this);
+		}
 	}
 
 	public Rectangle getBounds() {
@@ -195,7 +203,50 @@ public class Component {
 		return false;
 	}
 	
+	public double distance(Component c1, Component c2) {
+		int a = (c2.m_x - c1.m_x) * (c2.m_x - c1.m_x);
+		int b = (c2.m_y - c1.m_y) * (c2.m_y - c1.m_y);
+
+		return (Math.sqrt((double) a + b));
+	}
+
+	public void Get1() {
+		
+		this.setAutomate(m_model.perso1.automate);
+		m_model.perso1.setAutomate(m_model.Player);
+		this.m_type=IType.TEAM;
+		m_model.perso1.m_type=IType.PLAYER;
+
+	}
+
+	public void Get2() {
+
+
+		this.setAutomate(m_model.perso2.automate);
+		m_model.perso2.setAutomate(m_model.Player);
+		this.m_type=IType.TEAM;
+		m_model.perso2.m_type=IType.PLAYER;
+
+	}
+
+	public void Get3() {
+
+
+
+		this.setAutomate(m_model.perso3.automate);
+		m_model.perso3.setAutomate(m_model.Player);
+		this.m_type=IType.TEAM;
+		m_model.perso3.m_type=IType.PLAYER;
+		
+
+	}
+	
 	public void paint(Graphics g) {
+
+		Image img = m_sprites[m_idx];
+		int w = (int) (m_scale * m_w);
+		int h = (int) (m_scale * m_h);
+		g.drawImage(img, m_x, m_y, w, h, null);
 
 	}
 	

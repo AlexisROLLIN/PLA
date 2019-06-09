@@ -35,11 +35,12 @@ public class Tests_interpreter {
 	}
 
 	@Test
-	public void test00() throws Interpreter_Exception, IOException {
+	public void test00() throws Interpreter_Exception, IOException, Exception {
 
 		/*
-		 * Def manuelle d'un automate à 2 états. (1) - Cell() / Move(R) -> (2) (2) -
-		 * Cell() / Hit -> (1)
+		 * Def manuelle d'un automate à 2 états. 
+		 * (1) - Cell() / Move(R) -> (2) 
+		 * (2) -Cell() / Hit -> (1)
 		 * 
 		 */
 
@@ -56,7 +57,7 @@ public class Tests_interpreter {
 			c.m_type = IType.VOID;
 		}
 
-		Monster c = new Monster(m, 0, sprite, 1, 1, 10, 10, (float) 1.0, 1);
+		Monster c = new Monster(m, sprite, 1, 1, 10, 10, (float) 1.0, 1, true, 1);
 		c.m_h = 32;
 		c.m_w = 32;
 
@@ -88,22 +89,22 @@ public class Tests_interpreter {
 		IAutomaton auto = new IAutomaton(etat1, behaviourList, "A1");
 
 		c.setAutomate(auto);
-		c.step();
+		c.step(61L);
 		assertTrue((auto.current()).name().equals("E2")); // On s'assure qu'on est bien passé au 2nd etat
-		c.step();
+		c.step(61L);
 		assertTrue((auto.current()).name().equals("E1"));
-		c.step();
+		c.step(61L);
 		assertTrue((auto.current()).name().equals("E2"));
-		c.step();// Frappe
-		c.step();// Avance Ouest
-		c.step();// Frappe
-		c.step();// Avance Nord
+		c.step(61L);// Frappe
+		c.step(61L);// Avance Ouest
+		c.step(61L);// Frappe
+		c.step(61L);// Avance Nord
 		assertTrue(c.x() == 10);
 		assertTrue(c.y() == 10); // Il devrait avoir fait un tour normalement
 	}
 
 	@Test
-	public void test01() throws Interpreter_Exception, IOException {
+	public void test01() throws Interpreter_Exception, IOException, Exception {
 		// Test boucle sur un état
 		/*
 		 * Def manuelle d'un automate à 3 transitions. (1) - MyDir(S) / Wait -> (2) (1)
@@ -122,7 +123,7 @@ public class Tests_interpreter {
 			c.m_type = IType.VOID;
 		}
 
-		Monster c = new Monster(m, 0, sprite, 1, 1, 10, 10, (float) 1.0, 1);
+		Monster c = new Monster(m, sprite, 1, 1, 10, 10, (float) 1.0, 1, true, 1);
 		c.m_h = 32;
 		c.m_w = 32;
 
@@ -158,18 +159,18 @@ public class Tests_interpreter {
 		IAutomaton auto = new IAutomaton(etat1, behaviourList, "A2");
 
 		c.setAutomate(auto);
-		c.step();
+		c.step(0);
 		assertTrue((auto.current()).name().equals("E1")); // On s'assure qu'on est toujours au premier état
-		c.step();
+		c.step(0);
 		assertTrue((auto.current()).name().equals("E1"));
-		c.step();
+		c.step(0);
 		assertTrue((auto.current()).name().equals("E2"));
-		c.step();
+		c.step(0);
 		assertTrue((auto.current()).name().equals("E2"));
 	}
 
 	@Test
-	public void test02() throws Interpreter_Exception, IOException {
+	public void test02() throws Interpreter_Exception, IOException, Exception {
 		// Test Interaction entre 2 automates
 
 		/*
@@ -189,7 +190,7 @@ public class Tests_interpreter {
 			c.m_type = IType.VOID;
 		}
 
-		Monster c_A = new Monster(m, 0, sprite, 1, 1, 0, 0, (float) 1.0, 1); // en (0,0)
+		Monster c_A = new Monster(m, sprite, 1, 1, 0, 0, (float) 1.0, 1, true, 1); // en (0,0)
 		c_A.m_type = IType.ADVERSAIRE;
 		c_A.m_h = 32;
 		c_A.m_w = 32;
@@ -232,7 +233,7 @@ public class Tests_interpreter {
 		 * entité je frappe en sa direction
 		 */
 
-		Monster c_B = new Monster(m, 0, sprite, 1, 1, 96, 0, (float) 1.0, 1); // en (96,0), soit 3 cases à l'est de c_A
+		Monster c_B = new Monster(m, sprite, 1, 1, 96, 0, (float) 1.0, 1, true, 1); // en (96,0), soit 3 cases à l'est de c_A
 		c_B.m_type = IType.ADVERSAIRE;
 		c_B.m_h = 32;
 		c_B.m_w = 32;
@@ -270,13 +271,13 @@ public class Tests_interpreter {
 
 		c_A.setAutomate(auto_A);
 		c_B.setAutomate(auto_B);
-		c_A.step();
+		c_A.step(0);
 		assertTrue((auto_A.current()).name().equals("E1_A")); // Supposé avancer vers l'est
-		c_B.step();
+		c_B.step(0);
 		assertTrue((auto_B.current()).name().equals("E1_B"));
-		c_A.step();
+		c_A.step(0);
 		assertTrue((auto_A.current()).name().equals("E2_A")); // Les deux components sont censés se rencontrer
-		c_B.step();
+		c_B.step(0);
 		assertTrue((auto_B.current()).name().equals("E2_B"));
 
 	}
@@ -302,7 +303,7 @@ public class Tests_interpreter {
 			co.m_type = IType.VOID;
 		}
 
-		Component c = new Component(m, 0, sprite, 1, 1, 0, 0, 10, 10, (float) 1.0, 1); // en (0,0)
+		Component c = new Component(m, sprite, 1, 1, 0, 0, 10, 10, (float) 1.0, 1, true, 1); // en (0,0)
 		c.m_type = IType.ADVERSAIRE;
 		c.m_h = 32;
 		c.m_w = 32;

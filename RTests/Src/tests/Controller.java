@@ -59,6 +59,34 @@ public class Controller extends GameController implements ActionListener {
 				m_model.touches.add("s");
 			}
 		}
+		if (e.getKeyChar() == 'p') {
+			if (!m_model.touches.contains("p")) {
+				m_model.touches.add("p");
+				m_model.Cgmt = 'p';
+			}
+			
+		}
+		if (e.getKeyChar() == 'm') {
+			if (!m_model.touches.contains("m")) {
+				m_model.touches.add("m");
+				m_model.Cgmt = 'm';
+			}
+			
+		}
+		if (e.getKeyChar() == 'o') {
+			if (!m_model.touches.contains("o")) {
+				m_model.touches.add("o");
+				m_model.Cgmt = 'o';
+			}
+			
+		}
+		
+		if (e.getKeyCode() == 32) {
+			if (!m_model.touches.contains("SPACE")) {
+				m_model.touches.add("SPACE");
+			}
+			
+		}
 
 	}
 
@@ -77,6 +105,18 @@ public class Controller extends GameController implements ActionListener {
 		}
 		if (e.getKeyChar() == 's') {
 			m_model.touches.remove("s");
+		}
+		if (e.getKeyChar() == 'p') {
+			m_model.touches.remove("p");
+		}
+		if (e.getKeyChar() == 'm') {
+			m_model.touches.remove("m");
+		}
+		if (e.getKeyChar() == 'o') {
+			m_model.touches.remove("o");
+		}
+		if (e.getKeyCode() == 32) {
+			m_model.touches.remove("SPACE");
 		}
 
 	}

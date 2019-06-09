@@ -84,19 +84,24 @@ public abstract class ICondition {
 
 		public boolean eval(Component e) {
 			
-			/*if (direction == IDirection.NORTH || (e.dir() == IDirection.NORTH && direction == IDirection.FRONT)
+			if (direction == IDirection.NORTH || (e.dir() == IDirection.NORTH && direction == IDirection.FRONT)
 					|| (e.dir() == IDirection.SOUTH && direction == IDirection.BACK)
 					|| (e.dir() == IDirection.WEST && direction == IDirection.RIGHT)
 					|| (e.dir() == IDirection.EAST && direction == IDirection.LEFT)) {
+				//On teste tous les components du plateau pour voir s'ils sont dans la case à côté de la nôtre
 				Iterator<Component> iter= e.model.components.iterator();
 				while (iter.hasNext()) {
 					Component comp=iter.next();
 					if (comp.is_in_case(e.x(), e.y()-32)) { //S'il y a un component dans la case d'à coté
-						if(comp.type()==type || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
+						if(comp.type()!=IType.VOID && type==IType.VOID) {
+							return false;
+						}
+						
+						else if((comp.type()==type && type!=IType.VOID) || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
 						}
 				}
-				return false;
+				return type==IType.VOID;
 			}
 
 			else if (direction == IDirection.SOUTH || (e.dir() == IDirection.SOUTH && direction == IDirection.FRONT)
@@ -107,11 +112,15 @@ public abstract class ICondition {
 				while (iter.hasNext()) {
 					Component comp=iter.next();
 					if (comp.is_in_case(e.x(), e.y()+32)) {
-						if(comp.type()==type || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
+						if(comp.type()!=IType.VOID && type==IType.VOID) {
+							return false;
+						}
+						
+						else if((comp.type()==type && type!=IType.VOID) || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
 						}
 				}
-				return false;
+				return type==IType.VOID;
 			}
 
 			else if (direction == IDirection.WEST || (e.dir() == IDirection.WEST && direction == IDirection.FRONT)
@@ -122,11 +131,15 @@ public abstract class ICondition {
 				while (iter.hasNext()) {
 					Component comp=iter.next();
 					if (comp.is_in_case(e.x()-32, e.y())) {
-						if(comp.type()==type || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
+						if(comp.type()!=IType.VOID && type==IType.VOID) {
+							return false;
+						}
+						
+						else if((comp.type()==type && type!=IType.VOID) || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
 						}
 				}
-				return false;
+				return type==IType.VOID;
 			}
 
 			else {
@@ -142,14 +155,15 @@ public abstract class ICondition {
 						
 						else if((comp.type()==type && type!=IType.VOID) || (type==IType.ANYTHING && comp.type()!=IType.VOID)){
 							return true;}
-						}
+					}
 				}
 				return type==IType.VOID;
-			}*/
-			
-		
-			return true;
 			}
+			
+		}
+
+
+
 	}
 
 	public static class IGotPower extends ICondition {
@@ -212,7 +226,7 @@ public abstract class ICondition {
 			while(iter.hasNext()) {
 				tmp=iter.next();
 				a = c.distance(tmp , c);
-				if((IType)(tmp.m_type) == (IType)this.t &&  a < dist) {
+				if((tmp.m_type) == this.t &&  a < dist && tmp!=c) {
 					dist =a;
 					plus_proche = tmp;
 				}

@@ -1,14 +1,12 @@
 Player(Init){
   * (Init):
-  | Key(z) ? Move(N) :(Init)
-  | Key(s) ? Move(S) :(Init)
   | Key(q) ? Move(O) :(Init)
   | Key(d) ? Move(E) :(Init)
+  | Key(z) ? Move(N) :(Init)
+  | Key(s) ? Move(S) :(Init)
   | Key(p) ? Get()   :(Init)
   | Key(m) ? Get()   :(Init)
   | Key(o) ? Get()   :(Init)
-  | Key(SPACE) ? Hit()  :(Init)
-  
   }
   
  Allie1(Init1){
@@ -26,9 +24,3 @@ Player(Init){
   | Closest(T,E) & (Cell(E,V) / Cell(E,@)) ? Move(E) :(Init2)
   | Closest(T,O) & (Cell(O,V) / Cell(O,@))  ? Move(O) :(Init2)
   }
-  
-  Bullet(Init){
-  * (Init):
-  | True ? Move() :(Init)
-  }
-

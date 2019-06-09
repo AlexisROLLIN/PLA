@@ -12,10 +12,10 @@ public class Queen extends Component { // Changement sprites à faire !!
 	int speed;
 	int hunger;
 
-	public Queen(Model model,  int no, BufferedImage sprite, int rows, int columns, int x, int y, float scale,
-			int screen) {
+	public Queen(Model model, BufferedImage sprite, int rows, int columns, int x, int y, float scale,
+			int id_x, boolean show, int screen) {
 
-		super(model, no, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale, screen);
+		super(model, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale, id_x, show, screen);
 		m_idx = 0;
 		life = 100;// inutile théoriquement, mais sécurité
 		power = 3;
@@ -203,7 +203,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 
 		if(ponte>(100-hunger)/30) { //Pond une fois tous les (100-hunger)/30 steps egg
 
-			new Monster(m_model, no, m_sprite, m_nrows, m_ncols, m_x, m_y, 1, screen);
+			new Monster(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, 1, m_idx, m_show, screen);
 
 			ponte=1;
 		}

@@ -17,7 +17,7 @@ public enum IType {
 			case "T": return IType.TEAM;
 			case "@": return IType.PLAYER;
 			case "V": return IType.VOID;
-			case "An": return IType.ANYTHING;
+			case "_": return IType.ANYTHING;
 			default: System.out.println("Type inconnu, VOID par défaut \n");
 				return IType.VOID;
 		}
