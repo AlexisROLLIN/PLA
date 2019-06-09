@@ -26,8 +26,8 @@ public class Ally extends Component {
 		if (player.intersects(objet)) {
 			return true;
 		}
-		//return false;
-		return true; //Pour tests
+		return false;
+		//return true; //Pour tests
 	}
 
 	public void Afficher() {
