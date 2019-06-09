@@ -13,11 +13,10 @@ public class Monster extends Component {
 			int columns, int x, int y,float scale, int id_x, boolean show) {
 		
 		super(model, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale, id_x, show);
-		m_idx = 0;
-		m_show = true;
 		speed=32;
 		m_type=IType.ADVERSAIRE;
 		automate=model.monster;
+		power=5;
 	}
 	
 	@Override

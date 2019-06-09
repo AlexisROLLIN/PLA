@@ -18,7 +18,6 @@ import map_creator.Map;
 import ricm3.parser.AutomataParser;
 import ricm3.parser.Ast.AI_Definitions;
 
-
 public class Model extends GameModel {
 
 	public BufferedImage Sprite;
@@ -26,6 +25,7 @@ public class Model extends GameModel {
 	Shooter perso1;
 	Mage perso2;
 	Warrior perso3;
+	Queen reine;
 	IAutomaton Player;
 	IAutomaton spawn;
 	IAutomaton spawn1;
@@ -36,24 +36,25 @@ public class Model extends GameModel {
 	IAutomaton fireball;
 	IAutomaton bullet;
 	IAutomaton floor;
-	
+
 	public char Cgmt;
-	
+
 	int nbElements;
+	public int nb_monsters_to_be_added;
 	public LinkedList<Component> components;
-	public LinkedList<Ally> allies;//Allies du plateau
+	public LinkedList<Ally> allies;// Allies du plateau
 	public LinkedList<String> touches;
 
-
 	public Model() throws Interpreter_Exception, Exception {
-		
+
 		loadSprites();
 		nbElements = 0;
 		this.touches = new LinkedList();
 		this.components = new LinkedList();
-		
-		allies=new LinkedList<Ally>();
-		
+
+		allies = new LinkedList<Ally>();
+		nb_monsters_to_be_added = 0;
+
 		AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file("src/Automates/Automate"));
 		IAI_Definitions iai_def = ai_def.make();
 		spawn = iai_def.automatas.get(0);
@@ -61,16 +62,18 @@ public class Model extends GameModel {
 		spawn2 = iai_def.automatas.get(2);
 		obst = iai_def.automatas.get(3);
 		floor = iai_def.automatas.get(4);
-		
+		queen = iai_def.automatas.get(5);
+		monster = iai_def.automatas.get(6);
+
 		Player = spawn;
-		
+
 		map = new Map(44, 64, this);
-		
-		
+
 		perso1 = new Shooter(this, Sprite, 10, 9, 224, 416, 1F, 81, true);
 		perso2 = new Mage(this, Sprite, 10, 9, 192, 416, 1F, 44, true);
 		perso3 = new Warrior(this, Sprite, 10, 9, 160, 416, 1F, 48, true);
-		
+		reine = new Queen(this, Sprite, 10, 9, 320, 448, 1F, 13, true);
+
 		perso1.setAutomate(spawn);
 		perso2.setAutomate(spawn1);
 		perso3.setAutomate(spawn2);
@@ -94,20 +97,19 @@ public class Model extends GameModel {
 
 		while (iter.hasNext()) {
 			try {
-				
-				Component b = iter.next();
-				if (b instanceof Warrior) {
-					int i=0;
-					i++;
-				}
-				b.step(now);
+				iter.next().step(now);
 
 			} catch (Interpreter_Exception e) {
 			}
 		}
+		// On ne peut pas ajouter de components pendant qu'on parcourt la liste de
+		// components
+		// On fait donc ça maintenant
+		for (int i = 0; i < nb_monsters_to_be_added; i++) {
+			new Monster(this, reine.m_sprite, reine.m_nrows, reine.m_ncols, reine.m_x, reine.m_y, 1F, 19, reine.m_show);
+		}
+		nb_monsters_to_be_added = 0;
 	}
-
-	
 
 	private void loadSprites() {
 

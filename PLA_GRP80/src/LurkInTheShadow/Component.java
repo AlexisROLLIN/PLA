@@ -256,6 +256,11 @@ public class Component {
 		return true;
 	}
 	
+	//A Overrider
+	public boolean egg(){
+		return true;
+	}
+	
 
 }
 

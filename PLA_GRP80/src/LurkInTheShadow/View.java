@@ -48,10 +48,7 @@ public class View extends GameView {
 		Iterator<Component> iter = this.m_model.components.iterator();
 		while (iter.hasNext()) {
 			Component c = iter.next();
-			if (c instanceof Warrior) {
-				int i=0;
-				i++;
-			}
+
 			
 			if (c.m_show) {
 				c.paint(g);

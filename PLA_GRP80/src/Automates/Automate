@@ -32,3 +32,29 @@ Player(Init){
  Floor(Init){
   * (Init): True ? Wait :(Init)
  }
+ 
+ Queen(Init){
+  * (Init):
+  | Closest(@,N) & ((Cell(N,V) / Cell(N,A)) & !(Cell(N,@) / Cell(N,T))) ? Move(N) :(Ponte)
+  | Closest(@,S) & ((Cell(S,V) / Cell(S,A)) & !(Cell(N,@) / Cell(N,T))) ? Move(S) :(Ponte)
+  | Closest(@,E) & ((Cell(E,V) / Cell(E,A)) & !(Cell(N,@) / Cell(N,T))) ? Move(E) :(Ponte)
+  | Closest(@,O) & ((Cell(O,V) / Cell(O,A)) & !(Cell(N,@) / Cell(N,T))) ? Move(O) :(Ponte)
+  | Cell(N,@) / Cell(N,T) ? Hit(N) :(Ponte)
+  | Cell(S,@) / Cell(S,T) ? Hit(S) :(Ponte)
+  | Cell(E,@) / Cell(E,T) ? Hit(E) :(Ponte)
+  | Cell(O,@) / Cell(O,T) ? Hit(O) :(Ponte)
+  * (Ponte): True ? Egg() :(Init) 
+ }
+ 
+ Monstre(Init){
+ * (Init):
+ | Cell(N,V) ? Move(N) :(Init)
+ | Cell(N,@) / Cell(N,T) ? Hit(N) :(Init)
+ | Cell(S,V) ? Move(S) :(Init)
+ | Cell(S,@) / Cell(S,T) ? Hit(S) :(Init)
+ | Cell(O,V) ? Move(O) :(Init)
+ | Cell(O,@) / Cell(O,T) ? Hit(O) :(Init)
+ | Cell(E,V) ? Move(E) :(Init)
+ | Cell(E,@) / Cell(E,T) ? Hit(E) :(Init)
+ 
+ }

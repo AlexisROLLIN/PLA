@@ -18,17 +18,16 @@ public class Queen extends Component { // Changement sprites à faire !!
 			int id_x, boolean show) {
 
 		super(model, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale, id_x, show);
-		m_idx = 0;
 		life = 100;// inutile théoriquement, mais sécurité
 		power = 3;
-		m_show = true;
 		periode_marche = 3;// Marche à une freq de 1/3
 		marche = 1;
 		ponte=1;
 		speed = 32;
-		hunger = 0; //fin maximum = 100
+		hunger = 0; //faim maximum = 100
 		m_type=IType.ADVERSAIRE;
 		automate=model.queen;
+		power=100;
 	}
 
 	@Override
@@ -81,7 +80,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 	@Override
 	public boolean hit(IDirection d) { // /!\ Ne change pas de sprite
 
-		hunger = hunger + power; // On dit qu'un Hit donne faim proportionnellement à sa puissance
+		hunger = hunger + power/10; // On dit qu'un Hit donne faim proportionnellement à sa puissance
 
 		if (d == IDirection.NORTH || (m_dir == IDirection.NORTH && d == IDirection.FRONT)
 				|| (m_dir == IDirection.SOUTH && d == IDirection.BACK)
@@ -202,11 +201,12 @@ public class Queen extends Component { // Changement sprites à faire !!
 		return true;
 	}
 	
+	@Override
 	public boolean egg(){
 
 		if(ponte>(100-hunger)/30) { //Pond une fois tous les (100-hunger)/30 steps egg
 
-			new Monster(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, 1, m_idx, m_show);
+			m_model.nb_monsters_to_be_added++;
 
 			ponte=1;
 		}

@@ -12,6 +12,7 @@ public class Ally extends Component {
 	public Ally(Model model, BufferedImage sprite, int rows, int columns, int x, int y, int h, int w, float scale,
 				int id_x, boolean show) {
 		super(model, sprite, rows, columns, x, y, h, w, scale, id_x, show);
+		model.allies.add(this);
 		
 	}
 	
@@ -25,7 +26,8 @@ public class Ally extends Component {
 		if (player.intersects(objet)) {
 			return true;
 		}
-		return false;
+		//return false;
+		return true; //Pour tests
 	}
 
 	public void Afficher() {
