@@ -8,6 +8,11 @@ import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
 public class Personnage extends Component {
+	
+	int lampe_x;
+	int lampe_y;
+	double lampe_width;
+	double lampe_height;
 
 	public Personnage(Model model, int no, BufferedImage sprite, int rows,
 			int columns, int x, int y, float scale, int screen) {
@@ -15,12 +20,14 @@ public class Personnage extends Component {
 		super(model, no, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale,screen);
 		m_idx = 0;
 		m_show = true;
+		lampe_x = 50;
+		lampe_y = 50;
+		lampe_width = 2.5 * lampe_x;
+		lampe_height = 2.5 * lampe_y;
 	}
 
 	boolean Vision(Component c) {
-		int x = 50;
-		int y = 50;
-		Ellipse2D.Double player = new Ellipse2D.Double(this.m_x - x, this.m_y - y, 2.5 * x, 2.5 * y);
+		Ellipse2D.Double player = new Ellipse2D.Double(this.m_x - lampe_x, this.m_y - lampe_y, lampe_width, lampe_height);
 		Rectangle objet = c.getBounds();
 
 		if (player.intersects(objet)) {
