@@ -592,7 +592,7 @@ public class Ast {
 			}
 
 			IState istate_initial = entry.make();
-			return new IAutomaton(istate_initial, iBehaviours);
+			return new IAutomaton(istate_initial, iBehaviours, name.toString());
 		}
 
 		public String tree_edges() {

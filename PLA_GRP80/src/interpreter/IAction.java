@@ -11,7 +11,7 @@ public abstract class IAction {
 	
 	public static class IHit extends IAction {
 		IDirection direction ;
-		Integer power; //Force du coup on peut faire un constructeur le prenant en param si besoin
+		int power; //Force du coup on peut faire un constructeur le prenant en param si besoin
 		
 		public IHit(String direction){
 			this.direction = IDirection.strToDir(direction);
@@ -58,30 +58,40 @@ public abstract class IAction {
 	}
 	
 	//A FAIRE:
-	public static class IPop extends IAction { //TODO
+	public static class IPop extends IAction {
+		IDirection direction ;
 		
-		public IPop(String dir){}
+		public IPop(String dir){
+			this.direction = IDirection.strToDir(dir);
+		}
 		
-		public IPop(){}
+		public IPop(){
+			this.direction = IDirection.FRONT;
+		}
 		
 		public boolean exec(Component e){
-			return true;
+			return e.pop(direction);
 		}
 		
 	}
 	
-	public static class IWizz extends IAction { //TODO
+	public static class IWizz extends IAction {
+		IDirection direction ;
 		
-		public IWizz(String dir){}
+		public IWizz(String dir){
+			this.direction = IDirection.strToDir(dir);
+		}
 		
-		public IWizz(){}
+		public IWizz(){
+			this.direction = IDirection.FRONT;
+		}
 		
 		public boolean exec(Component e){
-			return true;
+			return e.wizz(direction);
 		}
 	}
 	
-	public static class IJump extends IAction { //TODO
+	public static class IJump extends IAction { //On ne s'en sert pas
 		
 		public IJump(String dir){}
 		
@@ -92,14 +102,19 @@ public abstract class IAction {
 		}
 	}
 	
-	public static class ITurn extends IAction { //TODO
+	public static class ITurn extends IAction {
+		IDirection direction ;
 		
-		public ITurn(String dir){}
+		public ITurn(String dir){
+			this.direction = IDirection.strToDir(dir);
+		}
 		
-		public ITurn(){}
+		public ITurn(){
+			this.direction = IDirection.RIGHT;
+		}
 		
 		public boolean exec(Component e){
-			return true;
+			return e.turn(direction);
 		}
 	}
 	
