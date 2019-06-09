@@ -46,6 +46,7 @@ public class Component {
 		m_y = y;
 		m_h=h;
 		m_w=w;
+		m_idx=id_x;
 		m_scale = scale;
 		m_show = show;
 		m_dir = IDirection.NORTH; //dir par defaut
