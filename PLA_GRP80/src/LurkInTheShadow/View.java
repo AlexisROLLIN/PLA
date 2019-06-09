@@ -1,6 +1,5 @@
 package LurkInTheShadow;
 
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Iterator;
@@ -46,55 +45,19 @@ public class View extends GameView {
 		g.setColor(m_background);
 		g.fillRect(0, 0, getWidth(), getHeight());
 
-		if (Options.SHOW_M1) {
-			Iterator<Component> iter = this.m_model.ElementsM1.iterator();
-			Component c = iter.next();
-			while (iter.hasNext()) {
-				if (!(c instanceof Ally) && c.m_show) {
-					c.paint(g);
-				}
-				c=iter.next();
-			}
-		}
-		if (Options.SHOW_M2) {
-			Iterator<Component> iter = this.m_model.ElementsM2.iterator();
-			Component c = iter.next();
-			while (iter.hasNext()) {
-				if (!(c instanceof Ally) && c.m_show) {
-					c.paint(g);
-				}
-				c=iter.next();
-			}
-		}
-		if (Options.SHOW_M3) {
-			Iterator<Component> iter = this.m_model.ElementsM3.iterator();
-			Component c = iter.next();
-			while (iter.hasNext()) {
-				if (!(c instanceof Ally) && c.m_show) {
-					c.paint(g);
-				}
-				c=iter.next();
-			}
-		}
-		if (Options.SHOW_M4) {
-			Iterator<Component> iter = this.m_model.ElementsM4.iterator();
-			Component c = iter.next();
-			while (iter.hasNext()) {
-				if (!(c instanceof Ally) && c.m_show) {
-					c.paint(g);
-				}
-				c=iter.next();
-			}
-		}
-		Component currComp;
-		Iterator<Component> iter = m_model.components.iterator();
+		Iterator<Component> iter = this.m_model.components.iterator();
 		while (iter.hasNext()) {
-			currComp = iter.next();
+			Component c = iter.next();
+			if (c instanceof Warrior) {
+				int i=0;
+				i++;
+			}
 			
-				currComp.paint(g);
-			
+			if (c.m_show) {
+				c.paint(g);
+			}
 		}
-		
+
 	}
 
 }

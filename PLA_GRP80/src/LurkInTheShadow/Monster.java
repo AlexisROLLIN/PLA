@@ -3,18 +3,21 @@ package LurkInTheShadow;
 import java.awt.image.BufferedImage;
 import java.util.ListIterator;
 
+import interpreter.IAutomaton;
+
 public class Monster extends Component {
 	
 	int speed;
 	
 	public Monster(Model model, BufferedImage sprite, int rows,
-			int columns, int x, int y,float scale, int id_x, boolean show, int screen) {
+			int columns, int x, int y,float scale, int id_x, boolean show) {
 		
-		super(model, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale, id_x, show, screen);
+		super(model, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale, id_x, show);
 		m_idx = 0;
 		m_show = true;
 		speed=32;
 		m_type=IType.ADVERSAIRE;
+		automate=model.monster;
 	}
 	
 	@Override

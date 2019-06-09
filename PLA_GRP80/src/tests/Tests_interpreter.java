@@ -51,13 +51,13 @@ public class Tests_interpreter {
 		BufferedImage sprite = ImageIO.read(imageFile);
 
 		// Vider la map
-		ListIterator<Component> iter = m.components();
+		ListIterator<Component> iter = m.components.listIterator();
 		while (iter.hasNext()) {
 			Component c = iter.next();
 			c.m_type = IType.VOID;
 		}
 
-		Monster c = new Monster(m, sprite, 1, 1, 10, 10, (float) 1.0, 1, true, 1);
+		Monster c = new Monster(m, sprite, 1, 1, 10, 10, (float) 1.0, 1, true);
 		c.m_h = 32;
 		c.m_w = 32;
 
@@ -117,13 +117,13 @@ public class Tests_interpreter {
 		BufferedImage sprite = ImageIO.read(imageFile);
 
 		// Vider la map
-		ListIterator<Component> iter = m.components();
+		ListIterator<Component> iter = m.components.listIterator();
 		while (iter.hasNext()) {
 			Component c = iter.next();
 			c.m_type = IType.VOID;
 		}
 
-		Monster c = new Monster(m, sprite, 1, 1, 10, 10, (float) 1.0, 1, true, 1);
+		Monster c = new Monster(m, sprite, 1, 1, 10, 10, (float) 1.0, 1, true);
 		c.m_h = 32;
 		c.m_w = 32;
 
@@ -184,13 +184,13 @@ public class Tests_interpreter {
 		BufferedImage sprite = ImageIO.read(imageFile);
 
 		// Vider la map
-		ListIterator<Component> iter = m.components();
+		ListIterator<Component> iter = m.components.listIterator();
 		while (iter.hasNext()) {
 			Component c = iter.next();
 			c.m_type = IType.VOID;
 		}
 
-		Monster c_A = new Monster(m, sprite, 1, 1, 0, 0, (float) 1.0, 1, true, 1); // en (0,0)
+		Monster c_A = new Monster(m, sprite, 1, 1, 0, 0, (float) 1.0, 1, true); // en (0,0)
 		c_A.m_type = IType.ADVERSAIRE;
 		c_A.m_h = 32;
 		c_A.m_w = 32;
@@ -233,7 +233,7 @@ public class Tests_interpreter {
 		 * entité je frappe en sa direction
 		 */
 
-		Monster c_B = new Monster(m, sprite, 1, 1, 96, 0, (float) 1.0, 1, true, 1); // en (96,0), soit 3 cases à l'est de c_A
+		Monster c_B = new Monster(m, sprite, 1, 1, 96, 0, (float) 1.0, 1, true); // en (96,0), soit 3 cases à l'est de c_A
 		c_B.m_type = IType.ADVERSAIRE;
 		c_B.m_h = 32;
 		c_B.m_w = 32;
@@ -297,13 +297,13 @@ public class Tests_interpreter {
 		BufferedImage sprite = ImageIO.read(imageFile);
 
 		// Vider la map
-		ListIterator<Component> iter = m.components();
+		ListIterator<Component> iter = m.components.listIterator();
 		while (iter.hasNext()) {
 			Component co = iter.next();
 			co.m_type = IType.VOID;
 		}
 
-		Component c = new Component(m, sprite, 1, 1, 0, 0, 10, 10, (float) 1.0, 1, true, 1); // en (0,0)
+		Component c = new Component(m, sprite, 1, 1, 0, 0, 10, 10, (float) 1.0, 1, true); // en (0,0)
 		c.m_type = IType.ADVERSAIRE;
 		c.m_h = 32;
 		c.m_w = 32;

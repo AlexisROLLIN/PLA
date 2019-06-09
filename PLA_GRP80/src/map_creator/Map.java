@@ -6,6 +6,7 @@ import LurkInTheShadow.Component;
 import LurkInTheShadow.Model;
 import LurkInTheShadow.Obstacle;
 import LurkInTheShadow.Sol;
+import interpreter.IAutomaton;
 
 public class Map {
 
@@ -230,44 +231,50 @@ public class Map {
 	void repartition() {
 		for (int i = 0; i < length / 2; i++) {
 			for (int j = 0; j < width / 2; j++) {
-				if (m1[i][j] == 1) {
-					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4,true, 1);
-					m.m_idx = 4;
-
-				}
-				if (m2[i][j] == 1) {
-					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4,true, 1);
-					m.m_idx = 4;
-
-				}
-				if (m3[i][j] == 1) {
-					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4,true, 1);
-					m.m_idx = 4;
-
-				}
-				if (m4[i][j] == 1) {
-					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F,4,true, 1);
-					m.m_idx = 4;
-
-				}
 				if (m1[i][j] == 0) {
-					Sol m = new Sol(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 88,true, 1);
+					Sol m = new Sol(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 88,true);
 					m.m_idx = 86;
 
 				}
 				if (m2[i][j] == 0) {
-					Sol m = new Sol(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 88,true, 2);
+					Sol m = new Sol(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 88,true);
 					m.m_idx = 86;
 
 				}
 				if (m3[i][j] == 0) {
-					Sol m = new Sol(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 88,true, 3);
+					Sol m = new Sol(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 88,true);
 					m.m_idx = 86;
 
 				}
 				if (m4[i][j] == 0) {
-					Sol m = new Sol(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 88,true, 4);
+					Sol m = new Sol(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 88,true);
 					m.m_idx = 86;
+
+				}
+
+			}
+		}
+		//D'abord le sol, ensuite les rochers
+		for (int i = 0; i < length / 2; i++) {
+			for (int j = 0; j < width / 2; j++) {
+				if (m1[i][j] == 1) {
+					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4,true);
+					m.m_idx = 4;
+
+				}
+				if (m2[i][j] == 1) {
+					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4, true);
+					m.m_idx = 4;
+
+				}
+				if (m3[i][j] == 1) {
+					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4,true);
+					m.m_idx = 4;
+
+				}
+				if (m4[i][j] == 1) {
+					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F,4,true);
+					m.m_idx = 4;
 
 				}
 

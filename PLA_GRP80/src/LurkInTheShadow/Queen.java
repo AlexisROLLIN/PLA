@@ -3,6 +3,8 @@ package LurkInTheShadow;
 import java.awt.image.BufferedImage;
 import java.util.ListIterator;
 
+import interpreter.IAutomaton;
+
 public class Queen extends Component { // Changement sprites à faire !!
 
 	int periode_ponte;
@@ -13,9 +15,9 @@ public class Queen extends Component { // Changement sprites à faire !!
 	int hunger;
 
 	public Queen(Model model, BufferedImage sprite, int rows, int columns, int x, int y, float scale,
-			int id_x, boolean show, int screen) {
+			int id_x, boolean show) {
 
-		super(model, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale, id_x, show, screen);
+		super(model, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale, id_x, show);
 		m_idx = 0;
 		life = 100;// inutile théoriquement, mais sécurité
 		power = 3;
@@ -26,6 +28,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 		speed = 32;
 		hunger = 0; //fin maximum = 100
 		m_type=IType.ADVERSAIRE;
+		automate=model.queen;
 	}
 
 	@Override
@@ -203,7 +206,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 
 		if(ponte>(100-hunger)/30) { //Pond une fois tous les (100-hunger)/30 steps egg
 
-			new Monster(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, 1, m_idx, m_show, screen);
+			new Monster(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, 1, m_idx, m_show);
 
 			ponte=1;
 		}

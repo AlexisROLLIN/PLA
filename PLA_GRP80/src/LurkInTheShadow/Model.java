@@ -27,15 +27,20 @@ public class Model extends GameModel {
 	Mage perso2;
 	Warrior perso3;
 	IAutomaton Player;
+	IAutomaton spawn;
+	IAutomaton spawn1;
+	IAutomaton spawn2;
+	IAutomaton obst;
+	IAutomaton monster;
+	IAutomaton queen;
+	IAutomaton fireball;
+	IAutomaton bullet;
+	IAutomaton floor;
+	
 	public char Cgmt;
 	
 	int nbElements;
 	public LinkedList<Component> components;
-	public LinkedList<Component> ElementsM1;
-	public LinkedList<Component> ElementsM2;
-	public LinkedList<Component> ElementsM3;
-	public LinkedList<Component> ElementsM4;
-
 	public LinkedList<Ally> allies;//Allies du plateau
 	public LinkedList<String> touches;
 
@@ -46,41 +51,29 @@ public class Model extends GameModel {
 		nbElements = 0;
 		this.touches = new LinkedList();
 		this.components = new LinkedList();
-		IAutomaton spawn;
-		IAutomaton spawn1;
-		IAutomaton spawn2;
-		ElementsM1 = new LinkedList<Component>();
-		ElementsM2 = new LinkedList<Component>();
-		ElementsM3 = new LinkedList<Component>();
-		ElementsM4 = new LinkedList<Component>();
 		
 		allies=new LinkedList<Ally>();
-		
-		Options.SHOW_M1 = true;
-		map = new Map(44, 64, this);
-		ListIterator<Component> iter = this.ElementsM1.listIterator();
-		Component tmp = iter.next();
-		while(iter.hasNext() && tmp.m_type==IType.OBSTACLE){
-			tmp = iter.next();
-		}
-
-		perso1 = new Shooter(this, Sprite, 10, 9, 200, 400, 1F, 81, true, 1);
-		perso2 = new Mage(this, Sprite, 10, 9, 136, 400, 1F, 44, true, 1);
-		perso3 = new Warrior(this, Sprite, 10, 9, 104, 400, 1F, 48, true, 1);
-		
 		
 		AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file("src/Automates/Automate"));
 		IAI_Definitions iai_def = ai_def.make();
 		spawn = iai_def.automatas.get(0);
 		spawn1 = iai_def.automatas.get(1);
 		spawn2 = iai_def.automatas.get(2);
+		obst = iai_def.automatas.get(3);
+		floor = iai_def.automatas.get(4);
+		
 		Player = spawn;
+		
+		map = new Map(44, 64, this);
+		
+		
+		perso1 = new Shooter(this, Sprite, 10, 9, 224, 416, 1F, 81, true);
+		perso2 = new Mage(this, Sprite, 10, 9, 192, 416, 1F, 44, true);
+		perso3 = new Warrior(this, Sprite, 10, 9, 160, 416, 1F, 48, true);
+		
 		perso1.setAutomate(spawn);
 		perso2.setAutomate(spawn1);
 		perso3.setAutomate(spawn2);
-		this.components.add(perso1);
-		this.components.add(perso2);
-		this.components.add(perso3);
 
 	}
 
@@ -101,28 +94,19 @@ public class Model extends GameModel {
 
 		while (iter.hasNext()) {
 			try {
-				iter.next().step(now);
+				
+				Component b = iter.next();
+				if (b instanceof Warrior) {
+					int i=0;
+					i++;
+				}
+				b.step(now);
 
 			} catch (Interpreter_Exception e) {
 			}
 		}
 	}
-	
-	public ListIterator<Component> components(){
-		  if(Options.SHOW_M1){
-			return ElementsM1.listIterator();
-		  }
-		  if(Options.SHOW_M2){
-			return ElementsM2.listIterator();
-		  }
-		  if(Options.SHOW_M3){
-			return ElementsM3.listIterator();
-		  }
-		  else{
-			return ElementsM4.listIterator();
-		  }
-		  
-	  }
+
 	
 
 	private void loadSprites() {

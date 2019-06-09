@@ -1,9 +1,9 @@
 Player(Init){
   * (Init):
-  | Key(q) ? Move(O) :(Init)
-  | Key(d) ? Move(E) :(Init)
-  | Key(z) ? Move(N) :(Init)
-  | Key(s) ? Move(S) :(Init)
+  | Key(q) & (Cell (O,V) / Cell (O,T)) ? Move(O) :(Init)
+  | Key(d) & (Cell (E,V) / Cell (E,T)) ? Move(E) :(Init)
+  | Key(z) & (Cell (N,V) / Cell (N,T)) ? Move(N) :(Init)
+  | Key(s) & (Cell (S,V) / Cell (S,T)) ? Move(S) :(Init)
   | Key(p) ? Get()   :(Init)
   | Key(m) ? Get()   :(Init)
   | Key(o) ? Get()   :(Init)
@@ -24,3 +24,11 @@ Player(Init){
   | Closest(T,E) & (Cell(E,V) / Cell(E,@)) ? Move(E) :(Init2)
   | Closest(T,O) & (Cell(O,V) / Cell(O,@))  ? Move(O) :(Init2)
   }
+  
+ Obst(Init){
+  * (Init): True ? Wait :(Init)
+ }
+ 
+ Floor(Init){
+  * (Init): True ? Wait :(Init)
+ }

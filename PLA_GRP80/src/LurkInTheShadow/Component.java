@@ -30,14 +30,14 @@ public class Component {
 	public boolean m_show;
 	
 	public int power;
-	int life;
+	public int life;
 	
 	IAutomaton automate;
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
 	public IType m_type; // Definit le type (allié, ennemi, rocher, etc) de ce component.
 
 	public Component(Model model, BufferedImage sprite, int rows, int columns, int x, int y, int h, int w, float scale,
-			int id_x, boolean show, int screen) {
+			int id_x, boolean show) {
 		m_model = model;
 		m_sprite = sprite;
 		m_ncols = columns;
@@ -50,28 +50,8 @@ public class Component {
 		m_scale = scale;
 		m_show = show;
 		m_dir = IDirection.NORTH; //dir par defaut
-		splitSprite();
-		
-		if (screen == 1) {
-			m_model.ElementsM1.add(this);
-			this.screen = 1;
-		}
-		if (screen == 2) {
-			m_model.ElementsM2.add(this);
-			this.screen=2;
-		}
-			
-		if (screen == 3) {
-			m_model.ElementsM3.add(this);
-			this.screen =3;
-		}
-	
-		if (screen == 4) {
-			m_model.ElementsM4.add(this);
-			this.screen =4;
-		}
-		
 		m_model.nbElements++;
+		m_model.components.add(this);
 		splitSprite();
 	}
 	
@@ -151,7 +131,7 @@ public class Component {
 
 	}
 
-	boolean CollisionTotale() {
+	/*boolean CollisionTotale() {
 		if (Options.SHOW_M1) {
 			Iterator<Component> iter = this.m_model.ElementsM1.iterator();
 			Component tmp = iter.next();
@@ -202,7 +182,7 @@ public class Component {
 		}
 
 		return false;
-	}
+	}*/
 	
 	public double distance(Component c1, Component c2) {
 		int a = (c2.m_x - c1.m_x) * (c2.m_x - c1.m_x);
@@ -253,7 +233,7 @@ public class Component {
 	
 	//A Overrider
 	public boolean move(IDirection d) {
-		return true; // L'action s'est bien déroulée
+		return true;
 	}
 
 	//A Overrider

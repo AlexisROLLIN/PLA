@@ -192,7 +192,7 @@ public abstract class IAction {
 		}
 
 		public boolean exec(Component e) {
-			return true;
+			return e.life>0;
 		}
 	}
 
