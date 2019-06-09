@@ -47,9 +47,17 @@ public class Personnage extends Component {
 	//Fonction test temporaire
 	public void MoveR(){
 		this.m_x+=32;
+//		if (m_x>=2048){
+//			m_x=0;
+//			m_model.map.jViewport=0;
+//		}
 	}
 	public void MoveL(){
 		this.m_x-=32;
+//		if (m_x<0){
+//			m_x=2048;
+//			m_model.map.jViewport=1536;
+//		}
 	}
 	public void MoveN(){
 		this.m_y-=32;

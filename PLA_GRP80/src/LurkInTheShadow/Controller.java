@@ -40,21 +40,37 @@ public class Controller extends GameController implements ActionListener {
 		if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') {
 			this.m_model.perso1.MoveR();
 			m_model.map.jViewport++;
+			if(m_model.perso1.m_x>2024){
+				m_model.perso1.m_x=0;
+				m_model.map.jViewport=16;
+			}
 		}
 
 		if (e.getKeyChar() == 'z' || e.getKeyChar() == 'Z') {
 			this.m_model.perso1.MoveN();
 			m_model.map.iViewport--;
+			if(m_model.perso1.m_y<0){
+				m_model.perso1.m_y=1536;
+				m_model.map.iViewport=60;
+			}
 
 		}
 		if (e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
 			this.m_model.perso1.MoveS();
 			m_model.map.iViewport++;
+			if(m_model.perso1.m_y>1536){
+				m_model.perso1.m_y=0;
+				m_model.map.iViewport=12;
+			}
 		}
 
 		if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
 			this.m_model.perso1.MoveL();
 			m_model.map.jViewport--;
+			if(m_model.perso1.m_x<0){
+				m_model.perso1.m_x=2048;
+				m_model.map.jViewport=80;
+			}
 		}
 
 	}

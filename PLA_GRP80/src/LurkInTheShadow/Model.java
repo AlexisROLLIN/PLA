@@ -21,6 +21,7 @@ public class Model extends GameModel {
 	int nbElements;
 	
 	public Component[][] ElementsMap;
+	public Component[][] ElementsTore;
 	//public LinkedList<Component> ElementsMap;
 	public LinkedList<Component> ElementsViewPort;
 	
@@ -36,6 +37,7 @@ public class Model extends GameModel {
 
 		//Options.SHOW_M1 = true;
 		ElementsMap= new Component[48][64];
+		ElementsTore= new Component[96][128];
 		
 		perso1 = new Personnage(this, 100, Sprite, 10, 9, 512, 384, 1F, 1);
 		perso1.m_idx = 25;

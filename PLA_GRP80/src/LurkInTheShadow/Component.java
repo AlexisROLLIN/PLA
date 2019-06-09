@@ -262,7 +262,38 @@ public class Component {
 		Image img = m_sprites[m_idx];
 		int w = (int) (m_scale * m_w);
 		int h = (int) (m_scale * m_h);
-		g.drawImage(img, m_x-m_model.perso1.m_x+512, m_y-m_model.perso1.m_y+384, w, h, null);
+		g.drawImage(img, (m_x-m_model.perso1.m_x)%1024+512, (m_y-m_model.perso1.m_y)%768+384, w, h, null);
+	}
+	
+//	public void paintToreR(Graphics g,int nbCasex) {
+//		Image img = m_sprites[m_idx];
+//		int w = (int) (m_scale * m_w);
+//		int h = (int) (m_scale * m_h);
+//		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+32*nbCasex+512, (m_y-m_model.perso1.m_y)%768+384, w, h, null);
+//	}
+//	public void paintToreS(Graphics g,int nbCasey) {
+//		Image img = m_sprites[m_idx];
+//		int w = (int) (m_scale * m_w);
+//		int h = (int) (m_scale * m_h);
+//		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+512, (m_y-m_model.perso1.m_y)%768+32*nbCasey+384, w, h, null);
+//	}
+	public void paintToreRS(Graphics g,int nbCasex,int nbCasey) {
+		Image img = m_sprites[m_idx];
+		int w = (int) (m_scale * m_w);
+		int h = (int) (m_scale * m_h);
+		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+32*nbCasex+512, (m_y-m_model.perso1.m_y)%768+32*nbCasey+384, w, h, null);
+	}
+	public void paintToreLN(Graphics g,int nbCasex,int nbCasey) {
+		Image img = m_sprites[m_idx];
+		int w = (int) (m_scale * m_w);
+		int h = (int) (m_scale * m_h);
+		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024-32*nbCasex+512, (m_y-m_model.perso1.m_y)%768-32*nbCasey+384, w, h, null);
+	}
+	public void paintToreL(Graphics g,int nbCasex,int nbCasey) {
+		Image img = m_sprites[m_idx];
+		int w = (int) (m_scale * m_w);
+		int h = (int) (m_scale * m_h);
+		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024-32*nbCasex+512, (m_y-m_model.perso1.m_y)%768-32*nbCasey+384, w, h, null);
 	}
 
 }

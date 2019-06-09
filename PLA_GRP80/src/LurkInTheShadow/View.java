@@ -24,6 +24,7 @@ public class View extends GameView {
 	int m_fps;
 	Model m_model;
 	BufferedImage background;
+	boolean tore;
 	
 	
 
@@ -52,18 +53,18 @@ public class View extends GameView {
 		computeFPS();
 		
 		
-		g.setColor(m_background);
-		g.fillRect(0, 0, getWidth(), getHeight());
+//		g.setColor(m_background);
+//		g.fillRect(0, 0, getWidth(), getHeight());
 
-//		File imageFile = new File("src/map_creator/testFond.png");
-//		try {
-//			background = ImageIO.read(imageFile);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		g.drawImage(background, 0, 0, 1024, 768, null);
+		File imageFile = new File("src/map_creator/testFond.png");
+		try {
+			background = ImageIO.read(imageFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		g.drawImage(background, 0, 0, 1024, 768, null);
 		
 		
 		int i1=m_model.map.iViewport;	//limite i
@@ -71,26 +72,51 @@ public class View extends GameView {
 
 		int nbCasei=24;
 		int nbCasej=32;
-		
+
 		Component c;
+		
+
+		
 		for(int i=0;i<nbCasei;i++){
-			
-			if(i1>=48){
-				i1=0;
+			tore=false;
+			if(i1>=48+24){
+//				i1=0;
+				tore=true;
 			}
-			if(i1<0){
-				i1=47;
+			if(i1<24){
+//				i1=47;
+				tore=true;
 			}
 			j1=m_model.map.jViewport;
 			for(int j=0;j<nbCasej;j++){
-				if(j1>=64){
-					j1=0;
+				if(j1>=64+32){
+//					j1=0;
+					tore=true;
 				}
-				if(j1<0){
-					j1=63;
+				if(j1<32){
+//					j1=63;
+					tore=true;
 				}
-				c=m_model.ElementsMap[i1][j1];
-				c.paint(g);
+				
+//				
+				c=m_model.ElementsTore[i1][j1];
+//				c=m_model.ElementsMap[i1][j1];
+				if(tore==false){
+					c.paint(g);
+				}
+				else{
+//					c.paintToreR(g, nbCasej);
+//					c.paintToreS(g, nbCasei);
+//					c.paintToreRS(g,0,nbCasei);
+					c.paintToreRS(g,nbCasej,nbCasei);
+					c.paintToreRS(g,0,nbCasei);
+					c.paintToreRS(g,nbCasej,0);
+					c.paintToreLN(g,nbCasej,nbCasei);
+					c.paintToreLN(g,0,nbCasei);
+					c.paintToreL(g,nbCasej,0);
+					c.paint(g);
+				}
+				
 				j1++;
 			}
 			i1++;

@@ -199,8 +199,8 @@ public class Map {
 							break;
 						}
 					}
-				iViewport=i;
-				jViewport=j;
+				iViewport=24;
+				jViewport=32;
 	}
 	
 	public void majTabDecor(){
@@ -322,11 +322,66 @@ public class Map {
 					m.m_idx = 4;
 					model.ElementsMap[i][j]=m;
 
+					model.ElementsTore[24+i][32+j]=m;
+					if(j<32){
+						model.ElementsTore[i+24][j+96]=m;
+					}
+					if(j>=32){
+						model.ElementsTore[i+24][j-32]=m;
+					}
+					
+					if(i<24){
+						model.ElementsTore[i+72][j+32]=m;
+					}
+					if(i>=24){
+						model.ElementsTore[i-24][j+32]=m;
+					}
+					if(j<32 && i<24){
+						model.ElementsTore[i+72][j+96]=m;
+					}
+					if(j>=32 && i<24){
+						model.ElementsTore[i+72][j-32]=m;
+					}
+					if(j<32 && i>=24){
+						model.ElementsTore[i-24][j+96]=m;
+					}
+					if(j>=32 && i>=24){
+						model.ElementsTore[i-24][j-32]=m;
+					}
+
 				}
 				if (tab[i][j] == 0) {
 					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
 					m.m_idx = 86;
 					model.ElementsMap[i][j]=m;
+
+					model.ElementsTore[24+i][32+j]=m;
+					if(j<32){
+						model.ElementsTore[i+24][j+96]=m;
+					}
+					if(j>=32){
+						model.ElementsTore[i+24][j-32]=m;
+					}
+					
+					if(i<24){
+						model.ElementsTore[i+72][j+32]=m;
+					}
+					if(i>=24){
+						model.ElementsTore[i-24][j+32]=m;
+					}
+					if(j<32 && i<24){
+						model.ElementsTore[i+72][j+96]=m;
+					}
+					if(j>=32 && i<24){
+						model.ElementsTore[i+72][j-32]=m;
+					}
+					if(j<32 && i>=24){
+						model.ElementsTore[i-24][j+96]=m;
+					}
+					if(j>=32 && i>=24){
+						model.ElementsTore[i-24][j-32]=m;
+					}
+
 
 				}
 				
