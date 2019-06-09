@@ -9,5 +9,6 @@ public class Ally extends Component{
 		super(model, no, sprite, rows, columns, x, y, h, w, scale, screen);
 		
 	}
+
 	
 }

@@ -202,7 +202,9 @@ public class Queen extends Component { // Changement sprites à faire !!
 	public boolean egg(){
 
 		if(ponte>(100-hunger)/30) { //Pond une fois tous les (100-hunger)/30 steps egg
+
 			new Monster(m_model, no, m_sprite, m_nrows, m_ncols, m_x, m_y, 1, screen);
+
 			ponte=1;
 		}
 		else {
