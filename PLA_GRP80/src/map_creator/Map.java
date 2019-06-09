@@ -231,42 +231,42 @@ public class Map {
 		for (int i = 0; i < length / 2; i++) {
 			for (int j = 0; j < width / 2; j++) {
 				if (m1[i][j] == 1) {
-					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
+					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1,4,true);
 					m.m_idx = 4;
 
 				}
 				if (m2[i][j] == 1) {
-					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
+					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1,4,true);
 					m.m_idx = 4;
 
 				}
 				if (m3[i][j] == 1) {
-					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
+					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1,4,true);
 					m.m_idx = 4;
 
 				}
 				if (m4[i][j] == 1) {
-					Obstacle m = new Obstacle(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
+					Obstacle m = new Obstacle(this.model, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1,4,true);
 					m.m_idx = 4;
 
 				}
 				if (m1[i][j] == 0) {
-					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1,88,true);
 					m.m_idx = 86;
 
 				}
 				if (m2[i][j] == 0) {
-					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 2,88,true);
 					m.m_idx = 86;
 
 				}
 				if (m3[i][j] == 0) {
-					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 3,88,true);
 					m.m_idx = 86;
 
 				}
 				if (m4[i][j] == 0) {
-					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 4,88,true);
 					m.m_idx = 86;
 
 				}

@@ -120,9 +120,9 @@ public class Component {
 
 	public boolean hit(IDirection d) {
 
-		// Pas le vrai hit, juste une version pour tester.
+		
 		System.out.println("Frappe\n");
-		return true;// L'action s'est bien déroulée
+		return true;
 	}
 
 	public double distance(Component c1, Component c2) {

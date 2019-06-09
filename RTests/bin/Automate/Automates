@@ -7,6 +7,7 @@ Player(Init){
   | Key(p) ? Get()   :(Init)
   | Key(m) ? Get()   :(Init)
   | Key(o) ? Get()   :(Init)
+  | Key(SPACE) ? Hit()  :(Init)
   
   }
   
@@ -24,5 +25,10 @@ Player(Init){
   | Closest(T,S) & (Cell(S,V) / Cell(S,@)) ? Move(S) :(Init2)
   | Closest(T,E) & (Cell(E,V) / Cell(E,@)) ? Move(E) :(Init2)
   | Closest(T,O) & (Cell(O,V) / Cell(O,@))  ? Move(O) :(Init2)
+  }
+  
+  Bullet(Init){
+  * (Init):
+  | True ? Move() :(Init)
   }
 

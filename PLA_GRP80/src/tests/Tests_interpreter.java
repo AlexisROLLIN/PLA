@@ -24,7 +24,7 @@ import java.util.LinkedList;
 
 public class Tests_interpreter {
   
-  @Before
+ /* @Before
   public void before() {
     // Executed before each test
   }
@@ -37,7 +37,7 @@ public class Tests_interpreter {
   
   
   @Test
-  public void test00() throws Interpreter_Exception, IOException {
+  public void test00() throws Interpreter_Exception, IOException {*/
 	  
 	/*Def manuelle d'un automate à 2 états.
 	  (1) - Cell() / Move(R) -> (2)
@@ -46,7 +46,7 @@ public class Tests_interpreter {
 	*/
 	
 	  
-	Model m=new Model();
+	/*Model m=new Model();
 	
 	//Juste utile pour le constructeur
 	File imageFile = new File("src/map_creator/testSprites.png");
@@ -114,7 +114,7 @@ public class Tests_interpreter {
 	 
 	 Se dirige en marchant vers le sud et et reste dans cette direction
 	*/  
-	Model m=new Model();
+	/*Model m=new Model();
 	File imageFile = new File("src/map_creator/testSprites.png");
 	BufferedImage sprite=ImageIO.read(imageFile);
 	
@@ -180,7 +180,7 @@ public class Tests_interpreter {
 	 Je marche vers l'Est tant qu'il n'y a aucune entité sur la case Est 
 	 et si je tombe face à une entité je frappe en sa direction
 	*/
-	Model m=new Model(); 
+	/*Model m=new Model(); 
 	File imageFile = new File("src/map_creator/testSprites.png");
 	BufferedImage sprite=ImageIO.read(imageFile);
 	
@@ -234,7 +234,7 @@ public class Tests_interpreter {
 	 et si je tombe face à une entité je frappe en sa direction
 	*/  
 
-	Component c_B = new Component (m, 0, sprite, 1, 1, 96, 0, 10, 10, (float) 1.0, 1); //en (96,0), soit 3 cases à l'est de c_A
+	/*Component c_B = new Component (m, 0, sprite, 1, 1, 96, 0, 10, 10, (float) 1.0, 1); //en (96,0), soit 3 cases à l'est de c_A
 	c_B.m_type=IType.ADVERSAIRE;
 	
 	IState etat1_B=new IState("E1_B");
@@ -288,6 +288,6 @@ public class Tests_interpreter {
 		  IAI_Definitions iai_def = ai_def.make();
 		  IAutomaton spawn=iai_def.automatas.get(0);
 		  assertTrue(spawn.current().name().equals("Init"));
-  }
+  }*/
   
 }

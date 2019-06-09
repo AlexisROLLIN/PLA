@@ -26,7 +26,7 @@ public abstract class IAction {
 		}
 
 		public boolean exec(Component e) {
-			return e.hit(this.direction);
+			return e.hit(e.m_dir);
 		}
 	}
 

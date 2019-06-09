@@ -3,10 +3,11 @@ package LurkInTheShadow;
 import java.awt.Dimension;
 
 import edu.ricm3.game.GameUI;
+import interpreter.Interpreter_Exception;
 
 public class GameMain {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Interpreter_Exception, Exception {
 	
 		Model model = new Model();
 		View view = new View(model);

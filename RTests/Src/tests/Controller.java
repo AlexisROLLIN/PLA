@@ -80,6 +80,13 @@ public class Controller extends GameController implements ActionListener {
 			}
 			
 		}
+		
+		if (e.getKeyCode() == 32) {
+			if (!m_model.touches.contains("SPACE")) {
+				m_model.touches.add("SPACE");
+			}
+			
+		}
 
 	}
 
@@ -107,6 +114,9 @@ public class Controller extends GameController implements ActionListener {
 		}
 		if (e.getKeyChar() == 'o') {
 			m_model.touches.remove("o");
+		}
+		if (e.getKeyCode() == 32) {
+			m_model.touches.remove("SPACE");
 		}
 
 	}

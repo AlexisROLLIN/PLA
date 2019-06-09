@@ -10,6 +10,8 @@ import edu.ricm3.game.Options;
 import interpreter.IAutomaton;
 import interpreter.Interpreter_Exception;
 
+
+
 public class Component {
 	BufferedImage m_sprite;
 	public int m_w, m_h;
@@ -31,41 +33,42 @@ public class Component {
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
 	public IType m_type; // Definit le type (allié, ennemi, rocher, etc) de ce component.
 
-	public Component(Model model, int no, BufferedImage sprite, int rows, int columns, int x, int y, int h, int w, float scale,
-			int screen) {
-		m_model = model;
-		m_sprite = sprite;
-		m_ncols = columns;
-		m_nrows = rows;
-		m_x = x;
-		m_y = y;
-		m_h=h;
-		m_w=w;
-		m_scale = scale;
-		m_show = false;
-		power=0;
-		m_dir = IDirection.NORTH; //dir par defaut
+	public Component(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col,
+			int id_x, boolean show, int screen) {
+		this.m_model = m;
+		this.m_x = x;
+		this.m_y = y;
+		this.m_w = w;
+		this.m_h = h;
+		this.m_scale = scale;
+		this.m_sprite = sprite;
+		this.m_nrows = rows;
+		this.m_ncols = col;
+		this.m_idx = id_x;
+		this.m_show = show;
+		splitSprite();
+	
 		
 		if (screen == 1) {
-			model.ElementsM1.add(this);
+			m_model.ElementsM1.add(this);
 			this.screen = 1;
 		}
 		if (screen == 2) {
-			model.ElementsM2.add(this);
+			m_model.ElementsM2.add(this);
 			this.screen=2;
 		}
 			
 		if (screen == 3) {
-			model.ElementsM3.add(this);
+			m_model.ElementsM3.add(this);
 			this.screen =3;
 		}
 	
 		if (screen == 4) {
-			model.ElementsM4.add(this);
+			m_model.ElementsM4.add(this);
 			this.screen =4;
 		}
 		
-		model.nbElements++;
+		m_model.nbElements++;
 		splitSprite();
 	}
 	
@@ -163,8 +166,8 @@ public class Component {
 		return true; // L'action s'est bien déroulée
 	}
 
-	public void step() throws Interpreter_Exception {
-		automate.step(this);
+	public void step(long now) throws Interpreter_Exception {
+	
 	}
 
 	public boolean hit(IDirection d) {
@@ -256,6 +259,44 @@ public class Component {
 		}
 
 		return false;
+	}
+	
+	public double distance(Component c1, Component c2) {
+		int a = (c2.m_x - c1.m_x) * (c2.m_x - c1.m_x);
+		int b = (c2.m_y - c1.m_y) * (c2.m_y - c1.m_y);
+
+		return (Math.sqrt((double) a + b));
+	}
+
+	public void Get1() {
+		
+		this.setAutomate(m_model.perso1.automate);
+		m_model.perso1.setAutomate(m_model.Player);
+		this.m_type=IType.TEAM;
+		m_model.perso1.m_type=IType.PLAYER;
+
+	}
+
+	public void Get2() {
+
+
+		this.setAutomate(m_model.perso2.automate);
+		m_model.perso2.setAutomate(m_model.Player);
+		this.m_type=IType.TEAM;
+		m_model.perso2.m_type=IType.PLAYER;
+
+	}
+
+	public void Get3() {
+
+
+
+		this.setAutomate(m_model.perso3.automate);
+		m_model.perso3.setAutomate(m_model.Player);
+		this.m_type=IType.TEAM;
+		m_model.perso3.m_type=IType.PLAYER;
+		
+
 	}
 	
 	public void paint(Graphics g) {

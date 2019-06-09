@@ -4,32 +4,48 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ListIterator;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
 import edu.ricm3.game.GameModel;
 import edu.ricm3.game.Options;
+import interpreter.IAI_Definitions;
+import interpreter.IAutomaton;
+import interpreter.Interpreter_Exception;
 import map_creator.Map;
+import ricm3.parser.AutomataParser;
+import ricm3.parser.Ast.AI_Definitions;
+
 
 public class Model extends GameModel {
 
 	public BufferedImage Sprite;
 	public Map map;
-	Personnage perso1;
-
+	Shooter perso1;
+	Mage perso2;
+	Warrior perso3;
+	IAutomaton Player;
+	public char Cgmt;
+	
 	int nbElements;
+	public LinkedList<Component> components;
 	public LinkedList<Component> ElementsM1;
 	public LinkedList<Component> ElementsM2;
 	public LinkedList<Component> ElementsM3;
 	public LinkedList<Component> ElementsM4;
-	
-	//LinkedList<Component> m_component;
+	public LinkedList<String> touches;
 
-	public Model() {
+	public Model() throws Interpreter_Exception, Exception {
 		
 		loadSprites();
 		nbElements = 0;
+		this.touches = new LinkedList();
+		this.components = new LinkedList();
+		IAutomaton spawn;
+		IAutomaton spawn1;
+		IAutomaton spawn2;
 		ElementsM1 = new LinkedList<Component>();
 		ElementsM2 = new LinkedList<Component>();
 		ElementsM3 = new LinkedList<Component>();
@@ -41,8 +57,21 @@ public class Model extends GameModel {
 		while(iter.hasNext() && tmp instanceof Obstacle ){
 			tmp = iter.next();
 		}
-		perso1 = new Personnage(this, 100, Sprite, 10, 9, tmp.m_x, tmp.m_y, 1F, 1);
-		perso1.m_idx = 25;
+		perso1 = new Shooter(this, 200, 400, 32, 32, 1F, Sprite, 10, 9, 81, true, 1);
+		perso2 = new Mage(this, 136, 400, 32, 32, 1F, Sprite, 10, 9, 44, true, 1);
+		perso3 = new Warrior(this, 104, 400, 32, 32, 1F, Sprite, 10, 9, 48, true, 1);
+		AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file("src/Automates/Automate"));
+		IAI_Definitions iai_def = ai_def.make();
+		spawn = iai_def.automatas.get(0);
+		spawn1 = iai_def.automatas.get(1);
+		spawn2 = iai_def.automatas.get(2);
+		Player = spawn;
+		perso1.setAutomate(spawn);
+		perso2.setAutomate(spawn1);
+		perso3.setAutomate(spawn2);
+		this.components.add(perso1);
+		this.components.add(perso2);
+		this.components.add(perso3);
 
 	}
 
@@ -59,6 +88,15 @@ public class Model extends GameModel {
 	@Override
 	public void step(long now) {
 		perso1.Afficher();
+		Iterator<Component> iter = this.components.iterator();
+
+		while (iter.hasNext()) {
+			try {
+				iter.next().step(now);
+
+			} catch (Interpreter_Exception e) {
+			}
+		}
 	}
 	
 	public ListIterator<Component> components(){

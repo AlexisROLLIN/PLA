@@ -77,7 +77,7 @@ public class Shooter extends Component {
 		}
 	}
 
-	public boolean Hit(IDirection d) {
+	public boolean hit(IDirection d) {
 		int a =0;
 		if(d==IDirection.EAST) {
 			a=21;
@@ -93,9 +93,10 @@ public class Shooter extends Component {
 		}
 
 		Bullet b = new Bullet(model, this.m_x, this.m_y, 32, 32, 1F, this.m_sprite, 10, 9,a ,
-				true, this.m_dir);
+				true, this.m_dir,3);
 		model.components.add(b);
+		b.setAutomate(model.TabAuto[3]);
 		
-		return true;// L'action s'est bien déroulée
+		return true;
 	}
 }

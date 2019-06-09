@@ -25,8 +25,7 @@ public class Model extends GameModel {
 	public Warrior m_warrior;
 	public LinkedList<Component> components;
 	public LinkedList<String> touches;
-	public IAutomaton[] TabAuto = new IAutomaton[3];
-	public Component[] TabTeam = new Component[2];
+	public IAutomaton[] TabAuto = new IAutomaton[4];
 	public Component Main;
 	
 	public char Cgmt;
@@ -38,12 +37,14 @@ public class Model extends GameModel {
 		IAutomaton spawn;
 		IAutomaton spawn1;
 		IAutomaton spawn2;
+		IAutomaton spawn3;
 
 		AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file("Src/Automate/Automates"));
 		IAI_Definitions iai_def = ai_def.make();
 		spawn = iai_def.automatas.get(0);
 		spawn1 = iai_def.automatas.get(1);
 		spawn2 = iai_def.automatas.get(2);
+		spawn3 = iai_def.automatas.get(3);
 
 		// Shooter
 
@@ -64,13 +65,13 @@ public class Model extends GameModel {
 		TabAuto[0]= spawn;
 		TabAuto[1]= spawn1;
 		TabAuto[2]= spawn2;
+		TabAuto[3]= spawn3;
 
 		m_shooter.setAutomate(spawn);
 		m_mage.setAutomate(spawn1);
 		m_warrior.setAutomate(spawn2);
 		Main = m_shooter;
-		TabTeam[0]=m_mage;
-		TabTeam[1]=m_warrior;
+		
 
 	}
 
