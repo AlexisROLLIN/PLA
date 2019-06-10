@@ -40,7 +40,7 @@ public class Controller extends GameController implements ActionListener {
 		if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') {
 			this.m_model.perso1.MoveR();
 			m_model.map.jViewport++;
-			if(m_model.perso1.m_x>2024){
+			if(m_model.perso1.m_x>2016){
 				m_model.perso1.m_x=0;
 				m_model.map.jViewport=16;
 			}
@@ -50,15 +50,15 @@ public class Controller extends GameController implements ActionListener {
 			this.m_model.perso1.MoveN();
 			m_model.map.iViewport--;
 			if(m_model.perso1.m_y<0){
-				m_model.perso1.m_y=1536;
-				m_model.map.iViewport=60;
+				m_model.perso1.m_y=1504;
+				m_model.map.iViewport=59;
 			}
 
 		}
 		if (e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
 			this.m_model.perso1.MoveS();
 			m_model.map.iViewport++;
-			if(m_model.perso1.m_y>1536){
+			if(m_model.perso1.m_y>1504){
 				m_model.perso1.m_y=0;
 				m_model.map.iViewport=12;
 			}
@@ -68,8 +68,8 @@ public class Controller extends GameController implements ActionListener {
 			this.m_model.perso1.MoveL();
 			m_model.map.jViewport--;
 			if(m_model.perso1.m_x<0){
-				m_model.perso1.m_x=2048;
-				m_model.map.jViewport=80;
+				m_model.perso1.m_x=2016;
+				m_model.map.jViewport=79;
 			}
 		}
 

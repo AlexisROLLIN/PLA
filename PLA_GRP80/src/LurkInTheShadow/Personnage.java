@@ -31,15 +31,17 @@ public class Personnage extends Component {
 	}
 
 	public void Afficher() {
-		Iterator<Component> iter = m_model.components();
 
-		while (iter.hasNext()) {
-			Component c = iter.next();
-			if (Vision(c)) {
-				c.m_show = true;
-			} else {
-				c.m_show = false;
+		for(int i=0; i<m_model.map.length*2;i++){
+			for (int j =0 ; j<m_model.map.width*2;j++){
+				Component c = m_model.ElementsTore[i][j];
+				if (Vision(c)) {
+					c.m_show = true;
+				} else {
+					c.m_show = false;
+				}
 			}
+			
 		}
 	}
 	
@@ -47,17 +49,9 @@ public class Personnage extends Component {
 	//Fonction test temporaire
 	public void MoveR(){
 		this.m_x+=32;
-//		if (m_x>=2048){
-//			m_x=0;
-//			m_model.map.jViewport=0;
-//		}
 	}
 	public void MoveL(){
 		this.m_x-=32;
-//		if (m_x<0){
-//			m_x=2048;
-//			m_model.map.jViewport=1536;
-//		}
 	}
 	public void MoveN(){
 		this.m_y-=32;

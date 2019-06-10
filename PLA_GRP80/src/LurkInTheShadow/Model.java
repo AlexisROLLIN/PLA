@@ -18,24 +18,14 @@ public class Model extends GameModel {
 	public Map map;
 	public Personnage perso1;
 
-	int nbElements;
 	
 	public Component[][] ElementsMap;
 	public Component[][] ElementsTore;
-	//public LinkedList<Component> ElementsMap;
-	public LinkedList<Component> ElementsViewPort;
 	
-	//LinkedList<Component> m_component;
 
 	public Model() {
 		
 		loadSprites();
-//		nbElements = 0;
-
-		
-		//	ElementsMap = new LinkedList<Component>();
-
-		//Options.SHOW_M1 = true;
 		ElementsMap= new Component[48][64];
 		ElementsTore= new Component[96][128];
 		
@@ -43,14 +33,6 @@ public class Model extends GameModel {
 		perso1.m_idx = 25;
 		
 		map = new Map(48, 64, this);
-		
-		
-//		ListIterator<Component> iter = this.ElementsMap.listIterator();
-//		Component tmp = iter.next();
-//		while(iter.hasNext() && tmp instanceof Obstacle ){
-//			tmp = iter.next();
-//		}
-		
 		
 		
 	}
@@ -67,13 +49,13 @@ public class Model extends GameModel {
 	 */
 	@Override
 	public void step(long now) {
-		//perso1.Afficher();
+		perso1.Afficher();
 		
 	}
 	
 	public ListIterator<Component> components(){
-			return ElementsViewPort.listIterator();  
-	  }
+			return null;  
+	}
 	
 
 	private void loadSprites() {

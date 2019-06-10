@@ -48,8 +48,6 @@ public class Component {
 		power = 0;
 		m_dir = IDirection.NORTH; // dir par defaut
 
-
-		model.nbElements++;
 		splitSprite();
 	}
 
@@ -193,107 +191,10 @@ public class Component {
 
 	}
 
-	boolean CollisionTotale() {
-
-		// Iterator<Component> iter = this.m_model.ElementsMap.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-
-		// if (Options.SHOW_M1) {
-		// Iterator<Component> iter = this.m_model.ElementsM1.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
-		// if (Options.SHOW_M2) {
-		// Iterator<Component> iter = m_model.ElementsM2.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
-		// if (Options.SHOW_M3) {
-		// Iterator<Component> iter = m_model.ElementsM3.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
-		// if (Options.SHOW_M4) {
-		// Iterator<Component> iter = m_model.ElementsM4.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
-
-		return false;
-	}
-
 	public void paint(Graphics g) {
 		Image img = m_sprites[m_idx];
 		int w = (int) (m_scale * m_w);
 		int h = (int) (m_scale * m_h);
 		g.drawImage(img, (m_x-m_model.perso1.m_x)%1024+512, (m_y-m_model.perso1.m_y)%768+384, w, h, null);
 	}
-	
-//	public void paintToreR(Graphics g,int nbCasex) {
-//		Image img = m_sprites[m_idx];
-//		int w = (int) (m_scale * m_w);
-//		int h = (int) (m_scale * m_h);
-//		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+32*nbCasex+512, (m_y-m_model.perso1.m_y)%768+384, w, h, null);
-//	}
-//	public void paintToreS(Graphics g,int nbCasey) {
-//		Image img = m_sprites[m_idx];
-//		int w = (int) (m_scale * m_w);
-//		int h = (int) (m_scale * m_h);
-//		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+512, (m_y-m_model.perso1.m_y)%768+32*nbCasey+384, w, h, null);
-//	}
-	public void paintToreRS(Graphics g,int nbCasex,int nbCasey) {
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+32*nbCasex+512, (m_y-m_model.perso1.m_y)%768+32*nbCasey+384, w, h, null);
-	}
-	public void paintToreLN(Graphics g,int nbCasex,int nbCasey) {
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024-32*nbCasex+512, (m_y-m_model.perso1.m_y)%768-32*nbCasey+384, w, h, null);
-	}
-	public void paintToreL(Graphics g,int nbCasex,int nbCasey) {
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024-32*nbCasex+512, (m_y-m_model.perso1.m_y)%768-32*nbCasey+384, w, h, null);
-	}
-
 }
