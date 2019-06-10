@@ -23,10 +23,12 @@ public class Model extends GameModel {
 	public BufferedImage Sprite;
 	public Map map;
 
+	public Component mainPlayed;
 	public Shooter perso1;
 	public Mage perso2;
 	public Warrior perso3;
 	public Queen reine;
+	
 	IAutomaton Player;
 	IAutomaton spawn1;
 	IAutomaton spawn2;
@@ -86,6 +88,7 @@ public class Model extends GameModel {
 		reine = new Queen(this, Sprite, 10, 9, 320, 448, 1F, 13, true);
 
 		perso1.setAutomate(Player);
+		mainPlayed=perso1;
 		perso2.setAutomate(spawn1);
 		perso3.setAutomate(spawn2);
 		

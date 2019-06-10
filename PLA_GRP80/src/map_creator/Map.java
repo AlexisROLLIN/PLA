@@ -182,8 +182,8 @@ public class Map {
 	}
 	
 	public void firstCase(){
-		int x = model.perso1.m_x;
-		int y = model.perso1.m_y;
+		int x = model.mainPlayed.m_x;
+		int y = model.mainPlayed.m_y;
 		
 		//Cherche la premiere case correct
 				boolean test=false;

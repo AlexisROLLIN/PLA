@@ -16,8 +16,8 @@ public class Monster extends Component {
 		speed=32;
 		m_type=IType.ADVERSAIRE;
 		automate=model.monster;
+		model.monstres.add(this);
 		power=5;
-		//model.mobileComponents.add(this);
 	}
 	
 	@Override

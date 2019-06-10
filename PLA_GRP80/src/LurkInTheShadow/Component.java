@@ -264,12 +264,15 @@ public class Component {
 			m_model.perso1.setAutomate(m_model.Player);
 			m_model.perso2.setAutomate(m_model.spawn1);
 			m_model.perso3.setAutomate(m_model.spawn2);
+			m_model.mainPlayed=m_model.perso1;
+			slow_world();
 		}
 		else {
 			this.setAutomate(m_model.perso1.automate);
 			m_model.perso1.setAutomate(m_model.Player);
 			this.m_type=IType.TEAM;
 			m_model.perso1.m_type=IType.PLAYER;
+			m_model.mainPlayed=m_model.perso1;
 		}
 
 	}
@@ -281,12 +284,15 @@ public class Component {
 			m_model.perso1.setAutomate(m_model.spawn1);
 			m_model.perso2.setAutomate(m_model.Player);
 			m_model.perso3.setAutomate(m_model.spawn2);
+			m_model.mainPlayed=m_model.perso2;
+			slow_world();
 		}
 		else {
 			this.setAutomate(m_model.perso2.automate);
 			m_model.perso2.setAutomate(m_model.Player);
 			this.m_type=IType.TEAM;
 			m_model.perso2.m_type=IType.PLAYER;
+			m_model.mainPlayed=m_model.perso2;
 		}
 
 	}
@@ -298,12 +304,15 @@ public class Component {
 			m_model.perso1.setAutomate(m_model.spawn1);
 			m_model.perso2.setAutomate(m_model.spawn2);
 			m_model.perso3.setAutomate(m_model.Player);
+			m_model.mainPlayed=m_model.perso3;
+			slow_world();
 		}
 		else {
 			this.setAutomate(m_model.perso3.automate);
 			m_model.perso3.setAutomate(m_model.Player);
 			this.m_type=IType.TEAM;
 			m_model.perso3.m_type=IType.PLAYER;
+			m_model.mainPlayed=m_model.perso3;
 		}
 
 	}
@@ -316,7 +325,40 @@ public class Component {
 		m_model.perso3.setAutomate(m_model.spawn2);
 		m_model.reine.setAutomate(m_model.Player);
 		this.m_type=IType.TEAM;
-		m_model.reine.m_type=IType.PLAYER;	
+		m_model.reine.m_type=IType.PLAYER;
+		m_model.mainPlayed=m_model.reine;
+		
+		if (!(this instanceof Queen)) {
+			speed_up_world();
+		}
+	}
+	
+	public void slow_world() {
+		Iterator<Ally> iter = m_model.allies.iterator();
+		while (iter.hasNext()) {
+			Ally a = iter.next();
+			a.speed = a.speed/2;
+		}
+		
+		Iterator<Monster> iterM = m_model.monstres.iterator();
+		while (iterM.hasNext()) {
+			Monster m = iterM.next();
+			m.speed = m.speed/2;
+		}
+	}
+	
+	public void speed_up_world() {
+		Iterator<Ally> iter = m_model.allies.iterator();
+		while (iter.hasNext()) {
+			Ally a = iter.next();
+			a.speed = a.speed*2;
+		}
+		
+		Iterator<Monster> iterM = m_model.monstres.iterator();
+		while (iterM.hasNext()) {
+			Monster m = iterM.next();
+			m.speed = m.speed*2;
+		}
 	}
 	
 	//A Overrider
@@ -358,7 +400,7 @@ public class Component {
 		Image img = m_sprites[m_idx];
 		int w = (int) (m_scale * m_w);
 		int h = (int) (m_scale * m_h);
-		g.drawImage(img, (m_x-m_model.perso1.m_x)%1024+512, (m_y-m_model.perso1.m_y)%768+384, w, h, null);
+		g.drawImage(img, (m_x-m_model.mainPlayed.m_x)%1024+512, (m_y-m_model.mainPlayed.m_y)%768+384, w, h, null);
 	}
 	
 //	public void paintToreR(Graphics g,int nbCasex) {
@@ -377,19 +419,19 @@ public class Component {
 		Image img = m_sprites[m_idx];
 		int w = (int) (m_scale * m_w);
 		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+32*nbCasex+512, (m_y-m_model.perso1.m_y)%768+32*nbCasey+384, w, h, null);
+		g.drawImage(img,(m_x-m_model.mainPlayed.m_x)%1024+32*nbCasex+512, (m_y-m_model.mainPlayed.m_y)%768+32*nbCasey+384, w, h, null);
 	}
 	public void paintToreLN(Graphics g,int nbCasex,int nbCasey) {
 		Image img = m_sprites[m_idx];
 		int w = (int) (m_scale * m_w);
 		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024-32*nbCasex+512, (m_y-m_model.perso1.m_y)%768-32*nbCasey+384, w, h, null);
+		g.drawImage(img,(m_x-m_model.mainPlayed.m_x)%1024-32*nbCasex+512, (m_y-m_model.mainPlayed.m_y)%768-32*nbCasey+384, w, h, null);
 	}
 	public void paintToreL(Graphics g,int nbCasex,int nbCasey) {
 		Image img = m_sprites[m_idx];
 		int w = (int) (m_scale * m_w);
 		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024-32*nbCasex+512, (m_y-m_model.perso1.m_y)%768-32*nbCasey+384, w, h, null);
+		g.drawImage(img,(m_x-m_model.mainPlayed.m_x)%1024-32*nbCasex+512, (m_y-m_model.mainPlayed.m_y)%768-32*nbCasey+384, w, h, null);
 	}
 
 }
