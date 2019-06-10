@@ -72,10 +72,19 @@ public abstract class ICondition {
 	public static class ICell extends ICondition {
 		IDirection direction;
 		IType type;
+		int number;
 
 		public ICell(String direction, String type) {
 			this.direction = IDirection.strToDir(direction);
 			this.type = IType.strToType(type);
+			number=1;
+
+		}
+		
+		public ICell(String direction, String type, String num) {
+			this.direction = IDirection.strToDir(direction);
+			this.type = IType.strToType(type);
+			this.number = Integer.parseInt(num);
 
 		}
 
@@ -90,7 +99,7 @@ public abstract class ICondition {
 				Iterator<Component> iter = e.m_model.components.iterator();
 				while (iter.hasNext()) {
 					Component comp = iter.next();
-					if (comp.is_in_case(e.x(), e.y() - 32)) { // S'il y a un component dans la case d'à coté
+					if (comp.is_in_case(e.x(), e.y() - 32*number)) { // S'il y a un component dans la case d'à coté
 						if (comp.type() != IType.VOID && type == IType.VOID) {
 							return false;
 						}
@@ -113,7 +122,7 @@ public abstract class ICondition {
 				Iterator<Component> iter = e.m_model.components.iterator();
 				while (iter.hasNext()) {
 					Component comp = iter.next();
-					if (comp.is_in_case(e.x(), e.y() + 32)) {
+					if (comp.is_in_case(e.x(), e.y() + 32*number)) {
 						if (comp.type() != IType.VOID && type == IType.VOID) {
 							return false;
 						}
@@ -134,7 +143,7 @@ public abstract class ICondition {
 				Iterator<Component> iter = e.m_model.components.iterator();
 				while (iter.hasNext()) {
 					Component comp = iter.next();
-					if (comp.is_in_case(e.x() - 32, e.y())) {
+					if (comp.is_in_case(e.x() - 32*number, e.y())) {
 						if (comp.type() != IType.VOID && type == IType.VOID) {
 							return false;
 						}
@@ -153,7 +162,7 @@ public abstract class ICondition {
 				while (iter.hasNext()) {
 					Component comp = iter.next();
 
-					if (comp.is_in_case(e.x() + 32, e.y())) {
+					if (comp.is_in_case(e.x() + 32*number, e.y())) {
 
 						if (comp.type() != IType.VOID && type == IType.VOID) {
 							return false;
@@ -189,7 +198,7 @@ public abstract class ICondition {
 		}
 	}
 
-	public static class IKey extends ICondition { // TODO
+	public static class IKey extends ICondition {
 		String touches;
 
 		public IKey(String s) {

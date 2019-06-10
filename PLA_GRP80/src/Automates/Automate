@@ -7,6 +7,7 @@ Player(Init){
   | Key(p) ? Get()   :(Init)
   | Key(m) ? Get()   :(Init)
   | Key(o) ? Get()   :(Init)
+  | Key(l) ? Get()   :(Init)
   }
   
  Allie1(Init1){
@@ -56,5 +57,10 @@ Player(Init){
  | Cell(O,@) / Cell(O,T) ? Hit(O) :(Init)
  | Cell(E,V) ? Move(E) :(Init)
  | Cell(E,@) / Cell(E,T) ? Hit(E) :(Init)
+ 
+ }
+ 
+  Transe(Init){
+ * (Init): True ? Turn(R) :(Init)
  
  }

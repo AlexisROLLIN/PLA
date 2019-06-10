@@ -34,13 +34,10 @@ public class Component {
 	
 	IAutomaton automate;
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
-	public IType m_type; // Definit le type (allié, ennemi, rocher, etc) de ce
-							// component.
-
+	public IType m_type; // Definit le type (allié, ennemi, rocher, etc) de ce component.
 
 	public Component(Model model, BufferedImage sprite, int rows, int columns, int x, int y, int h, int w, float scale,
 			int id_x, boolean show) {
-
 		m_model = model;
 		m_sprite = sprite;
 		m_ncols = columns;
@@ -52,15 +49,12 @@ public class Component {
 		m_idx=id_x;
 		m_scale = scale;
 		m_show = show;
-		power=0;
 		m_dir = IDirection.NORTH; //dir par defaut
 		m_model.nbElements++;
-		m_model.components.add(this);
-		model.nbElements++;
-
+		m_model.componentsToAdd.add(this);
 		splitSprite();
 	}
-
+	
 	public void setAutomate(IAutomaton aut) {
 		automate = aut;
 	}
@@ -80,12 +74,12 @@ public class Component {
 	public IDirection dir() {
 		return m_dir;
 	}
-
+	
 	public IType type() {
 		return m_type;
 	}
 
-	public boolean is_in_case(int x, int y) {// x et y sont les coord de la case
+	public boolean is_in_case(int x, int y) {//x et y sont les coord de la case
 		if ((m_x >= x + 32) // trop à droite
 				|| (m_x + m_w <= x) // trop à gauche
 				|| (m_y >= y + 32) // trop en bas
@@ -96,7 +90,6 @@ public class Component {
 			return true;
 		}
 	}
-
 
 	public void step(long now) throws Interpreter_Exception {
 		long elapsed = now - m_lastMove;
@@ -122,8 +115,7 @@ public class Component {
 			for (int j = 0; j < m_ncols; j++) {
 				int x = j * m_w;
 				int y = i * m_h;
-				m_sprites[(i * m_ncols) + j] = m_sprite.getSubimage(x, y, m_w,
-						m_h);
+				m_sprites[(i * m_ncols) + j] = m_sprite.getSubimage(x, y, m_w, m_h);
 			}
 		}
 	}
@@ -139,70 +131,55 @@ public class Component {
 
 	}
 
-/*
-	boolean CollisionTotale() {
-
-		// Iterator<Component> iter = this.m_model.ElementsMap.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-
-		// if (Options.SHOW_M1) {
-		// Iterator<Component> iter = this.m_model.ElementsM1.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
-		// if (Options.SHOW_M2) {
-		// Iterator<Component> iter = m_model.ElementsM2.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
-		// if (Options.SHOW_M3) {
-		// Iterator<Component> iter = m_model.ElementsM3.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
-		// if (Options.SHOW_M4) {
-		// Iterator<Component> iter = m_model.ElementsM4.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
->>>>>>> tmpGaetan
-
+	/*boolean CollisionTotale() {
+		if (Options.SHOW_M1) {
+			Iterator<Component> iter = this.m_model.ElementsM1.iterator();
+			Component tmp = iter.next();
+			while (iter.hasNext()) {
+				if (tmp instanceof Obstacle) {
+					if (this.Collision(tmp)) {
+						return true;
+					}
+				}
+				tmp = iter.next();
+			}
+		}
+		if (Options.SHOW_M2) {
+			Iterator<Component> iter = m_model.ElementsM2.iterator();
+			Component tmp = iter.next();
+			while (iter.hasNext()) {
+				if (tmp instanceof Obstacle) {
+					if (this.Collision(tmp)) {
+						return true;
+					}
+				}
+				tmp = iter.next();
+			}
+		}
+		if (Options.SHOW_M3) {
+			Iterator<Component> iter = m_model.ElementsM3.iterator();
+			Component tmp = iter.next();
+			while (iter.hasNext()) {
+				if (tmp instanceof Obstacle) {
+					if (this.Collision(tmp)) {
+						return true;
+					}
+				}
+				tmp = iter.next();
+			}
+		}
+		if (Options.SHOW_M4) {
+			Iterator<Component> iter = m_model.ElementsM4.iterator();
+			Component tmp = iter.next();
+			while (iter.hasNext()) {
+				if (tmp instanceof Obstacle) {
+					if (this.Collision(tmp)) {
+						return true;
+					}
+				}
+				tmp = iter.next();
+			}
+		}
 		return false;
 	}*/
 	
@@ -215,32 +192,72 @@ public class Component {
 
 	public void Get1() {
 		
-		this.setAutomate(m_model.perso1.automate);
-		m_model.perso1.setAutomate(m_model.Player);
-		this.m_type=IType.TEAM;
-		m_model.perso1.m_type=IType.PLAYER;
+		if (this instanceof Queen) {
+			this.setAutomate(m_model.queen);
+			m_model.perso1.setAutomate(m_model.Player);
+			m_model.perso2.setAutomate(m_model.spawn1);
+			m_model.perso3.setAutomate(m_model.spawn2);
+		}
+		else {
+			this.setAutomate(m_model.perso1.automate);
+			m_model.perso1.setAutomate(m_model.Player);
+			this.m_type=IType.TEAM;
+			m_model.perso1.m_type=IType.PLAYER;
+		}
 
 	}
 
 	public void Get2() {
 
-
-		this.setAutomate(m_model.perso2.automate);
-		m_model.perso2.setAutomate(m_model.Player);
-		this.m_type=IType.TEAM;
-		m_model.perso2.m_type=IType.PLAYER;
+		if (this instanceof Queen) {
+			this.setAutomate(m_model.queen);
+			m_model.perso1.setAutomate(m_model.spawn1);
+			m_model.perso2.setAutomate(m_model.Player);
+			m_model.perso3.setAutomate(m_model.spawn2);
+		}
+		else {
+			this.setAutomate(m_model.perso2.automate);
+			m_model.perso2.setAutomate(m_model.Player);
+			this.m_type=IType.TEAM;
+			m_model.perso2.m_type=IType.PLAYER;
+		}
 
 	}
 
 	public void Get3() {
 
+		if (this instanceof Queen) {
+			this.setAutomate(m_model.queen);
+			m_model.perso1.setAutomate(m_model.spawn1);
+			m_model.perso2.setAutomate(m_model.spawn2);
+			m_model.perso3.setAutomate(m_model.Player);
+		}
+		else {
+			this.setAutomate(m_model.perso3.automate);
+			m_model.perso3.setAutomate(m_model.Player);
+			this.m_type=IType.TEAM;
+			m_model.perso3.m_type=IType.PLAYER;
+		}
 
+	}
+	
+	public void GetQueen() { //Pour la queen
 
-		this.setAutomate(m_model.perso3.automate);
-		m_model.perso3.setAutomate(m_model.Player);
-		this.m_type=IType.TEAM;
-		m_model.perso3.m_type=IType.PLAYER;
+		m_model.perso1.setAutomate(m_model.transe);//Automates à changer
+		m_model.perso2.setAutomate(m_model.spawn2);
 		
+		m_model.perso3.setAutomate(m_model.spawn2);
+		m_model.reine.setAutomate(m_model.Player);
+		this.m_type=IType.TEAM;
+		m_model.reine.m_type=IType.PLAYER;	
+	}
+	
+	public void paint(Graphics g) {
+
+		Image img = m_sprites[m_idx];
+		int w = (int) (m_scale * m_w);
+		int h = (int) (m_scale * m_h);
+		g.drawImage(img, m_x, m_y, w, h, null);
 
 	}
 	
@@ -274,42 +291,9 @@ public class Component {
 		return true;
 	}
 	
-	public void paint(Graphics g) {
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img, (m_x-m_model.perso1.m_x)%1024+512, (m_y-m_model.perso1.m_y)%768+384, w, h, null);
-	}
-	
-//	public void paintToreR(Graphics g,int nbCasex) {
-//		Image img = m_sprites[m_idx];
-//		int w = (int) (m_scale * m_w);
-//		int h = (int) (m_scale * m_h);
-//		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+32*nbCasex+512, (m_y-m_model.perso1.m_y)%768+384, w, h, null);
-//	}
-//	public void paintToreS(Graphics g,int nbCasey) {
-//		Image img = m_sprites[m_idx];
-//		int w = (int) (m_scale * m_w);
-//		int h = (int) (m_scale * m_h);
-//		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+512, (m_y-m_model.perso1.m_y)%768+32*nbCasey+384, w, h, null);
-//	}
-	public void paintToreRS(Graphics g,int nbCasex,int nbCasey) {
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+32*nbCasex+512, (m_y-m_model.perso1.m_y)%768+32*nbCasey+384, w, h, null);
-	}
-	public void paintToreLN(Graphics g,int nbCasex,int nbCasey) {
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024-32*nbCasex+512, (m_y-m_model.perso1.m_y)%768-32*nbCasey+384, w, h, null);
-	}
-	public void paintToreL(Graphics g,int nbCasex,int nbCasey) {
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024-32*nbCasex+512, (m_y-m_model.perso1.m_y)%768-32*nbCasey+384, w, h, null);
+	//A Overrider
+	public boolean kamikaze(){
+		return true;
 	}
 	
 

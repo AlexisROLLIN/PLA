@@ -26,8 +26,8 @@ public class Ally extends Component {
 		if (player.intersects(objet)) {
 			return true;
 		}
-		return false;
-		//return true; //Pour tests
+		//return false;
+		return true; //Pour tests
 	}
 
 	public void Afficher() {
@@ -41,6 +41,13 @@ public class Ally extends Component {
 				c.m_show = false;
 			}
 		}
+	}
+	
+	//A appeler quand !IGotPower
+	public boolean kamikaze() {
+		m_model.allies.remove(this);
+		m_model.componentsToRemove.add(this);
+		return true;
 	}
 
 }

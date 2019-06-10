@@ -15,12 +15,6 @@ public class Sol extends Component {
 		m_show = true;
 		automate=model.floor;
 		m_type=IType.VOID;
-		splitSprite();
-	}
-
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
 	}
 
 }

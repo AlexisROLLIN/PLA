@@ -1,4 +1,3 @@
-
 package LurkInTheShadow;
 
 import java.awt.Button;
@@ -11,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.util.Map;
 
 import edu.ricm3.game.GameController;
 import edu.ricm3.game.Options;
@@ -32,12 +30,13 @@ public class Controller extends GameController implements ActionListener {
 
 	@Override
 	public void step(long now) {
+		m_model.step(now);
 		m_view.step(now);
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-<<<<<<< HEAD
 		/*int i = 0;
 		
 		int j = 0;
@@ -57,45 +56,103 @@ public class Controller extends GameController implements ActionListener {
 			i = this.m_model.map.length/ 2;
 			j = this.m_model.map.width / 2;
 		}
-=======
->>>>>>> tmpGaetan
 		if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') {
-			this.m_model.perso1.MoveR();
-			m_model.map.jViewport++;
-			if(m_model.perso1.m_x>2024){
-				m_model.perso1.m_x=0;
-				m_model.map.jViewport=16;
+			if (this.m_model.perso1.m_x < (this.m_model.map.width / 2) * 31
+					&& this.m_model.map.tab[(this.m_model.perso1.m_y) / 32 + i][(this.m_model.perso1.m_x) / 32 + 1
+							+ j] != 1) {
+				this.m_model.perso1.m_x = this.m_model.perso1.m_x + 32;
+				this.m_model.perso1.m_idx = 37;
+			} else if (this.m_model.perso1.m_x == (this.m_model.map.width / 2) * 31) {
+				this.m_model.perso1.m_x = 0;
+				if (Options.SHOW_M1) {
+					Options.SHOW_M1 = false;
+					Options.SHOW_M2 = true;
+					this.m_model.perso1.screen = 2;
+					this.m_model.ElementsM2.add(this.m_model.perso1);
+					this.m_model.ElementsM1.remove(this.m_model.perso1);
+				}
+				if (Options.SHOW_M3) {
+					Options.SHOW_M3 = false;
+					Options.SHOW_M4 = true;
+					this.m_model.perso1.screen = 4;
+					this.m_model.ElementsM4.add(this.m_model.perso1);
+					this.m_model.ElementsM3.remove(this.m_model.perso1);
+				}
 			}
 		}
-
 		if (e.getKeyChar() == 'z' || e.getKeyChar() == 'Z') {
-			this.m_model.perso1.MoveN();
-			m_model.map.iViewport--;
-			if(m_model.perso1.m_y<0){
-				m_model.perso1.m_y=1536;
-				m_model.map.iViewport=60;
+			if (this.m_model.perso1.m_y > 0) {
+				if (this.m_model.map.tab[(this.m_model.perso1.m_y / 32) - 1 + i][(this.m_model.perso1.m_x) / 32
+						+ j] != 1) {
+					this.m_model.perso1.m_y = this.m_model.perso1.m_y - 32;
+				}
+			} else {
+				this.m_model.perso1.m_y = ((this.m_model.map.length / 2) - 1) * 32;
+				if (Options.SHOW_M3) {
+					Options.SHOW_M3 = false;
+					Options.SHOW_M1 = true;
+					this.m_model.perso1.screen = 1;
+					this.m_model.ElementsM1.add(this.m_model.perso1);
+					this.m_model.ElementsM3.remove(this.m_model.perso1);
+				}
+				if (Options.SHOW_M4) {
+					Options.SHOW_M4 = false;
+					Options.SHOW_M2 = true;
+					this.m_model.perso1.screen = 2;
+					this.m_model.ElementsM2.add(this.m_model.perso1);
+					this.m_model.ElementsM4.remove(this.m_model.perso1);
+				}
 			}
-
 		}
 		if (e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
-			this.m_model.perso1.MoveS();
-			m_model.map.iViewport++;
-			if(m_model.perso1.m_y>1536){
-				m_model.perso1.m_y=0;
-				m_model.map.iViewport=12;
+			{
+				if (this.m_model.map.tab[(this.m_model.perso1.m_y / 32) + 1 + i][(this.m_model.perso1.m_x) / 32
+						+ j] != 1) {
+					if (this.m_model.perso1.m_y < (this.m_model.map.length / 2) * 30)
+						this.m_model.perso1.m_y = this.m_model.perso1.m_y + 32;
+					else {
+						this.m_model.perso1.m_y = 0;
+						if (Options.SHOW_M1) {
+							Options.SHOW_M1 = false;
+							Options.SHOW_M3 = true;
+							this.m_model.perso1.screen = 3;
+							this.m_model.ElementsM3.add(this.m_model.perso1);
+							this.m_model.ElementsM1.remove(this.m_model.perso1);
+						}
+						if (Options.SHOW_M2) {
+							Options.SHOW_M2 = false;
+							Options.SHOW_M4 = true;
+							this.m_model.perso1.screen = 4;
+							this.m_model.ElementsM4.add(this.m_model.perso1);
+							this.m_model.ElementsM2.remove(this.m_model.perso1);
+						}
+					}
+				}
 			}
 		}
-
 		if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
-			this.m_model.perso1.MoveL();
-			m_model.map.jViewport--;
-			if(m_model.perso1.m_x<0){
-				m_model.perso1.m_x=2048;
-				m_model.map.jViewport=80;
+			if (this.m_model.perso1.m_x > 0
+					&& this.m_model.map.tab[(this.m_model.perso1.m_y) / 32 + i][(this.m_model.perso1.m_x) / 32 - 1
+							+ j] != 1) {
+				this.m_model.perso1.m_x = this.m_model.perso1.m_x - 32;
+			} else if (this.m_model.perso1.m_x == 0) {
+				this.m_model.perso1.m_x = (this.m_model.map.width / 2) * 31;
+				if (Options.SHOW_M4) {
+					Options.SHOW_M4 = false;
+					Options.SHOW_M3 = true;
+					this.m_model.perso1.screen = 3;
+					this.m_model.ElementsM3.add(this.m_model.perso1);
+					this.m_model.ElementsM4.remove(this.m_model.perso1);
+				}
+				if (Options.SHOW_M2) {
+					Options.SHOW_M2 = false;
+					Options.SHOW_M1 = true;
+					this.m_model.perso1.screen = 1;
+					this.m_model.ElementsM1.add(this.m_model.perso1);
+					this.m_model.ElementsM2.remove(this.m_model.perso1);
+				}
 			}
 		}
-
-<<<<<<< HEAD
 		if (e.getKeyChar() == '1') {
 			Options.SHOW_M1 = true;
 			Options.SHOW_M2 = false;
@@ -117,8 +174,6 @@ public class Controller extends GameController implements ActionListener {
 			Options.SHOW_M3 = false;
 			Options.SHOW_M4 = true;
 		}*/
-=======
->>>>>>> tmpGaetan
 	}
 
 	@Override
@@ -170,6 +225,14 @@ public class Controller extends GameController implements ActionListener {
 			
 		}
 		
+		if (e.getKeyChar() == 'l') {
+			if (!m_model.touches.contains("l")) {
+				m_model.touches.add("l");
+				m_model.Cgmt = 'l';
+			}
+			
+		}
+		
 		if (e.getKeyCode() == 32) {
 			if (!m_model.touches.contains("SPACE")) {
 				m_model.touches.add("SPACE");
@@ -205,6 +268,11 @@ public class Controller extends GameController implements ActionListener {
 		if (e.getKeyChar() == 'o') {
 			m_model.touches.remove("o");
 		}
+		
+		if (e.getKeyChar() == 'l') {
+			m_model.touches.remove("l");
+		}
+		
 		if (e.getKeyCode() == 32) {
 			m_model.touches.remove("SPACE");
 		}

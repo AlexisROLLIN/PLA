@@ -206,7 +206,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 
 		if(ponte>(100-hunger)/30) { //Pond une fois tous les (100-hunger)/30 steps egg
 
-			m_model.nb_monsters_to_be_added++;
+			m_model.componentsToAdd.add(new Monster(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, m_scale, 17, m_show));
 
 			ponte=1;
 		}

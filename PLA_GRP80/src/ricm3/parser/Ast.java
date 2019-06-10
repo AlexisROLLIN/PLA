@@ -369,7 +369,13 @@ public class Ast {
 				case "GotStuff": return new IGotStuff();
 				case "Key": return new IKey(parameters.get(0).make());//Key(Touche)
 				case "MyDir": return new IMyDir(parameters.get(0).make());//MyDir(Direction)*/
-				case "Cell": return new ICell(parameters.get(0).make(),parameters.get(1).make());
+				case "Cell": 
+					if (parameters.size()<3) {
+						return new ICell(parameters.get(0).make(),parameters.get(1).make());
+					} 
+					else {
+						return new ICell(parameters.get(0).make(),parameters.get(1).make(),parameters.get(2).make());
+					}
 				case "Closest": return new IClosest(parameters.get(0).make(),parameters.get(1).make());
 				default: throw new Interpreter_Exception("Fonction inconnue"+name.toString()+"\n");
 			}

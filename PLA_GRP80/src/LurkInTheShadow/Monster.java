@@ -162,5 +162,10 @@ public class Monster extends Component {
 
 		return true;
 	}
+	
+	public boolean kamikaze() {
+		m_model.componentsToRemove.add(this);
+		return true;
+	}
 
 }
