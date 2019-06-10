@@ -44,6 +44,11 @@ public class Model extends GameModel {
 	public LinkedList<Component> components;
 	public LinkedList<Ally> allies;// Allies du plateau
 	public LinkedList<String> touches;
+	
+	public Component[][] ElementsMap;
+	public Component[][] ElementsTore;
+	public Component[][] ElementsMap;
+	public Component[][] ElementsTore;
 
 	public Model() throws Interpreter_Exception, Exception {
 
@@ -78,6 +83,27 @@ public class Model extends GameModel {
 		perso2.setAutomate(spawn1);
 		perso3.setAutomate(spawn2);
 
+	//public LinkedList<Component> ElementsMap;
+	
+	//LinkedList<Component> m_component;
+
+		
+		//	ElementsMap = new LinkedList<Component>();
+
+		//Options.SHOW_M1 = true;
+		ElementsMap= new Component[48][64];
+		ElementsTore= new Component[96][128];
+		
+		
+		
+//		ListIterator<Component> iter = this.ElementsMap.listIterator();
+//		Component tmp = iter.next();
+//		while(iter.hasNext() && tmp instanceof Obstacle ){
+//			tmp = iter.next();
+//		}
+		
+		
+		
 	}
 
 	@Override
@@ -110,6 +136,11 @@ public class Model extends GameModel {
 		}
 		nb_monsters_to_be_added = 0;
 	}
+
+	public ListIterator<Component> components(){
+			return ElementsViewPort.listIterator();  
+	  }
+
 
 	private void loadSprites() {
 

@@ -18,12 +18,9 @@ public class Sol extends Component {
 		splitSprite();
 	}
 
+	@Override
 	public void paint(Graphics g) {
-
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img, m_x, m_y, w, h, null);
+		super.paint(g);
 	}
 
 }
