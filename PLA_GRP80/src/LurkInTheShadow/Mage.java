@@ -32,6 +32,15 @@ public class Mage extends Ally {
 				m_y -= 32;
 				m_dir = IDirection.NORTH;
 				System.out.println("Avance au Nord\n");
+				
+				if(m_type==IType.PLAYER) {
+					m_model.map.iViewport--;
+					if(m_model.perso1.m_y<0){
+						m_model.perso1.m_y=1536;
+						m_model.map.iViewport=60;
+					}
+				}
+				
 			}
 
 			else if (d == IDirection.SOUTH || (m_dir == IDirection.SOUTH && d == IDirection.FRONT)
@@ -41,6 +50,14 @@ public class Mage extends Ally {
 				m_y += 32;
 				m_dir = IDirection.SOUTH;
 				System.out.println("Avance au Sud \n");
+				
+				if(m_type==IType.PLAYER) {
+					m_model.map.iViewport++;
+					if(m_model.perso1.m_y>1536){
+						m_model.perso1.m_y=0;
+						m_model.map.iViewport=12;
+					}
+				}
 			}
 
 			else if (d == IDirection.WEST || (m_dir == IDirection.WEST && d == IDirection.FRONT)
@@ -50,12 +67,29 @@ public class Mage extends Ally {
 				m_x -= 32;
 				m_dir = IDirection.WEST;
 				System.out.println("Avance à l'Ouest \n");
+				
+				if(m_type==IType.PLAYER) {
+					m_model.map.jViewport--;
+					if(m_model.perso1.m_x<0){
+						m_model.perso1.m_x=2048;
+						m_model.map.jViewport=80;
+					}
+				}
 			}
 
 			else {
 				m_x += 32;
 				m_dir = IDirection.EAST;
 				System.out.println("Avance à l'Est \n");
+				
+				if(m_type==IType.PLAYER) {
+					m_model.map.jViewport++;
+					if(m_model.perso1.m_x>2048){
+						m_model.perso1.m_x=0;
+						m_model.map.jViewport=16;
+					}
+				}
+
 			}
 		return true; // L'action s'est bien déroulée
 	}

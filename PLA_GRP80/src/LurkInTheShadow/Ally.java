@@ -13,6 +13,7 @@ public class Ally extends Component {
 				int id_x, boolean show) {
 		super(model, sprite, rows, columns, x, y, h, w, scale, id_x, show);
 		model.allies.add(this);
+		//model.mobileComponents.add(this);
 		
 	}
 	

@@ -28,6 +28,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 		m_type=IType.ADVERSAIRE;
 		automate=model.queen;
 		power=100;
+		//model.mobileComponents.add(this);
 	}
 
 	@Override
@@ -204,7 +205,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 	@Override
 	public boolean egg(){
 
-		if(ponte>(100-hunger)/30) { //Pond une fois tous les (100-hunger)/30 steps egg
+		/*if(ponte>(100-hunger)/30) { //Pond une fois tous les (100-hunger)/30 steps egg
 
 			m_model.componentsToAdd.add(new Monster(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, m_scale, 17, m_show));
 
@@ -212,7 +213,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 		}
 		else {
 			ponte++;
-		}
+		}*/
 		return true;
 	}
 }

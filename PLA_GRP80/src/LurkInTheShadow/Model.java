@@ -22,10 +22,11 @@ public class Model extends GameModel {
 
 	public BufferedImage Sprite;
 	public Map map;
-	Shooter perso1;
-	Mage perso2;
-	Warrior perso3;
-	Queen reine;
+
+	public Shooter perso1;
+	public Mage perso2;
+	public Warrior perso3;
+	public Queen reine;
 	IAutomaton Player;
 	IAutomaton spawn1;
 	IAutomaton spawn2;
@@ -44,7 +45,15 @@ public class Model extends GameModel {
 	public LinkedList<Component> componentsToRemove;
 	public LinkedList<Component> components;
 	public LinkedList<Ally> allies;// Allies du plateau
+	public LinkedList<Monster> monstres;// Monstres du plateau
+	public LinkedList<Component> mobileComponents; //A afficher par dessus le plateau
 	public LinkedList<String> touches;
+	
+	//Tore viewport
+	public Component[][] ElementsMap;
+	public Component[][] ElementsTore;
+	//public LinkedList<Component> ElementsMap;
+	public LinkedList<Component> ElementsViewPort;
 
 	public Model() throws Interpreter_Exception, Exception {
 
@@ -53,7 +62,10 @@ public class Model extends GameModel {
 		this.touches = new LinkedList();
 		this.components = new LinkedList();
 
+		//Listes utiles
 		allies = new LinkedList<Ally>();
+		monstres = new LinkedList<Monster>();
+		mobileComponents = new LinkedList<Component>();
 		componentsToAdd = new LinkedList<Component>();
 		componentsToRemove = new LinkedList<Component>();
 
@@ -68,8 +80,6 @@ public class Model extends GameModel {
 		monster = iai_def.automatas.get(6);
 		transe = iai_def.automatas.get(7);
 
-		map = new Map(44, 64, this);
-
 		perso1 = new Shooter(this, Sprite, 10, 9, 224, 416, 1F, 81, true);
 		perso2 = new Mage(this, Sprite, 10, 9, 192, 416, 1F, 44, true);
 		perso3 = new Warrior(this, Sprite, 10, 9, 160, 416, 1F, 48, true);
@@ -78,7 +88,26 @@ public class Model extends GameModel {
 		perso1.setAutomate(Player);
 		perso2.setAutomate(spawn1);
 		perso3.setAutomate(spawn2);
+		
+		ElementsMap= new Component[48][64];
+		ElementsTore= new Component[96][128];
+		
+		map = new Map(48, 64, this);
 
+		
+		//	ElementsMap = new LinkedList<Component>();
+
+		//Options.SHOW_M1 = true;
+		
+		
+		
+//		ListIterator<Component> iter = this.ElementsMap.listIterator();
+//		Component tmp = iter.next();
+//		while(iter.hasNext() && tmp instanceof Obstacle ){
+//			tmp = iter.next();
+//		}
+		
+		
 	}
 
 	@Override
@@ -111,6 +140,9 @@ public class Model extends GameModel {
 		while (iterA.hasNext()) {
 			Component c=iterA.next();
 			components.add(c);
+			if (c.m_type!=IType.OBSTACLE && c.m_type!=IType.VOID) {
+				mobileComponents.add(c);
+			}
 		}
 		componentsToAdd.clear(); //Vide la liste
 		
@@ -119,10 +151,18 @@ public class Model extends GameModel {
 		while (iterR.hasNext()) {
 			Component c=iterR.next();
 			components.remove(c);
+			if (c.m_type!=IType.OBSTACLE && c.m_type!=IType.VOID) {
+				mobileComponents.remove(c);
+			}
 		}
 		componentsToRemove.clear(); //Vide la liste
 		
 	}
+	
+	public ListIterator<Component> components(){
+			return ElementsViewPort.listIterator();  
+	  }
+	
 
 	private void loadSprites() {
 
