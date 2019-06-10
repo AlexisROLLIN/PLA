@@ -20,7 +20,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 		super(model, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale, id_x, show);
 		life = 100;// inutile théoriquement, mais sécurité
 		power = 3;
-		periode_marche = 3;// Marche à une freq de 1/3
+		periode_marche = 1;// Marche à une freq de 1/3
 		marche = 1;
 		ponte=1;
 		speed = 32;

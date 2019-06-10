@@ -10,6 +10,10 @@ Player(Init){
   | Key(l) ? Get()   :(Init)
   }
   
+  Leader(Init){
+  * (Init): True ? Wait :(Init)
+  }
+  
  Allie1(Init1){
   * (Init1):
   | Closest(@,N) & (Cell(N,V) / Cell(N,T)) ? Move(N) :(Init1)

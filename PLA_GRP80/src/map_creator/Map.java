@@ -42,6 +42,24 @@ public class Map {
 		repartition();
 		firstCase();
 }
+	
+	public Map(int length, int width, Model model, int tab_map[][]) {
+		this.model = model;
+		this.length = length;
+		this.width = width;
+		tab = new int[length][width];
+		tabDecor = new int [length/2][width/2];
+		if (this.length % 2 == 1) {
+			realLen++;
+		}
+		if (this.width % 2 == 1) {
+			realWid++;
+		}
+		
+		tab=tab_map;
+		repartition();
+		firstCase();
+}
 
 	void initialisation() {
 		for (int i = 0; i < length; i++) {
