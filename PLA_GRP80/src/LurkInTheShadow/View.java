@@ -10,6 +10,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import map_creator.Fleche;
+import map_creator.MiniMap;
 import edu.ricm3.game.GameView;
 import edu.ricm3.game.Options;
 
@@ -22,7 +24,7 @@ public class View extends GameView {
 	int m_npaints;
 	int m_fps;
 	Model m_model;
-	BufferedImage background;
+	BufferedImage minimap;
 
 	public View(Model m) {
 		m_model = m;
@@ -74,6 +76,16 @@ public class View extends GameView {
 
 		Personnage perso1 = m_model.perso1;
 		perso1.paint(g);
+		
+		MiniMap minimap = m_model.minimap;
+		Fleche fleche = m_model.fleche;
+		
+		minimap.paintMiniMap(g);
+		fleche.paintMiniMap(g);
+
+
+
+		
 
 	}
 

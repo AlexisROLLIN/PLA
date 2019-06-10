@@ -197,4 +197,11 @@ public class Component {
 		int h = (int) (m_scale * m_h);
 		g.drawImage(img, (m_x-m_model.perso1.m_x)%1024+512, (m_y-m_model.perso1.m_y)%768+384, w, h, null);
 	}
+	
+	public void paintMiniMap(Graphics g) {
+		Image img = m_sprites[m_idx];
+		int w = (int) (m_scale * m_w);
+		int h = (int) (m_scale * m_h);
+		g.drawImage(img, (m_x)%1024,(m_y)%768, w, h, null);
+	}
 }

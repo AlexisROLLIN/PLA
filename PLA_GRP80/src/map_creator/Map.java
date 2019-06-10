@@ -209,128 +209,128 @@ public class Map {
 			for (int j = 0; j < width; j++) {
 				if (tab[i][j] == 1) {
 					Obstacle m = new Obstacle(this.model, 100,
-							this.model.Sprite, 10, 9, 32 * j, 32 * i, 1F, 1);
+							this.model.Sprite, 12, 11, 32 * j, 32 * i, 0.40F, 1);
 					m.m_idx = 4;
 					model.ElementsMap[i][j] = m;
 
 					model.ElementsTore[24 + i][32 + j] = m;
 					if (j < 32) {
 						Obstacle mTore = new Obstacle(this.model, 100,
-								this.model.Sprite, 10, 9, 32 * j + 64 * 32,
-								32 * i, 1F, 1);
+								this.model.Sprite, 12, 11, 32 * j + 64 * 32,
+								32 * i, 0.40F, 1);
 						mTore.m_idx = 4;
 						model.ElementsTore[i + 24][j + 96] = mTore;
 
 					}
 					if (j >= 32) {
 						Obstacle mTore = new Obstacle(this.model, 100,
-								this.model.Sprite, 10, 9, 32 * j - 64 * 32,
-								32 * i, 1F, 1);
+								this.model.Sprite, 12, 11, 32 * j - 64 * 32,
+								32 * i, 0.40F, 1);
 						mTore.m_idx = 4;
 						model.ElementsTore[i + 24][j - 32] = mTore;
 					}
 
 					if (i < 24) {
 						Obstacle mTore = new Obstacle(this.model, 100,
-								this.model.Sprite, 10, 9, 32 * j,
-								32 * i + 48 * 32, 1F, 1);
+								this.model.Sprite, 12, 11, 32 * j,
+								32 * i + 48 * 32, 0.40F, 1);
 						mTore.m_idx = 4;
 						model.ElementsTore[i + 72][j + 32] = mTore;
 					}
 					if (i >= 24) {
 						Obstacle mTore = new Obstacle(this.model, 100,
-								this.model.Sprite, 10, 9, 32 * j,
-								32 * i - 48 * 32, 1F, 1);
+								this.model.Sprite, 12, 11, 32 * j,
+								32 * i - 48 * 32, 0.40F, 1);
 						mTore.m_idx = 4;
 						model.ElementsTore[i - 24][j + 32] = mTore;
 					}
 					if (j < 32 && i < 24) {
 						Obstacle mTore = new Obstacle(this.model, 100,
-								this.model.Sprite, 10, 9, 32 * j + 64 * 32,
-								32 * i + 48 * 32, 1F, 1);
+								this.model.Sprite, 12, 11, 32 * j + 64 * 32,
+								32 * i + 48 * 32, 0.40F, 1);
 						mTore.m_idx = 4;
 						model.ElementsTore[i + 72][j + 96] = mTore;
 					}
 					if (j >= 32 && i < 24) {
 						Obstacle mTore = new Obstacle(this.model, 100,
-								this.model.Sprite, 10, 9, 32 * j - 64 * 32,
-								32 * i + 48 * 32, 1F, 1);
+								this.model.Sprite, 12, 11, 32 * j - 64 * 32,
+								32 * i + 48 * 32, 0.40F, 1);
 						mTore.m_idx = 4;
 						model.ElementsTore[i + 72][j - 32] = mTore;
 					}
 					if (j < 32 && i >= 24) {
 						Obstacle mTore = new Obstacle(this.model, 100,
-								this.model.Sprite, 10, 9, 32 * j + 64 * 32,
-								32 * i - 48 * 32, 1F, 1);
+								this.model.Sprite, 12, 11, 32 * j + 64 * 32,
+								32 * i - 48 * 32, 0.40F, 1);
 						mTore.m_idx = 4;
 						model.ElementsTore[i - 24][j + 96] = mTore;
 					}
 					if (j >= 32 && i >= 24) {
 						Obstacle mTore = new Obstacle(this.model, 100,
-								this.model.Sprite, 10, 9, 32 * j - 64 * 32,
-								32 * i - 48 * 32, 1F, 1);
+								this.model.Sprite, 12, 11, 32 * j - 64 * 32,
+								32 * i - 48 * 32, 0.40F, 1);
 						mTore.m_idx = 4;
 						model.ElementsTore[i - 24][j - 32] = mTore;
 					}
 
 				}
 				if (tab[i][j] == 0) {
-					Sol m = new Sol(this.model, 100, this.model.Sprite, 10, 9,
-							32 * j, 32 * i, 1F, 2);
+					Sol m = new Sol(this.model, 100, this.model.Sprite, 12, 11,
+							32 * j, 32 * i, 0.40F, 2);
 					m.m_idx = 86;
 					model.ElementsMap[i][j] = m;
 
 					model.ElementsTore[24 + i][32 + j] = m;
 					if (j < 32) {
 						Sol mTore = new Sol(this.model, 100, this.model.Sprite,
-								10, 9, 32 * j + 64 * 32, 32 * i, 1F, 2);
+								12, 11, 32 * j + 64 * 32, 32 * i, 0.40F, 2);
 						mTore.m_idx = 86;
 						model.ElementsTore[i + 24][j + 96] = mTore;
 
 					}
 					if (j >= 32) {
 						Sol mTore = new Sol(this.model, 100, this.model.Sprite,
-								10, 9, 32 * j - 64 * 32, 32 * i, 1F, 2);
+								12, 11, 32 * j - 64 * 32, 32 * i, 0.40F, 2);
 						mTore.m_idx = 86;
 						model.ElementsTore[i + 24][j - 32] = mTore;
 					}
 
 					if (i < 24) {
 						Sol mTore = new Sol(this.model, 100, this.model.Sprite,
-								10, 9, 32 * j, 32 * i + 48 * 32, 1F, 2);
+								12, 11, 32 * j, 32 * i + 48 * 32, 0.40F, 2);
 						mTore.m_idx = 86;
 						model.ElementsTore[i + 72][j + 32] = mTore;
 					}
 					if (i >= 24) {
 						Sol mTore = new Sol(this.model, 100, this.model.Sprite,
-								10, 9, 32 * j, 32 * i - 48 * 32, 1F, 2);
+								12, 11, 32 * j, 32 * i - 48 * 32, 0.40F, 2);
 						mTore.m_idx = 86;
 						model.ElementsTore[i - 24][j + 32] = mTore;
 					}
 					if (j < 32 && i < 24) {
 						Sol mTore = new Sol(this.model, 100, this.model.Sprite,
-								10, 9, 32 * j + 64 * 32, 32 * i + 48 * 32, 1F,
+								12, 11, 32 * j + 64 * 32, 32 * i + 48 * 32, 0.40F,
 								2);
 						mTore.m_idx = 86;
 						model.ElementsTore[i + 72][j + 96] = mTore;
 					}
 					if (j >= 32 && i < 24) {
 						Sol mTore = new Sol(this.model, 100, this.model.Sprite,
-								10, 9, 32 * j - 64 * 32, 32 * i + 48 * 32, 1F,
+								12, 11, 32 * j - 64 * 32, 32 * i + 48 * 32, 0.40F,
 								2);
 						mTore.m_idx = 86;
 						model.ElementsTore[i + 72][j - 32] = mTore;
 					}
 					if (j < 32 && i >= 24) {
 						Sol mTore = new Sol(this.model, 100, this.model.Sprite,
-								10, 9, 32 * j + 64 * 32, 32 * i - 48 * 32, 1F,
+								12, 11, 32 * j + 64 * 32, 32 * i - 48 * 32, 0.40F,
 								2);
 						mTore.m_idx = 86;
 						model.ElementsTore[i - 24][j + 96] = mTore;
 					}
 					if (j >= 32 && i >= 24) {
 						Sol mTore = new Sol(this.model, 100, this.model.Sprite,
-								10, 9, 32 * j - 64 * 32, 32 * i - 48 * 32, 1F,
+								12, 11, 32 * j - 64 * 32, 32 * i - 48 * 32, 0.40F,
 								2);
 						mTore.m_idx = 86;
 						model.ElementsTore[i - 24][j - 32] = mTore;
