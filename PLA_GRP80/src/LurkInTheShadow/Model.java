@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 
 import edu.ricm3.game.GameModel;
 import edu.ricm3.game.Options;
-<<<<<<< HEAD
 import interpreter.IAI_Definitions;
 import interpreter.IAutomaton;
 import interpreter.Interpreter_Exception;
@@ -19,18 +18,15 @@ import map_creator.Map;
 import ricm3.parser.AutomataParser;
 import ricm3.parser.Ast.AI_Definitions;
 import sauvegarde.Sauvegarde;
-=======
 import map_creator.Fleche;
 import map_creator.Map;
 import map_creator.MiniMap;
->>>>>>> tmpGaetan
 
 public class Model extends GameModel {
 
 	public BufferedImage Sprite;
 	public BufferedImage SpriteMiniMap;
 	public Map map;
-<<<<<<< HEAD
 
 	public Component mainPlayed;
 	public Shooter perso1;
@@ -52,6 +48,8 @@ public class Model extends GameModel {
 	IAutomaton monstre_desoriente;
 
 	public char Cgmt;
+	public MiniMap minimap;
+	public Fleche fleche;
 
 	int nbElements;
 	public LinkedList<Component> componentsToAdd; // Composants à ajouter sur le plateau après les steps
@@ -97,10 +95,10 @@ public class Model extends GameModel {
 		fireball = obst;
 		bullet = obst;
 
-		perso1 = new Shooter(this, Sprite, 10, 9, 512, 384, 1F, 81, true);
-		perso2 = new Mage(this, Sprite, 10, 9, 192, 416, 1F, 44, true);
-		perso3 = new Warrior(this, Sprite, 10, 9, 160, 416, 1F, 48, true);
-		reine = new Queen(this, Sprite, 10, 9, 320, 448, 1F, 13, true);
+		perso1 = new Shooter(this, Sprite, 12, 11, 512, 384, 1F, 81, true);
+		perso2 = new Mage(this, Sprite, 12, 11, 192, 416, 1F, 44, true);
+		perso3 = new Warrior(this, Sprite, 12, 11, 160, 416, 1F, 48, true);
+		reine = new Queen(this, Sprite, 12, 11, 320, 448, 2F, 112, true);
 
 		perso1.setAutomate(Player);
 		mainPlayed = perso1;
@@ -112,59 +110,22 @@ public class Model extends GameModel {
 
 		map = new Map(48, 64, this);
 		
-		/*if (load_config()==false) {
-			save_config();
-		}*/
-		// Test sauvegarde
-
-		// ElementsMap = new LinkedList<Component>();
-
-		// Options.SHOW_M1 = true;
-
-//		ListIterator<Component> iter = this.ElementsMap.listIterator();
-//		Component tmp = iter.next();
-//		while(iter.hasNext() && tmp instanceof Obstacle ){
-//			tmp = iter.next();
-//		}
-
-=======
-	public Personnage perso1;
-	public MiniMap minimap;
-	public Fleche fleche;
-
-	
-	public Component[][] ElementsMap;
-	public Component[][] ElementsTore;
-	
-
-	public Model() {
-		
-		loadSprites();
-		ElementsMap= new Component[48][64];
-		ElementsTore= new Component[96][128];
-		
-		perso1 = new Personnage(this, 100, Sprite, 12, 11, 512, 384, 0.40F, 1);
-		perso1.m_idx = 25;
-		
-		map = new Map(48, 64, this);
-		
-		
-		
 		//Charger l'image de la map
-		File imageFileMap = new File("src/map_creator/MiniMap");
-		try {
-			SpriteMiniMap = ImageIO.read(imageFileMap);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			System.exit(-1);
-		}
+				File imageFileMap = new File("src/Sprites/MiniMap");
+				try {
+					SpriteMiniMap = ImageIO.read(imageFileMap);
+				} catch (IOException ex) {
+					ex.printStackTrace();
+					System.exit(-1);
+				}
+				
+				minimap = new MiniMap(this,SpriteMiniMap,1, 1, perso1.m_x-512, perso1.m_y-384, 0.23F,0,true);
+				
+				fleche = new Fleche (this,Sprite,12, 11, perso1.m_x-512, perso1.m_y-384, 1F,123,true);
 		
-		minimap = new MiniMap(this,100,SpriteMiniMap,1, 1, perso1.m_x-512, perso1.m_y-384, 0.23F, 1);
-		
-		fleche = new Fleche (this,100,Sprite,12, 11, perso1.m_x-512, perso1.m_y-384, 0.40F, 1);
-		fleche.m_idx=123;
-		
->>>>>>> tmpGaetan
+
+
+	
 	}
 
 	@Override
@@ -180,7 +141,6 @@ public class Model extends GameModel {
 	@Override
 	public void step(long now) {
 		perso1.Afficher();
-<<<<<<< HEAD
 		Iterator<Component> iter = this.components.iterator();
 
 		while (iter.hasNext()) {
@@ -214,26 +174,17 @@ public class Model extends GameModel {
 			}
 		}
 		componentsToRemove.clear(); // Vide la liste
-
+		fleche.Coordonnees();
+		fleche.step(now);
 	}
 
 	public ListIterator<Component> components() {
 		return ElementsViewPort.listIterator();
 	}
-=======
-		fleche.Coordonnees();
-		fleche.step(now);
-	}
-	
-	public ListIterator<Component> components(){
-			return null;  
-	}
-	
->>>>>>> tmpGaetan
 
 	private void loadSprites() {
 
-		File imageFile = new File("src/map_creator/testSprites.png");
+		File imageFile = new File("src/Sprites/testSprite.png");
 		try {
 			Sprite = ImageIO.read(imageFile);
 		} catch (IOException ex) {

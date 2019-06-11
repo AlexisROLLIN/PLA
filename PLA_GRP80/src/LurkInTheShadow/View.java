@@ -24,12 +24,9 @@ public class View extends GameView {
 	int m_npaints;
 	int m_fps;
 	Model m_model;
-<<<<<<< HEAD
+
 	BufferedImage background;
-	
-=======
 	BufferedImage minimap;
->>>>>>> tmpGaetan
 
 	public View(Model m) {
 		m_model = m;
@@ -71,39 +68,26 @@ public class View extends GameView {
 			for (int j = 0; j < nbCasej; j++) {
 
 				c = m_model.ElementsTore[i1][j1];
-<<<<<<< HEAD
-=======
-				
->>>>>>> tmpGaetan
-				if (c.m_show == true) { //Verifie si l'objet est dans le rayon du joueur
+				if (c.m_show == true) { // Verifie si l'objet est dans le rayon
+										// du joueur
 					c.paint(g);
 				}
 				j1++;
 			}
 			i1++;
 		}
-<<<<<<< HEAD
-		
+
 		Iterator<Component> iterC = m_model.mobileComponents.iterator();
-		
+
 		while (iterC.hasNext()) {
 			iterC.next().paint(g);
 		}
-=======
 
-		Personnage perso1 = m_model.perso1;
-		perso1.paint(g);
-		
 		MiniMap minimap = m_model.minimap;
 		Fleche fleche = m_model.fleche;
-		
-		minimap.paintMiniMap(g);
-		fleche.paintMiniMap(g);
 
-
-
->>>>>>> tmpGaetan
-		
+		minimap.paint(g);
+		fleche.paint(g);
 
 	}
 
