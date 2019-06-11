@@ -23,7 +23,7 @@ public class Sauvegarde {
 	
 	static int nb_cases_lig=48;
 	static int nb_cases_col=64;
-	static int nb_auto=8;
+	static int nb_auto=12;
 
 	public Sauvegarde(int map[][], IAutomaton autos[], String fichier) {
 		tab_map = map;

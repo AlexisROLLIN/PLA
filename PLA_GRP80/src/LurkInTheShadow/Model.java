@@ -17,17 +17,21 @@ import interpreter.Interpreter_Exception;
 import map_creator.Map;
 import ricm3.parser.AutomataParser;
 import ricm3.parser.Ast.AI_Definitions;
+import sauvegarde.Sauvegarde;
 
 public class Model extends GameModel {
 
 	public BufferedImage Sprite;
 	public Map map;
-	Shooter perso1;
-	Mage perso2;
-	Warrior perso3;
-	Queen reine;
+
+	public Component mainPlayed;
+	public Shooter perso1;
+	public Mage perso2;
+	public Warrior perso3;
+	public Queen reine;
+
 	IAutomaton Player;
-	IAutomaton spawn;
+	IAutomaton leader;
 	IAutomaton spawn1;
 	IAutomaton spawn2;
 	IAutomaton obst;
@@ -36,14 +40,25 @@ public class Model extends GameModel {
 	IAutomaton fireball;
 	IAutomaton bullet;
 	IAutomaton floor;
+	IAutomaton transe;
+	IAutomaton monstre_desoriente;
 
 	public char Cgmt;
 
 	int nbElements;
-	public int nb_monsters_to_be_added;
+	public LinkedList<Component> componentsToAdd; // Composants à ajouter sur le plateau après les steps
+	public LinkedList<Component> componentsToRemove;
 	public LinkedList<Component> components;
 	public LinkedList<Ally> allies;// Allies du plateau
+	public LinkedList<Monster> monstres;// Monstres du plateau
+	public LinkedList<Component> mobileComponents; // A afficher par dessus le plateau
 	public LinkedList<String> touches;
+
+	// Tore viewport
+	public Component[][] ElementsMap;
+	public Component[][] ElementsTore;
+	// public LinkedList<Component> ElementsMap;
+	public LinkedList<Component> ElementsViewPort;
 
 	public Model() throws Interpreter_Exception, Exception {
 
@@ -52,31 +67,57 @@ public class Model extends GameModel {
 		this.touches = new LinkedList();
 		this.components = new LinkedList();
 
+		// Listes utiles
 		allies = new LinkedList<Ally>();
-		nb_monsters_to_be_added = 0;
+		monstres = new LinkedList<Monster>();
+		mobileComponents = new LinkedList<Component>();
+		componentsToAdd = new LinkedList<Component>();
+		componentsToRemove = new LinkedList<Component>();
 
 		AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file("src/Automates/Automate"));
 		IAI_Definitions iai_def = ai_def.make();
-		spawn = iai_def.automatas.get(0);
-		spawn1 = iai_def.automatas.get(1);
-		spawn2 = iai_def.automatas.get(2);
-		obst = iai_def.automatas.get(3);
-		floor = iai_def.automatas.get(4);
-		queen = iai_def.automatas.get(5);
-		monster = iai_def.automatas.get(6);
+		Player = iai_def.automatas.get(0);
+		leader = iai_def.automatas.get(1);
+		spawn1 = iai_def.automatas.get(2);
+		spawn2 = iai_def.automatas.get(3);
+		obst = iai_def.automatas.get(4);
+		floor = iai_def.automatas.get(5);
+		queen = iai_def.automatas.get(6);
+		monster = iai_def.automatas.get(7);
+		transe = iai_def.automatas.get(8);
+		monstre_desoriente = iai_def.automatas.get(7);
+		fireball = obst;
+		bullet = obst;
 
-		Player = spawn;
-
-		map = new Map(44, 64, this);
-
-		perso1 = new Shooter(this, Sprite, 10, 9, 224, 416, 1F, 81, true);
+		perso1 = new Shooter(this, Sprite, 10, 9, 512, 384, 1F, 81, true);
 		perso2 = new Mage(this, Sprite, 10, 9, 192, 416, 1F, 44, true);
 		perso3 = new Warrior(this, Sprite, 10, 9, 160, 416, 1F, 48, true);
 		reine = new Queen(this, Sprite, 10, 9, 320, 448, 1F, 13, true);
 
-		perso1.setAutomate(spawn);
+		perso1.setAutomate(Player);
+		mainPlayed = perso1;
 		perso2.setAutomate(spawn1);
 		perso3.setAutomate(spawn2);
+
+		ElementsMap = new Component[48][64];
+		ElementsTore = new Component[96][128];
+
+		map = new Map(48, 64, this);
+		
+		/*if (load_config()==false) {
+			save_config();
+		}*/
+		// Test sauvegarde
+
+		// ElementsMap = new LinkedList<Component>();
+
+		// Options.SHOW_M1 = true;
+
+//		ListIterator<Component> iter = this.ElementsMap.listIterator();
+//		Component tmp = iter.next();
+//		while(iter.hasNext() && tmp instanceof Obstacle ){
+//			tmp = iter.next();
+//		}
 
 	}
 
@@ -105,10 +146,32 @@ public class Model extends GameModel {
 		// On ne peut pas ajouter de components pendant qu'on parcourt la liste de
 		// components
 		// On fait donc ça maintenant
-		for (int i = 0; i < nb_monsters_to_be_added; i++) {
-			new Monster(this, reine.m_sprite, reine.m_nrows, reine.m_ncols, reine.m_x, reine.m_y, 1F, 19, reine.m_show);
+		Iterator<Component> iterA = this.componentsToAdd.iterator();
+
+		while (iterA.hasNext()) {
+			Component c = iterA.next();
+			components.add(c);
+			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID) {
+				mobileComponents.add(c);
+			}
 		}
-		nb_monsters_to_be_added = 0;
+		componentsToAdd.clear(); // Vide la liste
+
+		Iterator<Component> iterR = this.componentsToRemove.iterator();
+
+		while (iterR.hasNext()) {
+			Component c = iterR.next();
+			components.remove(c);
+			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID) {
+				mobileComponents.remove(c);
+			}
+		}
+		componentsToRemove.clear(); // Vide la liste
+
+	}
+
+	public ListIterator<Component> components() {
+		return ElementsViewPort.listIterator();
 	}
 
 	private void loadSprites() {
@@ -121,6 +184,48 @@ public class Model extends GameModel {
 			System.exit(-1);
 		}
 
+	}
+
+	public void save_config() {
+
+		IAutomaton auto[] = new IAutomaton[12];
+		auto[0] = Player;
+		auto[1] = leader;
+		auto[2] = spawn1;
+		auto[3] = spawn2;
+		auto[4] = obst;
+		auto[5] = monster;
+		auto[6] = queen;
+		auto[7] = fireball;
+		auto[8] = bullet;
+		auto[9] = floor;
+		auto[10] = transe;
+		auto[11] = monstre_desoriente;
+		Sauvegarde sauv = new Sauvegarde(map.tab, auto, "src/Automates/Automate");
+		sauv.encode("game_save.txt");
+	}
+
+	public boolean load_config() {
+
+		Sauvegarde sauv = Sauvegarde.decode("game_save.txt");
+		if (sauv == null) {
+			return false;
+		}
+		
+		map = new Map(48, 64, this, sauv.tab_map);
+		Player = sauv.tab_auto[0];
+		leader = sauv.tab_auto[1];
+		spawn1 = sauv.tab_auto[2];
+		spawn2 = sauv.tab_auto[3];
+		obst = sauv.tab_auto[4];
+		monster = sauv.tab_auto[5];
+		queen = sauv.tab_auto[6];
+		fireball = sauv.tab_auto[7];
+		bullet = sauv.tab_auto[8];
+		floor = sauv.tab_auto[9];
+		transe = sauv.tab_auto[10];
+		monstre_desoriente = sauv.tab_auto[11];
+		return true;
 	}
 
 }

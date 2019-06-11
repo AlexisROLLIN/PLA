@@ -181,6 +181,8 @@ public abstract class IAction {
 				e.Get2();
 			} else if (e.m_model.Cgmt == 'o') {
 				e.Get3();
+			} else if (e.m_model.Cgmt == 'l') {
+				e.GetQueen();
 			}
 			return true;
 		}
@@ -202,7 +204,7 @@ public abstract class IAction {
 		}
 
 		public boolean exec(Component e) {
-			return true;
+			return e.kamikaze();
 		}
 	}
 

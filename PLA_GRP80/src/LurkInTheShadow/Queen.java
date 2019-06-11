@@ -22,7 +22,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 		power = 3;
 		periode_marche = 3;// Marche à une freq de 1/3
 		marche = 1;
-		ponte=1;
+		ponte=5000;
 		speed = 32;
 		hunger = 0; //faim maximum = 100
 		m_type=IType.ADVERSAIRE;
@@ -44,6 +44,14 @@ public class Queen extends Component { // Changement sprites à faire !!
 				m_y -= speed;
 				m_dir = IDirection.NORTH;
 				System.out.println("Avance au Nord\n");
+				
+				if(m_type==IType.PLAYER) {
+					m_model.map.iViewport--;
+					if(m_model.mainPlayed.m_y<0){
+						m_model.mainPlayed.m_y=1504;
+						m_model.map.iViewport=59;
+					}
+				}
 			}
 
 			else if (d == IDirection.SOUTH || (m_dir == IDirection.SOUTH && d == IDirection.FRONT)
@@ -53,6 +61,14 @@ public class Queen extends Component { // Changement sprites à faire !!
 				m_y += speed;
 				m_dir = IDirection.SOUTH;
 				System.out.println("Avance au Sud \n");
+				
+				if(m_type==IType.PLAYER) {
+					m_model.map.iViewport++;
+					if(m_model.mainPlayed.m_y>1504){
+						m_model.mainPlayed.m_y=0;
+						m_model.map.iViewport=12;
+					}
+				}
 			}
 
 			else if (d == IDirection.WEST || (m_dir == IDirection.WEST && d == IDirection.FRONT)
@@ -62,12 +78,28 @@ public class Queen extends Component { // Changement sprites à faire !!
 				m_x -= speed;
 				m_dir = IDirection.WEST;
 				System.out.println("Avance à l'Ouest \n");
+				
+				if(m_type==IType.PLAYER) {
+					m_model.map.jViewport--;
+					if(m_model.mainPlayed.m_x<0){
+						m_model.mainPlayed.m_x=2016;
+						m_model.map.jViewport=79;
+					}
+				}
 			}
 
 			else {
 				m_x += speed;
 				m_dir = IDirection.EAST;
 				System.out.println("Avance à l'Est \n");
+				
+				if(m_type==IType.PLAYER) {
+					m_model.map.jViewport++;
+					if(m_model.mainPlayed.m_x>2016){
+						m_model.mainPlayed.m_x=0;
+						m_model.map.jViewport=16;
+					}
+				}
 			}
 			marche = 1;
 		} else {
@@ -203,10 +235,10 @@ public class Queen extends Component { // Changement sprites à faire !!
 	
 	@Override
 	public boolean egg(){
+		
+		if(ponte>(100-hunger)/30 && m_model.monstres.size()<=30) { //Pond une fois tous les (100-hunger)/30 steps egg
 
-		if(ponte>(100-hunger)/30) { //Pond une fois tous les (100-hunger)/30 steps egg
-
-			m_model.nb_monsters_to_be_added++;
+			m_model.componentsToAdd.add(new Monster(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, m_scale, 17, m_show));
 
 			ponte=1;
 		}
