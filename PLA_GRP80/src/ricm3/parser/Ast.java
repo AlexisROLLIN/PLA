@@ -252,6 +252,22 @@ public class Ast {
 
 		public abstract IAction make_action() throws Interpreter_Exception;// Redefini par les sous-classes
 	}
+	
+	public static class None extends Expression {
+		None(){}
+		public final String toString() { return "none" ; }
+		public String tree_edges() { return "" ; }
+		
+		public ICondition make_condition() throws Interpreter_Exception {
+			throw new Interpreter_Exception("None ne peut pas être une condition");
+		}
+
+		public IAction make_action() throws Interpreter_Exception {
+			return new IWait();
+		}
+		
+		
+	}
 
 	public static class UnaryOp extends Expression {
 
@@ -485,6 +501,11 @@ public class Ast {
 	public static class Action extends Ast {
 
 		Expression expression;
+		
+		Action(){
+			this.kind = "Action" ;
+			this.expression = new None();
+		}
 
 		Action(Expression expression) {
 			this.kind = "Action";

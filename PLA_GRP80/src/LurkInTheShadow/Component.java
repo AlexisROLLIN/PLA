@@ -123,132 +123,6 @@ public class Component {
 		}
 	}
 
-	boolean Collision(Component c) {
-		Rectangle r1 = this.getBounds();
-		Rectangle r2 = c.getBounds();
-
-		if (r1.intersects(r2)) {
-			return true;
-		} else
-			return false;
-
-	}
-
-	/*boolean CollisionTotale() {
-		if (Options.SHOW_M1) {
-			Iterator<Component> iter = this.m_model.ElementsM1.iterator();
-			Component tmp = iter.next();
-			while (iter.hasNext()) {
-				if (tmp instanceof Obstacle) {
-					if (this.Collision(tmp)) {
-						return true;
-					}
-				}
-				tmp = iter.next();
-			}
-		}
-		if (Options.SHOW_M2) {
-			Iterator<Component> iter = m_model.ElementsM2.iterator();
-			Component tmp = iter.next();
-			while (iter.hasNext()) {
-				if (tmp instanceof Obstacle) {
-					if (this.Collision(tmp)) {
-						return true;
-					}
-				}
-				tmp = iter.next();
-			}
-		}
-		if (Options.SHOW_M3) {
-			Iterator<Component> iter = m_model.ElementsM3.iterator();
-			Component tmp = iter.next();
-			while (iter.hasNext()) {
-				if (tmp instanceof Obstacle) {
-					if (this.Collision(tmp)) {
-						return true;
-					}
-				}
-				tmp = iter.next();
-			}
-		}
-		if (Options.SHOW_M4) {
-			Iterator<Component> iter = m_model.ElementsM4.iterator();
-			Component tmp = iter.next();
-			while (iter.hasNext()) {
-				if (tmp instanceof Obstacle) {
-					if (this.Collision(tmp)) {
-						return true;
-					}
-				}
-				tmp = iter.next();
-			}
-		}
-=======
-	boolean CollisionTotale() {
-
-		// Iterator<Component> iter = this.m_model.ElementsMap.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-
-		// if (Options.SHOW_M1) {
-		// Iterator<Component> iter = this.m_model.ElementsM1.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
-		// if (Options.SHOW_M2) {
-		// Iterator<Component> iter = m_model.ElementsM2.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
-		// if (Options.SHOW_M3) {
-		// Iterator<Component> iter = m_model.ElementsM3.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
-		// if (Options.SHOW_M4) {
-		// Iterator<Component> iter = m_model.ElementsM4.iterator();
-		// Component tmp = iter.next();
-		// while (iter.hasNext()) {
-		// if (tmp instanceof Obstacle) {
-		// if (this.Collision(tmp)) {
-		// return true;
-		// }
-		// }
-		// tmp = iter.next();
-		// }
-		// }
-
->>>>>>> tmpGaetan
-		return false;
-	}*/
 	
 	public double distance(Component c1, Component c2) {
 		int a = (c2.m_x - c1.m_x) * (c2.m_x - c1.m_x);
@@ -261,6 +135,8 @@ public class Component {
 		
 		if (this instanceof Queen) {
 			this.setAutomate(m_model.queen);
+			this.m_type=IType.ADVERSAIRE;
+			m_model.perso1.m_type=IType.PLAYER;
 			m_model.perso1.setAutomate(m_model.Player);
 			m_model.perso2.setAutomate(m_model.spawn1);
 			m_model.perso3.setAutomate(m_model.spawn2);
@@ -274,6 +150,7 @@ public class Component {
 			m_model.perso1.m_type=IType.PLAYER;
 			m_model.mainPlayed=m_model.perso1;
 		}
+		m_model.map.firstCase();
 
 	}
 
@@ -281,6 +158,8 @@ public class Component {
 
 		if (this instanceof Queen) {
 			this.setAutomate(m_model.queen);
+			this.m_type=IType.ADVERSAIRE;
+			m_model.perso2.m_type=IType.PLAYER;
 			m_model.perso1.setAutomate(m_model.spawn1);
 			m_model.perso2.setAutomate(m_model.Player);
 			m_model.perso3.setAutomate(m_model.spawn2);
@@ -294,6 +173,7 @@ public class Component {
 			m_model.perso2.m_type=IType.PLAYER;
 			m_model.mainPlayed=m_model.perso2;
 		}
+		m_model.map.firstCase();
 
 	}
 
@@ -301,6 +181,8 @@ public class Component {
 
 		if (this instanceof Queen) {
 			this.setAutomate(m_model.queen);
+			this.m_type=IType.ADVERSAIRE;
+			m_model.perso3.m_type=IType.PLAYER;
 			m_model.perso1.setAutomate(m_model.spawn1);
 			m_model.perso2.setAutomate(m_model.spawn2);
 			m_model.perso3.setAutomate(m_model.Player);
@@ -314,6 +196,7 @@ public class Component {
 			m_model.perso3.m_type=IType.PLAYER;
 			m_model.mainPlayed=m_model.perso3;
 		}
+		m_model.map.firstCase();
 
 	}
 	
@@ -331,6 +214,7 @@ public class Component {
 		if (!(this instanceof Queen)) {
 			speed_up_world();
 		}
+		m_model.map.firstCase();
 	}
 	
 	public void slow_world() {
@@ -403,35 +287,6 @@ public class Component {
 		g.drawImage(img, (m_x-m_model.mainPlayed.m_x)%1024+512, (m_y-m_model.mainPlayed.m_y)%768+384, w, h, null);
 	}
 	
-//	public void paintToreR(Graphics g,int nbCasex) {
-//		Image img = m_sprites[m_idx];
-//		int w = (int) (m_scale * m_w);
-//		int h = (int) (m_scale * m_h);
-//		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+32*nbCasex+512, (m_y-m_model.perso1.m_y)%768+384, w, h, null);
-//	}
-//	public void paintToreS(Graphics g,int nbCasey) {
-//		Image img = m_sprites[m_idx];
-//		int w = (int) (m_scale * m_w);
-//		int h = (int) (m_scale * m_h);
-//		g.drawImage(img,(m_x-m_model.perso1.m_x)%1024+512, (m_y-m_model.perso1.m_y)%768+32*nbCasey+384, w, h, null);
-//	}
-	public void paintToreRS(Graphics g,int nbCasex,int nbCasey) {
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.mainPlayed.m_x)%1024+32*nbCasex+512, (m_y-m_model.mainPlayed.m_y)%768+32*nbCasey+384, w, h, null);
-	}
-	public void paintToreLN(Graphics g,int nbCasex,int nbCasey) {
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.mainPlayed.m_x)%1024-32*nbCasex+512, (m_y-m_model.mainPlayed.m_y)%768-32*nbCasey+384, w, h, null);
-	}
-	public void paintToreL(Graphics g,int nbCasex,int nbCasey) {
-		Image img = m_sprites[m_idx];
-		int w = (int) (m_scale * m_w);
-		int h = (int) (m_scale * m_h);
-		g.drawImage(img,(m_x-m_model.mainPlayed.m_x)%1024-32*nbCasex+512, (m_y-m_model.mainPlayed.m_y)%768-32*nbCasey+384, w, h, null);
-	}
+	
 
 }

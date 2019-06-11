@@ -89,7 +89,7 @@ public class Model extends GameModel {
 		fireball = obst;
 		bullet = obst;
 
-		perso1 = new Shooter(this, Sprite, 10, 9, 224, 416, 1F, 81, true);
+		perso1 = new Shooter(this, Sprite, 10, 9, 512, 384, 1F, 81, true);
 		perso2 = new Mage(this, Sprite, 10, 9, 192, 416, 1F, 44, true);
 		perso3 = new Warrior(this, Sprite, 10, 9, 160, 416, 1F, 48, true);
 		reine = new Queen(this, Sprite, 10, 9, 320, 448, 1F, 13, true);

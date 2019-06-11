@@ -32,8 +32,8 @@ public class Ally extends Component {
 				if(m_type==IType.PLAYER) {
 					m_model.map.iViewport--;
 					if(m_model.mainPlayed.m_y<0){
-						m_model.mainPlayed.m_y=1536;
-						m_model.map.iViewport=60;
+						m_model.mainPlayed.m_y=1504;
+						m_model.map.iViewport=59;
 					}
 				}
 			}
@@ -48,7 +48,7 @@ public class Ally extends Component {
 				
 				if(m_type==IType.PLAYER) {
 					m_model.map.iViewport++;
-					if(m_model.mainPlayed.m_y>1536){
+					if(m_model.mainPlayed.m_y>1504){
 						m_model.mainPlayed.m_y=0;
 						m_model.map.iViewport=12;
 					}
@@ -66,8 +66,8 @@ public class Ally extends Component {
 				if(m_type==IType.PLAYER) {
 					m_model.map.jViewport--;
 					if(m_model.mainPlayed.m_x<0){
-						m_model.mainPlayed.m_x=2048;
-						m_model.map.jViewport=80;
+						m_model.mainPlayed.m_x=2016;
+						m_model.map.jViewport=79;
 					}
 				}
 			}
@@ -79,7 +79,7 @@ public class Ally extends Component {
 				
 				if(m_type==IType.PLAYER) {
 					m_model.map.jViewport++;
-					if(m_model.mainPlayed.m_x>2048){
+					if(m_model.mainPlayed.m_x>2016){
 						m_model.mainPlayed.m_x=0;
 						m_model.map.jViewport=16;
 					}
