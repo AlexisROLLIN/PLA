@@ -80,7 +80,7 @@ public class View extends GameView {
 		Iterator<Component> iterC = m_model.mobileComponents.iterator();
 
 		while (iterC.hasNext()) {
-			iterC.next().paint(g);
+			iterC.next().paintPerso(g);
 		}
 
 		MiniMap minimap = m_model.minimap;
