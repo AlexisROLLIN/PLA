@@ -17,17 +17,32 @@
  */
 package LurkInTheShadow;
 
+import javax.swing.JComboBox;
+import javax.swing.Spring;
+
 public class Options {
-  public static final int W_WIDTH = 1366;
-  public static final int W_HEIGHT = 768;
-  
-  public static final int PW_WIDTH = 1024;
-  
-  public static final int IHM_WIDTH = W_WIDTH - PW_WIDTH;
-  public static final int NB_I = 3;
-  
-  
+	public static final int W_WIDTH = 1024;
+	public static final int W_HEIGHT = 768;
 
+	public static final int NB_I = 3;
 
+	public static final int I_WIDTH = W_WIDTH / NB_I;
+	public static final int IHM_WIDTH = 64;
 
+	public static final int PW_HEIGHT = W_HEIGHT - IHM_WIDTH;
+	
+	public static final float MAX_DURABILITY = 9000; // 3 min
+	
+	public static final int MAX_SCORE = Integer.MAX_VALUE;
+	
+	public static Spring AUTOMATA_WARRIOR;
+	public static Spring AUTOMATA_SHOOTER;
+	public static Spring AUTOMATA_MAGE;
+	public static Spring AUTOMATA_FIREBALL;
+	public static Spring AUTOMATA_BULLET;
+	public static Spring AUTOMATA_MONSTER;
+	public static Spring AUTOMATA_QUEEN;
+	public static Spring AUTOMATA_OBST;
+	public static Spring AUTOMATA_FLOOR;
+	public static Spring AUTOMATA_ITEMS;
 }

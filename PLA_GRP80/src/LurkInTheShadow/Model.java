@@ -6,11 +6,15 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import javax.imageio.ImageIO;
+
 import edu.ricm3.game.GameModel;
 import LurkInTheShadow.Mage;
 import LurkInTheShadow.Wall;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 public class Model extends GameModel {
 	BufferedImage m_testSprite;
@@ -23,12 +27,20 @@ public class Model extends GameModel {
 	Bullet m_bullet;
 	Wall m_wall;
 	IHM m_IHM;
+	Battery m_battery;
+	// EMF m_EMF;
 	Score m_score;
 	LinkedList<Component> components;
 
-	public Model() {
+	public Model() {		
+		
 		loadSprites();
 		this.components = new LinkedList<Component>();
+
+		// Decor
+
+		m_wall = new Wall(this, 400, 400, 32, 32, 3F, m_testSprite, 10, 9, 4, true);
+		this.components.add(m_wall);
 
 		// Warrior
 
@@ -38,7 +50,7 @@ public class Model extends GameModel {
 		int[] spritesGoRightWarrior = { 66, 62, 67 };
 
 		m_warrior = new Warrior(this, 300, 200, 32, 32, 3F, m_testSprite, 10, 9, 48, spritesGoUpWarrior,
-				spritesGoDownWarrior, spritesGoLeftWarrior, spritesGoRightWarrior, true, 200, 10, 1, 0);
+				spritesGoDownWarrior, spritesGoLeftWarrior, spritesGoRightWarrior, true, 200, 10, 1, 1);
 		this.components.add(m_warrior);
 
 		// Shooter
@@ -49,7 +61,7 @@ public class Model extends GameModel {
 		int[] spritesGoRightShooter = { 72, 68, 71 };
 
 		m_shooter = new Shooter(this, 200, 400, 32, 32, 3F, m_testSprite, 10, 9, 81, spritesGoUpShooter,
-				spritesGoDownShooter, spritesGoLeftShooter, spritesGoRightShooter, true, 150, 15, 1, 0);
+				spritesGoDownShooter, spritesGoLeftShooter, spritesGoRightShooter, true, 150, 15, 1, 1);
 		this.components.add(m_shooter);
 
 		// Mage
@@ -60,23 +72,28 @@ public class Model extends GameModel {
 		int[] spritesGoRightMage = { 37, 38 };
 
 		m_mage = new Mage(this, 300, 400, 32, 32, 3F, m_testSprite, 10, 9, 39, spritesGoUpMage, spritesGoDownMage,
-				spritesGoLeftMage, spritesGoRightMage, true, 100, 20, 1, 0);
+				spritesGoLeftMage, spritesGoRightMage, true, 100, 20, 1, 1);
 		this.components.add(m_mage);
-
-		// Decor
-
-		m_wall = new Wall(this, 400, 400, 32, 32, 3F, m_testSprite, 10, 9, 4, true);
-		this.components.add(m_wall);
+		
 		m_main = m_shooter;
-		
+
 		// IHM
-		
-		m_IHM = new IHM(this, Options.PW_WIDTH, 0, Options.IHM_WIDTH, Options.W_HEIGHT, Color.gray);
-		
+
+		m_IHM = new IHM(this, 0, 0, Options.W_WIDTH, Options.IHM_WIDTH, Color.gray);
+
+		// Battery
+
+		m_battery = new Battery(this, 85, -61, 32, 32, 6F, m_testSprite, 10, 9, 8, true);
+
+		// EMF
+
+		// m_EMF = new EMF(...);
+
+		// Score
+
 		Font font = new Font("TimesRoman", Font.BOLD, 32);
-		m_score = new Score(this, Options.PW_WIDTH, Options.W_HEIGHT / Options.NB_I, font);
-		
-		
+		m_score = new Score(this, (Options.I_WIDTH * 2) + 85, 43, font);
+
 	}
 
 	public Character main() {
@@ -103,8 +120,12 @@ public class Model extends GameModel {
 		return m_fireball;
 	}
 
-	public Wall Wall() {
+	public Wall wall() {
 		return m_wall;
+	}
+
+	public Battery battery() {
+		return m_battery;
 	}
 
 	@Override
@@ -117,7 +138,7 @@ public class Model extends GameModel {
 	}
 
 	private void loadSprites() {
-		File imageFile = new File("src/Sprites/testSprites.png");
+		File imageFile = new File("src/Sprites/sprites.png");
 
 		try {
 			m_testSprite = ImageIO.read(imageFile);

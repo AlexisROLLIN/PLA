@@ -160,11 +160,11 @@ public class Component {
 			}
 
 			if (0 > m_origin.x + (int) (m_scale * m_w)) {
-				m_origin.x += Options.PW_WIDTH;
+				m_origin.x += Options.W_WIDTH;
 			}
 
 			if (1024 < m_origin.x) {
-				m_origin.x -= (Options.PW_WIDTH + (int) (m_scale * m_w));
+				m_origin.x -= (Options.W_WIDTH + (int) (m_scale * m_w));
 			}
 		}
 

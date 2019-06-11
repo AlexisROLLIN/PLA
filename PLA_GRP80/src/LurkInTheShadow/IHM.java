@@ -31,6 +31,6 @@ public class IHM {
 
 	void paint(Graphics g) {
 		g.setColor(m_color);
-		g.fillRect(0, 0, m_w, m_h);
+		g.fillRect(m_origin.x, m_origin.y, m_w, m_h);
 	}
 }

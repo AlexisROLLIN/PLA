@@ -7,6 +7,7 @@ import java.awt.Color;
 
 public class Ally extends Character {
 	int faction;
+//	Battery m_battery;
 
 	public Ally(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,
 			int[] spritesGoUp, int[] spritesGoDown, int[] spritesGoLeft, int[] spritesGoRight, boolean show, int HP,
@@ -44,6 +45,7 @@ public class Ally extends Character {
 			}
 			
 			translate();
+			m_model.m_battery.consumes(m_intensity);
 		}
 
 		if (0 >= HP) {

@@ -1,14 +1,18 @@
 package LurkInTheShadow;
 
+import java.awt.Button;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
+
+import javax.swing.JFrame;
 
 import edu.ricm3.game.GameController;
 import LurkInTheShadow.Model;
@@ -17,6 +21,9 @@ import LurkInTheShadow.View;
 public class Controller extends GameController implements ActionListener {
 	Model m_model;
 	View m_view;
+	
+	private Button m_play;
+	private Button m_options;
 
 	public Controller(Model model, View view) {
 		this.m_model = model;
@@ -129,9 +136,30 @@ public class Controller extends GameController implements ActionListener {
 	}
 
 	public void notifyVisible() {
+		
+		JFrame gameMenu = new JFrame();
+		gameMenu.setSize(450, 700);
+		gameMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gameMenu.setTitle("Game Menu");
+		
+//		Rectangle r = new Rectangle(0, 0, Options.W_WIDTH, Options.W_HEIGHT);	
+//		Container cont = new Container();
+//		cont.setLayout(new FlowLayout());
+
+		m_play = new Button("Play");
+		m_play.addActionListener(this);
+		gameMenu.add(m_play);
+
+		m_options = new Button("Options");
+		m_options.addActionListener(this);
+		gameMenu.add(m_options);		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	}
+		Object s = e.getSource();
+		if (s == m_play)
+			System.out.println("Play On !");
+		else if (s == m_options)
+			System.out.println("Options !");	}
 }

@@ -18,7 +18,23 @@ public class Score {
 		m_model = model;
 		m_origin = new Point(x, y);
 		m_font = font;
-		m_points = 99999999;
+		m_points = 0;
+	}
+
+	void earn(int points) {
+		if (0 > m_points + points) {
+			m_points = Options.MAX_SCORE;
+		} else {
+			m_points += points;
+		}
+	}
+
+	void lose(int points) {
+		if (0 > m_points - points) {
+			m_points = 0;
+		} else {
+			m_points -= points;
+		}
 	}
 
 	/**
@@ -28,10 +44,8 @@ public class Score {
 	 **/
 
 	void paint(Graphics g) {
-		g.setColor(Color.red);
-		g.fillRect(114, 85, m_w, 85);
 		g.setColor(Color.white);
 		g.setFont(m_font);
-		g.drawString(String.valueOf(m_points), 114, 85);
+		g.drawString(String.valueOf(m_points), m_origin.x, m_origin.y);
 	}
 }

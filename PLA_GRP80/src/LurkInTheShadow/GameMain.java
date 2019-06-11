@@ -17,8 +17,9 @@ public class GameMain {
 		Controller controller = new Controller(model, view);
 
 		Dimension d = new Dimension(Options.W_WIDTH, Options.W_HEIGHT);
+		
 		new GameUI(model, view, controller, d);
-
+		
 		return;
 	}
 

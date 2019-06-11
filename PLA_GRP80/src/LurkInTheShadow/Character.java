@@ -9,7 +9,7 @@ public class Character extends Component {
 	int maxHP;
 	int HP;
 	int damage;
-	int intensity;
+	int m_intensity;
 	int[] m_spritesGoUp;
 	int[] m_spritesGoDown;
 	int[] m_spritesGoLeft;
@@ -26,7 +26,7 @@ public class Character extends Component {
 		this.maxHP = maxHP;
 		this.HP = maxHP;
 		this.damage = damage;
-		this.intensity = intensity;
+		this.m_intensity = intensity;
 		this.m_spritesGoUp = spritesGoUp;
 		this.m_spritesGoDown = spritesGoDown;
 		this.m_spritesGoLeft = spritesGoLeft;

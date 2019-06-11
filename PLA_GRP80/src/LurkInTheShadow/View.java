@@ -43,9 +43,9 @@ public class View extends GameView {
 
 		Image image = m_model.m_background;
 		g.drawImage(image, 0, 0, 1024, 768, null);
-		
+
 		m_model.m_main.vision();
-		
+
 		Component currComp;
 		Iterator<Component> iter = m_model.components.iterator();
 		while (iter.hasNext()) {
@@ -54,12 +54,19 @@ public class View extends GameView {
 				currComp.paint(g);
 			}
 		}
-		
-		Graphics gIHM = g.create(m_model.m_IHM.m_origin.x, m_model.m_IHM.m_origin.y, m_model.m_IHM.m_w, m_model.m_IHM.m_h);
-		m_model.m_IHM.paint(gIHM);
-		
-		Graphics gScore = gIHM.create(0, 0, m_model.m_IHM.m_w, m_model.m_IHM.m_h / Options.NB_I);
-		m_model.m_score.paint(gScore);
-		
+
+		m_model.m_IHM.paint(g);
+
+		m_model.m_battery.paint(g);
+
+		g.setColor(Color.black);
+		g.drawLine(Options.I_WIDTH, 0, Options.I_WIDTH, Options.IHM_WIDTH);
+
+		//
+
+		g.setColor(Color.black);
+		g.drawLine(Options.I_WIDTH * 2, 0, Options.I_WIDTH * 2, Options.IHM_WIDTH * 2);
+
+		m_model.m_score.paint(g);
 	}
 }
