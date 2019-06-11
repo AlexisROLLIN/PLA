@@ -50,7 +50,10 @@ public class View extends GameView {
 			Iterator<Component> iter = this.m_model.ElementsM1.iterator();
 			Component c = iter.next();
 			while (iter.hasNext()) {
-				if (!(c instanceof Personnage) && c.m_show) {
+				if (!(c instanceof Personnage) && !(c instanceof Items) && c.m_show) {
+					c.paint(g);
+				}
+				if (c instanceof Items && c.m_show) {
 					c.paint(g);
 				}
 				c=iter.next();
@@ -60,7 +63,10 @@ public class View extends GameView {
 			Iterator<Component> iter = this.m_model.ElementsM2.iterator();
 			Component c = iter.next();
 			while (iter.hasNext()) {
-				if (!(c instanceof Personnage) && c.m_show) {
+				if (!(c instanceof Personnage) && !(c instanceof Items) && c.m_show) {
+					c.paint(g);
+				}
+				if (c instanceof Items && c.m_show) {
 					c.paint(g);
 				}
 				c=iter.next();
@@ -70,7 +76,10 @@ public class View extends GameView {
 			Iterator<Component> iter = this.m_model.ElementsM3.iterator();
 			Component c = iter.next();
 			while (iter.hasNext()) {
-				if (!(c instanceof Personnage) && c.m_show) {
+				if (!(c instanceof Personnage) && !(c instanceof Items) && c.m_show) {
+					c.paint(g);
+				}
+				if (c instanceof Items && c.m_show) {
 					c.paint(g);
 				}
 				c=iter.next();
@@ -80,7 +89,10 @@ public class View extends GameView {
 			Iterator<Component> iter = this.m_model.ElementsM4.iterator();
 			Component c = iter.next();
 			while (iter.hasNext()) {
-				if (!(c instanceof Personnage) && c.m_show) {
+				if (!(c instanceof Personnage) && !(c instanceof Items) && c.m_show) {
+					c.paint(g);
+				}
+				if (c instanceof Items && c.m_show) {
 					c.paint(g);
 				}
 				c=iter.next();
