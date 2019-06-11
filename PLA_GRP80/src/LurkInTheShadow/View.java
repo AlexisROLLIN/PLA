@@ -66,6 +66,7 @@ public class View extends GameView {
 			for (int j = 0; j < nbCasej; j++) {
 
 				c = m_model.ElementsTore[i1][j1];
+				
 				if (c.m_show == true) { //Verifie si l'objet est dans le rayon du joueur
 					c.paint(g);
 				}

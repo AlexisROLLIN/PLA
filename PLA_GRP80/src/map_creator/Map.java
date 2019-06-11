@@ -59,12 +59,12 @@ public class Map {
 
 		m_x = 1;
 		m_y = 1;
-		for (i = 1; i < length - 1; i++) {
+		for (i = 0; i < length; i++) {
 			for (int j = width / 2 - 2; j < width / 2 + 2; j++) {
 				tab[i][j] = 0;
 			}
 		}
-		for (i = 1; i < width - 1; i++) {
+		for (i = 0; i < width; i++) {
 			for (int j = length / 2 - 2; j < length / 2 + 2; j++) {
 				tab[j][i] = 0;
 			}
