@@ -49,12 +49,19 @@ public class Component {
 		m_w=w;
 		m_idx=id_x;
 		m_scale = scale;
+<<<<<<< HEAD
 		m_show = show;
 		m_dir = IDirection.NORTH; //dir par defaut
 		m_model.nbElements++;
 		m_model.componentsToAdd.add(this);
 		model.nbElements++;
 		power=0;
+=======
+		m_show = false;
+		power = 0;
+		m_dir = IDirection.NORTH; // dir par defaut
+
+>>>>>>> tmpGaetan
 		splitSprite();
 	}
 
@@ -154,6 +161,7 @@ public class Component {
 
 	}
 
+<<<<<<< HEAD
 	public void Get2() {
 
 		if (this instanceof Queen) {
@@ -289,4 +297,19 @@ public class Component {
 	
 	
 
+=======
+	public void paint(Graphics g) {
+		Image img = m_sprites[m_idx];
+		int w = (int) (m_scale * m_w);
+		int h = (int) (m_scale * m_h);
+		g.drawImage(img, (m_x-m_model.perso1.m_x)%1024+512, (m_y-m_model.perso1.m_y)%768+384, w, h, null);
+	}
+	
+	public void paintMiniMap(Graphics g) {
+		Image img = m_sprites[m_idx];
+		int w = (int) (m_scale * m_w);
+		int h = (int) (m_scale * m_h);
+		g.drawImage(img, (m_x)%1024,(m_y)%768, w, h, null);
+	}
+>>>>>>> tmpGaetan
 }

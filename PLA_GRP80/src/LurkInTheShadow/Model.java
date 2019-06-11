@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 
 import edu.ricm3.game.GameModel;
 import edu.ricm3.game.Options;
+<<<<<<< HEAD
 import interpreter.IAI_Definitions;
 import interpreter.IAutomaton;
 import interpreter.Interpreter_Exception;
@@ -18,11 +19,18 @@ import map_creator.Map;
 import ricm3.parser.AutomataParser;
 import ricm3.parser.Ast.AI_Definitions;
 import sauvegarde.Sauvegarde;
+=======
+import map_creator.Fleche;
+import map_creator.Map;
+import map_creator.MiniMap;
+>>>>>>> tmpGaetan
 
 public class Model extends GameModel {
 
 	public BufferedImage Sprite;
+	public BufferedImage SpriteMiniMap;
 	public Map map;
+<<<<<<< HEAD
 
 	public Component mainPlayed;
 	public Shooter perso1;
@@ -119,6 +127,44 @@ public class Model extends GameModel {
 //			tmp = iter.next();
 //		}
 
+=======
+	public Personnage perso1;
+	public MiniMap minimap;
+	public Fleche fleche;
+
+	
+	public Component[][] ElementsMap;
+	public Component[][] ElementsTore;
+	
+
+	public Model() {
+		
+		loadSprites();
+		ElementsMap= new Component[48][64];
+		ElementsTore= new Component[96][128];
+		
+		perso1 = new Personnage(this, 100, Sprite, 12, 11, 512, 384, 0.40F, 1);
+		perso1.m_idx = 25;
+		
+		map = new Map(48, 64, this);
+		
+		
+		
+		//Charger l'image de la map
+		File imageFileMap = new File("src/map_creator/MiniMap");
+		try {
+			SpriteMiniMap = ImageIO.read(imageFileMap);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			System.exit(-1);
+		}
+		
+		minimap = new MiniMap(this,100,SpriteMiniMap,1, 1, perso1.m_x-512, perso1.m_y-384, 0.23F, 1);
+		
+		fleche = new Fleche (this,100,Sprite,12, 11, perso1.m_x-512, perso1.m_y-384, 0.40F, 1);
+		fleche.m_idx=123;
+		
+>>>>>>> tmpGaetan
 	}
 
 	@Override
@@ -134,6 +180,7 @@ public class Model extends GameModel {
 	@Override
 	public void step(long now) {
 		perso1.Afficher();
+<<<<<<< HEAD
 		Iterator<Component> iter = this.components.iterator();
 
 		while (iter.hasNext()) {
@@ -173,6 +220,16 @@ public class Model extends GameModel {
 	public ListIterator<Component> components() {
 		return ElementsViewPort.listIterator();
 	}
+=======
+		fleche.Coordonnees();
+		fleche.step(now);
+	}
+	
+	public ListIterator<Component> components(){
+			return null;  
+	}
+	
+>>>>>>> tmpGaetan
 
 	private void loadSprites() {
 
