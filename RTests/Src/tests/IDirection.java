@@ -9,7 +9,7 @@ public enum IDirection {
 			case "N": return IDirection.NORTH;
 			case "S": return IDirection.SOUTH;
 			case "E": return IDirection.EAST;
-			case "O": return IDirection.WEST;
+			case "W": return IDirection.WEST;
 			case "F": return IDirection.FRONT;
 			case "B": return IDirection.BACK;
 			case "R": return IDirection.RIGHT;

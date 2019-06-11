@@ -38,6 +38,12 @@ public class Model extends GameModel {
 		IAutomaton spawn1;
 		IAutomaton spawn2;
 		IAutomaton spawn3;
+		IAutomaton spawn4;
+		IAutomaton spawn5;
+		IAutomaton spawn6;
+		IAutomaton spawn7;
+		IAutomaton spawn8;
+		IAutomaton spawn9;
 
 		AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file("Src/Automate/Automates"));
 		IAI_Definitions iai_def = ai_def.make();
@@ -45,6 +51,12 @@ public class Model extends GameModel {
 		spawn1 = iai_def.automatas.get(1);
 		spawn2 = iai_def.automatas.get(2);
 		spawn3 = iai_def.automatas.get(3);
+		spawn4 = iai_def.automatas.get(4);
+		spawn5 = iai_def.automatas.get(5);
+		spawn6 = iai_def.automatas.get(6);
+		spawn7 = iai_def.automatas.get(7);
+		spawn8 = iai_def.automatas.get(8);
+		spawn9 = iai_def.automatas.get(9);
 
 		// Shooter
 
@@ -68,8 +80,8 @@ public class Model extends GameModel {
 		TabAuto[3]= spawn3;
 
 		m_shooter.setAutomate(spawn);
-		m_mage.setAutomate(spawn1);
-		m_warrior.setAutomate(spawn2);
+		m_mage.setAutomate(spawn8);
+		m_warrior.setAutomate(spawn9);
 		Main = m_shooter;
 		
 
