@@ -8,8 +8,6 @@ import java.util.Iterator;
 import interpreter.IAutomaton;
 
 public class Ally extends Component {
-
-	int speed;
 	
 	public Ally(Model model, BufferedImage sprite, int rows, int columns, int x, int y, int h, int w, float scale,
 				int id_x, boolean show) {
@@ -88,32 +86,6 @@ public class Ally extends Component {
 		return true; // L'action s'est bien déroulée
 	}
 	
-	
-	boolean Vision(Component c) {
-		int x = 50;
-		int y = 50;
-		Ellipse2D.Double player = new Ellipse2D.Double(this.m_x - x, this.m_y - y, 2.5 * x, 2.5 * y);
-		Rectangle objet = c.getBounds();
-
-		if (player.intersects(objet)) {
-			return true;
-		}
-		//return false;
-		return true; //Pour tests
-	}
-
-	public void Afficher() {
-		Iterator<Component> iter = m_model.components.listIterator();
-
-		while (iter.hasNext()) {
-			Component c = iter.next();
-			if (Vision(c)) {
-				c.m_show = true;
-			} else {
-				c.m_show = false;
-			}
-		}
-	}
 	
 	//A appeler quand !IGotPower
 	public boolean kamikaze() {

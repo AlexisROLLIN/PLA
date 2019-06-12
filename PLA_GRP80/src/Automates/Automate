@@ -66,5 +66,8 @@ Player(Init){
  
   Transe(Init){
  * (Init): True ? Turn(R) :(Init)
+ }
  
+  Item(Init){
+ * (Init): True ? Wait :(Init)
  }

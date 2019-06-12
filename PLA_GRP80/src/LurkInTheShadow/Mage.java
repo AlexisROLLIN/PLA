@@ -21,6 +21,12 @@ public class Mage extends Ally {
 		m_type = IType.TEAM;
 		splitSprite();
 	}
+	
+	@Override
+	public boolean hit(IDirection d) {
+		new Fireball(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, m_scale, 21, m_show, m_dir, power);
+		return true;
+	}
 
 
 }

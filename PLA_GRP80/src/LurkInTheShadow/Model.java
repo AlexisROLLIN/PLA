@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ListIterator;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.imageio.ImageIO;
 
@@ -29,6 +30,11 @@ public class Model extends GameModel {
 	public Mage perso2;
 	public Warrior perso3;
 	public Queen reine;
+	
+	int nbAmmo;
+	int nbBattery;
+	int nbCmd;
+	int nbLife;
 
 	IAutomaton Player;
 	IAutomaton leader;
@@ -42,6 +48,7 @@ public class Model extends GameModel {
 	IAutomaton floor;
 	IAutomaton transe;
 	IAutomaton monstre_desoriente;
+	IAutomaton item;
 
 	public char Cgmt;
 
@@ -51,6 +58,8 @@ public class Model extends GameModel {
 	public LinkedList<Component> components;
 	public LinkedList<Ally> allies;// Allies du plateau
 	public LinkedList<Monster> monstres;// Monstres du plateau
+	public LinkedList<Projectile> projectiles;// Projectiles
+	public LinkedList<Component> items;// Items
 	public LinkedList<Component> mobileComponents; // A afficher par dessus le plateau
 	public LinkedList<String> touches;
 
@@ -70,6 +79,8 @@ public class Model extends GameModel {
 		// Listes utiles
 		allies = new LinkedList<Ally>();
 		monstres = new LinkedList<Monster>();
+		projectiles = new LinkedList<Projectile>();
+		items = new LinkedList<Component>();
 		mobileComponents = new LinkedList<Component>();
 		componentsToAdd = new LinkedList<Component>();
 		componentsToRemove = new LinkedList<Component>();
@@ -88,6 +99,7 @@ public class Model extends GameModel {
 		monstre_desoriente = iai_def.automatas.get(7);
 		fireball = obst;
 		bullet = obst;
+		item = iai_def.automatas.get(9);
 
 		perso1 = new Shooter(this, Sprite, 10, 9, 512, 384, 1F, 81, true);
 		perso2 = new Mage(this, Sprite, 10, 9, 192, 416, 1F, 44, true);
@@ -133,7 +145,8 @@ public class Model extends GameModel {
 	 */
 	@Override
 	public void step(long now) {
-		perso1.Afficher();
+		mainPlayed.Afficher();
+		
 		Iterator<Component> iter = this.components.iterator();
 
 		while (iter.hasNext()) {
@@ -151,8 +164,11 @@ public class Model extends GameModel {
 		while (iterA.hasNext()) {
 			Component c = iterA.next();
 			components.add(c);
-			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID) {
+			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID && c.m_type!=IType.PRENABLE) {
 				mobileComponents.add(c);
+			}
+			if(c.m_type == IType.PRENABLE) {
+				items.add(c);
 			}
 		}
 		componentsToAdd.clear(); // Vide la liste
@@ -165,8 +181,25 @@ public class Model extends GameModel {
 			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID) {
 				mobileComponents.remove(c);
 			}
+			if(c.m_type == IType.PRENABLE) {
+				items.remove(c);
+			}
 		}
 		componentsToRemove.clear(); // Vide la liste
+		
+		
+		while (nbAmmo < 10) {
+			PlaceRandom(1);
+		}
+		while (nbBattery < 10) {
+			PlaceRandom(2);
+		}
+		while (nbCmd < 3) {
+			PlaceRandom(3);
+		}
+		while (nbLife < 5) {
+			PlaceRandom(4);
+		}
 
 	}
 
@@ -174,6 +207,38 @@ public class Model extends GameModel {
 		return ElementsViewPort.listIterator();
 	}
 
+	int Random(int min, int max) {
+		return (ThreadLocalRandom.current().nextInt(min,max+1));
+	}
+	
+	void PlaceRandom(int itemNumber) {
+		int x,y;
+		boolean free;
+		
+		do {
+			free = false;
+			x = Random(1,64);
+			y = Random(1,48);
+			
+				x = x*32;
+				y = y*32;
+			
+			ListIterator<Component> iter;
+			iter = this.components.listIterator();
+			
+			while (iter.hasNext() && !free) {
+				Component c = iter.next();
+				
+				if (c.m_x == x && c.m_y == y && c.m_type==IType.VOID) {
+					free = true;
+				}
+			}
+		}while (!free);
+		
+		Items item = new Items(this, Sprite, 10, 9, x, y, 1F, true, itemNumber);
+				
+	}
+	
 	private void loadSprites() {
 
 		File imageFile = new File("src/map_creator/testSprites.png");

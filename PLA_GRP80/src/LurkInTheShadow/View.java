@@ -65,7 +65,7 @@ public class View extends GameView {
 			for (int j = 0; j < nbCasej; j++) {
 
 				c = m_model.ElementsTore[i1][j1];
-				if (c.m_show == true) { //Verifie si l'objet est dans le rayon du joueur
+				if (c.m_show == true || m_model.mainPlayed==m_model.reine) { //Verifie si l'objet est dans le rayon du joueur
 					c.paint(g);
 				}
 				j1++;
@@ -76,7 +76,19 @@ public class View extends GameView {
 		Iterator<Component> iterC = m_model.mobileComponents.iterator();
 		
 		while (iterC.hasNext()) {
-			iterC.next().paint(g);
+			c = iterC.next();
+			if (c.m_show == true || m_model.mainPlayed instanceof Queen) { //Verifie si l'objet est dans le rayon du joueur
+				c.paint(g);
+			}
+		}
+		
+		Iterator<Component> iterI = m_model.items.iterator();
+		
+		while (iterI.hasNext()) {
+			c = iterI.next();
+			if (c.m_show == true || m_model.mainPlayed instanceof Queen) { //Verifie si l'objet est dans le rayon du joueur
+				c.paint_item(g);
+			}
 		}
 		
 

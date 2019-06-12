@@ -11,7 +11,6 @@ public class Queen extends Component { // Changement sprites à faire !!
 	int periode_marche;
 	int marche;
 	int ponte;
-	int speed;
 	int hunger;
 
 	public Queen(Model model, BufferedImage sprite, int rows, int columns, int x, int y, float scale,
