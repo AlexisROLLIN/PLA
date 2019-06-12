@@ -334,19 +334,12 @@ public class Component {
 		g.drawImage(img, (m_x-m_model.mainPlayed.m_x)%1024+512, (m_y-m_model.mainPlayed.m_y)%768+384, w, h, null);
 	}
 	
-<<<<<<< HEAD
-	public void paintPerso(Graphics g) {
-=======
-	public void paint_item(Graphics g) {
->>>>>>> tmpIntegration
+	public void paintMap(Graphics g) {
+
 		Image img = m_sprites[m_idx];
 		int w = (int) (m_scale * m_w);
 		int h = (int) (m_scale * m_h);
 		g.drawImage(img, (m_x-m_model.mainPlayed.m_x)+512, (m_y-m_model.mainPlayed.m_y)+384, w, h, null);
 	}
-<<<<<<< HEAD
-=======
-	
->>>>>>> tmpIntegration
 	
 }

@@ -66,14 +66,9 @@ public class Model extends GameModel {
 	public LinkedList<Component> components;
 	public LinkedList<Ally> allies;// Allies du plateau
 	public LinkedList<Monster> monstres;// Monstres du plateau
-<<<<<<< HEAD
-	public LinkedList<Component> mobileComponents; // A afficher par dessus le
-													// plateau
-=======
 	public LinkedList<Projectile> projectiles;// Projectiles
 	public LinkedList<Component> items;// Items
 	public LinkedList<Component> mobileComponents; // A afficher par dessus le plateau
->>>>>>> tmpIntegration
 	public LinkedList<String> touches;
 
 	// Tore viewport
@@ -97,25 +92,7 @@ public class Model extends GameModel {
 		mobileComponents = new LinkedList<Component>();
 		componentsToAdd = new LinkedList<Component>();
 		componentsToRemove = new LinkedList<Component>();
-
-<<<<<<< HEAD
-		AI_Definitions ai_def = ((AI_Definitions) AutomataParser
-				.from_file("src/Automates/Automate"));
-		IAI_Definitions iai_def = ai_def.make();
-		Player = iai_def.automatas.get(0);
-		leader = iai_def.automatas.get(1);
-		spawn1 = iai_def.automatas.get(2);
-		spawn2 = iai_def.automatas.get(3);
-		obst = iai_def.automatas.get(4);
-		floor = iai_def.automatas.get(5);
-		queen = iai_def.automatas.get(6);
-		monster = iai_def.automatas.get(7);
-		transe = iai_def.automatas.get(8);
-		monstre_desoriente = iai_def.automatas.get(7);
-		fireball = obst;
-		bullet = obst;
 		
-=======
 		AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file("src/Automates/Automate2.txt"));
 		IAI_Definitions iai_def = ai_def.make();
 		Player = iai_def.automatas.get(0);
@@ -131,7 +108,6 @@ public class Model extends GameModel {
 		fireball = iai_def.automatas.get(9);
 		bullet = iai_def.automatas.get(8);;
 		item = iai_def.automatas.get(7);
->>>>>>> tmpIntegration
 
 		perso1 = new Shooter(this, Sprite, 12, 11, 0, 0, 1F, 81, true);
 		perso2 = new Mage(this, Sprite, 12, 11, 0, 0, 1F, 44, true);
@@ -234,10 +210,10 @@ public class Model extends GameModel {
 			}
 		}
 		componentsToRemove.clear(); // Vide la liste
-<<<<<<< HEAD
+
 		fleche.Coordonnees();
 		fleche.step(now);
-=======
+
 		
 		
 		while (nbAmmo < 10) {
@@ -253,19 +229,18 @@ public class Model extends GameModel {
 			PlaceRandom(4);
 		}
 
->>>>>>> tmpIntegration
 	}
 
 	public ListIterator<Component> components() {
 		return ElementsViewPort.listIterator();
 	}
 
-<<<<<<< HEAD
+
 	public void spawn(Component personnage){
 		boolean spawn=false;
 		while (!spawn){
-			int i = (int) (Math.random() * ( 40 - 5 ));//Coordonnée plutot centré sur la map
-			int j = (int) (Math.random() * ( 60 - 5 ));
+			int i = (int) (Math.random() * ( 38 - 8 ));//Coordonnée plutot centré sur la map
+			int j = (int) (Math.random() * ( 58 - 8 ));
 			
 			if(ElementsMap[i][j] instanceof Sol){
 				if(ElementsMap[i-1][j-1] instanceof Sol && ElementsMap[i+1][j-1] instanceof Sol){
@@ -277,7 +252,7 @@ public class Model extends GameModel {
 		}
 	}
 
-=======
+
 	int Random(int min, int max) {
 		return (ThreadLocalRandom.current().nextInt(min,max+1));
 	}
@@ -306,11 +281,10 @@ public class Model extends GameModel {
 			}
 		}while (!free);
 		
-		Items item = new Items(this, Sprite, 10, 9, x, y, 1F, true, itemNumber);
+		Items item = new Items(this, Sprite, 12, 11, x, y, 1F, true, itemNumber);
 				
 	}
 	
->>>>>>> tmpIntegration
 	private void loadSprites() {
 
 		File imageFile = new File("src/Sprites/testSprite.png");

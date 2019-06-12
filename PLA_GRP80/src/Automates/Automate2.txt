@@ -1,17 +1,17 @@
 Player(Init){
   * (Init):
   | !GotPower() ? Kamikaze() : (Init)
-  | Key(z) & GotPower() ? Move(N) :(Init)
-  | Key(s) & GotPower() ? Move(S) :(Init)
-  | Key(q) & GotPower() ? Move(W) :(Init)
-  | Key(d) & GotPower() ? Move(E) :(Init)
+  | Key(z) & GotPower() & (Cell(N,V) / Cell(N,T) / Cell(N,P))? Move(N) :(Init)
+  | Key(s) & GotPower() & (Cell(S,V) / Cell(S,T) / Cell(S,P))? Move(S) :(Init)
+  | Key(q) & GotPower() & (Cell(W,V) / Cell(W,T) / Cell(W,P))? Move(W) :(Init)
+  | Key(d) & GotPower() & (Cell(E,V) / Cell(E,T) / Cell(E,P))? Move(E) :(Init)
   | Key(p) & GotPower() ? Get()   :(Init)
   | Key(m) & GotPower() ? Get()   :(Init)
   | Key(o) & GotPower() ? Get()   :(Init)
   | Key(a) & GotPower() ? Pop()   :(Init)
   | Key(e) & GotPower() ? Wizz()  :(Init)
   | Key(l) ? Get()  :(Init)
-  | Key(r) & GotPower() & Cell(N,P,0) ? Pick(N) :(Init)
+  | GotPower() & Cell(N,P,0) ? Pick(N) :(Init)
   | GotStuff() & GotPower() & Key(1) ? Throw(N) :(Init)
   | GotStuff() & GotPower() & Key(2) ? Throw(S) :(Init)
   | GotStuff() & GotPower() & Key(3) ? Throw(E) :(Init)
@@ -23,10 +23,12 @@ Player(Init){
  Allie1(Init1){
   * (Init1):
   | !GotPower() ? Kamikaze() : (Init)
-  | Closest(@,N) & (Cell(N,V) / Cell(N,T)) & GotPower() ? Move(N) :(Init1)
-  | Closest(@,S) & (Cell(S,V) / Cell(S,T)) & GotPower() ? Move(S) :(Init1)
-  | Closest(@,E) & (Cell(E,V) / Cell(E,T)) & GotPower() ? Move(E) :(Init1)
-  | Closest(@,O) & (Cell(W,V) / Cell(W,T)) & GotPower() ? Move(W) :(Init1)
+  | Closest(@,N) & (Cell(N,V) / Cell(N,T) / Cell(E,P)) & GotPower() ? Move(N) :(Init1)
+  | Closest(@,S) & (Cell(S,V) / Cell(S,T) / Cell(S,P) ) & GotPower() ? Move(S) :(Init1)
+  | Closest(@,E) & (Cell(E,V) / Cell(E,T) / Cell(W,P) ) & GotPower() ? Move(E) :(Init1)
+  | Closest(@,O) & (Cell(W,V) / Cell(W,T) / Cell(E,P)) & GotPower() ? Move(W) :(Init1)
+  | Cell(N,A,5) & GotPower() ? Wait() : (Attaque)
+  * (Attaque):
   | Cell(N,A,5) & GotPower() ?  Wizz() : (Init1)
   | Cell(S,A,5) & GotPower() ?  Wizz() : (Init1)
   | Cell(E,A,5) & GotPower() ?  Wizz() : (Init1)
@@ -40,10 +42,12 @@ Player(Init){
  Allie2(Init2){
   * (Init2):
   | !GotPower() ? Kamikaze() : (Init)
-  | Closest(T,N) & (Cell(N,V) / Cell(N,@)) & GotPower()  ? Move(N) :(Init2)
-  | Closest(T,S) & (Cell(S,V) / Cell(S,@)) & GotPower() ? Move(S) :(Init2)
-  | Closest(T,E) & (Cell(E,V) / Cell(E,@)) & GotPower() ? Move(E) :(Init2)
-  | Closest(T,W) & (Cell(W,V) / Cell(O,@)) & GotPower() ? Move(W) :(Init2)
+  | Closest(T,N) & (Cell(N,V) / Cell(N,@) / Cell(N,P)) & GotPower()  ? Move(N) :(Init2)
+  | Closest(T,S) & (Cell(S,V) / Cell(S,@) / Cell(S,P)) & GotPower() ? Move(S) :(Init2)
+  | Closest(T,E) & (Cell(E,V) / Cell(E,@) / Cell(W,P)) & GotPower() ? Move(E) :(Init2)
+  | Closest(T,W) & (Cell(W,V) / Cell(O,@) / Cell(E,P)) & GotPower() ? Move(W) :(Init2)
+  | Cell(N,A,5) & GotPower() ? Wait() : (Attaque)
+  * (Attaque):
   | Cell(N,A,5) & GotPower() ?  Wizz() : (Init2)
   | Cell(S,A,5) & GotPower() ?  Wizz() : (Init2)
   | Cell(E,A,5) & GotPower() ?  Wizz() : (Init2)
@@ -70,28 +74,29 @@ Player(Init){
   Reine(Init){
   * (Init):
   | !GotPower() ? Kamikaze() : (Init)
-  | Closest(@,N) & ((Cell(N,V) / Cell(N,T))) & GotPower() ? Move(N) :(Init)
-  | Closest(@,S) & ((Cell(S,V) / Cell(S,T))) & GotPower() ? Move(S) :(Init)
-  | Closest(@,E) & ((Cell(E,V) / Cell(E,T))) & GotPower() ? Move(E) :(Init)
-  | Closest(@,O) & ((Cell(W,V) / Cell(W,T))) & GotPower() ? Move(W) :(Init)
-  | Cell(N,@) & GotPower() ? Hit(N)  :(Init)
-  | Cell(S,@) & GotPower() ? Hit(S)  :(Init)
-  | Cell(E,@) & GotPower() ? Hit(E)  :(Init)
-  | Cell(W,@) & GotPower() ? Hit(W)  :(Init)
+  | Closest(@,N) & ((Cell(N,V) / Cell(N,T))) & GotPower() ? Move(N) :(Ponte)
+  | Closest(@,S) & ((Cell(S,V) / Cell(S,T))) & GotPower() ? Move(S) :(Ponte)
+  | Closest(@,E) & ((Cell(E,V) / Cell(E,T))) & GotPower() ? Move(E) :(Ponte)
+  | Closest(@,O) & ((Cell(W,V) / Cell(W,T))) & GotPower() ? Move(W) :(Ponte)
+  | Cell(N,@) & GotPower() ? Hit(N)  :(Ponte)
+  | Cell(S,@) & GotPower() ? Hit(S)  :(Ponte)
+  | Cell(E,@) & GotPower() ? Hit(E)  :(Ponte)
+  | Cell(W,@) & GotPower() ? Hit(W)  :(Ponte)
+  * (Ponte):
+  | True ? Egg() : (Init)
   }
   
   Monstre(Init){
   * (Init):
   | !GotPower() ? Kamikaze() : (Init)
-  |Cell(N,@,10) & Cell(N,V) & GotPower()? Move(N) :(Ponte)
-  |Cell(S,@,10) & Cell(S,V) & GotPower() ? Move(S) :(Ponte)
-  |Cell(E,@,10) & Cell(E,V) & GotPower() ? Move(E) :(Ponte)
-  |Cell(W,@,10) & Cell(W,V) & GotPower() ? Move(W) :(Ponte)
-  |Cell(N,V) & !Closest(T,N) & GotPower() ? Move(N) :(Ponte)
-  |Cell(S,V) & !Closest(T,S) & GotPower() ? Move(S) :(Ponte)
-  |Cell(E,V) & !Closest(T,E) & GotPower() ? Move(E) :(Ponte)
-  |Cell(W,V) & !Closest(T,W) & GotPower() ? Move(W) :(Ponte)
-  * (Ponte): True ? Egg() :(Init) 
+  |Cell(N,@,10) & Cell(N,V) & GotPower()? Move(N) :(Init)
+  |Cell(S,@,10) & Cell(S,V) & GotPower() ? Move(S) :(Init)
+  |Cell(E,@,10) & Cell(E,V) & GotPower() ? Move(E) :(Init)
+  |Cell(W,@,10) & Cell(W,V) & GotPower() ? Move(W) :(Init)
+  |Cell(N,V) & !Closest(T,N) & GotPower() ? Move(N) :(Init)
+  |Cell(S,V) & !Closest(T,S) & GotPower() ? Move(S) :(Init)
+  |Cell(E,V) & !Closest(T,E) & GotPower() ? Move(E) :(Init)
+  |Cell(W,V) & !Closest(T,W) & GotPower() ? Move(W) :(Init)
   }
   
   Wall(Init){
