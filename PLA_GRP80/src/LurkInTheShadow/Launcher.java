@@ -1,17 +1,24 @@
 package LurkInTheShadow;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Arrays;
 import java.util.LinkedList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,18 +38,29 @@ class GameMenu implements ActionListener {
 
 	JPanel m_panelMenu = new JPanel();
 	JPanel m_panelOptions = new JPanel();
+	JPanel m_panelChallenge = new JPanel();
 
 	// Menu
 
-	JButton m_newGameButton = new JButton("New Game");
-	JButton m_optionsButton = new JButton("Options");
-	JButton m_challengeButton = new JButton("Challenge");
-	IAutomaton[] automatons = new IAutomaton[11];
+	JButton m_newGameButton = new JButton();
+	JButton m_optionsButton = new JButton();
+	JButton m_challengeButton = new JButton();
 
 	// Options
 
-	JButton m_saveOptions = new JButton("Save");
+	JButton m_saveOptionsButton = new JButton("Save");
 
+	// Challenge
+
+	JButton m_selectFileButton = new JButton("Select File");
+	JButton m_tryChallengeButton = new JButton("Try");
+
+	// Cancel
+
+	JButton m_cancelButton = new JButton("Cancel");
+
+	IAutomaton[] automatons = new IAutomaton[11];
+	
 	JComboBox<IAutomaton> m_automataPlayer;
 	JComboBox<IAutomaton> m_automataWarrior;
 	JComboBox<IAutomaton> m_automataShooter;
@@ -67,15 +85,14 @@ class GameMenu implements ActionListener {
 		m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		m_frame.setLayout(new BorderLayout());
 //		m_frame.getContentPane().setLayout(null);
-		m_frame.setBounds(200, 200, 400, 400);
+		m_frame.setBounds(200, 200, 700, 700);
 	}
 
 	public void initPanelMenu() {
-//		m_panelMenu.setLayout(new BoxLayout(m_panelMenu, BoxLayout.PAGE_AXIS));
-
 		m_panelMenu.setLayout(new BorderLayout());
 
-		JPanel panel = new JPanel();
+		ImagePanel panel = new ImagePanel(
+				new ImageIcon("src/Sprites/background.png").getImage());
 		panel.setLayout(new GridBagLayout());
 
 		GridBagConstraints c = new GridBagConstraints();
@@ -106,23 +123,20 @@ class GameMenu implements ActionListener {
 //		m_challengeButton.addActionListener(this);
 //		m_panelMenu.add(m_challengeButton);
 
+		m_newGameButton.setIcon(new ImageIcon("src/Sprites/newgame.png"));
 		m_newGameButton.addActionListener(this);
-		c.gridwidth = 1;
-		c.gridheight = 1;
 		c.gridx = 0;
 		c.gridy = 0;
 		panel.add(m_newGameButton, c);
 
+		m_optionsButton.setIcon(new ImageIcon("src/Sprites/options.png"));
 		m_optionsButton.addActionListener(this);
-		c.gridwidth = 1;
-		c.gridheight = 1;
 		c.gridx = 0;
 		c.gridy = 1;
 		panel.add(m_optionsButton, c);
 
+		m_challengeButton.setIcon(new ImageIcon("src/Sprites/challenge.png"));
 		m_challengeButton.addActionListener(this);
-		c.gridwidth = 1;
-		c.gridheight = 1;
 		c.gridx = 0;
 		c.gridy = 2;
 		panel.add(m_challengeButton, c);
@@ -222,8 +236,49 @@ class GameMenu implements ActionListener {
 
 		// Button
 
-		m_saveOptions.addActionListener(this);
-		m_panelOptions.add(m_saveOptions, BorderLayout.SOUTH);
+		m_saveOptionsButton.addActionListener(this);
+		m_panelOptions.add(m_saveOptionsButton, BorderLayout.SOUTH);
+	}
+	
+	public void initPanelChallenge() {
+
+		// Init
+
+		m_panelChallenge.setLayout(new BorderLayout());
+
+		JLabel label;
+
+		// Title
+
+		label = new JLabel("Challenge");
+		label.setHorizontalAlignment(JLabel.CENTER);
+		m_panelChallenge.add(label, BorderLayout.NORTH);
+
+		// Tree
+
+		m_selectFileButton = new JButton("Select File");
+		m_selectFileButton.addActionListener(this);
+		m_panelChallenge.add(m_selectFileButton, BorderLayout.CENTER);
+
+		// Buttons
+
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridBagLayout());
+
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+		c.gridwidth = 1;
+		c.gridheight = 1;
+
+		m_tryChallengeButton.setBackground(Color.green);
+		m_tryChallengeButton.addActionListener(this);
+		panel.add(m_tryChallengeButton, c);
+
+		m_cancelButton.setBackground(Color.red);
+		m_cancelButton.addActionListener(this);
+		panel.add(m_cancelButton, c);
+
+		m_panelChallenge.add(panel, BorderLayout.SOUTH);
 	}
 
 	@Override
@@ -238,7 +293,7 @@ class GameMenu implements ActionListener {
 		} else if (s == m_optionsButton) {
 			m_frame.setContentPane(m_panelOptions);
 			m_frame.revalidate();
-		} else if (s == m_saveOptions) {
+		} else if (s == m_saveOptionsButton) {
 			Options.AUTOMATA_PLAYER = (IAutomaton) m_automataPlayer.getSelectedItem();
 			Options.AUTOMATA_WARRIOR = (IAutomaton) m_automataWarrior.getSelectedItem();
 			Options.AUTOMATA_SHOOTER = (IAutomaton) m_automataShooter.getSelectedItem();
@@ -251,11 +306,75 @@ class GameMenu implements ActionListener {
 			Options.AUTOMATA_FLOOR = (IAutomaton) m_automataFloor.getSelectedItem();
 			Options.AUTOMATA_ITEMS = (IAutomaton) m_automataItems.getSelectedItem();
 			
-			Options. config_changed=true;
+			m_frame.setContentPane(m_panelMenu);
+			m_frame.revalidate();
+		}else if (s == m_challengeButton) {
+			m_frame.setContentPane(m_panelChallenge);
+			m_frame.revalidate();
+		} else if (s == m_selectFileButton) {
+			JFileChooser fileChooser = new JFileChooser();
+			int returnValue = fileChooser.showOpenDialog(null);
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				
+				Options.option_load=true;
+				
+				File selectedFile = fileChooser.getSelectedFile();
+				
+				Sauvegarde sauv = Sauvegarde.decode(selectedFile);
+				
+				Options.AUTOMATA_PLAYER = sauv.tab_auto[0];
+				Options.AUTOMATA_WARRIOR = sauv.tab_auto[1];
+				Options.AUTOMATA_SHOOTER = sauv.tab_auto[2];
+				Options.AUTOMATA_MAGE = sauv.tab_auto[3];
+				Options.AUTOMATA_FIREBALL = sauv.tab_auto[4];
+				Options.AUTOMATA_BULLET = sauv.tab_auto[5];
+				Options.AUTOMATA_MONSTER = sauv.tab_auto[6];
+				Options.AUTOMATA_QUEEN = sauv.tab_auto[7];
+				Options.AUTOMATA_OBST = sauv.tab_auto[8];
+				Options.AUTOMATA_FLOOR = sauv.tab_auto[9];
+				Options.AUTOMATA_ITEMS = sauv.tab_auto[10];
+				Options.map=sauv.tab_map;
+				
+				
+				System.out.println(selectedFile.getName());
+			}
+		} else if (s == m_tryChallengeButton) {
+			// Change Options
+			try {
+				GameMain.main(null);
+			} catch (Exception e1) {
+			}
+			m_frame.dispose();
+		} else if (s == m_cancelButton) {
 			m_frame.setContentPane(m_panelMenu);
 			m_frame.revalidate();
 		}
 	}
+}
+
+class ImagePanel extends JPanel {
+
+	private Image img;
+
+	public ImagePanel(String img) {
+		this(new ImageIcon(img).getImage());
+	}
+
+	public ImagePanel(Image img) {
+		this.img = img;
+		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+		setPreferredSize(size);
+		setMinimumSize(size);
+		setMaximumSize(size);
+		setSize(size);
+		setLayout(null);
+	}
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(img, 0, 0, null);
+	}
+
 }
 
 public class Launcher {

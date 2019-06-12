@@ -101,11 +101,28 @@ public class Model extends GameModel {
 		transe = Options.AUTOMATA_FLOOR;
 		monstre_desoriente=Options.AUTOMATA_MONSTER;
 		
+		fireball=Options.AUTOMATA_FIREBALL;
+		bullet=Options.AUTOMATA_BULLET;
 		obst = Options.AUTOMATA_OBST;
 		floor = Options.AUTOMATA_FLOOR;
 		queen = Options.AUTOMATA_QUEEN;
 		monster = Options.AUTOMATA_MONSTER;
 		item = Options.AUTOMATA_ITEMS;
+		
+		IAutomaton[] tableau_autos_save = new IAutomaton[11];
+		tableau_autos_save[0]=Player;
+		tableau_autos_save[1]=warrior;
+		tableau_autos_save[2]=shooter;
+		tableau_autos_save[3]=mage;
+		tableau_autos_save[4]=fireball;
+		tableau_autos_save[5]=bullet;
+		tableau_autos_save[6]=monster;
+		tableau_autos_save[7]=queen;
+		tableau_autos_save[8]=obst;
+		tableau_autos_save[9]=floor;
+		tableau_autos_save[10]=item;
+		
+		
 		
 		/*Automates systemes
 		transe = Options.AUTOMATA_TRANSE;
@@ -128,12 +145,19 @@ public class Model extends GameModel {
 
 		ElementsMap = new Component[48][64];
 		ElementsTore = new Component[96][128];
-
-		map = new Map(48, 64, this);
 		
-		/*if (load_config()==false) {
-			save_config();
-		}*/
+		if(Options.option_load==true) {
+			map = new Map(48,64,this, Options.map);
+		}
+		else {
+			map = new Map(48, 64, this);
+		}
+		
+		//On sauvegarde à chaque fois là /!\
+		Sauvegarde save = new Sauvegarde(map.tab,tableau_autos_save,"src/Automates/Automate2.txt");
+		save.encode("save.txt");
+
+		
 		// Test sauvegarde
 
 		// ElementsMap = new LinkedList<Component>();
@@ -268,26 +292,5 @@ public class Model extends GameModel {
 	}
 
 
-	public boolean load_config(String s) {
-
-		Sauvegarde sauv = Sauvegarde.decode(s);
-		if (sauv == null) {
-			return false;
-		}
-		
-		map = new Map(48, 64, this, sauv.tab_map);
-		Player = sauv.tab_auto[0];
-		leader = sauv.tab_auto[1];
-		spawn1 = sauv.tab_auto[2];
-		spawn2 = sauv.tab_auto[3];
-		obst = sauv.tab_auto[4];
-		monster = sauv.tab_auto[5];
-		queen = sauv.tab_auto[6];
-		fireball = sauv.tab_auto[7];
-		bullet = sauv.tab_auto[8];
-		floor = sauv.tab_auto[9];
-		item = sauv.tab_auto[10];
-		return true;
-	}
 
 }

@@ -23,7 +23,7 @@ public class Sauvegarde {
 	
 	static int nb_cases_lig=48;
 	static int nb_cases_col=64;
-	static int nb_auto=12;
+	static int nb_auto=11;
 
 	public Sauvegarde(int map[][], IAutomaton autos[], String fichier) {
 		tab_map = map;
@@ -74,7 +74,7 @@ public class Sauvegarde {
 		}
 	}
 
-	public static Sauvegarde decode(String nom_fich_sauvegarde) {
+	public static Sauvegarde decode(File file) {
 
 		FileReader fr = null;
 		IAutomaton autos[] = new IAutomaton[nb_auto];
@@ -83,7 +83,7 @@ public class Sauvegarde {
 
 		try {
 
-			fr = new FileReader(nom_fich_sauvegarde);
+			fr = new FileReader(file);
 			// Flux de lecture de lignes
 			char a[] = new char[1];
 

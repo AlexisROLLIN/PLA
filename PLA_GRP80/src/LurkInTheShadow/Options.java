@@ -30,5 +30,6 @@ public class Options {
 	public static IAutomaton AUTOMATA_OBST;
 	public static IAutomaton AUTOMATA_FLOOR;
 	public static IAutomaton AUTOMATA_ITEMS;
-	public static boolean config_changed;
+	public static boolean option_load;
+	public static int map[][];
 }
