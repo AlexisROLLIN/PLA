@@ -5,16 +5,22 @@ import LurkInTheShadow.*;
 
 public class IAutomaton {
 
+	String name;
 	IState current ;
 	List<IBehaviour> behaviours ;
 	
-	public IAutomaton(IState initial, List<IBehaviour> behaviours){
+	public IAutomaton(IState initial, List<IBehaviour> behaviours, String name){
 		this.current = initial ;
 		this.behaviours = behaviours ;
+		this.name=name;
 	}
 	
 	public IState current() {
 		return current;
+	}
+	
+	public String name() {
+		return name;
 	}
 	
 	public boolean step(Component c) throws Interpreter_Exception{
@@ -24,11 +30,12 @@ public class IAutomaton {
 		// true si une transition effectuée, false si aucune transition possible (=?= mort de l'automate ?)
 
 		// - selectionne le comportement en fonction de l'état courant
+
 		ListIterator<IBehaviour> iter = behaviours.listIterator();
 		IBehaviour currentBehaviour=null;
 		while (iter.hasNext()) {
 			IBehaviour b = iter.next();
-			if (b.source.toString().equals(current.toString())) {
+			if (b.source.name().equals(current.name())) {
 				currentBehaviour = b;
 				break; //inutile d'aller plus loin, on a trouvé l'état qui correspond à notre état courant dans la liste d'états
 			}

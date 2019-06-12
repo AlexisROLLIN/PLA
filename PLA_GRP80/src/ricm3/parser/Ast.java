@@ -252,6 +252,22 @@ public class Ast {
 
 		public abstract IAction make_action() throws Interpreter_Exception;// Redefini par les sous-classes
 	}
+	
+	public static class None extends Expression {
+		None(){}
+		public final String toString() { return "none" ; }
+		public String tree_edges() { return "" ; }
+		
+		public ICondition make_condition() throws Interpreter_Exception {
+			throw new Interpreter_Exception("None ne peut pas être une condition");
+		}
+
+		public IAction make_action() throws Interpreter_Exception {
+			return new IWait();
+		}
+		
+		
+	}
 
 	public static class UnaryOp extends Expression {
 
@@ -369,7 +385,13 @@ public class Ast {
 				case "GotStuff": return new IGotStuff();
 				case "Key": return new IKey(parameters.get(0).make());//Key(Touche)
 				case "MyDir": return new IMyDir(parameters.get(0).make());//MyDir(Direction)*/
-				case "Cell": return new ICell(parameters.get(0).make(),parameters.get(1).make());
+				case "Cell": 
+					if (parameters.size()<3) {
+						return new ICell(parameters.get(0).make(),parameters.get(1).make());
+					} 
+					else {
+						return new ICell(parameters.get(0).make(),parameters.get(1).make(),parameters.get(2).make());
+					}
 				case "Closest": return new IClosest(parameters.get(0).make(),parameters.get(1).make());
 				default: throw new Interpreter_Exception("Fonction inconnue"+name.toString()+"\n");
 			}
@@ -479,6 +501,11 @@ public class Ast {
 	public static class Action extends Ast {
 
 		Expression expression;
+		
+		Action(){
+			this.kind = "Action" ;
+			this.expression = new None();
+		}
 
 		Action(Expression expression) {
 			this.kind = "Action";
@@ -592,7 +619,7 @@ public class Ast {
 			}
 
 			IState istate_initial = entry.make();
-			return new IAutomaton(istate_initial, iBehaviours);
+			return new IAutomaton(istate_initial, iBehaviours, name.toString());
 		}
 
 		public String tree_edges() {
