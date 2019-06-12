@@ -32,6 +32,7 @@ public class Component {
 	public int power;
 	public int life;
 	public int speed;
+	public boolean on_move;
 	
 	IAutomaton automate;
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
@@ -104,8 +105,8 @@ public class Component {
 		if (player.intersects(objet)) {
 			return true;
 		}
-		return false;
-		//return true; //Pour tests
+		//return false;
+		return true; //Pour tests
 	}
 
 	public void Afficher() {
@@ -130,6 +131,10 @@ public class Component {
 
 	public void step(long now) throws Interpreter_Exception {
 		long elapsed = now - m_lastMove;
+		
+		if(automate==null) {
+			return;
+		}
 
 		if (elapsed > 60L) {
 			m_lastMove = now;

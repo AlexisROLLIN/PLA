@@ -23,6 +23,10 @@ public class IAutomaton {
 		return name;
 	}
 	
+	public String toString() {
+		return name;
+	}
+	
 	public boolean step(Component c) throws Interpreter_Exception{
 		// - effectue une transition
 		// - met à jour l'état courant

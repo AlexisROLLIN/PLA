@@ -17,7 +17,19 @@ Player(Init){
   | GotStuff() & GotPower() & Key(3) ? Throw(E) :(Init)
   | GotStuff() & GotPower() & Key(4) ? Throw(W) :(Init)
   | Key(SPACE) & GotPower() ? Hit()  :(Init)
+  }
   
+ AllieModeReine(Init){
+  * (Init):
+  | !GotPower() ? Kamikaze() : (Init)
+  | Cell(N,A,5) & GotPower() ?  Wizz() : (Init)
+  | Cell(S,A,5) & GotPower() ?  Wizz() : (Init)
+  | Cell(E,A,5) & GotPower() ?  Wizz() : (Init)
+  | Cell(W,A,5) & GotPower() ?  Wizz() : (Init)
+  | Cell(N,A,5) & GotPower() ?  Pop() : (Init)
+  | Cell(S,A,5) & GotPower() ?  Pop() : (Init)
+  | Cell(E,A,5) & GotPower() ?  Pop() : (Init)
+  | Cell(W,A,5) & GotPower() ?  Pop() : (Init)
   }
   
  Allie1(Init1){
@@ -32,6 +44,8 @@ Player(Init){
   | Cell(E,A,5) & GotPower() ?  Wizz() : (Init1)
   | Cell(W,A,5) & GotPower() ?  Wizz() : (Init1)
   | Cell(N,A,5) & GotPower() ?  Pop() : (Init1)
+  
+  
   | Cell(S,A,5) & GotPower() ?  Pop() : (Init1)
   | Cell(E,A,5) & GotPower() ?  Pop() : (Init1)
   | Cell(W,A,5) & GotPower() ?  Pop() : (Init1)
@@ -54,58 +68,25 @@ Player(Init){
   | Cell(W,A,5) & GotPower() ?  Pop() : (Init2)
   }
   
-  AllieModeReine(Init){
-  * (Init):
-  | !GotPower() ? Kamikaze() : (Init)
-  | Cell(N,A,5) & GotPower() ?  Wizz() : (Init)
-  | Cell(S,A,5) & GotPower() ?  Wizz() : (Init)
-  | Cell(E,A,5) & GotPower() ?  Wizz() : (Init)
-  | Cell(W,A,5) & GotPower() ?  Wizz() : (Init)
-  | Cell(N,A,5) & GotPower() ?  Pop() : (Init)
-  | Cell(S,A,5) & GotPower() ?  Pop() : (Init)
-  | Cell(E,A,5) & GotPower() ?  Pop() : (Init)
-  | Cell(W,A,5) & GotPower() ?  Pop() : (Init)
-  }
+  BouleDeFeu(Init5){
+   * (Init5):
+  |Cell(F,V) / Cell(F,@) / Cell(F,T) ? Move() : (Init5)
+  |!(Cell(F,V) / Cell(F,@) / Cell(F,T)) ? Kamikaze() : (Init5)
   
-  Reine(Init){
-  * (Init):
-  | !GotPower() ? Kamikaze() : (Init)
-  | Closest(@,N) & ((Cell(N,V) / Cell(N,T))) & GotPower() ? Move(N) :(Init)
-  | Closest(@,S) & ((Cell(S,V) / Cell(S,T))) & GotPower() ? Move(S) :(Init)
-  | Closest(@,E) & ((Cell(E,V) / Cell(E,T))) & GotPower() ? Move(E) :(Init)
-  | Closest(@,O) & ((Cell(W,V) / Cell(W,T))) & GotPower() ? Move(W) :(Init)
-  | Cell(N,@) & GotPower() ? Hit(N)  :(Init)
-  | Cell(S,@) & GotPower() ? Hit(S)  :(Init)
-  | Cell(E,@) & GotPower() ? Hit(E)  :(Init)
-  | Cell(W,@) & GotPower() ? Hit(W)  :(Init)
-  }
+  * (Init6):
+  |Cell(F,V) / Cell(F,@) / Cell(F,T) ? Move() : (Init6)
+  |!(Cell(F,V) / Cell(F,@) / Cell(F,T)) ? Kamikaze() : (Init6)
   
-  Monstre(Init){
-  * (Init):
-  | !GotPower() ? Kamikaze() : (Init)
-  |Cell(N,@,10) & Cell(N,V) & GotPower()? Move(N) :(Ponte)
-  |Cell(S,@,10) & Cell(S,V) & GotPower() ? Move(S) :(Ponte)
-  |Cell(E,@,10) & Cell(E,V) & GotPower() ? Move(E) :(Ponte)
-  |Cell(W,@,10) & Cell(W,V) & GotPower() ? Move(W) :(Ponte)
-  |Cell(N,V) & !Closest(T,N) & GotPower() ? Move(N) :(Ponte)
-  |Cell(S,V) & !Closest(T,S) & GotPower() ? Move(S) :(Ponte)
-  |Cell(E,V) & !Closest(T,E) & GotPower() ? Move(E) :(Ponte)
-  |Cell(W,V) & !Closest(T,W) & GotPower() ? Move(W) :(Ponte)
-  * (Ponte): True ? Egg() :(Init) 
-  }
+  * (Init7):
+  |Cell(F,V) / Cell(F,@) / Cell(F,T) ? Move() : (Init7)
+  |!(Cell(F,V) / Cell(F,@) / Cell(F,T)) ? Kamikaze() : (Init7)
   
-  Wall(Init){
-  * (Init):
-  | !GotPower() ? Kamikaze() : (Init)
-  |True ? Wizz() : (Tmp)
+  * (Init8):
+  |Cell(F,V) / Cell(F,@) / Cell(F,T) ? Move() : (Init8)
+  |!(Cell(F,V) / Cell(F,@) / Cell(F,T)) ? Kamikaze() : (Init8)
   
-  * (Tmp):
-  |True ? Pop() : (Init)
-  }
-  
-  Ground(Init){
-  * (Init):
-  |True ? Wait()  : (Init)
+  * (Init9):
+  |True ? Kamikaze() : (Init5)
   }
   
   Bullet(Init){
@@ -145,27 +126,54 @@ Player(Init){
   |True ? Kamikaze() : (Init1)
   
   }
+
   
- BouleDeFeu(Init5){
-   * (Init5):
-  |Cell(F,V) / Cell(F,@) / Cell(F,T) ? Move() : (Init5)
-  |!(Cell(F,V) / Cell(F,@) / Cell(F,T)) ? Kamikaze() : (Init5)
-  
-  * (Init6):
-  |Cell(F,V) / Cell(F,@) / Cell(F,T) ? Move() : (Init6)
-  |!(Cell(F,V) / Cell(F,@) / Cell(F,T)) ? Kamikaze() : (Init6)
-  
-  * (Init7):
-  |Cell(F,V) / Cell(F,@) / Cell(F,T) ? Move() : (Init7)
-  |!(Cell(F,V) / Cell(F,@) / Cell(F,T)) ? Kamikaze() : (Init7)
-  
-  * (Init8):
-  |Cell(F,V) / Cell(F,@) / Cell(F,T) ? Move() : (Init8)
-  |!(Cell(F,V) / Cell(F,@) / Cell(F,T)) ? Kamikaze() : (Init8)
-  
-  * (Init9):
-  |True ? Kamikaze() : (Init5)
+ Monstre(Init){
+  * (Init):
+  | !GotPower() ? Kamikaze() : (Init)
+  |Cell(N,@,10) & Cell(N,V) & GotPower()? Move(N) :(Ponte)
+  |Cell(S,@,10) & Cell(S,V) & GotPower() ? Move(S) :(Ponte)
+  |Cell(E,@,10) & Cell(E,V) & GotPower() ? Move(E) :(Ponte)
+  |Cell(W,@,10) & Cell(W,V) & GotPower() ? Move(W) :(Ponte)
+  |Cell(N,V) & !Closest(T,N) & GotPower() ? Move(N) :(Ponte)
+  |Cell(S,V) & !Closest(T,S) & GotPower() ? Move(S) :(Ponte)
+  |Cell(E,V) & !Closest(T,E) & GotPower() ? Move(E) :(Ponte)
+  |Cell(W,V) & !Closest(T,W) & GotPower() ? Move(W) :(Ponte)
+  * (Ponte): True ? Egg() :(Init) 
   }
+  
+  Reine(Init){
+  * (Init):
+  | !GotPower() ? Kamikaze() : (Init)
+  | Closest(@,N) & ((Cell(N,V) / Cell(N,T))) & GotPower() ? Move(N) :(Ponte)
+  | Closest(@,S) & ((Cell(S,V) / Cell(S,T))) & GotPower() ? Move(S) :(Ponte)
+  | Closest(@,E) & ((Cell(E,V) / Cell(E,T))) & GotPower() ? Move(E) :(Ponte)
+  | Closest(@,O) & ((Cell(W,V) / Cell(W,T))) & GotPower() ? Move(W) :(Ponte)
+  | Cell(N,@) & GotPower() ? Hit(N)  :(Ponte)
+  | Cell(S,@) & GotPower() ? Hit(S)  :(Ponte)
+  | Cell(E,@) & GotPower() ? Hit(E)  :(Ponte)
+  | Cell(W,@) & GotPower() ? Hit(W)  :(Ponte)
+  * (Ponte): True ? Egg() :(Init) 
+  }
+  
+  Wall(Init){
+  * (Init):
+  | !GotPower() ? Kamikaze() : (Init)
+  |True ? Wizz() : (Tmp)
+  
+  * (Tmp):
+  |True ? Pop() : (Init)
+  }
+  
+ Ground1(Init){
+	* (Init):
+  | True ? Wait :(Init)
+ }
+ 
+  Item(Init){
+	* (Init):
+  | True ? Wait :(Init)
+ }
   
   
   

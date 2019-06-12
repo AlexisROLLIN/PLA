@@ -37,24 +37,6 @@ public class Controller extends GameController implements ActionListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 
-		/*
-		 * if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') {
-		 * m_model.map.jViewport++; if(m_model.perso1.m_x>2048){ m_model.perso1.m_x=0;
-		 * m_model.map.jViewport=16; } }
-		 * 
-		 * if (e.getKeyChar() == 'z' || e.getKeyChar() == 'Z') {
-		 * m_model.map.iViewport--; if(m_model.perso1.m_y<0){ m_model.perso1.m_y=1536;
-		 * m_model.map.iViewport=60; }
-		 * 
-		 * } if (e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
-		 * m_model.map.iViewport++; if(m_model.perso1.m_y>1536){ m_model.perso1.m_y=0;
-		 * m_model.map.iViewport=12; } }
-		 * 
-		 * if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
-		 * m_model.map.jViewport--; if(m_model.perso1.m_x<0){ m_model.perso1.m_x=2048;
-		 * m_model.map.jViewport=80; } }
-		 */
-
 	}
 
 	@Override

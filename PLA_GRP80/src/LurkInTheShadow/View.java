@@ -77,7 +77,7 @@ public class View extends GameView {
 		
 		while (iterC.hasNext()) {
 			c = iterC.next();
-			if (c.m_show == true || m_model.mainPlayed instanceof Queen) { //Verifie si l'objet est dans le rayon du joueur
+			if (c.m_show == true || m_model.mainPlayed instanceof Queen || m_model.monster.name().equals("Player") || m_model.monster.name().equals("Monstre")) { //Verifie si l'objet est dans le rayon du joueur
 				c.paint(g);
 			}
 		}
