@@ -3,6 +3,7 @@ package LurkInTheShadow;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -29,6 +30,7 @@ public class Component {
 	public boolean m_show;
 	public int power;
 	public int life;
+	public int speed;
 	
 	IAutomaton automate;
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
@@ -54,6 +56,7 @@ public class Component {
 		m_model.componentsToAdd.add(this);
 		model.nbElements++;
 		power=0;
+		speed=0;
 		splitSprite();
 	}
 
@@ -89,6 +92,38 @@ public class Component {
 			return false;
 		}
 		return true;
+	}
+	
+	boolean Vision(Component c) {
+		int x = 50;
+		int y = 50;
+		Ellipse2D.Double player = new Ellipse2D.Double(this.m_x - x, this.m_y - y, 2.5 * x, 2.5 * y);
+		Rectangle objet = c.getBounds();
+
+		if (player.intersects(objet)) {
+			return true;
+		}
+		return false;
+		//return true; //Pour tests
+	}
+
+	public void Afficher() {
+		Iterator<Component> iter = m_model.components.listIterator();
+
+		while (iter.hasNext()) {
+			Component c = iter.next();
+			
+			if(c instanceof Queen) {
+				int i=0;
+				i++;
+			}
+			
+			if (Vision(c)) {
+				c.m_show = true;
+			} else {
+				c.m_show = false;
+			}
+		}
 	}
 
 
@@ -245,6 +280,18 @@ public class Component {
 		}
 	}
 	
+
+	boolean Collision(Component c) {
+		Rectangle r1 = this.getBounds();
+		Rectangle r2 = c.getBounds();
+
+		if (r1.intersects(r2)) {
+			return true;
+		} else
+			return false;
+
+}
+	
 	//A Overrider
 	public boolean move(IDirection d) {
 		return true;
@@ -287,11 +334,19 @@ public class Component {
 		g.drawImage(img, (m_x-m_model.mainPlayed.m_x)%1024+512, (m_y-m_model.mainPlayed.m_y)%768+384, w, h, null);
 	}
 	
+<<<<<<< HEAD
 	public void paintPerso(Graphics g) {
+=======
+	public void paint_item(Graphics g) {
+>>>>>>> tmpIntegration
 		Image img = m_sprites[m_idx];
 		int w = (int) (m_scale * m_w);
 		int h = (int) (m_scale * m_h);
 		g.drawImage(img, (m_x-m_model.mainPlayed.m_x)+512, (m_y-m_model.mainPlayed.m_y)+384, w, h, null);
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> tmpIntegration
 	
 }

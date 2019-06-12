@@ -8,6 +8,7 @@ Player(Init){
   | Key(m) ? Get()   :(Init)
   | Key(o) ? Get()   :(Init)
   | Key(l) ? Get()   :(Init)
+  | Key(SPACE) ? Hit()   :(Init)
   }
   
   Leader(Init){
@@ -66,5 +67,12 @@ Player(Init){
  
   Transe(Init){
  * (Init): True ? Turn(R) :(Init)
+ }
  
+  Item(Init){
+ * (Init): True ? Wait :(Init)
+ }
+ 
+   Fireball(Init){
+ * (Init): True ? Move(F) :(Init)
  }

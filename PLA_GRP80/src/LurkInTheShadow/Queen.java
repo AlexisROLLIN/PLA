@@ -11,15 +11,14 @@ public class Queen extends Component { // Changement sprites à faire !!
 	int periode_marche;
 	int marche;
 	int ponte;
-	int speed;
 	int hunger;
 
 	public Queen(Model model, BufferedImage sprite, int rows, int columns, int x, int y, float scale,
 			int id_x, boolean show) {
 
 		super(model, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale, id_x, show);
-		life = 100;// inutile théoriquement, mais sécurité
-		power = 3;
+		life = 1000;// inutile théoriquement, mais sécurité
+		power = 100;
 		periode_marche = 3;// Marche à une freq de 1/3
 		marche = 1;
 		ponte=5000;
@@ -112,7 +111,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 	@Override
 	public boolean hit(IDirection d) { // /!\ Ne change pas de sprite
 
-		hunger = hunger + power/10; // On dit qu'un Hit donne faim proportionnellement à sa puissance
+		hunger = hunger + power/20; // On dit qu'un Hit donne faim proportionnellement à sa puissance
 
 		if (d == IDirection.NORTH || (m_dir == IDirection.NORTH && d == IDirection.FRONT)
 				|| (m_dir == IDirection.SOUTH && d == IDirection.BACK)

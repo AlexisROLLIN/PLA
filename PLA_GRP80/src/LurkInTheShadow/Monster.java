@@ -18,6 +18,7 @@ public class Monster extends Component {
 		automate=model.monster;
 		model.monstres.add(this);
 		power=5;
+		life=20;
 	}
 	
 	@Override
