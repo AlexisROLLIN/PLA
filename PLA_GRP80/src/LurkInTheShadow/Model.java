@@ -52,12 +52,15 @@ public class Model extends GameModel {
 	public Fleche fleche;
 
 	int nbElements;
-	public LinkedList<Component> componentsToAdd; // Composants à ajouter sur le plateau après les steps
+	public LinkedList<Component> componentsToAdd; // Composants à ajouter sur
+													// le plateau après les
+													// steps
 	public LinkedList<Component> componentsToRemove;
 	public LinkedList<Component> components;
 	public LinkedList<Ally> allies;// Allies du plateau
 	public LinkedList<Monster> monstres;// Monstres du plateau
-	public LinkedList<Component> mobileComponents; // A afficher par dessus le plateau
+	public LinkedList<Component> mobileComponents; // A afficher par dessus le
+													// plateau
 	public LinkedList<String> touches;
 
 	// Tore viewport
@@ -80,7 +83,8 @@ public class Model extends GameModel {
 		componentsToAdd = new LinkedList<Component>();
 		componentsToRemove = new LinkedList<Component>();
 
-		AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file("src/Automates/Automate"));
+		AI_Definitions ai_def = ((AI_Definitions) AutomataParser
+				.from_file("src/Automates/Automate"));
 		IAI_Definitions iai_def = ai_def.make();
 		Player = iai_def.automatas.get(0);
 		leader = iai_def.automatas.get(1);
@@ -94,10 +98,11 @@ public class Model extends GameModel {
 		monstre_desoriente = iai_def.automatas.get(7);
 		fireball = obst;
 		bullet = obst;
+		
 
-		perso1 = new Shooter(this, Sprite, 12, 11, 512, 384, 1F, 81, true);
-		perso2 = new Mage(this, Sprite, 12, 11, 192, 416, 1F, 44, true);
-		perso3 = new Warrior(this, Sprite, 12, 11, 160, 416, 1F, 48, true);
+		perso1 = new Shooter(this, Sprite, 12, 11, 0, 0, 1F, 81, true);
+		perso2 = new Mage(this, Sprite, 12, 11, 0, 0, 1F, 44, true);
+		perso3 = new Warrior(this, Sprite, 12, 11, 0, 0, 1F, 48, true);
 		reine = new Queen(this, Sprite, 12, 11, 320, 448, 2F, 112, true);
 
 		perso1.setAutomate(Player);
@@ -110,22 +115,35 @@ public class Model extends GameModel {
 
 		map = new Map(48, 64, this);
 		
-		//Charger l'image de la map
-				File imageFileMap = new File("src/Sprites/MiniMap");
-				try {
-					SpriteMiniMap = ImageIO.read(imageFileMap);
-				} catch (IOException ex) {
-					ex.printStackTrace();
-					System.exit(-1);
-				}
-				
-				minimap = new MiniMap(this,SpriteMiniMap,1, 1, perso1.m_x-512, perso1.m_y-384, 0.23F,0,true);
-				
-				fleche = new Fleche (this,Sprite,12, 11, perso1.m_x-512, perso1.m_y-384, 1F,123,true);
+		
+		//Spwan des personnages sur la map
+		spawn(perso1);
+		map.firstCase();
+		
+		perso2.m_x=perso1.m_x-32;
+		perso2.m_y=perso1.m_y-32;
+		
+		perso3.m_x=perso1.m_x-32;
+		perso3.m_y=perso1.m_y+32;
+		
+		spawn(reine);
 		
 
+		// Charger l'image de la map
+		File imageFileMap = new File("src/Sprites/MiniMap");
+		try {
+			SpriteMiniMap = ImageIO.read(imageFileMap);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			System.exit(-1);
+		}
 
-	
+		minimap = new MiniMap(this, SpriteMiniMap, 1, 1, 0,
+				0, 0.23F, 0, true);
+
+		fleche = new Fleche(this, Sprite, 12, 11, 0,
+				0, 1F, 123, true);
+
 	}
 
 	@Override
@@ -136,7 +154,8 @@ public class Model extends GameModel {
 	/**
 	 * Simulation step.
 	 * 
-	 * @param now is the current time in milliseconds.
+	 * @param now
+	 *            is the current time in milliseconds.
 	 */
 	@Override
 	public void step(long now) {
@@ -150,7 +169,8 @@ public class Model extends GameModel {
 			} catch (Interpreter_Exception e) {
 			}
 		}
-		// On ne peut pas ajouter de components pendant qu'on parcourt la liste de
+		// On ne peut pas ajouter de components pendant qu'on parcourt la liste
+		// de
 		// components
 		// On fait donc ça maintenant
 		Iterator<Component> iterA = this.componentsToAdd.iterator();
@@ -182,6 +202,22 @@ public class Model extends GameModel {
 		return ElementsViewPort.listIterator();
 	}
 
+	public void spawn(Component personnage){
+		boolean spawn=false;
+		while (!spawn){
+			int i = (int) (Math.random() * ( 40 - 5 ));//Coordonn�e plutot centr� sur la map
+			int j = (int) (Math.random() * ( 60 - 5 ));
+			
+			if(ElementsMap[i][j] instanceof Sol){
+				if(ElementsMap[i-1][j-1] instanceof Sol && ElementsMap[i+1][j-1] instanceof Sol){
+					personnage.m_x=j*32;
+					personnage.m_y=i*32;
+					spawn=true;
+				}
+			}
+		}
+	}
+
 	private void loadSprites() {
 
 		File imageFile = new File("src/Sprites/testSprite.png");
@@ -209,7 +245,8 @@ public class Model extends GameModel {
 		auto[9] = floor;
 		auto[10] = transe;
 		auto[11] = monstre_desoriente;
-		Sauvegarde sauv = new Sauvegarde(map.tab, auto, "src/Automates/Automate");
+		Sauvegarde sauv = new Sauvegarde(map.tab, auto,
+				"src/Automates/Automate");
 		sauv.encode("game_save.txt");
 	}
 
@@ -219,7 +256,7 @@ public class Model extends GameModel {
 		if (sauv == null) {
 			return false;
 		}
-		
+
 		map = new Map(48, 64, this, sauv.tab_map);
 		Player = sauv.tab_auto[0];
 		leader = sauv.tab_auto[1];

@@ -37,7 +37,6 @@ public class Map {
 		initialisation();
 		creuser();
 		repartition();
-		firstCase();
 	}
 
 	public Map(int length, int width, Model model, int tab_map[][]) {
