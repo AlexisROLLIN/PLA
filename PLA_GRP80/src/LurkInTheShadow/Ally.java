@@ -9,13 +9,17 @@ import interpreter.IAutomaton;
 
 public class Ally extends Component {
 	
+
+	
 	public Ally(Model model, BufferedImage sprite, int rows, int columns, int x, int y, int h, int w, float scale,
 				int id_x, boolean show) {
 		super(model, sprite, rows, columns, x, y, h, w, scale, id_x, show);
 		model.allies.add(this);
 		speed=32;
 		life=100;
+
 	}
+
 	
 	@Override
 	public boolean move(IDirection d) { //Graphiques non geres
@@ -124,6 +128,54 @@ public class Ally extends Component {
 		m_model.componentsToRemove.add(this);
 		return true;
 	}
+	
+	@Override
+	public boolean pop(IDirection d) {
+		if (this.m_model.mainPlayed.lampe_x == 50) {
+			this.m_model.mainPlayed.lampe_x += 25;
+			this.m_model.mainPlayed.lampe_y += 25;
+			this.m_model.mainPlayed.lampe_width = 2.4 * this.m_model.mainPlayed.lampe_x;
+			this.m_model.mainPlayed.lampe_height = 2.4 * this.m_model.mainPlayed.lampe_y;
+		}
+		else if (this.m_model.mainPlayed.lampe_x == 75) {
+			this.m_model.mainPlayed.lampe_x += 25;
+			this.m_model.mainPlayed.lampe_y += 25;
+			this.m_model.mainPlayed.lampe_width = 2.3 * this.m_model.mainPlayed.lampe_x;
+			this.m_model.mainPlayed.lampe_height = 2.3 * this.m_model.mainPlayed.lampe_y;
+		}
+		else if (this.m_model.perso1.lampe_x == 100) {
+			this.m_model.mainPlayed.lampe_x += 30;
+			this.m_model.mainPlayed.lampe_y += 30;
+			this.m_model.mainPlayed.lampe_width = 2.25 * this.m_model.mainPlayed.lampe_x;
+			this.m_model.mainPlayed.lampe_height = 2.25 * this.m_model.mainPlayed.lampe_y;
+		}
+
+		return true;
+	}
+	
+	@Override
+	public boolean wizz(IDirection d) {
+		if (this.m_model.mainPlayed.lampe_x == 75) {
+			this.m_model.mainPlayed.lampe_x -= 25;
+			this.m_model.mainPlayed.lampe_y -= 25;
+			this.m_model.mainPlayed.lampe_width = 2.5 * this.m_model.mainPlayed.lampe_x;
+			this.m_model.mainPlayed.lampe_height = 2.5 * this.m_model.mainPlayed.lampe_y;
+		}
+		else if (this.m_model.mainPlayed.lampe_x == 100) {
+			this.m_model.mainPlayed.lampe_x -= 25;
+			this.m_model.mainPlayed.lampe_y -= 25;
+			this.m_model.mainPlayed.lampe_width = 2.4 * this.m_model.mainPlayed.lampe_x;
+			this.m_model.mainPlayed.lampe_height = 2.4 * this.m_model.mainPlayed.lampe_y;
+		}
+		else if (this.m_model.mainPlayed.lampe_x == 130) {
+			this.m_model.mainPlayed.lampe_x -= 30;
+			this.m_model.mainPlayed.lampe_y -= 30;
+			this.m_model.mainPlayed.lampe_width = 2.3 * this.m_model.mainPlayed.lampe_x;
+			this.m_model.mainPlayed.lampe_height = 2.3 * this.m_model.mainPlayed.lampe_y;
+		}
+		return true;
+	}
+	
 
 }
 /*(Model m, int x, int y, int w, int h, float scale, BufferedImage sprite, int rows, int col, int id_x,

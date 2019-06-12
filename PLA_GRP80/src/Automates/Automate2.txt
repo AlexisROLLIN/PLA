@@ -89,14 +89,10 @@ Player(Init){
   Monstre(Init){
   * (Init):
   | !GotPower() ? Kamikaze() : (Init)
-  |Cell(N,@,10) & Cell(N,V) & GotPower()? Move(N) :(Init)
-  |Cell(S,@,10) & Cell(S,V) & GotPower() ? Move(S) :(Init)
-  |Cell(E,@,10) & Cell(E,V) & GotPower() ? Move(E) :(Init)
-  |Cell(W,@,10) & Cell(W,V) & GotPower() ? Move(W) :(Init)
-  |Cell(N,V) & !Closest(T,N) & GotPower() ? Move(N) :(Init)
-  |Cell(S,V) & !Closest(T,S) & GotPower() ? Move(S) :(Init)
-  |Cell(E,V) & !Closest(T,E) & GotPower() ? Move(E) :(Init)
-  |Cell(W,V) & !Closest(T,W) & GotPower() ? Move(W) :(Init)
+  |Cell(N,V) &  GotPower() ? Move(N) :(Init)
+  |Cell(S,V) &  GotPower() ? Move(S) :(Init)
+  |Cell(E,V) &  GotPower() ? Move(E) :(Init)
+  |Cell(W,V)  & GotPower() ? Move(W) :(Init)
   }
   
   Wall(Init){

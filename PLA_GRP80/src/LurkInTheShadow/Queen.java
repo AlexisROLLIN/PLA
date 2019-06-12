@@ -12,6 +12,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 	int marche;
 	int ponte;
 	int hunger;
+	float timer;
 
 	public Queen(Model model, BufferedImage sprite, int rows, int columns, int x, int y, float scale,
 			int id_x, boolean show) {
@@ -27,6 +28,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 		m_type=IType.ADVERSAIRE;
 		automate=model.queen;
 		power=100;
+		timer=6000;
 	}
 
 	@Override

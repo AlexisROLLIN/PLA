@@ -160,7 +160,7 @@ public class Controller extends GameController implements ActionListener {
 		}
 
 		if (e.getKeyChar() == 'e') {
-			m_model.touches.remove("w");
+			m_model.touches.remove("e");
 		}
 	}
 

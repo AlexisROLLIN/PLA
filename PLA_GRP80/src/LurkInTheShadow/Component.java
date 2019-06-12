@@ -6,9 +6,9 @@ import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
-import java.util.LinkedList;
 
-import edu.ricm3.game.Options;
+
+
 import interpreter.IAutomaton;
 import interpreter.Interpreter_Exception;
 
@@ -31,6 +31,11 @@ public class Component {
 	public int power;
 	public int life;
 	public int speed;
+	
+	int lampe_x;
+	int lampe_y;
+	double lampe_width;
+	double lampe_height;
 	
 	IAutomaton automate;
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
@@ -58,6 +63,11 @@ public class Component {
 		power=0;
 		speed=0;
 		splitSprite();
+		
+		lampe_x=75;
+		lampe_y=75;
+		lampe_width=2.4*lampe_x;
+		lampe_height=2.4*lampe_y;
 	}
 
 	public void setAutomate(IAutomaton aut) {
@@ -95,9 +105,7 @@ public class Component {
 	}
 	
 	boolean Vision(Component c) {
-		int x = 50;
-		int y = 50;
-		Ellipse2D.Double player = new Ellipse2D.Double(this.m_x - x, this.m_y - y, 2.5 * x, 2.5 * y);
+		Ellipse2D.Double player = new Ellipse2D.Double(m_model.mainPlayed.m_x - lampe_x, m_model.mainPlayed.m_y - lampe_y, lampe_width, lampe_height);
 		Rectangle objet = c.getBounds();
 
 		if (player.intersects(objet)) {
@@ -133,6 +141,17 @@ public class Component {
 		if (elapsed > 60L) {
 			m_lastMove = now;
 			automate.step(this);
+		}
+		
+		//Timer Reine (~10sec)
+		if (m_model.mainPlayed instanceof Queen){
+			if (m_model.reine.timer==0){
+				m_model.reine.timer=now;
+			}
+			if(now-m_model.reine.timer>10000){
+				m_model.reine.timer=0;
+				m_model.mainPlayed.Get2();
+			}
 		}
 	}
 
@@ -250,6 +269,7 @@ public class Component {
 			speed_up_world();
 		}
 		m_model.map.firstCase();
+		
 	}
 	
 	public void slow_world() {

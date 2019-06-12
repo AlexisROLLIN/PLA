@@ -34,6 +34,7 @@ public class View extends GameView {
 
 	public void step(long now) {
 		m_model.step(now);
+
 	}
 
 	private void computeFPS() {
@@ -68,7 +69,15 @@ public class View extends GameView {
 			for (int j = 0; j < nbCasej; j++) {
 
 				c = m_model.ElementsTore[i1][j1];
-				if (c.m_show == true || m_model.mainPlayed==m_model.reine) { //Verifie si l'objet est dans le rayon du joueur
+				if (c.m_show == true || m_model.mainPlayed == m_model.reine) { // Verifie
+																				// si
+																				// l'objet
+																				// est
+																				// dans
+																				// le
+																				// rayon
+																				// du
+																				// joueur
 					c.paint(g);
 				}
 				j1++;
@@ -80,26 +89,54 @@ public class View extends GameView {
 
 		while (iterC.hasNext()) {
 			c = iterC.next();
-			if (c.m_show == true || m_model.mainPlayed instanceof Queen) { //Verifie si l'objet est dans le rayon du joueur
+			if (c.m_show == true || m_model.mainPlayed instanceof Queen) { // Verifie
+																			// si
+																			// l'objet
+																			// est
+																			// dans
+																			// le
+																			// rayon
+																			// du
+																			// joueur
 				c.paintMap(g);
 			}
 		}
-		
+
 		Iterator<Component> iterI = m_model.items.iterator();
-		
+
 		while (iterI.hasNext()) {
 			c = iterI.next();
-			if (c.m_show == true || m_model.mainPlayed instanceof Queen) { //Verifie si l'objet est dans le rayon du joueur
+			if (c.m_show == true || m_model.mainPlayed instanceof Queen) { // Verifie si l'objet est dans le rayon du joueur			 
 				c.paintMap(g);
 			}
 		}
 
-		MiniMap minimap = m_model.minimap;
-		Fleche fleche = m_model.fleche;
+//		if (m_model.mainPlayed instanceof Queen) {
+//			g.setColor(Color.red);
+//			if (m_model.reine.timer < 3000) {
+//				g.fillRect(m_model.map.jViewport + 480,
+//						m_model.map.iViewport + 352, 100, 10);
+//			}
+//			if (m_model.reine.timer >= 3000 && m_model.reine.timer < 6000) {
+//				g.fillRect(m_model.map.jViewport + 480,
+//						m_model.map.iViewport + 352, 75, 10);
+//			}
+//			if (m_model.reine.timer >= 6000 && m_model.reine.timer < 9000) {
+//				g.fillRect(m_model.map.jViewport + 480,
+//						m_model.map.iViewport + 352, 50, 10);
+//			}
+//			if (m_model.reine.timer > 9000) {
+//				g.fillRect(m_model.map.jViewport + 480,
+//						m_model.map.iViewport + 352, 25, 10);
+//			}
+//	}
 
-		minimap.paint(g);
-		fleche.paint(g);
+			MiniMap minimap = m_model.minimap;
+			Fleche fleche = m_model.fleche;
+
+			minimap.paint(g);
+			fleche.paint(g);
+
 
 	}
-
 }

@@ -238,9 +238,17 @@ public class Model extends GameModel {
 
 	public void spawn(Component personnage){
 		boolean spawn=false;
+		int i;
+		int j;
 		while (!spawn){
-			int i = (int) (Math.random() * ( 38 - 8 ));//Coordonnée plutot centré sur la map
-			int j = (int) (Math.random() * ( 58 - 8 ));
+			if (personnage instanceof Queen){
+				i = (int) (Math.random() * ( 40 - 1 ));//Coordonnée plutot centré sur la map
+				j = (int) (Math.random() * ( 32 - 8 ));
+			}
+			else{
+				i = (int) (Math.random() * ( 38 - 8 ));//Coordonnée plutot centré sur la map
+				j = (int) (Math.random() * ( 64 - 8 ));
+			}
 			
 			if(ElementsMap[i][j] instanceof Sol){
 				if(ElementsMap[i-1][j-1] instanceof Sol && ElementsMap[i+1][j-1] instanceof Sol){
@@ -250,6 +258,7 @@ public class Model extends GameModel {
 				}
 			}
 		}
+		
 	}
 
 
