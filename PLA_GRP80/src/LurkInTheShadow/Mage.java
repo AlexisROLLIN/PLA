@@ -19,12 +19,13 @@ public class Mage extends Ally {
 		m_step = 8;
 		m_dir = IDirection.EAST;
 		m_type = IType.TEAM;
+		power = 20;
 		splitSprite();
 	}
 	
 	@Override
 	public boolean hit(IDirection d) {
-		new Fireball(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, m_scale, 21, m_show, m_dir, power);
+		m_model.componentsToAdd.add(new Fireball(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, m_scale, 21, m_show, m_dir, power));
 		return true;
 	}
 

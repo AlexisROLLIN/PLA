@@ -280,6 +280,18 @@ public class Component {
 		}
 	}
 	
+
+	boolean Collision(Component c) {
+		Rectangle r1 = this.getBounds();
+		Rectangle r2 = c.getBounds();
+
+		if (r1.intersects(r2)) {
+			return true;
+		} else
+			return false;
+
+}
+	
 	//A Overrider
 	public boolean move(IDirection d) {
 		return true;

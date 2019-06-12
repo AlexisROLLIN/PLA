@@ -185,7 +185,7 @@ public abstract class ICondition {
 		}
 
 		public boolean eval(Component c) {
-			return (c.power > 0);
+			return (c.life> 0);
 		}
 	}
 

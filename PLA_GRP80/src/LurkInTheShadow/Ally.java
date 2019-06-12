@@ -14,6 +14,7 @@ public class Ally extends Component {
 		super(model, sprite, rows, columns, x, y, h, w, scale, id_x, show);
 		model.allies.add(this);
 		speed=32;
+		life=100;
 	}
 	
 	@Override
@@ -84,6 +85,36 @@ public class Ally extends Component {
 				}
 			}
 		return true; // L'action s'est bien déroulée
+	}
+	
+	public boolean turn(IDirection d) {
+
+		if (d == IDirection.NORTH || (m_dir == IDirection.NORTH && d == IDirection.FRONT)
+				|| (m_dir == IDirection.SOUTH && d == IDirection.BACK)
+				|| (m_dir == IDirection.WEST && d == IDirection.RIGHT)
+				|| (m_dir == IDirection.EAST && d == IDirection.LEFT)) {
+			m_dir = IDirection.NORTH;
+		}
+
+		else if (d == IDirection.SOUTH || (m_dir == IDirection.SOUTH && d == IDirection.FRONT)
+				|| (m_dir == IDirection.NORTH && d == IDirection.BACK)
+				|| (m_dir == IDirection.EAST && d == IDirection.RIGHT)
+				|| (m_dir == IDirection.WEST && d == IDirection.LEFT)) {
+			m_dir = IDirection.SOUTH;
+		}
+
+		else if (d == IDirection.WEST || (m_dir == IDirection.WEST && d == IDirection.FRONT)
+				|| (m_dir == IDirection.EAST && d == IDirection.BACK)
+				|| (m_dir == IDirection.SOUTH && d == IDirection.RIGHT)
+				|| (m_dir == IDirection.NORTH && d == IDirection.LEFT)) {
+			m_dir = IDirection.WEST;
+		}
+
+		else {
+			m_dir = IDirection.EAST;
+		}
+
+		return true;
 	}
 	
 	

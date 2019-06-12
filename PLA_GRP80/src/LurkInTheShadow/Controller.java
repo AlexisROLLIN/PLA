@@ -37,40 +37,25 @@ public class Controller extends GameController implements ActionListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 
-		/*if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') {
-			m_model.map.jViewport++;
-			if(m_model.perso1.m_x>2048){
-				m_model.perso1.m_x=0;
-				m_model.map.jViewport=16;
-			}
-		}
-
-		if (e.getKeyChar() == 'z' || e.getKeyChar() == 'Z') {
-			m_model.map.iViewport--;
-			if(m_model.perso1.m_y<0){
-				m_model.perso1.m_y=1536;
-				m_model.map.iViewport=60;
-			}
-
-		}
-		if (e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
-			m_model.map.iViewport++;
-			if(m_model.perso1.m_y>1536){
-				m_model.perso1.m_y=0;
-				m_model.map.iViewport=12;
-			}
-		}
-
-		if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
-			m_model.map.jViewport--;
-			if(m_model.perso1.m_x<0){
-				m_model.perso1.m_x=2048;
-				m_model.map.jViewport=80;
-			}
-		}*/
+		/*
+		 * if (e.getKeyChar() == 'd' || e.getKeyChar() == 'D') {
+		 * m_model.map.jViewport++; if(m_model.perso1.m_x>2048){ m_model.perso1.m_x=0;
+		 * m_model.map.jViewport=16; } }
+		 * 
+		 * if (e.getKeyChar() == 'z' || e.getKeyChar() == 'Z') {
+		 * m_model.map.iViewport--; if(m_model.perso1.m_y<0){ m_model.perso1.m_y=1536;
+		 * m_model.map.iViewport=60; }
+		 * 
+		 * } if (e.getKeyChar() == 's' || e.getKeyChar() == 'S') {
+		 * m_model.map.iViewport++; if(m_model.perso1.m_y>1536){ m_model.perso1.m_y=0;
+		 * m_model.map.iViewport=12; } }
+		 * 
+		 * if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
+		 * m_model.map.jViewport--; if(m_model.perso1.m_x<0){ m_model.perso1.m_x=2048;
+		 * m_model.map.jViewport=80; } }
+		 */
 
 	}
-
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -80,7 +65,7 @@ public class Controller extends GameController implements ActionListener {
 			if (!m_model.touches.contains("z")) {
 				m_model.touches.add("z");
 			}
-			
+
 		}
 
 		if (e.getKeyChar() == 'd') {
@@ -105,39 +90,53 @@ public class Controller extends GameController implements ActionListener {
 				m_model.touches.add("p");
 				m_model.Cgmt = 'p';
 			}
-			
+
 		}
 		if (e.getKeyChar() == 'm') {
 			if (!m_model.touches.contains("m")) {
 				m_model.touches.add("m");
 				m_model.Cgmt = 'm';
 			}
-			
+
 		}
 		if (e.getKeyChar() == 'o') {
 			if (!m_model.touches.contains("o")) {
 				m_model.touches.add("o");
 				m_model.Cgmt = 'o';
 			}
-			
+
 		}
-		
+
 		if (e.getKeyChar() == 'l') {
 			if (!m_model.touches.contains("l")) {
 				m_model.touches.add("l");
 				m_model.Cgmt = 'l';
 			}
-			
+
 		}
-		
+
 		if (e.getKeyCode() == 32) {
 			if (!m_model.touches.contains("SPACE")) {
 				m_model.touches.add("SPACE");
 			}
-			
+
 		}
 
+		if (e.getKeyChar() == 'a') {
+			if (!m_model.touches.contains("a")) {
+				m_model.touches.add("a");
+				m_model.Cgmt = 'a';
+			}
 
+		}
+
+		if (e.getKeyChar() == 'e') {
+			if (!m_model.touches.contains("e")) {
+				m_model.touches.add("e");
+				m_model.Cgmt = 'e';
+			}
+
+		}
 	}
 
 	@Override
@@ -165,13 +164,21 @@ public class Controller extends GameController implements ActionListener {
 		if (e.getKeyChar() == 'o') {
 			m_model.touches.remove("o");
 		}
-		
+
 		if (e.getKeyChar() == 'l') {
 			m_model.touches.remove("l");
 		}
-		
+
 		if (e.getKeyCode() == 32) {
 			m_model.touches.remove("SPACE");
+		}
+
+		if (e.getKeyChar() == 'a') {
+			m_model.touches.remove("a");
+		}
+
+		if (e.getKeyChar() == 'e') {
+			m_model.touches.remove("w");
 		}
 	}
 
@@ -216,7 +223,7 @@ public class Controller extends GameController implements ActionListener {
 		if (Options.ECHO_MOUSE_MOTION)
 			System.out.println("MouseMoved: (" + e.getX() + "," + e.getY());
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object s = e.getSource();
@@ -226,7 +233,7 @@ public class Controller extends GameController implements ActionListener {
 	@Override
 	public void notifyVisible() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

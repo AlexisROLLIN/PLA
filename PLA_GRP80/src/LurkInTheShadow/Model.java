@@ -79,27 +79,27 @@ public class Model extends GameModel {
 		// Listes utiles
 		allies = new LinkedList<Ally>();
 		monstres = new LinkedList<Monster>();
-		projectiles = new LinkedList<Projectile>();
+		//projectiles = new LinkedList<Projectile>();
 		items = new LinkedList<Component>();
 		mobileComponents = new LinkedList<Component>();
 		componentsToAdd = new LinkedList<Component>();
 		componentsToRemove = new LinkedList<Component>();
 
-		AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file("src/Automates/Automate"));
+		AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file("src/Automates/Automate2.txt"));
 		IAI_Definitions iai_def = ai_def.make();
 		Player = iai_def.automatas.get(0);
-		leader = iai_def.automatas.get(1);
-		spawn1 = iai_def.automatas.get(2);
-		spawn2 = iai_def.automatas.get(3);
-		obst = iai_def.automatas.get(4);
-		floor = iai_def.automatas.get(5);
-		queen = iai_def.automatas.get(6);
-		monster = iai_def.automatas.get(7);
-		transe = iai_def.automatas.get(8);
-		monstre_desoriente = iai_def.automatas.get(7);
-		fireball = obst;
-		bullet = obst;
-		item = iai_def.automatas.get(9);
+		leader = iai_def.automatas.get(3);
+		spawn1 = iai_def.automatas.get(1);
+		spawn2 = iai_def.automatas.get(2);
+		obst = iai_def.automatas.get(6);
+		floor = iai_def.automatas.get(7);
+		queen = iai_def.automatas.get(4);
+		monster = iai_def.automatas.get(5);
+		transe = iai_def.automatas.get(8);//
+		monstre_desoriente = iai_def.automatas.get(7);//
+		fireball = iai_def.automatas.get(9);
+		bullet = iai_def.automatas.get(8);;
+		item = iai_def.automatas.get(7);
 
 		perso1 = new Shooter(this, Sprite, 10, 9, 512, 384, 1F, 81, true);
 		perso2 = new Mage(this, Sprite, 10, 9, 192, 416, 1F, 44, true);
