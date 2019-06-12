@@ -35,14 +35,14 @@ public class Options {
 	
 	public static final int MAX_SCORE = Integer.MAX_VALUE;
 	
-	public static Spring AUTOMATA_WARRIOR;
-	public static Spring AUTOMATA_SHOOTER;
-	public static Spring AUTOMATA_MAGE;
-	public static Spring AUTOMATA_FIREBALL;
-	public static Spring AUTOMATA_BULLET;
-	public static Spring AUTOMATA_MONSTER;
-	public static Spring AUTOMATA_QUEEN;
-	public static Spring AUTOMATA_OBST;
-	public static Spring AUTOMATA_FLOOR;
-	public static Spring AUTOMATA_ITEMS;
+	public static String AUTOMATA_WARRIOR;
+	public static String AUTOMATA_SHOOTER;
+	public static String AUTOMATA_MAGE;
+	public static String AUTOMATA_FIREBALL;
+	public static String AUTOMATA_BULLET;
+	public static String AUTOMATA_MONSTER;
+	public static String AUTOMATA_QUEEN;
+	public static String AUTOMATA_OBST;
+	public static String AUTOMATA_FLOOR;
+	public static String AUTOMATA_ITEMS;
 }
