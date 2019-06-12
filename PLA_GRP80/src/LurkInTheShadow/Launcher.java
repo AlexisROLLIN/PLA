@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.Spring;
 
 class GameMenu implements ActionListener {
@@ -23,6 +24,7 @@ class GameMenu implements ActionListener {
 
 	JPanel m_panelMenu = new JPanel();
 	JPanel m_panelOptions = new JPanel();
+	JPanel m_panelChallenge = new JPanel();
 
 	// Menu
 
@@ -32,7 +34,11 @@ class GameMenu implements ActionListener {
 
 	// Options
 
-	JButton m_saveOptions = new JButton("Save");
+	JButton m_saveOptionsButton = new JButton("Save");
+	
+	// Challenge
+	
+	JButton m_tryChallengeButton = new JButton("Try");
 
 	String[] automatons = new String[] { "Player", "leader", "spawn1", "spawn2", "obst", "monster", "queen", "fireball",
 			"bullet", "floor", "transe", "monstre_desoriente" };
@@ -52,6 +58,7 @@ class GameMenu implements ActionListener {
 		prepareGUI();
 		initPanelMenu();
 		initPanelOptions();
+		initPanelChallenge();
 
 		m_frame.setVisible(true);
 	}
@@ -60,13 +67,10 @@ class GameMenu implements ActionListener {
 		m_frame.setTitle("Launcher: What Lurks In The Shadow ?");
 		m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		m_frame.setLayout(new BorderLayout());
-//		m_frame.getContentPane().setLayout(null);
 		m_frame.setBounds(200, 200, 400, 400);
 	}
 
 	public void initPanelMenu() {
-//		m_panelMenu.setLayout(new BoxLayout(m_panelMenu, BoxLayout.PAGE_AXIS));
-		
 		m_panelMenu.setLayout(new BorderLayout());
 
 		JPanel panel = new JPanel();
@@ -76,52 +80,33 @@ class GameMenu implements ActionListener {
 		c.fill = GridBagConstraints.BOTH;
 		
 		JLabel label;
+		
+		// Title
 
 		label = new JLabel("Menu");
 		label.setHorizontalAlignment(JLabel.CENTER);
-//		label.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
-//		m_panelMenu.add(label);
 		m_panelMenu.add(label, BorderLayout.NORTH);
-
-//		m_panelMenu.add(Box.createVerticalGlue());
-//
-//		m_newGameButton.setHorizontalAlignment(JLabel.CENTER);
-//		m_newGameButton.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
-//		m_newGameButton.addActionListener(this);
-//		m_panelMenu.add(m_newGameButton);
-//
-//		m_optionsButton.setHorizontalAlignment(JLabel.CENTER);
-//		m_optionsButton.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
-//		m_optionsButton.addActionListener(this);
-//		m_panelMenu.add(m_optionsButton);
-//
-//		m_challengeButton.setHorizontalAlignment(JLabel.CENTER);
-//		m_challengeButton.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
-//		m_challengeButton.addActionListener(this);
-//		m_panelMenu.add(m_challengeButton);
+		
+		// Buttons
 		
 		m_newGameButton.addActionListener(this);
-		c.gridwidth = 1;
-	    c.gridheight = 1;
 		c.gridx = 0;
 		c.gridy = 0;
 		panel.add(m_newGameButton, c);
 
 		m_optionsButton.addActionListener(this);
-		c.gridwidth = 1;
-	    c.gridheight = 1;
 		c.gridx = 0;
 		c.gridy = 1;
 		panel.add(m_optionsButton, c);
 
 		m_challengeButton.addActionListener(this);
-		c.gridwidth = 1;
-	    c.gridheight = 1;
 		c.gridx = 0;
 		c.gridy = 2;
 		panel.add(m_challengeButton, c);
 		
 		m_panelMenu.add(panel, BorderLayout.CENTER);
+		
+		// Display
 
 		m_frame.setContentPane(m_panelMenu);
 	}
@@ -136,9 +121,10 @@ class GameMenu implements ActionListener {
 		panel.setLayout(new GridBagLayout());
 
 		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.HORIZONTAL;
+		c.fill = GridBagConstraints.BOTH;
 
 		JLabel label;
+		JComboBox comboBox;
 
 		// Title
 
@@ -171,118 +157,60 @@ class GameMenu implements ActionListener {
 			c.gridy = i;
 			panel.add(label, c);
 
-			JComboBox comboBox = listAutomata.get(i);
+			comboBox = listAutomata.get(i);
 			comboBox.setSelectedIndex(i);
 			c.gridx = 1;
 			c.gridy = i;
 			panel.add(comboBox, c);
 		}
 
-//		label = new JLabel("Warrior:");
-//		c.gridx = 0;
-//		c.gridy = 1;
-//		panel.add(label, c);
-//
-//		m_automataWarrior.setSelectedIndex(1);
-//		c.gridx = 1;
-//		c.gridy = 1;
-//		panel.add(m_automataWarrior, c);
-//
-//		label = new JLabel("Shooter:");
-//		c.gridx = 0;
-//		c.gridy = 2;
-//		panel.add(label, c);
-//
-//		m_automataShooter.setSelectedIndex(0);
-//		c.gridx = 1;
-//		c.gridy = 2;
-//		panel.add(m_automataShooter, c);
-//
-//		label = new JLabel("Mage:");
-//		c.gridx = 0;
-//		c.gridy = 3;
-//		panel.add(label, c);
-//
-//		m_automataMage.setSelectedIndex(0);
-//		c.gridx = 1;
-//		c.gridy = 3;
-//		panel.add(m_automataMage, c);
-//
-//		label = new JLabel("Fireball:");
-//		c.gridx = 0;
-//		c.gridy = 4;
-//		panel.add(label, c);
-//
-//		m_automataFireball.setSelectedIndex(7);
-//		c.gridx = 1;
-//		c.gridy = 4;
-//		panel.add(m_automataFireball, c);
-//
-//		label = new JLabel("Bullet:");
-//		c.gridx = 0;
-//		c.gridy = 5;
-//		panel.add(label, c);
-//
-//		m_automataBullet.setSelectedIndex(8);
-//		c.gridx = 1;
-//		c.gridy = 5;
-//		panel.add(m_automataBullet, c);
-//
-//		label = new JLabel("Monster:");
-//		c.gridx = 0;
-//		c.gridy = 6;
-//		panel.add(label, c);
-//
-//		m_automataMonster.setSelectedIndex(5);
-//		c.gridx = 1;
-//		c.gridy = 6;
-//		panel.add(m_automataMonster, c);
-//
-//		label = new JLabel("Queen:");
-//		c.gridx = 0;
-//		c.gridy = 7;
-//		panel.add(label, c);
-//
-//		m_automataQueen.setSelectedIndex(6);
-//		c.gridx = 1;
-//		c.gridy = 7;
-//		panel.add(m_automataQueen, c);
-//
-//		label = new JLabel("Obst:");
-//		c.gridx = 0;
-//		c.gridy = 8;
-//		panel.add(label, c);
-//
-//		m_automataObst.setSelectedIndex(4);
-//		c.gridx = 1;
-//		c.gridy = 8;
-//		panel.add(m_automataObst, c);
-//
-//		label = new JLabel("Floor:");
-//		c.gridx = 0;
-//		c.gridy = 9;
-//		panel.add(label, c);
-//
-//		m_automataFloor.setSelectedIndex(9);
-//		c.gridx = 1;
-//		c.gridy = 9;
-//		panel.add(m_automataFloor, c);
-//
-//		label = new JLabel("Items:");
-//		c.gridx = 0;
-//		c.gridy = 10;
-//		panel.add(label, c);
-//
-//		m_automataItems.setSelectedIndex(10);
-//		c.gridx = 1;
-//		c.gridy = 10;
-//		panel.add(m_automataItems, c);
-
 		m_panelOptions.add(panel, BorderLayout.CENTER);
 
 		// Button
 
-		m_panelOptions.add(m_saveOptions, BorderLayout.SOUTH);
+		m_saveOptionsButton.addActionListener(this);
+		m_panelOptions.add(m_saveOptionsButton, BorderLayout.SOUTH);
+	}
+	
+	public void initPanelChallenge() {
+
+		// Init
+
+		m_panelChallenge.setLayout(new BorderLayout());
+
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridBagLayout());
+
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+
+		JLabel label;
+		JRadioButton challenge;
+
+		// Title
+
+		label = new JLabel("Challenge");
+		label.setHorizontalAlignment(JLabel.CENTER);
+		m_panelChallenge.add(label, BorderLayout.NORTH);
+
+		// List
+		
+		challenge = new JRadioButton("Name: ");
+		c.gridx = 0;
+		c.gridy = 0;
+		panel.add(challenge, c);
+		
+		label = new JLabel("1000");
+		c.gridx = 1;
+		c.gridy = 0;
+		panel.add(label, c);
+
+		m_panelChallenge.add(panel, BorderLayout.CENTER);
+
+		// Button
+
+		m_tryChallengeButton.addActionListener(this);
+		m_panelChallenge.add(m_tryChallengeButton, BorderLayout.SOUTH);
 	}
 
 	@Override
@@ -294,8 +222,7 @@ class GameMenu implements ActionListener {
 		} else if (s == m_optionsButton) {
 			m_frame.setContentPane(m_panelOptions);
 			m_frame.revalidate();
-		} else if (s == m_saveOptions) {
-			System.out.println("test");
+		} else if (s == m_saveOptionsButton) {
 			Options.AUTOMATA_WARRIOR = (String) m_automataWarrior.getSelectedItem();
 			Options.AUTOMATA_SHOOTER = (String) m_automataShooter.getSelectedItem();
 			Options.AUTOMATA_MAGE = (String) m_automataMage.getSelectedItem();
@@ -308,6 +235,13 @@ class GameMenu implements ActionListener {
 			Options.AUTOMATA_ITEMS = (String) m_automataItems.getSelectedItem();
 			m_frame.setContentPane(m_panelMenu);
 			m_frame.revalidate();
+		} else if (s == m_challengeButton) {
+			m_frame.setContentPane(m_panelChallenge);
+			m_frame.revalidate();
+		} else if (s == m_tryChallengeButton) {
+			// Change Options
+			GameMain.main(null);
+			m_frame.dispose();
 		}
 	}
 }
