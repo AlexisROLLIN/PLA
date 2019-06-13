@@ -29,6 +29,10 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -40,6 +44,10 @@ class GameMenu implements ActionListener {
 	JPanel m_panelOptions = new JPanel();
 	JPanel m_panelChallenge = new JPanel();
 
+	// MenuBar
+	
+	JMenuItem m_i1 = new JMenuItem("À propos");
+	
 	// Menu
 
 	JButton m_newGameButton = new JButton();
@@ -73,18 +81,35 @@ class GameMenu implements ActionListener {
 
 	GameMenu() {
 		prepareGUI();
+		initMenuBar();
 		initPanelMenu();
-		initPanelChallenge();
 		initPanelOptions();
+		initPanelChallenge();
 
 		m_frame.setVisible(true);
 	}
 
 	public void prepareGUI() {
-		m_frame.setTitle("Launcher: What Lurks In The Shadow ?");
+		m_frame.setTitle("What Lurks In The Shadow ?");
 		m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		m_frame.setLayout(new BorderLayout());
 		m_frame.setBounds(200, 200, 700, 700);
+		m_frame.setResizable(false);
+	}
+	
+	public void initMenuBar() {
+		
+		// Init
+		
+		JMenuBar mb = new JMenuBar();
+		JMenu menu = new JMenu("Help");
+		m_i1.addActionListener(this);
+		menu.add(m_i1);
+		mb.add(menu);
+		
+		// Display
+		
+		m_frame.setJMenuBar(mb);
 	}
 
 	public void initPanelMenu() {
@@ -280,7 +305,10 @@ class GameMenu implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object s = e.getSource();
-		if (s == m_newGameButton) {
+		if (s == m_i1) {
+			JOptionPane.showMessageDialog(m_frame,
+				    "Copyright (C) 2018-2019 Groupe 8");
+		} else if (s == m_newGameButton) {
 			GameMain.main(null);
 			m_frame.dispose();
 		} else if (s == m_optionsButton) {
