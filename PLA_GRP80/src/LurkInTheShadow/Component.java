@@ -31,6 +31,7 @@ public class Component {
 	public int power;
 	public int life;
 	public int speed;
+	public boolean on_move;
 	
 	int lampe_x;
 	int lampe_y;
@@ -137,6 +138,10 @@ public class Component {
 
 	public void step(long now) throws Interpreter_Exception {
 		long elapsed = now - m_lastMove;
+		
+		if(automate==null) {
+			return;
+		}
 
 		if (elapsed > 60L) {
 			m_lastMove = now;
@@ -256,7 +261,7 @@ public class Component {
 	
 	public void GetQueen() { //Pour la queen
 
-		m_model.perso1.setAutomate(m_model.transe);//Automates à changer
+		m_model.perso1.setAutomate(m_model.spawn2);//Automates à changer
 		m_model.perso2.setAutomate(m_model.spawn2);
 		
 		m_model.perso3.setAutomate(m_model.spawn2);
@@ -311,6 +316,19 @@ public class Component {
 			return false;
 
 }
+	
+	public boolean jump(){
+		return true;
+	}
+	
+	public boolean Throw(){
+		return true;
+	}
+	
+	public boolean pick(){
+		return true;
+	}
+	
 	
 	//A Overrider
 	public boolean move(IDirection d) {

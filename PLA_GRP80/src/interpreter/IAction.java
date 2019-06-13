@@ -100,7 +100,7 @@ public abstract class IAction {
 		public IJump(){}
 		
 		public boolean exec(Component e){
-			return true;
+			return e.jump();
 		}
 	}
 	
@@ -129,7 +129,8 @@ public abstract class IAction {
 		}
 
 		public boolean exec(Component e) {
-			return true;
+			return e.pick();
+
 		}
 	}
 
@@ -142,7 +143,7 @@ public abstract class IAction {
 		}
 
 		public boolean exec(Component e) {
-			return true;
+			return e.Throw();
 		}
 	}
 

@@ -117,7 +117,31 @@ public class Controller extends GameController implements ActionListener {
 				m_model.touches.add("e");
 				m_model.Cgmt = 'e';
 			}
+		
 
+		}
+		
+		if (e.getKeyChar() == 'b') {
+			if (!m_model.touches.contains("b")) {
+				m_model.touches.add("b");
+				m_model.Cgmt = 'b';
+			}
+		
+
+		}
+		
+		if (e.getKeyChar() == 'n') {
+			if (!m_model.touches.contains("n")) {
+				m_model.touches.add("n");
+				m_model.Cgmt = 'n';
+			}
+		}
+		
+		if (e.getKeyChar() == 'r') {
+			if (!m_model.touches.contains("r")) {
+				m_model.touches.add("r");
+				m_model.Cgmt = 'r';
+			}
 		}
 	}
 
@@ -161,6 +185,15 @@ public class Controller extends GameController implements ActionListener {
 
 		if (e.getKeyChar() == 'e') {
 			m_model.touches.remove("e");
+		}
+		if (e.getKeyChar() == 'b') {
+			m_model.touches.remove("b");
+		}
+		if (e.getKeyChar() == 'n') {
+			m_model.touches.remove("n");
+		}
+		if (e.getKeyChar() == 'r') {
+			m_model.touches.remove("r");
 		}
 	}
 

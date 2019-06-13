@@ -123,9 +123,7 @@ public class Warrior extends Ally {
 					while (iter.hasNext()) {
 						tmp = iter.next();
 						if (this.Collision(tmp)) {
-
-							this.m_model.monstres.remove(tmp);
-							this.m_model.components.remove(tmp);
+							tmp.life -= 30;
 						}
 
 					}
@@ -152,8 +150,7 @@ public class Warrior extends Ally {
 					while (iter.hasNext()) {
 						tmp = iter.next();
 						if (this.Collision(tmp)) {
-							this.m_model.monstres.remove(tmp);
-							this.m_model.components.remove(tmp);
+							tmp.life -= 30;
 						}
 
 					}
@@ -180,8 +177,7 @@ public class Warrior extends Ally {
 					while (iter.hasNext()) {
 						tmp = iter.next();
 						if (this.Collision(tmp)) {
-							this.m_model.monstres.remove(tmp);
-							this.m_model.components.remove(tmp);
+							tmp.life -= 30;
 						}
 
 					}
@@ -206,8 +202,7 @@ public class Warrior extends Ally {
 					while (iter.hasNext()) {
 						tmp = iter.next();
 						if (this.Collision(tmp)) {
-							this.m_model.monstres.remove(tmp);
-							this.m_model.components.remove(tmp);
+							tmp.life -= 30;
 
 						}
 

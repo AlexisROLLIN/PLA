@@ -11,7 +11,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.imageio.ImageIO;
 
 import edu.ricm3.game.GameModel;
-import edu.ricm3.game.Options;
 import interpreter.IAI_Definitions;
 import interpreter.IAutomaton;
 import interpreter.Interpreter_Exception;
@@ -41,19 +40,24 @@ public class Model extends GameModel {
 	int nbLife;
 
 	IAutomaton Player;
-	IAutomaton leader;
-	IAutomaton spawn1;
-	IAutomaton spawn2;
+	IAutomaton warrior;
+	IAutomaton shooter;
+	IAutomaton mage;
 	IAutomaton obst;
 	IAutomaton monster;
 	IAutomaton queen;
 	IAutomaton fireball;
 	IAutomaton bullet;
 	IAutomaton floor;
-	IAutomaton transe;
-	IAutomaton monstre_desoriente;
 	IAutomaton item;
 
+	//Automates systeme
+	IAutomaton leader;
+	IAutomaton spawn1;
+	IAutomaton spawn2;
+	IAutomaton transe;
+	IAutomaton monstre_desoriente;
+	
 	public char Cgmt;
 	public MiniMap minimap;
 	public Fleche fleche;
@@ -78,7 +82,7 @@ public class Model extends GameModel {
 	public LinkedList<Component> ElementsViewPort;
 
 	public Model() throws Interpreter_Exception, Exception {
-
+		
 		loadSprites();
 		nbElements = 0;
 		this.touches = new LinkedList();
@@ -92,22 +96,50 @@ public class Model extends GameModel {
 		mobileComponents = new LinkedList<Component>();
 		componentsToAdd = new LinkedList<Component>();
 		componentsToRemove = new LinkedList<Component>();
+
 		
-		AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file("src/Automates/Automate2.txt"));
-		IAI_Definitions iai_def = ai_def.make();
-		Player = iai_def.automatas.get(0);
-		leader = iai_def.automatas.get(3);
-		spawn1 = iai_def.automatas.get(1);
-		spawn2 = iai_def.automatas.get(2);
-		obst = iai_def.automatas.get(6);
-		floor = iai_def.automatas.get(7);
-		queen = iai_def.automatas.get(4);
-		monster = iai_def.automatas.get(5);
-		transe = iai_def.automatas.get(8);//
-		monstre_desoriente = iai_def.automatas.get(7);//
-		fireball = iai_def.automatas.get(9);
-		bullet = iai_def.automatas.get(8);;
-		item = iai_def.automatas.get(7);
+		Player = Options.AUTOMATA_PLAYER;
+		shooter = Options.AUTOMATA_SHOOTER;
+		warrior = Options.AUTOMATA_WARRIOR;
+		mage = Options.AUTOMATA_MAGE;
+		
+		leader = Options.AUTOMATA_SHOOTER;
+		spawn1 = Options.AUTOMATA_WARRIOR;
+		spawn2 = Options.AUTOMATA_MAGE;
+		transe = Options.AUTOMATA_FLOOR;
+		monstre_desoriente=Options.AUTOMATA_MONSTER;
+		
+		fireball=Options.AUTOMATA_FIREBALL;
+		bullet=Options.AUTOMATA_BULLET;
+		obst = Options.AUTOMATA_OBST;
+		floor = Options.AUTOMATA_FLOOR;
+		queen = Options.AUTOMATA_QUEEN;
+		monster = Options.AUTOMATA_MONSTER;
+		item = Options.AUTOMATA_ITEMS;
+		
+		IAutomaton[] tableau_autos_save = new IAutomaton[11];
+		tableau_autos_save[0]=Player;
+		tableau_autos_save[1]=warrior;
+		tableau_autos_save[2]=shooter;
+		tableau_autos_save[3]=mage;
+		tableau_autos_save[4]=fireball;
+		tableau_autos_save[5]=bullet;
+		tableau_autos_save[6]=monster;
+		tableau_autos_save[7]=queen;
+		tableau_autos_save[8]=obst;
+		tableau_autos_save[9]=floor;
+		tableau_autos_save[10]=item;
+		
+		
+		
+		/*Automates systemes
+		transe = Options.AUTOMATA_TRANSE;
+		monstre_desoriente = Options.AUTOMATA_MONSTRE_DESO;
+		spawn1=
+		spawn2=
+		fireball = Options.AUTOMATA_FIREBALL;
+		bullet = Options.AUTOMATA_BULLET;
+		item = Options.AUTOMATA_ITEMS;*/
 
 		perso1 = new Shooter(this, Sprite, 12, 11, 0, 0, 1F, 81, true);
 		perso2 = new Mage(this, Sprite, 12, 11, 0, 0, 1F, 44, true);
@@ -121,9 +153,20 @@ public class Model extends GameModel {
 
 		ElementsMap = new Component[48][64];
 		ElementsTore = new Component[96][128];
-
-		map = new Map(48, 64, this);
 		
+		if(Options.option_load==true) {
+			map = new Map(48,64,this, Options.map);
+		}
+		else {
+			map = new Map(48, 64, this);
+		}
+		
+		//On sauvegarde à chaque fois là /!\
+		Sauvegarde save = new Sauvegarde(map.tab,tableau_autos_save,"src/Automates/Automate2.txt");
+		save.encode("save.txt");
+
+		
+
 		
 		//Spwan des personnages sur la map
 		spawn(perso1);
@@ -137,6 +180,9 @@ public class Model extends GameModel {
 		
 		spawn(reine);
 		
+
+		// Test sauvegarde
+
 
 		// Charger l'image de la map
 		File imageFileMap = new File("src/Sprites/MiniMap");
@@ -169,7 +215,7 @@ public class Model extends GameModel {
 	@Override
 	public void step(long now) {
 		mainPlayed.Afficher();
-		
+			
 		Iterator<Component> iter = this.components.iterator();
 
 		while (iter.hasNext()) {
@@ -179,8 +225,9 @@ public class Model extends GameModel {
 			} catch (Interpreter_Exception e) {
 			}
 		}
-		// On ne peut pas ajouter de components pendant qu'on parcourt la liste
-		// de
+
+		
+		// On ne peut pas ajouter de components pendant qu'on parcourt la liste de
 		// components
 		// On fait donc ça maintenant
 		Iterator<Component> iterA = this.componentsToAdd.iterator();
@@ -304,49 +351,6 @@ public class Model extends GameModel {
 			System.exit(-1);
 		}
 
-	}
-
-	public void save_config() {
-
-		IAutomaton auto[] = new IAutomaton[12];
-		auto[0] = Player;
-		auto[1] = leader;
-		auto[2] = spawn1;
-		auto[3] = spawn2;
-		auto[4] = obst;
-		auto[5] = monster;
-		auto[6] = queen;
-		auto[7] = fireball;
-		auto[8] = bullet;
-		auto[9] = floor;
-		auto[10] = transe;
-		auto[11] = monstre_desoriente;
-		Sauvegarde sauv = new Sauvegarde(map.tab, auto,
-				"src/Automates/Automate");
-		sauv.encode("game_save.txt");
-	}
-
-	public boolean load_config() {
-
-		Sauvegarde sauv = Sauvegarde.decode("game_save.txt");
-		if (sauv == null) {
-			return false;
-		}
-
-		map = new Map(48, 64, this, sauv.tab_map);
-		Player = sauv.tab_auto[0];
-		leader = sauv.tab_auto[1];
-		spawn1 = sauv.tab_auto[2];
-		spawn2 = sauv.tab_auto[3];
-		obst = sauv.tab_auto[4];
-		monster = sauv.tab_auto[5];
-		queen = sauv.tab_auto[6];
-		fireball = sauv.tab_auto[7];
-		bullet = sauv.tab_auto[8];
-		floor = sauv.tab_auto[9];
-		transe = sauv.tab_auto[10];
-		monstre_desoriente = sauv.tab_auto[11];
-		return true;
 	}
 
 }

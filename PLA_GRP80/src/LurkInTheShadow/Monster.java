@@ -23,6 +23,8 @@ public class Monster extends Component {
 	
 	@Override
 	public boolean move(IDirection d) { //Graphiques non geres
+		
+			on_move=true;
 
 			if (d == IDirection.NORTH || (m_dir == IDirection.NORTH && d == IDirection.FRONT)
 					|| (m_dir == IDirection.SOUTH && d == IDirection.BACK)
@@ -61,6 +63,8 @@ public class Monster extends Component {
 
 	@Override
 	public boolean hit(IDirection d) {
+		
+		
 
 		if (d == IDirection.NORTH || (m_dir == IDirection.NORTH && d == IDirection.FRONT)
 				|| (m_dir == IDirection.SOUTH && d == IDirection.BACK)
