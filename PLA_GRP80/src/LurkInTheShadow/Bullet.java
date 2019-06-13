@@ -5,9 +5,9 @@ import java.util.ListIterator;
 
 public class Bullet extends Projectile {
 
-	public Bullet (Model model, BufferedImage sprite, int rows, int columns, int x, int y,float scale, int id_x, boolean show, IDirection dir, int power) {
+	public Bullet (Model model, BufferedImage sprite, int rows, int columns, int x, int y,float scale, int id_x, boolean show, IDirection dir, int power,int speed) {
 		
-		super(model, sprite, rows, columns, x, y, scale, id_x, show, dir, power);
+		super(model, sprite, rows, columns, x, y, scale, id_x, show, dir, power,speed);
 		
 	}
 	
