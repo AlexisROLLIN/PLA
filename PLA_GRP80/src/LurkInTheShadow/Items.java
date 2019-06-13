@@ -8,9 +8,11 @@ import edu.ricm3.game.Options;
 
 public class Items extends Component{
 	
+	int itemType;
 	
 	public Items(Model model, int no, BufferedImage sprite, int rows, int columns, int x, int y, float scale, int screen, int item) {
 		super(model, no, sprite, rows, columns, x, y, sprite.getWidth(), sprite.getHeight(), scale, screen);
+		itemType = item;
 		if (item == 1) {
 			m_model.nbAmmo++;
 			m_idx = 6;

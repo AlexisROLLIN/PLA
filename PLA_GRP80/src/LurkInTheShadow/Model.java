@@ -68,6 +68,7 @@ public class Model extends GameModel {
 	@Override
 	public void step(long now) {
 		perso1.Afficher();
+		perso1.Pick();
 		while (nbAmmo < 10) {
 			PlaceRandom(1);
 		}
@@ -80,6 +81,7 @@ public class Model extends GameModel {
 		while (nbLife < 5) {
 			PlaceRandom(4);
 		}
+		System.out.println(perso1.myAmmo);
 	}
 	
 	public ListIterator<Component> components(){

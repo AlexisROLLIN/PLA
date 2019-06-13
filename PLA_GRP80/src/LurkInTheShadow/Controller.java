@@ -185,13 +185,7 @@ public class Controller extends GameController implements ActionListener {
 		}
 		
 		if (e.getKeyChar() == 'o' || e.getKeyChar() == 'O') {
-			if (this.m_model.perso1.lampe_x == 50) {
-				this.m_model.perso1.lampe_x -= 25;
-				this.m_model.perso1.lampe_y -= 25;
-				this.m_model.perso1.lampe_width = 2.8 * this.m_model.perso1.lampe_x;
-				this.m_model.perso1.lampe_height = 2.8 * this.m_model.perso1.lampe_y;
-			}
-			else if (this.m_model.perso1.lampe_x == 75) {
+			if (this.m_model.perso1.lampe_x == 75) {
 				this.m_model.perso1.lampe_x -= 25;
 				this.m_model.perso1.lampe_y -= 25;
 				this.m_model.perso1.lampe_width = 2.5 * this.m_model.perso1.lampe_x;
@@ -203,16 +197,16 @@ public class Controller extends GameController implements ActionListener {
 				this.m_model.perso1.lampe_width = 2.4 * this.m_model.perso1.lampe_x;
 				this.m_model.perso1.lampe_height = 2.4 * this.m_model.perso1.lampe_y;
 			}
+			else if (this.m_model.perso1.lampe_x == 130) {
+				this.m_model.perso1.lampe_x -= 30;
+				this.m_model.perso1.lampe_y -= 30;
+				this.m_model.perso1.lampe_width = 2.3 * this.m_model.perso1.lampe_x;
+				this.m_model.perso1.lampe_height = 2.3 * this.m_model.perso1.lampe_y;
+			}
 		}
 		
 		if (e.getKeyChar() == 'p' || e.getKeyChar() == 'P') {
-			if (this.m_model.perso1.lampe_x == 25) {
-				this.m_model.perso1.lampe_x += 25;
-				this.m_model.perso1.lampe_y += 25;
-				this.m_model.perso1.lampe_width = 2.5 * this.m_model.perso1.lampe_x;
-				this.m_model.perso1.lampe_height = 2.5 * this.m_model.perso1.lampe_y;
-			}
-			else if (this.m_model.perso1.lampe_x == 50) {
+			if (this.m_model.perso1.lampe_x == 50) {
 				this.m_model.perso1.lampe_x += 25;
 				this.m_model.perso1.lampe_y += 25;
 				this.m_model.perso1.lampe_width = 2.4 * this.m_model.perso1.lampe_x;
@@ -223,6 +217,12 @@ public class Controller extends GameController implements ActionListener {
 				this.m_model.perso1.lampe_y += 25;
 				this.m_model.perso1.lampe_width = 2.3 * this.m_model.perso1.lampe_x;
 				this.m_model.perso1.lampe_height = 2.3 * this.m_model.perso1.lampe_y;
+			}
+			else if (this.m_model.perso1.lampe_x == 100) {
+				this.m_model.perso1.lampe_x += 30;
+				this.m_model.perso1.lampe_y += 30;
+				this.m_model.perso1.lampe_width = 2.25 * this.m_model.perso1.lampe_x;
+				this.m_model.perso1.lampe_height = 2.25 * this.m_model.perso1.lampe_y;
 			}
 		}
 	}
