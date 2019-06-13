@@ -261,7 +261,7 @@ public class Warrior extends Ally {
 					|| (m_dir == IDirection.EAST && d == IDirection.RIGHT)
 					|| (m_dir == IDirection.WEST && d == IDirection.LEFT)) {
 				m_y += speed;
-				this.m_idx = 48;
+				this.m_idx = 47;
 				m_dir = IDirection.SOUTH;
 				System.out.println("Avance au Sud \n");
 
@@ -310,5 +310,7 @@ public class Warrior extends Ally {
 		}
 		return false;
 	}
+	
+	
 
 }

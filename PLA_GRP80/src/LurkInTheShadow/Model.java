@@ -110,10 +110,10 @@ public class Model extends GameModel {
 		;
 		item = iai_def.automatas.get(7);
 
-		perso1 = new Shooter(this, Sprite, 10, 9, 512, 384, 1F, 81, true);
-		perso2 = new Mage(this, Sprite, 10, 9, 192, 416, 1F, 44, true);
-		perso3 = new Warrior(this, Sprite, 10, 9, 160, 416, 1F, 48, true);
-		reine = new Queen(this, Sprite, 10, 9, 320, 448, 1F, 13, true);
+		perso1 = new Shooter(this, Sprite, 12, 11, 512, 384, 1F, 81, true);
+		perso2 = new Mage(this, Sprite, 12, 11, 192, 416, 1F, 44, true);
+		perso3 = new Warrior(this, Sprite, 12, 11, 160, 416, 1F, 48, true);
+		reine = new Queen(this, Sprite, 12, 11, 320, 448, 1F, 13, true);
 
 		perso1.setAutomate(Player);
 		mainPlayed = perso1;
@@ -255,13 +255,13 @@ public class Model extends GameModel {
 			}
 		} while (!free);
 
-		Items item = new Items(this, Sprite, 10, 9, x, y, 1F, true, itemNumber);
+		Items item = new Items(this, Sprite, 12, 11, x, y, 1F, true, itemNumber);
 
 	}
 
 	private void loadSprites() {
 
-		File imageFile = new File("src/map_creator/testSprites.png");
+		File imageFile = new File("src/Sprites/testSprites.png");
 		try {
 			Sprite = ImageIO.read(imageFile);
 		} catch (IOException ex) {

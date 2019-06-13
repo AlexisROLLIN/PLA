@@ -11,6 +11,7 @@ import interpreter.*;
 public class Shooter extends Ally {
 boolean sniper;
 int speedProj;
+int lastIdx;
 	public Shooter(Model model, BufferedImage sprite, int rows, int columns, int x, int y, float scale, int id_x,
 			boolean show) {
 		super(model, sprite, rows, columns, x, y, sprite.getHeight() * (int) scale, sprite.getWidth() * (int) scale,
@@ -20,6 +21,7 @@ int speedProj;
 		m_type = IType.PLAYER;
 		sniper = false;
 		speedProj = 32;
+		this.lastIdx = m_idx;
 		splitSprite();
 	}
 
@@ -29,6 +31,7 @@ int speedProj;
 					|| (m_dir == IDirection.SOUTH && d == IDirection.BACK)
 					|| (m_dir == IDirection.WEST && d == IDirection.RIGHT)
 					|| (m_dir == IDirection.EAST && d == IDirection.LEFT)) {
+				tmp_m_y = m_y;
 				m_y -= speed;
 				this.m_idx = 78;
 				m_dir = IDirection.NORTH;
@@ -47,6 +50,7 @@ int speedProj;
 					|| (m_dir == IDirection.NORTH && d == IDirection.BACK)
 					|| (m_dir == IDirection.EAST && d == IDirection.RIGHT)
 					|| (m_dir == IDirection.WEST && d == IDirection.LEFT)) {
+				tmp_m_y = m_y;
 				m_y += speed;
 				this.m_idx = 81;
 				m_dir = IDirection.SOUTH;
@@ -65,6 +69,7 @@ int speedProj;
 					|| (m_dir == IDirection.EAST && d == IDirection.BACK)
 					|| (m_dir == IDirection.SOUTH && d == IDirection.RIGHT)
 					|| (m_dir == IDirection.NORTH && d == IDirection.LEFT)) {
+				tmp_m_x = m_x;
 				m_x -= speed;
 				this.m_idx = 73;
 				m_dir = IDirection.WEST;
@@ -80,8 +85,9 @@ int speedProj;
 			}
 
 			else {
+				tmp_m_x = m_x;
 				m_x += speed;
-
+				
 				this.m_idx = 68;
 				m_dir = IDirection.EAST;
 				System.out.println("Avance à l'Est \n");
@@ -123,15 +129,37 @@ int speedProj;
 	
 	public boolean pop(IDirection d) {
 		if(sniper == false) {
-			sniper = true;
+			
+			int id;
+			if (d == IDirection.NORTH || (m_dir == IDirection.NORTH && d == IDirection.FRONT)
+					|| (m_dir == IDirection.SOUTH && d == IDirection.BACK)
+					|| (m_dir == IDirection.WEST && d == IDirection.RIGHT)
+					|| (m_dir == IDirection.EAST && d == IDirection.LEFT)) id = 93;
+			else if (d == IDirection.SOUTH || (m_dir == IDirection.SOUTH && d == IDirection.FRONT)
+					|| (m_dir == IDirection.NORTH && d == IDirection.BACK)
+					|| (m_dir == IDirection.EAST && d == IDirection.RIGHT)
+					|| (m_dir == IDirection.WEST && d == IDirection.LEFT)) id = 91;
+			else if (d == IDirection.WEST || (m_dir == IDirection.WEST && d == IDirection.FRONT)
+					|| (m_dir == IDirection.EAST && d == IDirection.BACK)
+					|| (m_dir == IDirection.SOUTH && d == IDirection.RIGHT)
+					|| (m_dir == IDirection.NORTH && d == IDirection.LEFT)) id = 89;
+			else id = 87;
+			this.lastIdx = m_idx;
+			this.m_idx = id;
 			this.speedProj = 64;
+			sniper = true;
+			
 		}
-		if(sniper == true) {
+		else {
 			this.speedProj = 32;
+			m_idx = lastIdx;
 			sniper = false;
 		}
+		
 		return true;
+		
 	}
+	
 	
 	
 }

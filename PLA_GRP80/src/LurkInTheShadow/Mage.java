@@ -76,7 +76,7 @@ public class Mage extends Ally {
 				|| (m_dir == IDirection.WEST && d == IDirection.RIGHT)
 				|| (m_dir == IDirection.EAST && d == IDirection.LEFT)) {
 			m_y -= speed;
-			this.m_idx = 46;
+			this.m_idx = 44;
 			m_dir = IDirection.NORTH;
 			System.out.println("Avance au Nord\n");
 
@@ -94,7 +94,7 @@ public class Mage extends Ally {
 				|| (m_dir == IDirection.EAST && d == IDirection.RIGHT)
 				|| (m_dir == IDirection.WEST && d == IDirection.LEFT)) {
 			m_y += speed;
-			this.m_idx = 39;
+			this.m_idx = 38;
 			m_dir = IDirection.SOUTH;
 			System.out.println("Avance au Sud \n");
 
@@ -112,7 +112,7 @@ public class Mage extends Ally {
 				|| (m_dir == IDirection.SOUTH && d == IDirection.RIGHT)
 				|| (m_dir == IDirection.NORTH && d == IDirection.LEFT)) {
 			m_x -= speed;
-			this.m_idx = 25;
+			this.m_idx = 27;
 			m_dir = IDirection.WEST;
 			System.out.println("Avance à l'Ouest \n");
 
@@ -128,7 +128,7 @@ public class Mage extends Ally {
 		else {
 			m_x += speed;
 
-			this.m_idx = 37;
+			this.m_idx = 34;
 			m_dir = IDirection.EAST;
 			System.out.println("Avance à l'Est \n");
 

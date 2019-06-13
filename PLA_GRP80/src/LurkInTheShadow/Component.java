@@ -31,8 +31,12 @@ public class Component {
 	public boolean m_show;
 	public int power;
 	public int life;
-	public int speed;
 	
+	
+	int tmp_m_x;
+	int tmp_m_y;
+	int mod;
+	public int speed;
 	IAutomaton automate;
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
 	public IType m_type; // Definit le type (allié, ennemi, rocher, etc) de ce
@@ -47,6 +51,8 @@ public class Component {
 		m_nrows = rows;
 		m_x = x;
 		m_y = y;
+		tmp_m_x = x;
+		tmp_m_y = y;
 		m_h=h;
 		m_w=w;
 		m_idx=id_x;
@@ -57,6 +63,8 @@ public class Component {
 		m_model.componentsToAdd.add(this);
 		model.nbElements++;
 		power=0;
+		mod =0;
+		
 		speed=0;
 		splitSprite();
 	}
