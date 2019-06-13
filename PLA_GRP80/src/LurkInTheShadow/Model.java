@@ -1,14 +1,22 @@
 package LurkInTheShadow;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ListIterator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.TargetDataLine;
+import javax.swing.JOptionPane;
 
 import edu.ricm3.game.GameModel;
 import edu.ricm3.game.Options;
@@ -30,7 +38,7 @@ public class Model extends GameModel {
 	public Mage perso2;
 	public Warrior perso3;
 	public Queen reine;
-	
+
 	int nbAmmo;
 	int nbBattery;
 	int nbCmd;
@@ -79,7 +87,7 @@ public class Model extends GameModel {
 		// Listes utiles
 		allies = new LinkedList<Ally>();
 		monstres = new LinkedList<Monster>();
-		//projectiles = new LinkedList<Projectile>();
+		// projectiles = new LinkedList<Projectile>();
 		items = new LinkedList<Component>();
 		mobileComponents = new LinkedList<Component>();
 		componentsToAdd = new LinkedList<Component>();
@@ -98,7 +106,8 @@ public class Model extends GameModel {
 		transe = iai_def.automatas.get(8);//
 		monstre_desoriente = iai_def.automatas.get(7);//
 		fireball = iai_def.automatas.get(9);
-		bullet = iai_def.automatas.get(8);;
+		bullet = iai_def.automatas.get(8);
+		;
 		item = iai_def.automatas.get(7);
 
 		perso1 = new Shooter(this, Sprite, 10, 9, 512, 384, 1F, 81, true);
@@ -115,10 +124,10 @@ public class Model extends GameModel {
 		ElementsTore = new Component[96][128];
 
 		map = new Map(48, 64, this);
-		
-		/*if (load_config()==false) {
-			save_config();
-		}*/
+
+		/*
+		 * if (load_config()==false) { save_config(); }
+		 */
 		// Test sauvegarde
 
 		// ElementsMap = new LinkedList<Component>();
@@ -146,7 +155,7 @@ public class Model extends GameModel {
 	@Override
 	public void step(long now) {
 		mainPlayed.Afficher();
-		
+
 		Iterator<Component> iter = this.components.iterator();
 
 		while (iter.hasNext()) {
@@ -164,10 +173,10 @@ public class Model extends GameModel {
 		while (iterA.hasNext()) {
 			Component c = iterA.next();
 			components.add(c);
-			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID && c.m_type!=IType.PRENABLE) {
+			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID && c.m_type != IType.PRENABLE) {
 				mobileComponents.add(c);
 			}
-			if(c.m_type == IType.PRENABLE) {
+			if (c.m_type == IType.PRENABLE) {
 				items.add(c);
 			}
 		}
@@ -181,13 +190,12 @@ public class Model extends GameModel {
 			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID) {
 				mobileComponents.remove(c);
 			}
-			if(c.m_type == IType.PRENABLE) {
+			if (c.m_type == IType.PRENABLE) {
 				items.remove(c);
 			}
 		}
 		componentsToRemove.clear(); // Vide la liste
-		
-		
+
 		while (nbAmmo < 10) {
 			PlaceRandom(1);
 		}
@@ -208,37 +216,37 @@ public class Model extends GameModel {
 	}
 
 	int Random(int min, int max) {
-		return (ThreadLocalRandom.current().nextInt(min,max+1));
+		return (ThreadLocalRandom.current().nextInt(min, max + 1));
 	}
-	
+
 	void PlaceRandom(int itemNumber) {
-		int x,y;
+		int x, y;
 		boolean free;
-		
+
 		do {
 			free = false;
-			x = Random(1,64);
-			y = Random(1,48);
-			
-				x = x*32;
-				y = y*32;
-			
+			x = Random(1, 64);
+			y = Random(1, 48);
+
+			x = x * 32;
+			y = y * 32;
+
 			ListIterator<Component> iter;
 			iter = this.components.listIterator();
-			
+
 			while (iter.hasNext() && !free) {
 				Component c = iter.next();
-				
-				if (c.m_x == x && c.m_y == y && c.m_type==IType.VOID) {
+
+				if (c.m_x == x && c.m_y == y && c.m_type == IType.VOID) {
 					free = true;
 				}
 			}
-		}while (!free);
-		
+		} while (!free);
+
 		Items item = new Items(this, Sprite, 10, 9, x, y, 1F, true, itemNumber);
-				
+
 	}
-	
+
 	private void loadSprites() {
 
 		File imageFile = new File("src/map_creator/testSprites.png");
@@ -276,7 +284,7 @@ public class Model extends GameModel {
 		if (sauv == null) {
 			return false;
 		}
-		
+
 		map = new Map(48, 64, this, sauv.tab_map);
 		Player = sauv.tab_auto[0];
 		leader = sauv.tab_auto[1];

@@ -9,6 +9,10 @@ Player(Init){
   | Key(o) ? Get()   :(Init)
   | Key(l) ? Get()   :(Init)
   | Key(SPACE) ? Hit()   :(Init)
+  | Key(a) ? Pop(F)	 :(Init)
+  |	Key(w) ? Wizz(F) :(Init)
+  |	Key(x) ? Hit(F)	 :(Init)
+  
   }
   
   Leader(Init){
