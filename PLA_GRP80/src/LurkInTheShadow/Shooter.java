@@ -102,14 +102,20 @@ int speedProj;
 
 	public boolean hit(IDirection d) {
 		int id;
-		if (d == IDirection.NORTH)
-			id = 22;
-		else if (d == IDirection.SOUTH)
-			id = 24;
-		else if (d == IDirection.WEST)
-			id = 23;
-		else
-			id = 21;
+		if (d == IDirection.NORTH || (m_dir == IDirection.NORTH && d == IDirection.FRONT)
+				|| (m_dir == IDirection.SOUTH && d == IDirection.BACK)
+				|| (m_dir == IDirection.WEST && d == IDirection.RIGHT)
+				|| (m_dir == IDirection.EAST && d == IDirection.LEFT)) id = 22;
+		else if (d == IDirection.SOUTH || (m_dir == IDirection.SOUTH && d == IDirection.FRONT)
+				|| (m_dir == IDirection.NORTH && d == IDirection.BACK)
+				|| (m_dir == IDirection.EAST && d == IDirection.RIGHT)
+				|| (m_dir == IDirection.WEST && d == IDirection.LEFT)) id = 24;
+		else if (d == IDirection.WEST || (m_dir == IDirection.WEST && d == IDirection.FRONT)
+				|| (m_dir == IDirection.EAST && d == IDirection.BACK)
+				|| (m_dir == IDirection.SOUTH && d == IDirection.RIGHT)
+				|| (m_dir == IDirection.NORTH && d == IDirection.LEFT)) id = 23;
+		else id = 21;
+	
 		m_model.componentsToAdd
 				.add(new Bullet(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, m_scale, id, m_show, d, power,speedProj));
 		return true;

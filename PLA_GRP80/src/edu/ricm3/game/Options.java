@@ -17,6 +17,8 @@
  */
 package edu.ricm3.game;
 
+import LurkInTheShadow.Music;
+
 public class Options {
   /*
    * You want to use double buffering... 
@@ -40,7 +42,7 @@ public class Options {
   public static boolean SHOW_M2 = false;
   public static boolean SHOW_M3 = false;
   public static boolean SHOW_M4 = false;
-  
+  public static Music bgm;
   public static boolean END_GAME = false;
   public static boolean LOST = false;
   

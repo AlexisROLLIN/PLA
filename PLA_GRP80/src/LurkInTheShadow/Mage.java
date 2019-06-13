@@ -27,8 +27,22 @@ public class Mage extends Ally {
 
 	@Override
 	public boolean hit(IDirection d) {
-		m_model.componentsToAdd
-				.add(new Fireball(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, m_scale, 21, m_show, m_dir, power,32));
+		int id;
+		if (d == IDirection.NORTH || (m_dir == IDirection.NORTH && d == IDirection.FRONT)
+				|| (m_dir == IDirection.SOUTH && d == IDirection.BACK)
+				|| (m_dir == IDirection.WEST && d == IDirection.RIGHT)
+				|| (m_dir == IDirection.EAST && d == IDirection.LEFT)) id = 18;
+		else if (d == IDirection.SOUTH || (m_dir == IDirection.SOUTH && d == IDirection.FRONT)
+				|| (m_dir == IDirection.NORTH && d == IDirection.BACK)
+				|| (m_dir == IDirection.EAST && d == IDirection.RIGHT)
+				|| (m_dir == IDirection.WEST && d == IDirection.LEFT)) id = 20;
+		else if (d == IDirection.WEST || (m_dir == IDirection.WEST && d == IDirection.FRONT)
+				|| (m_dir == IDirection.EAST && d == IDirection.BACK)
+				|| (m_dir == IDirection.SOUTH && d == IDirection.RIGHT)
+				|| (m_dir == IDirection.NORTH && d == IDirection.LEFT)) id = 19;
+		else id = 17;
+		
+		m_model.componentsToAdd.add(new Fireball(m_model, m_sprite, m_nrows, m_ncols, m_x, m_y, m_scale, id, m_show, m_dir, power,32));
 		return true;
 	}
 

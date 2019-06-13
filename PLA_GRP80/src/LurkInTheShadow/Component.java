@@ -139,7 +139,7 @@ public class Component {
 
 	public Rectangle getBounds() {
 		return new Rectangle(m_x, m_y, m_w, m_h);
-	}
+	}	
 
 	protected void splitSprite() {
 		int width = m_sprite.getWidth(null);

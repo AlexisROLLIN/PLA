@@ -125,6 +125,18 @@ public class Model extends GameModel {
 
 		map = new Map(48, 64, this);
 
+		File f = new File("src/Sprites/ST.wav");
+		try {
+			Options.bgm = new Music(f);
+			Options.bgm.start();
+			
+		}
+		catch(Exception ex){
+			
+		}
+		
+		
+		
 		/*
 		 * if (load_config()==false) { save_config(); }
 		 */
