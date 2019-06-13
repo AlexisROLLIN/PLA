@@ -41,7 +41,7 @@ public class Controller extends GameController implements ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
+		//System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
 
 		if (e.getKeyChar() == 'z') {
 			if (!m_model.touches.contains("z")) {
@@ -147,7 +147,7 @@ public class Controller extends GameController implements ActionListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());
+		//System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());
 
 		if (e.getKeyChar() == 'z') {
 			m_model.touches.remove("z");

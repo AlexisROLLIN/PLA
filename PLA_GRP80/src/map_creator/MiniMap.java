@@ -39,7 +39,6 @@ public class MiniMap {
 		m_sprites = new BufferedImage[m_nrows * m_ncols];
 		m_w = width / m_ncols;
 		m_h = height / m_nrows;
-//		m_step = 1;
 		for (int i = 0; i < m_nrows; i++) {
 			for (int j = 0; j < m_ncols; j++) {
 				int x = j * m_w;

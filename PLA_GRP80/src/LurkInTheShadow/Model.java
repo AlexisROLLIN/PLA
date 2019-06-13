@@ -1,5 +1,6 @@
 package LurkInTheShadow;
 
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class Model extends GameModel {
 	public Mage perso2;
 	public Warrior perso3;
 	public Queen reine;
-	
+
 	int nbAmmo;
 	int nbBattery;
 	int nbCmd;
@@ -51,16 +52,18 @@ public class Model extends GameModel {
 	IAutomaton floor;
 	IAutomaton item;
 
-	//Automates systeme
+	// Automates systeme
 	IAutomaton leader;
 	IAutomaton spawn1;
 	IAutomaton spawn2;
 	IAutomaton transe;
 	IAutomaton monstre_desoriente;
-	
+
 	public char Cgmt;
 	public MiniMap minimap;
 	public Fleche fleche;
+	public Battery battery;
+	public Score score;
 
 	int nbElements;
 	public LinkedList<Component> componentsToAdd; // Composants √† ajouter sur
@@ -72,7 +75,8 @@ public class Model extends GameModel {
 	public LinkedList<Monster> monstres;// Monstres du plateau
 	public LinkedList<Projectile> projectiles;// Projectiles
 	public LinkedList<Component> items;// Items
-	public LinkedList<Component> mobileComponents; // A afficher par dessus le plateau
+	public LinkedList<Component> mobileComponents; // A afficher par dessus le
+													// plateau
 	public LinkedList<String> touches;
 
 	// Tore viewport
@@ -82,7 +86,7 @@ public class Model extends GameModel {
 	public LinkedList<Component> ElementsViewPort;
 
 	public Model() throws Interpreter_Exception, Exception {
-		
+
 		loadSprites();
 		nbElements = 0;
 		this.touches = new LinkedList();
@@ -91,55 +95,50 @@ public class Model extends GameModel {
 		// Listes utiles
 		allies = new LinkedList<Ally>();
 		monstres = new LinkedList<Monster>();
-		//projectiles = new LinkedList<Projectile>();
+		// projectiles = new LinkedList<Projectile>();
 		items = new LinkedList<Component>();
 		mobileComponents = new LinkedList<Component>();
 		componentsToAdd = new LinkedList<Component>();
 		componentsToRemove = new LinkedList<Component>();
 
-		
 		Player = Options.AUTOMATA_PLAYER;
 		shooter = Options.AUTOMATA_SHOOTER;
 		warrior = Options.AUTOMATA_WARRIOR;
 		mage = Options.AUTOMATA_MAGE;
-		
+
 		leader = Options.AUTOMATA_SHOOTER;
 		spawn1 = Options.AUTOMATA_WARRIOR;
 		spawn2 = Options.AUTOMATA_MAGE;
 		transe = Options.AUTOMATA_FLOOR;
-		monstre_desoriente=Options.AUTOMATA_MONSTER;
-		
-		fireball=Options.AUTOMATA_FIREBALL;
-		bullet=Options.AUTOMATA_BULLET;
+		monstre_desoriente = Options.AUTOMATA_MONSTER;
+
+		fireball = Options.AUTOMATA_FIREBALL;
+		bullet = Options.AUTOMATA_BULLET;
 		obst = Options.AUTOMATA_OBST;
 		floor = Options.AUTOMATA_FLOOR;
 		queen = Options.AUTOMATA_QUEEN;
 		monster = Options.AUTOMATA_MONSTER;
 		item = Options.AUTOMATA_ITEMS;
-		
+
 		IAutomaton[] tableau_autos_save = new IAutomaton[11];
-		tableau_autos_save[0]=Player;
-		tableau_autos_save[1]=warrior;
-		tableau_autos_save[2]=shooter;
-		tableau_autos_save[3]=mage;
-		tableau_autos_save[4]=fireball;
-		tableau_autos_save[5]=bullet;
-		tableau_autos_save[6]=monster;
-		tableau_autos_save[7]=queen;
-		tableau_autos_save[8]=obst;
-		tableau_autos_save[9]=floor;
-		tableau_autos_save[10]=item;
-		
-		
-		
-		/*Automates systemes
-		transe = Options.AUTOMATA_TRANSE;
-		monstre_desoriente = Options.AUTOMATA_MONSTRE_DESO;
-		spawn1=
-		spawn2=
-		fireball = Options.AUTOMATA_FIREBALL;
-		bullet = Options.AUTOMATA_BULLET;
-		item = Options.AUTOMATA_ITEMS;*/
+		tableau_autos_save[0] = Player;
+		tableau_autos_save[1] = warrior;
+		tableau_autos_save[2] = shooter;
+		tableau_autos_save[3] = mage;
+		tableau_autos_save[4] = fireball;
+		tableau_autos_save[5] = bullet;
+		tableau_autos_save[6] = monster;
+		tableau_autos_save[7] = queen;
+		tableau_autos_save[8] = obst;
+		tableau_autos_save[9] = floor;
+		tableau_autos_save[10] = item;
+
+		/*
+		 * Automates systemes transe = Options.AUTOMATA_TRANSE;
+		 * monstre_desoriente = Options.AUTOMATA_MONSTRE_DESO; spawn1= spawn2=
+		 * fireball = Options.AUTOMATA_FIREBALL; bullet =
+		 * Options.AUTOMATA_BULLET; item = Options.AUTOMATA_ITEMS;
+		 */
 
 		perso1 = new Shooter(this, Sprite, 12, 11, 0, 0, 1F, 81, true);
 		perso2 = new Mage(this, Sprite, 12, 11, 0, 0, 1F, 44, true);
@@ -153,36 +152,31 @@ public class Model extends GameModel {
 
 		ElementsMap = new Component[48][64];
 		ElementsTore = new Component[96][128];
-		
-		if(Options.option_load==true) {
-			map = new Map(48,64,this, Options.map);
-		}
-		else {
+
+		if (Options.option_load == true) {
+			map = new Map(48, 64, this, Options.map);
+		} else {
 			map = new Map(48, 64, this);
 		}
-		
-		//On sauvegarde √† chaque fois l√† /!\
-		Sauvegarde save = new Sauvegarde(map.tab,tableau_autos_save,"src/Automates/Automate2.txt");
+
+		// On sauvegarde √† chaque fois l√† /!\
+		Sauvegarde save = new Sauvegarde(map.tab, tableau_autos_save,
+				"src/Automates/Automate2.txt");
 		save.encode("save.txt");
 
-		
-
-		
-		//Spwan des personnages sur la map
+		// Spwan des personnages sur la map
 		spawn(perso1);
 		map.firstCase();
-		
-		perso2.m_x=perso1.m_x-32;
-		perso2.m_y=perso1.m_y-32;
-		
-		perso3.m_x=perso1.m_x-32;
-		perso3.m_y=perso1.m_y+32;
-		
+
+		perso2.m_x = perso1.m_x - 32;
+		perso2.m_y = perso1.m_y - 32;
+
+		perso3.m_x = perso1.m_x - 32;
+		perso3.m_y = perso1.m_y + 32;
+
 		spawn(reine);
-		
 
 		// Test sauvegarde
-
 
 		// Charger l'image de la map
 		File imageFileMap = new File("src/Sprites/MiniMap");
@@ -193,11 +187,14 @@ public class Model extends GameModel {
 			System.exit(-1);
 		}
 
-		minimap = new MiniMap(this, SpriteMiniMap, 1, 1, 0,
-				0, 0.23F, 0, true);
+		minimap = new MiniMap(this, SpriteMiniMap, 1, 1, 0, 0, 0.23F, 0, true);
 
-		fleche = new Fleche(this, Sprite, 12, 11, 0,
-				0, 1F, 123, true);
+		fleche = new Fleche(this, Sprite, 12, 11, 0, 0, 1F, 123, true);
+		
+		battery = new Battery(this, Sprite,12,11, 32, 132, 5F, 8, true);
+		
+		Font font = new Font("TimesRoman", Font.BOLD, 32);
+		score = new Score(this, 230, 30, font);
 
 	}
 
@@ -215,7 +212,7 @@ public class Model extends GameModel {
 	@Override
 	public void step(long now) {
 		mainPlayed.Afficher();
-			
+
 		Iterator<Component> iter = this.components.iterator();
 
 		while (iter.hasNext()) {
@@ -226,8 +223,8 @@ public class Model extends GameModel {
 			}
 		}
 
-		
-		// On ne peut pas ajouter de components pendant qu'on parcourt la liste de
+		// On ne peut pas ajouter de components pendant qu'on parcourt la liste
+		// de
 		// components
 		// On fait donc √ßa maintenant
 		Iterator<Component> iterA = this.componentsToAdd.iterator();
@@ -235,10 +232,11 @@ public class Model extends GameModel {
 		while (iterA.hasNext()) {
 			Component c = iterA.next();
 			components.add(c);
-			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID && c.m_type!=IType.PRENABLE) {
+			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID
+					&& c.m_type != IType.PRENABLE) {
 				mobileComponents.add(c);
 			}
-			if(c.m_type == IType.PRENABLE) {
+			if (c.m_type == IType.PRENABLE) {
 				items.add(c);
 			}
 		}
@@ -252,7 +250,7 @@ public class Model extends GameModel {
 			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID) {
 				mobileComponents.remove(c);
 			}
-			if(c.m_type == IType.PRENABLE) {
+			if (c.m_type == IType.PRENABLE) {
 				items.remove(c);
 			}
 		}
@@ -261,8 +259,6 @@ public class Model extends GameModel {
 		fleche.Coordonnees();
 		fleche.step(now);
 
-		
-		
 		while (nbAmmo < 10) {
 			PlaceRandom(1);
 		}
@@ -275,6 +271,16 @@ public class Model extends GameModel {
 		while (nbLife < 5) {
 			PlaceRandom(4);
 		}
+		
+		this.battery.consumes(this.mainPlayed.puissance_eclairage);
+		
+		if (battery.m_durability == 0){
+			this.mainPlayed.lampe_x = 50;
+			this.mainPlayed.lampe_y = 50;
+			this.mainPlayed.lampe_width = 2.5 * this.mainPlayed.lampe_x;
+			this.mainPlayed.lampe_height = 2.5 * this.mainPlayed.lampe_y;
+			this.mainPlayed.puissance_eclairage = 1;
+		}
 
 	}
 
@@ -282,65 +288,65 @@ public class Model extends GameModel {
 		return ElementsViewPort.listIterator();
 	}
 
-
-	public void spawn(Component personnage){
-		boolean spawn=false;
+	public void spawn(Component personnage) {
+		boolean spawn = false;
 		int i;
 		int j;
-		while (!spawn){
-			if (personnage instanceof Queen){
-				i = (int) (Math.random() * ( 40 - 1 ));//CoordonnÈe plutot centrÈ sur la map
-				j = (int) (Math.random() * ( 32 - 8 ));
+		while (!spawn) {
+			if (personnage instanceof Queen) {
+				i = (int) (Math.random() * (40 - 1));// CoordonnÈe plutot centrÈ
+														// sur la map
+				j = (int) (Math.random() * (32 - 8));
+			} else {
+				i = (int) (Math.random() * (38 - 8));// CoordonnÈe plutot centrÈ
+														// sur la map
+				j = (int) (Math.random() * (64 - 8));
 			}
-			else{
-				i = (int) (Math.random() * ( 38 - 8 ));//CoordonnÈe plutot centrÈ sur la map
-				j = (int) (Math.random() * ( 64 - 8 ));
-			}
-			
-			if(ElementsMap[i][j] instanceof Sol){
-				if(ElementsMap[i-1][j-1] instanceof Sol && ElementsMap[i+1][j-1] instanceof Sol){
-					personnage.m_x=j*32;
-					personnage.m_y=i*32;
-					spawn=true;
+
+			if (ElementsMap[i][j] instanceof Sol) {
+				if (ElementsMap[i - 1][j - 1] instanceof Sol
+						&& ElementsMap[i + 1][j - 1] instanceof Sol) {
+					personnage.m_x = j * 32;
+					personnage.m_y = i * 32;
+					spawn = true;
 				}
 			}
 		}
-		
-	}
 
+	}
 
 	int Random(int min, int max) {
-		return (ThreadLocalRandom.current().nextInt(min,max+1));
+		return (ThreadLocalRandom.current().nextInt(min, max + 1));
 	}
-	
+
 	void PlaceRandom(int itemNumber) {
-		int x,y;
+		int x, y;
 		boolean free;
-		
+
 		do {
 			free = false;
-			x = Random(1,64);
-			y = Random(1,48);
-			
-				x = x*32;
-				y = y*32;
-			
+			x = Random(1, 64);
+			y = Random(1, 48);
+
+			x = x * 32;
+			y = y * 32;
+
 			ListIterator<Component> iter;
 			iter = this.components.listIterator();
-			
+
 			while (iter.hasNext() && !free) {
 				Component c = iter.next();
-				
-				if (c.m_x == x && c.m_y == y && c.m_type==IType.VOID) {
+
+				if (c.m_x == x && c.m_y == y && c.m_type == IType.VOID) {
 					free = true;
 				}
 			}
-		}while (!free);
-		
+		} while (!free);
+
 		Items item = new Items(this, Sprite, 12, 11, x, y, 1F, true, itemNumber);
-				
+
 	}
-	
+
 	private void loadSprites() {
 
 		File imageFile = new File("src/Sprites/testSprite.png");

@@ -32,6 +32,7 @@ public class Component {
 	public int life;
 	public int speed;
 	public boolean on_move;
+	public int puissance_eclairage;
 	
 	int lampe_x;
 	int lampe_y;
@@ -146,6 +147,7 @@ public class Component {
 		if (elapsed > 60L) {
 			m_lastMove = now;
 			automate.step(this);
+			
 		}
 		
 		//Timer Reine (~10sec)
@@ -158,6 +160,7 @@ public class Component {
 				m_model.mainPlayed.Get2();
 			}
 		}
+		
 	}
 
 	public Rectangle getBounds() {

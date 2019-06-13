@@ -17,6 +17,7 @@ public class Ally extends Component {
 		model.allies.add(this);
 		speed = 32;
 		life = 100;
+		puissance_eclairage = 2;
 
 	}
 
@@ -30,7 +31,7 @@ public class Ally extends Component {
 				|| (m_dir == IDirection.EAST && d == IDirection.LEFT)) {
 			m_y -= speed;
 			m_dir = IDirection.NORTH;
-			System.out.println("Avance au Nord\n");
+			// System.out.println("Avance au Nord\n");
 
 			if (m_type == IType.PLAYER) {
 				m_model.map.iViewport--;
@@ -48,7 +49,7 @@ public class Ally extends Component {
 				|| (m_dir == IDirection.WEST && d == IDirection.LEFT)) {
 			m_y += speed;
 			m_dir = IDirection.SOUTH;
-			System.out.println("Avance au Sud \n");
+			// System.out.println("Avance au Sud \n");
 
 			if (m_type == IType.PLAYER) {
 				m_model.map.iViewport++;
@@ -66,7 +67,7 @@ public class Ally extends Component {
 				|| (m_dir == IDirection.NORTH && d == IDirection.LEFT)) {
 			m_x -= speed;
 			m_dir = IDirection.WEST;
-			System.out.println("Avance à l'Ouest \n");
+			// System.out.println("Avance à l'Ouest \n");
 
 			if (m_type == IType.PLAYER) {
 				m_model.map.jViewport--;
@@ -80,7 +81,7 @@ public class Ally extends Component {
 		else {
 			m_x += speed;
 			m_dir = IDirection.EAST;
-			System.out.println("Avance à l'Est \n");
+			// System.out.println("Avance à l'Est \n");
 
 			if (m_type == IType.PLAYER) {
 				m_model.map.jViewport++;
@@ -135,21 +136,27 @@ public class Ally extends Component {
 
 	@Override
 	public boolean jump() {
-		if (this.m_model.mainPlayed.lampe_x == 50) {
+		if (m_model.battery.m_durability != 0
+				&& this.m_model.mainPlayed.lampe_x == 50) {
 			this.m_model.mainPlayed.lampe_x += 25;
 			this.m_model.mainPlayed.lampe_y += 25;
 			this.m_model.mainPlayed.lampe_width = 2.4 * this.m_model.mainPlayed.lampe_x;
 			this.m_model.mainPlayed.lampe_height = 2.4 * this.m_model.mainPlayed.lampe_y;
-		} else if (this.m_model.mainPlayed.lampe_x == 75) {
+			this.m_model.mainPlayed.puissance_eclairage = 2;
+		} else if (m_model.battery.m_durability != 0
+				&& this.m_model.mainPlayed.lampe_x == 75) {
 			this.m_model.mainPlayed.lampe_x += 25;
 			this.m_model.mainPlayed.lampe_y += 25;
 			this.m_model.mainPlayed.lampe_width = 2.3 * this.m_model.mainPlayed.lampe_x;
 			this.m_model.mainPlayed.lampe_height = 2.3 * this.m_model.mainPlayed.lampe_y;
-		} else if (this.m_model.perso1.lampe_x == 100) {
+			this.m_model.mainPlayed.puissance_eclairage = 3;
+		} else if (m_model.battery.m_durability != 0
+				&& this.m_model.mainPlayed.lampe_x == 100) {
 			this.m_model.mainPlayed.lampe_x += 30;
 			this.m_model.mainPlayed.lampe_y += 30;
 			this.m_model.mainPlayed.lampe_width = 2.25 * this.m_model.mainPlayed.lampe_x;
 			this.m_model.mainPlayed.lampe_height = 2.25 * this.m_model.mainPlayed.lampe_y;
+			this.m_model.mainPlayed.puissance_eclairage = 4;
 		}
 
 		return true;
@@ -162,16 +169,19 @@ public class Ally extends Component {
 			this.m_model.mainPlayed.lampe_y -= 25;
 			this.m_model.mainPlayed.lampe_width = 2.5 * this.m_model.mainPlayed.lampe_x;
 			this.m_model.mainPlayed.lampe_height = 2.5 * this.m_model.mainPlayed.lampe_y;
+			this.m_model.mainPlayed.puissance_eclairage = 1;
 		} else if (this.m_model.mainPlayed.lampe_x == 100) {
 			this.m_model.mainPlayed.lampe_x -= 25;
 			this.m_model.mainPlayed.lampe_y -= 25;
 			this.m_model.mainPlayed.lampe_width = 2.4 * this.m_model.mainPlayed.lampe_x;
 			this.m_model.mainPlayed.lampe_height = 2.4 * this.m_model.mainPlayed.lampe_y;
+			this.m_model.mainPlayed.puissance_eclairage = 2;
 		} else if (this.m_model.mainPlayed.lampe_x == 130) {
 			this.m_model.mainPlayed.lampe_x -= 30;
 			this.m_model.mainPlayed.lampe_y -= 30;
 			this.m_model.mainPlayed.lampe_width = 2.3 * this.m_model.mainPlayed.lampe_x;
 			this.m_model.mainPlayed.lampe_height = 2.3 * this.m_model.mainPlayed.lampe_y;
+			this.m_model.mainPlayed.puissance_eclairage = 3;
 		}
 		return true;
 	}
@@ -186,24 +196,28 @@ public class Ally extends Component {
 				if (((Items) c).itemType == 1) {
 					myAmmo += 5;
 					m_model.nbAmmo--;
+					m_model.componentsToRemove.add(c);
 					m_model.items.remove(c);
 					return true;
 				}
 				if (((Items) c).itemType == 2) {
 					m_model.nbBattery--;
-					//Ajouter Batterie
+					m_model.battery.refill(9000);
+					m_model.componentsToRemove.add(c);
 					m_model.items.remove(c);
 					return true;
 				}
 				if (((Items) c).itemType == 3) {
 					m_model.nbCmd--;
 					c.GetQueen();
+					m_model.componentsToRemove.add(c);
 					m_model.items.remove(c);
 					return true;
 				}
 				if (((Items) c).itemType == 4) {
 					m_model.nbLife--;
 					this.life++;
+					m_model.componentsToRemove.add(c);
 					m_model.items.remove(c);
 					return true;
 				}

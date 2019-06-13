@@ -42,7 +42,7 @@ public class Warrior extends Ally {
 					}
 				}
 				m_dir = IDirection.NORTH;
-				System.out.println("Attaque au Nord\n");
+				//System.out.println("Attaque au Nord\n");
 			}
 
 			else if (d == IDirection.SOUTH || (m_dir == IDirection.SOUTH && d == IDirection.FRONT)
@@ -60,7 +60,7 @@ public class Warrior extends Ally {
 
 				}
 				m_dir = IDirection.SOUTH;
-				System.out.println("Attaque au Sud \n");
+				//System.out.println("Attaque au Sud \n");
 			}
 
 			else if (d == IDirection.WEST || (m_dir == IDirection.WEST && d == IDirection.FRONT)
@@ -79,7 +79,7 @@ public class Warrior extends Ally {
 
 				}
 				m_dir = IDirection.WEST;
-				System.out.println("Attaque à l'Ouest \n");
+				//System.out.println("Attaque à l'Ouest \n");
 			}
 
 			else {
@@ -94,7 +94,7 @@ public class Warrior extends Ally {
 
 				}
 				m_dir = IDirection.EAST;
-				System.out.println("Attaque à l'Est \n");
+				//System.out.println("Attaque à l'Est \n");
 			}
 		}
 
@@ -131,7 +131,7 @@ public class Warrior extends Ally {
 				}
 
 				m_dir = IDirection.NORTH;
-				System.out.println("Pop au Nord\n");
+				//System.out.println("Pop au Nord\n");
 
 			} else if (d == IDirection.SOUTH || (m_dir == IDirection.SOUTH && d == IDirection.FRONT)
 					|| (m_dir == IDirection.NORTH && d == IDirection.BACK)
@@ -157,7 +157,7 @@ public class Warrior extends Ally {
 
 				}
 				m_dir = IDirection.SOUTH;
-				System.out.println("Pop au Sud \n");
+				//System.out.println("Pop au Sud \n");
 			}
 
 			else if (d == IDirection.WEST || (m_dir == IDirection.WEST && d == IDirection.FRONT)

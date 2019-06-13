@@ -69,15 +69,7 @@ public class View extends GameView {
 			for (int j = 0; j < nbCasej; j++) {
 
 				c = m_model.ElementsTore[i1][j1];
-				if (c.m_show == true || m_model.mainPlayed == m_model.reine) { // Verifie
-																				// si
-																				// l'objet
-																				// est
-																				// dans
-																				// le
-																				// rayon
-																				// du
-																				// joueur
+				if (c.m_show == true || m_model.mainPlayed == m_model.reine) { //Verifie l'affichage possible et si on est la reine
 					c.paint(g);
 				}
 				j1++;
@@ -90,7 +82,7 @@ public class View extends GameView {
 		while (iterC.hasNext()) {
 			c = iterC.next();
 
-			if (c.m_show == true || m_model.mainPlayed instanceof Queen || m_model.monster.name().equals("Player") || m_model.monster.name().equals("Monstre")) { //Verifie si l'objet est dans le rayon du joueur
+			if (c.m_show == true || m_model.mainPlayed instanceof Queen || m_model.monster.name().equals("Player")) { //Verifie si l'objet est dans le rayon du joueur
 				c.paintMap(g);
 
 			}
@@ -131,6 +123,11 @@ public class View extends GameView {
 
 			minimap.paint(g);
 			fleche.paint(g);
+			
+			Battery battery=m_model.battery;
+			battery.paint(g);
+			
+			m_model.score.paint(g);
 
 
 	}
