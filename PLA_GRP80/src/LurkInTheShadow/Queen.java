@@ -13,6 +13,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 	int ponte;
 	int hunger;
 	float timer;
+	int enviedeponte;
 
 	public Queen(Model model, BufferedImage sprite, int rows, int columns, int x, int y, float scale,
 			int id_x, boolean show) {
@@ -29,6 +30,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 		automate=model.queen;
 		power=100;
 		timer=6000;
+		enviedeponte = 0;
 	}
 
 	@Override
@@ -236,6 +238,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 	
 	@Override
 	public boolean egg(){
+		if(enviedeponte == 20){
 		
 		if(ponte>(100-hunger)/30 && m_model.monstres.size()<=30) { //Pond une fois tous les (100-hunger)/30 steps egg
 
@@ -246,6 +249,9 @@ public class Queen extends Component { // Changement sprites à faire !!
 		else {
 			ponte++;
 		}
+		enviedeponte = 0;
+		}
+		enviedeponte++;
 		return true;
 	}
 }

@@ -195,6 +195,15 @@ public class Model extends GameModel {
 		
 		Font font = new Font("TimesRoman", Font.BOLD, 32);
 		score = new Score(this, 230, 30, font);
+		
+		File f=new File("src/Sprites/ST.wav");
+		try{
+			Options.bgm=new Music (f);
+			Options.bgm.start();
+		}
+		catch(Exception ex){
+			
+		}
 
 	}
 

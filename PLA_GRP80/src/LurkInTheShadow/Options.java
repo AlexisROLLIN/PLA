@@ -15,7 +15,7 @@ public class Options {
 
 	public static final int PW_HEIGHT = W_HEIGHT - IHM_WIDTH;
 	
-	public static final float MAX_DURABILITY = 9000; // 3 min
+	public static final float MAX_DURABILITY = 100000;
 	
 	public static final int MAX_SCORE = Integer.MAX_VALUE;
 	
@@ -32,4 +32,5 @@ public class Options {
 	public static IAutomaton AUTOMATA_ITEMS;
 	public static boolean option_load;
 	public static int map[][];
+	public static Music bgm;
 }

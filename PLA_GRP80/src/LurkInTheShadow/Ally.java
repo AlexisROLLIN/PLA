@@ -202,7 +202,7 @@ public class Ally extends Component {
 				}
 				if (((Items) c).itemType == 2) {
 					m_model.nbBattery--;
-					m_model.battery.refill(9000);
+					m_model.battery.refill(Options.MAX_DURABILITY);
 					m_model.componentsToRemove.add(c);
 					m_model.items.remove(c);
 					return true;

@@ -38,6 +38,7 @@ public class Component {
 	int lampe_y;
 	double lampe_width;
 	double lampe_height;
+	boolean m_dead;
 	
 	IAutomaton automate;
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
@@ -70,6 +71,7 @@ public class Component {
 		lampe_y=75;
 		lampe_width=2.4*lampe_x;
 		lampe_height=2.4*lampe_y;
+		m_dead = false;
 	}
 
 	public void setAutomate(IAutomaton aut) {
@@ -264,10 +266,10 @@ public class Component {
 	
 	public void GetQueen() { //Pour la queen
 
-		m_model.perso1.setAutomate(m_model.spawn2);//Automates à changer
-		m_model.perso2.setAutomate(m_model.spawn2);
+		m_model.perso1.setAutomate(m_model.spawn1);//Automates à changer
+		m_model.perso2.setAutomate(m_model.spawn1);
 		
-		m_model.perso3.setAutomate(m_model.spawn2);
+		m_model.perso3.setAutomate(m_model.spawn1);
 		m_model.reine.setAutomate(m_model.Player);
 		this.m_type=IType.TEAM;
 		m_model.reine.m_type=IType.PLAYER;

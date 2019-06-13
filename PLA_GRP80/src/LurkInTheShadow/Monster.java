@@ -13,7 +13,7 @@ public class Monster extends Component {
 			int columns, int x, int y,float scale, int id_x, boolean show) {
 		
 		super(model, sprite, rows, columns, x, y, sprite.getHeight(), sprite.getWidth(), scale, id_x, show);
-		speed=8;
+		speed=32;
 		m_type=IType.ADVERSAIRE;
 		automate=model.monster;
 		model.monstres.add(this);
