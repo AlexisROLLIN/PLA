@@ -11,6 +11,7 @@ public class Obstacle extends Component {
 		m_type = IType.OBSTACLE;
 		automate=model.obst;
 		life=100;
+		speed=32;
 
 	}
 	
@@ -86,13 +87,13 @@ public class Obstacle extends Component {
 	
 	@Override
 	public boolean pop(IDirection d) {
-		//m_idx=5;
+		m_idx=5;
 		return true;
 	}
 	
 	@Override
 	public boolean wizz(IDirection d) {
-		//m_idx=4;
+		m_idx=4;
 		return true;
 	}
 	

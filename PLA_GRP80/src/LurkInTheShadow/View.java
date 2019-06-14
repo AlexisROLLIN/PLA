@@ -25,6 +25,7 @@ public class View extends GameView {
 	int m_fps;
 	Model m_model;
 
+
 	BufferedImage background;
 	BufferedImage minimap;
 
@@ -82,7 +83,7 @@ public class View extends GameView {
 		while (iterC.hasNext()) {
 			c = iterC.next();
 
-			if (c.m_dead == false && c.m_show == true ||c.m_dead == false &&  m_model.mainPlayed instanceof Queen || c.m_dead == false &&  m_model.monster.name().equals("Player")) { //Verifie si l'objet est dans le rayon du joueur
+			if ((c.m_dead == false && c.m_show == true) || (c.m_dead == false &&  m_model.mainPlayed instanceof Queen)) { //Verifie si l'objet est dans le rayon du joueur
 				c.paintMap(g);
 
 			}
@@ -128,6 +129,8 @@ public class View extends GameView {
 			battery.paint(g);
 			
 			m_model.score.paint(g);
+			
+			
 
 
 	}

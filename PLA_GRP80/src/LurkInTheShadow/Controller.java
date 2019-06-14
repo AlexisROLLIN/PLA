@@ -54,6 +54,7 @@ public class Controller extends GameController implements ActionListener {
 			if (!m_model.touches.contains("d")) {
 				m_model.touches.add("d");
 			}
+			//m_model.perso1.MoveR=true;
 		}
 
 		if (e.getKeyChar() == 'q') {
@@ -143,6 +144,16 @@ public class Controller extends GameController implements ActionListener {
 				m_model.Cgmt = 'r';
 			}
 		}
+		
+		if (e.getKeyChar() == 'f') {
+			m_model.pause= !m_model.pause;
+			}
+		
+		if (e.getKeyChar() == 'g') {
+			m_model.light= !m_model.light;
+			}
+		
+		
 	}
 
 	@Override

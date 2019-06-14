@@ -62,9 +62,11 @@ public class Bullet extends Projectile {
 			mon = iter.next();
 			if (mon.is_in_case(m_x, m_y)) {
 				mon.life = mon.life - power;
+				m_model.score.earn(100);
 			}
 		}
 		m_model.componentsToRemove.add(this);
+		
 		this.m_dead = true;
 		return true;
 	}

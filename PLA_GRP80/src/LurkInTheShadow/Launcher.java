@@ -66,7 +66,7 @@ class GameMenu implements ActionListener {
 	JButton m_tryChallengeButton = new JButton("Try");
 	JButton m_cancelChallengeButton = new JButton("Cancel");
 
-	IAutomaton[] automatons = new IAutomaton[11];
+	IAutomaton[] automatons = new IAutomaton[14];
 
 	JComboBox<IAutomaton> m_automataPlayer;
 	JComboBox<IAutomaton> m_automataWarrior;
@@ -79,6 +79,8 @@ class GameMenu implements ActionListener {
 	JComboBox<IAutomaton> m_automataObst;
 	JComboBox<IAutomaton> m_automataFloor;
 	JComboBox<IAutomaton> m_automataItems;
+	
+	IAI_Definitions iai_def;
 
 	GameMenu() {
 		prepareGUI();
@@ -204,7 +206,6 @@ class GameMenu implements ActionListener {
 
 		LinkedList<JComboBox> listAutomata = new LinkedList<JComboBox>();
 
-		IAI_Definitions iai_def;
 		AI_Definitions ai_def = ((AI_Definitions) AutomataParser
 				.from_file("src/Automates/Automate2.txt"));
 		iai_def = ai_def.make();
@@ -407,7 +408,7 @@ class GameMenu implements ActionListener {
 
 				File selectedFile = fileChooser.getSelectedFile();
 
-				Sauvegarde sauv = Sauvegarde.decode(selectedFile);
+				Sauvegarde sauv = Sauvegarde.decode(selectedFile,iai_def);
 
 				Options.AUTOMATA_PLAYER = sauv.tab_auto[0];
 				Options.AUTOMATA_WARRIOR = sauv.tab_auto[1];

@@ -39,6 +39,8 @@ public class Model extends GameModel {
 	int nbBattery;
 	int nbCmd;
 	int nbLife;
+	boolean pause;
+	boolean light;
 
 	IAutomaton Player;
 	IAutomaton warrior;
@@ -84,10 +86,12 @@ public class Model extends GameModel {
 	public Component[][] ElementsTore;
 	// public LinkedList<Component> ElementsMap;
 	public LinkedList<Component> ElementsViewPort;
+	float time;
 
 	public Model() throws Interpreter_Exception, Exception {
 
 		loadSprites();
+		pause = false;
 		nbElements = 0;
 		this.touches = new LinkedList();
 		this.components = new LinkedList();
@@ -190,19 +194,18 @@ public class Model extends GameModel {
 		minimap = new MiniMap(this, SpriteMiniMap, 1, 1, 0, 0, 0.23F, 0, true);
 
 		fleche = new Fleche(this, Sprite, 12, 11, 0, 0, 1F, 123, true);
-		
-		battery = new Battery(this, Sprite,12,11, 32, 132, 5F, 8, true);
-		
+
+		battery = new Battery(this, Sprite, 12, 11, 32, 132, 5F, 8, true);
+
 		Font font = new Font("TimesRoman", Font.BOLD, 32);
 		score = new Score(this, 230, 30, font);
-		
-		File f=new File("src/Sprites/ST.wav");
-		try{
-			Options.bgm=new Music (f);
+
+		File f = new File("src/Sprites/ST.wav");
+		try {
+			Options.bgm = new Music(f);
 			Options.bgm.start();
-		}
-		catch(Exception ex){
-			
+		} catch (Exception ex) {
+
 		}
 
 	}
@@ -220,75 +223,99 @@ public class Model extends GameModel {
 	 */
 	@Override
 	public void step(long now) {
-		mainPlayed.Afficher();
+		if (pause == false) {
+			mainPlayed.Afficher();
 
-		Iterator<Component> iter = this.components.iterator();
+			Iterator<Component> iter = this.components.iterator();
 
-		while (iter.hasNext()) {
-			try {
-				iter.next().step(now);
+			while (iter.hasNext()) {
+				try {
+					iter.next().step(now);
 
-			} catch (Interpreter_Exception e) {
+				} catch (Interpreter_Exception e) {
+				}
 			}
-		}
 
-		// On ne peut pas ajouter de components pendant qu'on parcourt la liste
-		// de
-		// components
-		// On fait donc Ã§a maintenant
-		Iterator<Component> iterA = this.componentsToAdd.iterator();
+			// On ne peut pas ajouter de components pendant qu'on parcourt la
+			// liste
+			// de
+			// components
+			// On fait donc Ã§a maintenant
+			Iterator<Component> iterA = this.componentsToAdd.iterator();
 
-		while (iterA.hasNext()) {
-			Component c = iterA.next();
-			components.add(c);
-			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID
-					&& c.m_type != IType.PRENABLE) {
-				mobileComponents.add(c);
+			while (iterA.hasNext()) {
+				Component c = iterA.next();
+				components.add(c);
+				if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID
+						&& c.m_type != IType.PRENABLE) {
+					mobileComponents.add(c);
+				}
+				if (c.m_type == IType.PRENABLE) {
+					items.add(c);
+				}
 			}
-			if (c.m_type == IType.PRENABLE) {
-				items.add(c);
+			componentsToAdd.clear(); // Vide la liste
+
+			Iterator<Component> iterR = this.componentsToRemove.iterator();
+
+			while (iterR.hasNext()) {
+				Component c = iterR.next();
+				components.remove(c);
+				if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID) {
+					mobileComponents.remove(c);
+				}
+				if (c.m_type == IType.PRENABLE) {
+					items.remove(c);
+				}
 			}
-		}
-		componentsToAdd.clear(); // Vide la liste
+			componentsToRemove.clear(); // Vide la liste
 
-		Iterator<Component> iterR = this.componentsToRemove.iterator();
+			fleche.Coordonnees();
+			fleche.step(now);
 
-		while (iterR.hasNext()) {
-			Component c = iterR.next();
-			components.remove(c);
-			if (c.m_type != IType.OBSTACLE && c.m_type != IType.VOID) {
-				mobileComponents.remove(c);
+			while (nbAmmo < 10) {
+				PlaceRandom(1);
 			}
-			if (c.m_type == IType.PRENABLE) {
-				items.remove(c);
+			while (nbBattery < 10) {
+				PlaceRandom(2);
 			}
-		}
-		componentsToRemove.clear(); // Vide la liste
+			while (nbCmd < 3) {
+				PlaceRandom(3);
+			}
+			while (nbLife < 5) {
+				PlaceRandom(4);
+			}
 
-		fleche.Coordonnees();
-		fleche.step(now);
+			// Batterie
+			this.battery.consumes(this.mainPlayed.puissance_eclairage);
 
-		while (nbAmmo < 10) {
-			PlaceRandom(1);
-		}
-		while (nbBattery < 10) {
-			PlaceRandom(2);
-		}
-		while (nbCmd < 3) {
-			PlaceRandom(3);
-		}
-		while (nbLife < 5) {
-			PlaceRandom(4);
-		}
-		
-		this.battery.consumes(this.mainPlayed.puissance_eclairage);
-		
-		if (battery.m_durability == 0){
-			this.mainPlayed.lampe_x = 50;
-			this.mainPlayed.lampe_y = 50;
-			this.mainPlayed.lampe_width = 2.5 * this.mainPlayed.lampe_x;
-			this.mainPlayed.lampe_height = 2.5 * this.mainPlayed.lampe_y;
-			this.mainPlayed.puissance_eclairage = 1;
+			if (battery.m_durability == 0) {
+				this.mainPlayed.lampe_x = 50;
+				this.mainPlayed.lampe_y = 50;
+				this.mainPlayed.lampe_width = 2.5 * this.mainPlayed.lampe_x;
+				this.mainPlayed.lampe_height = 2.5 * this.mainPlayed.lampe_y;
+				this.mainPlayed.puissance_eclairage = 1;
+			}
+
+			// Animation Sprite
+			if (perso1.MoveR == true || time != 0) {
+				if (time == 0) {
+					time = 1;
+				}
+				if (time != 5) {
+					if (perso1.m_idx > 70) {
+						perso1.m_idx = 67;
+					}
+					perso1.m_idx++;
+					perso1.m_x += 32 / 4;
+					time++;
+
+				} else {
+					perso1.MoveR = false;
+					time = 0;
+					map.firstCase();
+				}
+			}
 		}
 
 	}
@@ -307,9 +334,10 @@ public class Model extends GameModel {
 														// sur la map
 				j = (int) (Math.random() * (32 - 8));
 			} else {
-				i = (int) (Math.random() * (38 - 8));// Coordonnée plutot centré
-														// sur la map
-				j = (int) (Math.random() * (64 - 8));
+				i = (int) (Math.random() * (30 - 12) + 12);// Coordonnée plutot
+															// centré
+															// sur la map
+				j = (int) (Math.random() * (50 - 12) + 12);
 			}
 
 			if (ElementsMap[i][j] instanceof Sol) {

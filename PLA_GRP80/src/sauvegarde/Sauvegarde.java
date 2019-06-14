@@ -74,7 +74,7 @@ public class Sauvegarde {
 		}
 	}
 
-	public static Sauvegarde decode(File file) {
+	public static Sauvegarde decode(File file, IAI_Definitions iai_def) {
 
 		FileReader fr = null;
 		IAutomaton autos[] = new IAutomaton[nb_auto];
@@ -103,8 +103,8 @@ public class Sauvegarde {
 			// Lecture du nom fichier automate source
 			line = lnr.readLine();
 			nom_fich_autos= new String (line);
-			AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file(line));
-			IAI_Definitions iai_def = ai_def.make();
+			//AI_Definitions ai_def = ((AI_Definitions) AutomataParser.from_file(line));
+			//IAI_Definitions iai_def = ai_def.make();
 
 			int i = 0;
 			do {

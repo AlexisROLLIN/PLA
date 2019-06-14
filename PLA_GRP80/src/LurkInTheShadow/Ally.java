@@ -10,6 +10,7 @@ import interpreter.IAutomaton;
 public class Ally extends Component {
 
 	int myAmmo;
+	boolean MoveR;
 
 	public Ally(Model model, BufferedImage sprite, int rows, int columns,
 			int x, int y, int h, int w, float scale, int id_x, boolean show) {
@@ -18,6 +19,7 @@ public class Ally extends Component {
 		speed = 32;
 		life = 100;
 		puissance_eclairage = 2;
+		myAmmo = 20;
 
 	}
 
@@ -32,6 +34,9 @@ public class Ally extends Component {
 			m_y -= speed;
 			m_dir = IDirection.NORTH;
 			// System.out.println("Avance au Nord\n");
+			m_model.perso1.m_idx=78;
+			m_model.perso2.m_idx=44;
+			m_model.perso3.m_idx=51;
 
 			if (m_type == IType.PLAYER) {
 				m_model.map.iViewport--;
@@ -49,7 +54,11 @@ public class Ally extends Component {
 				|| (m_dir == IDirection.WEST && d == IDirection.LEFT)) {
 			m_y += speed;
 			m_dir = IDirection.SOUTH;
+			
 			// System.out.println("Avance au Sud \n");
+			m_model.perso1.m_idx=84;
+			m_model.perso2.m_idx=41;
+			m_model.perso3.m_idx=53;
 
 			if (m_type == IType.PLAYER) {
 				m_model.map.iViewport++;
@@ -67,29 +76,55 @@ public class Ally extends Component {
 				|| (m_dir == IDirection.NORTH && d == IDirection.LEFT)) {
 			m_x -= speed;
 			m_dir = IDirection.WEST;
-			// System.out.println("Avance à l'Ouest \n");
+//			System.out.println("Avance à l'Ouest \n");
+			m_model.perso1.m_idx=76;
+			m_model.perso2.m_idx=28;
+			m_model.perso3.m_idx=59;
+			
 
 			if (m_type == IType.PLAYER) {
+				
 				m_model.map.jViewport--;
+				
 				if (m_model.mainPlayed.m_x < 0) {
 					m_model.mainPlayed.m_x = 2016;
 					m_model.map.jViewport = 79;
 				}
+				
 			}
 		}
 
-		else {
-			m_x += speed;
+		else{
+			m_x+=speed;
 			m_dir = IDirection.EAST;
 			// System.out.println("Avance à l'Est \n");
+			m_model.perso1.m_idx=71;
+			m_model.perso2.m_idx=35;
+			m_model.perso3.m_idx=65;
 
 			if (m_type == IType.PLAYER) {
+				
+				//System.out.println("Avance à l'Est lol\n");
 				m_model.map.jViewport++;
 				if (m_model.mainPlayed.m_x > 2016) {
 					m_model.mainPlayed.m_x = 0;
 					m_model.map.jViewport = 16;
 				}
+//				if(this instanceof Shooter){
+//					m_model.perso1.m_idx=68;
+//					for(int i=0;i<7;i++){
+//						if (m_model.perso1.m_idx==71){
+//							m_model.perso1.m_idx=67;
+//						}
+//						m_model.perso1.m_idx++;
+//						m_x+=speed/8;
+//					}
+//					m_model.perso1.m_idx=68;
+//				}
+				
 			}
+			
+			
 		}
 		return true; // L'action s'est bien déroulée
 	}
@@ -194,7 +229,7 @@ public class Ally extends Component {
 
 			if (c.m_x == this.m_x && c.m_y == this.m_y && c instanceof Items) {
 				if (((Items) c).itemType == 1) {
-					myAmmo += 5;
+					myAmmo += 10;
 					m_model.nbAmmo--;
 					m_model.componentsToRemove.add(c);
 					m_model.items.remove(c);

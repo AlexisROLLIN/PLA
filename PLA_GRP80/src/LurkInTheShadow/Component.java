@@ -34,11 +34,14 @@ public class Component {
 	public boolean on_move;
 	public int puissance_eclairage;
 	
+	
 	int lampe_x;
 	int lampe_y;
 	double lampe_width;
 	double lampe_height;
 	boolean m_dead;
+	
+	
 	
 	IAutomaton automate;
 	IDirection m_dir; // doit etre NORTH,SOUTH,EAST ou WEST
@@ -65,6 +68,7 @@ public class Component {
 		model.nbElements++;
 		power=0;
 		speed=0;
+		model.light = false;
 		splitSprite();
 		
 		lampe_x=75;
@@ -115,8 +119,8 @@ public class Component {
 		if (player.intersects(objet)) {
 			return true;
 		}
-		return false;
-		//return true; //Pour tests
+		return m_model.light;
+		
 	}
 
 	public void Afficher() {

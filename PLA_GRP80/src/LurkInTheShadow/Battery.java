@@ -74,7 +74,7 @@ public class Battery {
 	public void updateSprite(float durability) {
 		float percentage = m_durability / Options.MAX_DURABILITY;
 //		System.out.println(percentage);
-		System.out.println(m_durability);
+//		System.out.println(m_durability);
 
 		if (0.75 <= percentage) { // 75% - 100%
 			m_idx = 8;

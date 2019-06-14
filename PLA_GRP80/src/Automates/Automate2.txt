@@ -1,105 +1,103 @@
 Player(Init){
   * (Init):
-  | !GotPower() ? Kamikaze() : (Init)
-  | Key(z) & GotPower() & (Cell(N,V) / Cell(N,T) / Cell(N,P))? Move(N) :(Init)
-  | Key(s) & GotPower() & (Cell(S,V) / Cell(S,T) / Cell(S,P))? Move(S) :(Init)
-  | Key(q) & GotPower() & (Cell(W,V) / Cell(W,T) / Cell(W,P))? Move(W) :(Init)
-  | Key(d) & GotPower() & (Cell(E,V) / Cell(E,T) / Cell(E,P))? Move(E) :(Init)
-  | Key(p) & GotPower() ? Get()   :(Init)
-  | Key(m) & GotPower() ? Get()   :(Init)
-  | Key(o) & GotPower() ? Get()   :(Init)
-  | Key(a) & GotPower() ? Pop()   :(Init)
-  | Key(e) & GotPower() ? Wizz()  :(Init)
-  | Key(l) & GotPower() ? Get()  :(Init)
-  | Key(b) & GotPower() ? Jump() :(Init)
-  | Key(n) & GotPower() ? Throw() :(Init)
-  | Key(r) & GotPower() & Cell(N,P,0) ? Pick(N) :(Init)
-  | GotStuff() & GotPower() & Key(1) ? Throw(N) :(Init)
-  | GotStuff() & GotPower() & Key(2) ? Throw(S) :(Init)
-  | GotStuff() & GotPower() & Key(3) ? Throw(E) :(Init)
-  | GotStuff() & GotPower() & Key(4) ? Throw(W) :(Init)
-  | Key(SPACE) & GotPower() ? Hit(F)  :(Init)
+  | Key(z)  & (Cell(N,V) / Cell(N,T) / Cell(N,P))? Move(N) :(Init)
+  | Key(s)  & (Cell(S,V) / Cell(S,T) / Cell(S,P))? Move(S) :(Init)
+  | Key(q)  & (Cell(W,V) / Cell(W,T) / Cell(W,P))? Move(W) :(Init)
+  | Key(d) & (Cell(E,V) / Cell(E,T) / Cell(E,P))? Move(E) :(Init)
+  | Key(p)  ? Get()   :(Init)
+  | Key(m)  ? Get()   :(Init)
+  | Key(o)  ? Get()   :(Init)
+  | Key(a)  ? Pop()   :(Init)
+  | Key(e) ? Wizz()  :(Init)
+  | Key(l)  ? Get()  :(Init)
+  | Key(b)  ? Jump() :(Init)
+  | Key(n)  ? Throw() :(Init)
+  | Key(r)  & Cell(N,P,0) ? Pick(N) :(Init)
+  | GotStuff()  & Key(1) ? Throw(N) :(Init)
+  | GotStuff()  & Key(2) ? Throw(S) :(Init)
+  | GotStuff()  & Key(3) ? Throw(E) :(Init)
+  | GotStuff()  & Key(4) ? Throw(W) :(Init)
+  | Key(SPACE) ? Hit(F)  :(Init)
   }
 
 AllieModeReine(Init){
   * (Init):
-  | !GotPower() ? Kamikaze() : (Init)
-  | Cell(N,A,5) & GotPower() ?  Hit() : (Init)
-  | Cell(S,A,5) & GotPower() ?  Hit() : (Init)
-  | Cell(E,A,5) & GotPower() ?  Hit() : (Init)
-  | Cell(W,A,5) & GotPower() ?  Hit() : (Init)
+ 
+  | Cell(N,A,5)  ?  Hit() : (Init)
+  | Cell(S,A,5)  ?  Hit() : (Init)
+  | Cell(E,A,5)  ?  Hit() : (Init)
+  | Cell(W,A,5)  ?  Hit() : (Init)
   }
   
  Allie1(Init1){
   * (Init1):
-  | !GotPower() ? Kamikaze() : (Init)
-  | Closest(@,N) & (Cell(N,V) / Cell(N,T) / Cell(E,P)) & GotPower() ? Move(N) :(Init1)
-  | Closest(@,S) & (Cell(S,V) / Cell(S,T) / Cell(S,P) ) & GotPower() ? Move(S) :(Init1)
-  | Closest(@,E) & (Cell(E,V) / Cell(E,T) / Cell(E,P) ) & GotPower() ? Move(E) :(Init1)
-  | Closest(@,W) & (Cell(W,V) / Cell(W,T) / Cell(W,P)) & GotPower() ? Move(W) :(Init1)
-  | Cell(N,A) & GotPower() ? Wait() : (Attaque)
+  
+  | Closest(@,N) & (Cell(N,V) / Cell(N,T) / Cell(E,P))  ? Move(N) :(Init1)
+  | Closest(@,S) & (Cell(S,V) / Cell(S,T) / Cell(S,P) ) ? Move(S) :(Init1)
+  | Closest(@,E) & (Cell(E,V) / Cell(E,T) / Cell(E,P) ) ? Move(E) :(Init1)
+  | Closest(@,W) & (Cell(W,V) / Cell(W,T) / Cell(W,P))  ? Move(W) :(Init1)
+  | Cell(N,A)  ? Wait() : (Attaque)
   * (Attaque):
-  | Cell(N,A,1) & GotPower() ?  Hit() : (Init1)
-  | Cell(S,A,1) & GotPower() ?  Hit() : (Init1)
-  | Cell(E,A,1) & GotPower() ?  Hit() : (Init1)
-  | Cell(W,A,1) & GotPower() ?  Hit() : (Init1)
-  | Cell(N,A,2) & GotPower() ?  Hit() : (Init1)
-  | Cell(S,A,2) & GotPower() ?  Hit() : (Init1)
-  | Cell(E,A,2) & GotPower() ?  Hit() : (Init1)
-  | Cell(W,A,2) & GotPower() ?  Hit() : (Init1)
-  | Cell(N,A,3) & GotPower() ?  Hit() : (Init1)
-  | Cell(S,A,3) & GotPower() ?  Hit() : (Init1)
-  | Cell(E,A,3) & GotPower() ?  Hit() : (Init1)
-  | Cell(W,A,3) & GotPower() ?  Hit() : (Init1)
-  | Cell(N,A,4) & GotPower() ?  Hit() : (Init1)
-  | Cell(S,A,4) & GotPower() ?  Hit() : (Init1)
-  | Cell(E,A,4) & GotPower() ?  Hit() : (Init1)
-  | Cell(W,A,4) & GotPower() ?  Hit() : (Init1)
+  | Cell(N,A,1)  ?  Hit() : (Init1)
+  | Cell(S,A,1)   ?  Hit() : (Init1)
+  | Cell(E,A,1)   ?  Hit() : (Init1)
+  | Cell(W,A,1)   ?  Hit() : (Init1)
+  | Cell(N,A,2)   ?  Hit() : (Init1)
+  | Cell(S,A,2)   ?  Hit() : (Init1)
+  | Cell(E,A,2)  ?  Hit() : (Init1)
+  | Cell(W,A,2)   ?  Hit() : (Init1)
+  | Cell(N,A,3)   ?  Hit() : (Init1)
+  | Cell(S,A,3)  ?  Hit() : (Init1)
+  | Cell(E,A,3)  ?  Hit() : (Init1)
+  | Cell(W,A,3)   ?  Hit() : (Init1)
+  | Cell(N,A,4)   ?  Hit() : (Init1)
+  | Cell(S,A,4)   ?  Hit() : (Init1)
+  | Cell(E,A,4)   ?  Hit() : (Init1)
+  | Cell(W,A,4)   ?  Hit() : (Init1)
   }
 
  Allie2(Init2){
   * (Init2):
-  | !GotPower() ? Kamikaze() : (Init2)
-  | Closest(T,N) & (Cell(N,V) / Cell(N,@) / Cell(N,P)) & GotPower()  ? Move(N) :(Init2)
-  | Closest(T,S) & (Cell(S,V) / Cell(S,@) / Cell(S,P)) & GotPower() ? Move(S) :(Init2)
-  | Closest(T,E) & (Cell(E,V) / Cell(E,@) / Cell(E,P)) & GotPower() ? Move(E) :(Init2)
-  | Closest(T,W) & (Cell(W,V) / Cell(W,@) / Cell(W,P)) & GotPower() ? Move(W) :(Init2)
-  | Cell(N,A) & GotPower() ? Wait() : (Attaque)
+  | Closest(T,N) & (Cell(N,V) / Cell(N,@) / Cell(N,P))   ? Move(N) :(Init2)
+  | Closest(T,S) & (Cell(S,V) / Cell(S,@) / Cell(S,P))  ? Move(S) :(Init2)
+  | Closest(T,E) & (Cell(E,V) / Cell(E,@) / Cell(E,P))  ? Move(E) :(Init2)
+  | Closest(T,W) & (Cell(W,V) / Cell(W,@) / Cell(W,P))  ? Move(W) :(Init2)
+  | Cell(N,A)  ? Wait() : (Attaque)
   * (Attaque):
-  | Cell(N,A,1) & GotPower() ?  Hit() : (Init2)
-  | Cell(S,A,1) & GotPower() ?  Hit() : (Init2)
-  | Cell(E,A,1) & GotPower() ?  Hit() : (Init2)
-  | Cell(W,A,1) & GotPower() ?  Hit() : (Init2)
-  | Cell(N,A,2) & GotPower() ?  Hit() : (Init2)
-  | Cell(S,A,2) & GotPower() ?  Hit() : (Init2)
-  | Cell(E,A,2) & GotPower() ?  Hit() : (Init2)
-  | Cell(W,A,2) & GotPower() ?  Hit() : (Init2)
-  | Cell(N,A,3) & GotPower() ?  Hit() : (Init2)
-  | Cell(S,A,3) & GotPower() ?  Hit() : (Init2)
-  | Cell(E,A,3) & GotPower() ?  Hit() : (Init2)
-  | Cell(W,A,3) & GotPower() ?  Hit() : (Init2)
-  | Cell(N,A,4) & GotPower() ?  Hit() : (Init2)
-  | Cell(S,A,4) & GotPower() ?  Hit() : (Init2)
-  | Cell(E,A,4) & GotPower() ?  Hit() : (Init2)
-  | Cell(W,A,4) & GotPower() ?  Hit() : (Init2)
+  | Cell(N,A,1)  ?  Hit() : (Init2)
+  | Cell(S,A,1)  ?  Hit() : (Init2)
+  | Cell(E,A,1)  ?  Hit() : (Init2)
+  | Cell(W,A,1)  ?  Hit() : (Init2)
+  | Cell(N,A,2)  ?  Hit() : (Init2)
+  | Cell(S,A,2)  ?  Hit() : (Init2)
+  | Cell(E,A,2)  ?  Hit() : (Init2)
+  | Cell(W,A,2)  ?  Hit() : (Init2)
+  | Cell(N,A,3)  ?  Hit() : (Init2)
+  | Cell(S,A,3)  ?  Hit() : (Init2)
+  | Cell(E,A,3)  ?  Hit() : (Init2)
+  | Cell(W,A,3)  ?  Hit() : (Init2)
+  | Cell(N,A,4)  ?  Hit() : (Init2)
+  | Cell(S,A,4)  ?  Hit() : (Init2)
+  | Cell(E,A,4)  ?  Hit() : (Init2)
+  | Cell(W,A,4)  ?  Hit() : (Init2)
   }  
   
   BouleDeFeu(Init5){
    * (Init5):
   |Cell(F,V) / Cell(F,@) / Cell(F,T) / Cell(F,M) / Cell(F,P) ? Move(F) : (Init5)
-  |Cell(F,A) / Cell(F,O) ? Kamikaze() : (Init5)
+  |!(Cell(F,V) / Cell(F,@) / Cell(F,T) / Cell(F,M) / Cell(F,P)) ? Move(F) : (Init9)
   
   * (Init6):
   |Cell(F,V) / Cell(F,@) / Cell(F,T) / Cell(F,M) / Cell(F,P) ? Move(F) : (Init6)
-  |Cell(F,A) / Cell(F,O) ? Kamikaze() : (Init6)
+  |!(Cell(F,V) / Cell(F,@) / Cell(F,T) / Cell(F,M) / Cell(F,P)) ? Move(F) : (Init9)
   
   * (Init7):
   |Cell(F,V) / Cell(F,@) / Cell(F,T) / Cell(F,M) / Cell(F,P) ? Move(F) : (Init7)
-  |Cell(F,A) / Cell(F,O) ? Kamikaze() : (Init7)
+  |!(Cell(F,V) / Cell(F,@) / Cell(F,T) / Cell(F,M) / Cell(F,P)) ? Move(F) : (Init9)
   
   * (Init8):
   |Cell(F,V) / Cell(F,@) / Cell(F,T) / Cell(F,M) / Cell(F,P) ? Move(F) : (Init8)
-  |Cell(F,A) / Cell(F,O) ? Kamikaze() : (Init8)
+  |!(Cell(F,V) / Cell(F,@) / Cell(F,T) / Cell(F,M) / Cell(F,P)) ? Move(F) : (Init9)
   
   * (Init9):
   |True ? Kamikaze() : (Init5)
@@ -145,15 +143,17 @@ AllieModeReine(Init){
   
   Monstre(Init){
   * (Init):
-  | !GotPower() ? Kamikaze() : (Init)
-  |Cell(N,V)  & GotPower() ? Move(N) :(Tmp)
-  |Cell(S,V)  & GotPower() ? Move(S) :(Tmp)
-  |Cell(E,V)  & GotPower() ? Move(E) :(Tmp)
-  |Cell(W,V)  & GotPower() ? Move(W) :(Tmp)
+  | Cell(N,M,0) ? Kamikaze() : (Init)
+  |Cell(N,V) ? Move(N) :(Tmp)
+  |Cell(S,V) ? Move(S) :(Tmp)
+  |Cell(E,V) ? Move(E) :(Tmp)
+  |Cell(W,V) ? Move(W) :(Tmp)
   * (Tmp):
-  True ? Wait() : (Tmp2)
+  |True ? Wait() : (Tmp2)
+  |Cell(N,M,0) ? Kamikaze() :(Tmp2)
   * (Tmp2) :
-  True ? Wait() : (Init)
+  |True ? Wait() : (Init)
+  |Cell(N,M,0) ? Kamikaze() :(Tmp2)
   }
   
   Reine(Init){
@@ -175,9 +175,7 @@ AllieModeReine(Init){
   
   Wall(Init){
   * (Init):
-  | !GotPower() ? Kamikaze() : (Init)
   |True ? Wizz() : (Tmp)
-  
   * (Tmp):
   |True ? Pop() : (Init)
   }
@@ -192,7 +190,84 @@ AllieModeReine(Init){
   |True ? Wait() : (Init)
   }
   
+  PlayerNonGod(Init){
+  * (Init):
+  | !GotPower() ? Kamikaze() : (Init)
+  | Key(z) & GotPower()  & (Cell(N,V) / Cell(N,T) / Cell(N,P))? Move(N) :(Init)
+  | Key(s) & GotPower() & (Cell(S,V) / Cell(S,T) / Cell(S,P))? Move(S) :(Init)
+  | Key(q)& GotPower()  & (Cell(W,V) / Cell(W,T) / Cell(W,P))? Move(W) :(Init)
+  | Key(d) & GotPower()& (Cell(E,V) / Cell(E,T) / Cell(E,P))? Move(E) :(Init)
+  | Key(p)  & GotPower()? Get()   :(Init)
+  | Key(m) & GotPower() ? Get()   :(Init)
+  | Key(o) & GotPower()  ? Get()   :(Init)
+  | Key(a) & GotPower() ? Pop()   :(Init)
+  | Key(e) & GotPower()? Wizz()  :(Init)
+  | Key(l) & GotPower() ? Get()  :(Init)
+  | Key(b)& GotPower()  ? Jump() :(Init)
+  | Key(n) & GotPower() ? Throw() :(Init)
+  | Key(r) & GotPower() & Cell(N,P,0) ? Pick(N) :(Init)
+  | GotStuff() & GotPower()  & Key(1) ? Throw(N) :(Init)
+  | GotStuff() & GotPower() & Key(2) ? Throw(S) :(Init)
+  | GotStuff() & GotPower() & Key(3) ? Throw(E) :(Init)
+  | GotStuff() & GotPower()  & Key(4) ? Throw(W) :(Init)
+  | Key(SPACE) & GotPower() ? Hit(F)  :(Init)
+  }
+  
+  
+  Allie1NonGod(Init1){
+  * (Init1):
+  | !GotPower() ? Kamikaze() : (Init1) 
+  | Closest(@,N) & GotPower() & (Cell(N,V) / Cell(N,T) / Cell(E,P))  ? Move(N) :(Init1)
+  | Closest(@,S) & GotPower()& (Cell(S,V) / Cell(S,T) / Cell(S,P) ) ? Move(S) :(Init1)
+  | Closest(@,E)& GotPower() & (Cell(E,V) / Cell(E,T) / Cell(E,P) ) ? Move(E) :(Init1)
+  | Closest(@,W) & GotPower()& (Cell(W,V) / Cell(W,T) / Cell(W,P))  ? Move(W) :(Init1)
+  | Cell(N,A) & GotPower() ? Wait() : (Attaque)
+  * (Attaque):
+  | !GotPower() ? Kamikaze() : (Init1)
+  | Cell(N,A,1) & GotPower() ?  Hit() : (Init1)
+  | Cell(S,A,1) & GotPower()  ?  Hit() : (Init1)
+  | Cell(E,A,1)  & GotPower() ?  Hit() : (Init1)
+  | Cell(W,A,1)  & GotPower() ?  Hit() : (Init1)
+  | Cell(N,A,2)  & GotPower() ?  Hit() : (Init1)
+  | Cell(S,A,2)  & GotPower() ?  Hit() : (Init1)
+  | Cell(E,A,2) & GotPower() ?  Hit() : (Init1)
+  | Cell(W,A,2)  & GotPower() ?  Hit() : (Init1)
+  | Cell(N,A,3)  & GotPower() ?  Hit() : (Init1)
+  | Cell(S,A,3)& GotPower()  ?  Hit() : (Init1)
+  | Cell(E,A,3) & GotPower() ?  Hit() : (Init1)
+  | Cell(W,A,3)  & GotPower() ?  Hit() : (Init1)
+  | Cell(N,A,4)  & GotPower() ?  Hit() : (Init1)
+  | Cell(S,A,4)  & GotPower() ?  Hit() : (Init1)
+  | Cell(E,A,4)  & GotPower() ?  Hit() : (Init1)
+  | Cell(W,A,4)  & GotPower() ?  Hit() : (Init1)
+  }
   
    
-  
+  Allie2NonGod(Init2){
+  * (Init2):
+  | !GotPower() ? Kamikaze() : (Init2)
+  | Closest(T,N) & GotPower() & (Cell(N,V) / Cell(N,@) / Cell(N,P))   ? Move(N) :(Init2)
+  | Closest(T,S) & GotPower()& (Cell(S,V) / Cell(S,@) / Cell(S,P))  ? Move(S) :(Init2)
+  | Closest(T,E) & GotPower()& (Cell(E,V) / Cell(E,@) / Cell(E,P))  ? Move(E) :(Init2)
+  | Closest(T,W) & GotPower()& (Cell(W,V) / Cell(W,@) / Cell(W,P))  ? Move(W) :(Init2)
+  | Cell(N,A) & GotPower() ? Wait() : (Attaque)
+  * (Attaque):
+  | !GotPower() ? Kamikaze() : (Init2)
+  | Cell(N,A,1) & GotPower() ?  Hit() : (Init2)
+  | Cell(S,A,1) & GotPower() ?  Hit() : (Init2)
+  | Cell(E,A,1) & GotPower() ?  Hit() : (Init2)
+  | Cell(W,A,1) & GotPower() ?  Hit() : (Init2)
+  | Cell(N,A,2) & GotPower() ?  Hit() : (Init2)
+  | Cell(S,A,2) & GotPower() ?  Hit() : (Init2)
+  | Cell(E,A,2) & GotPower() ?  Hit() : (Init2)
+  | Cell(W,A,2) & GotPower() ?  Hit() : (Init2)
+  | Cell(N,A,3) & GotPower() ?  Hit() : (Init2)
+  | Cell(S,A,3) & GotPower() ?  Hit() : (Init2)
+  | Cell(E,A,3) & GotPower() ?  Hit() : (Init2)
+  | Cell(W,A,3) & GotPower() ?  Hit() : (Init2)
+  | Cell(N,A,4) & GotPower() ?  Hit() : (Init2)
+  | Cell(S,A,4) & GotPower() ?  Hit() : (Init2)
+  | Cell(E,A,4) & GotPower() ?  Hit() : (Init2)
+  | Cell(W,A,4) & GotPower() ?  Hit() : (Init2)
+  }  
   

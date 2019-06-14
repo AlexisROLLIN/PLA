@@ -46,6 +46,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 					|| (m_dir == IDirection.EAST && d == IDirection.LEFT)) {
 				m_y -= speed;
 				m_dir = IDirection.NORTH;
+				m_model.reine.m_idx=115;
 				//System.out.println("Avance au Nord\n");
 				
 				if(m_type==IType.PLAYER) {
@@ -64,6 +65,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 				m_y += speed;
 				m_dir = IDirection.SOUTH;
 				//System.out.println("Avance au Sud \n");
+				m_model.reine.m_idx=112;
 				
 				if(m_type==IType.PLAYER) {
 					m_model.map.iViewport++;
@@ -81,6 +83,7 @@ public class Queen extends Component { // Changement sprites à faire !!
 				m_x -= speed;
 				m_dir = IDirection.WEST;
 				//System.out.println("Avance à l'Ouest \n");
+				m_model.reine.m_idx=117;
 				
 				if(m_type==IType.PLAYER) {
 					m_model.map.jViewport--;
@@ -94,8 +97,9 @@ public class Queen extends Component { // Changement sprites à faire !!
 			else {
 				m_x += speed;
 				m_dir = IDirection.EAST;
-				System.out.println("Avance à l'Est \n");
+				//System.out.println("Avance à l'Est \n");
 				
+				m_model.reine.m_idx=120;
 				if(m_type==IType.PLAYER) {
 					m_model.map.jViewport++;
 					if(m_model.mainPlayed.m_x>2016){

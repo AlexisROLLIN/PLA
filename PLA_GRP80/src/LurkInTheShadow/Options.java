@@ -15,7 +15,7 @@ public class Options {
 
 	public static final int PW_HEIGHT = W_HEIGHT - IHM_WIDTH;
 	
-	public static final float MAX_DURABILITY = 100000;
+	public static final float MAX_DURABILITY = 15000;
 	
 	public static final int MAX_SCORE = Integer.MAX_VALUE;
 	
